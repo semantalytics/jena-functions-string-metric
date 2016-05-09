@@ -1,2 +1,2 @@
-# stardog-list-util
-Stardog user defined functions for generating rdf lists
+# stardog-udf-utils
+Misc Stardog user defined functions
