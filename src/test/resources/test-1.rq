@@ -1,0 +1,1 @@
+construct { ?list co:item ?listItem ; a co:List . ?listItem co:itemContent ?item ; co:previousItem ?previousItem } where {?item a :Color . bind(bnode() as ?listItem). bind(util:bindPrev(?listItem) as ?previousItem) {select ?list where { bind(bnode() as ?list)}}}
