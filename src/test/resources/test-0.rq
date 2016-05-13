@@ -1,0 +1,9 @@
+insert data {
+
+:red a :Color .
+:white a :Color .
+:blue a :Color .
+:brown a :Color .
+:black a :Color .
+:yellow a :Color .
+}

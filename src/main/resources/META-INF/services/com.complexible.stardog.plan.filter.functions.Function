@@ -1,2 +1,3 @@
 com.semantalytics.stardog.function.collections.util.BindPrevious
 com.semantalytics.stardog.function.collections.util.Sleep
+com.semantalytics.stardog.function.collections.util.Index
