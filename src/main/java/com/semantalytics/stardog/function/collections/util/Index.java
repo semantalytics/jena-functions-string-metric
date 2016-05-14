@@ -26,6 +26,7 @@ public final class Index extends AbstractFunction implements UserDefinedFunction
 
     @Override
     public void initialize() {
+        add.initialize();
         index = Values.literal(0);
     }
 
