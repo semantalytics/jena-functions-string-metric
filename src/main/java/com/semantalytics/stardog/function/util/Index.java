@@ -1,7 +1,6 @@
-package com.semantalytics.stardog.function.collections.util;
+package com.semantalytics.stardog.function.util;
 
 import com.complexible.common.rdf.model.Values;
-import com.complexible.stardog.plan.eval.operator.update.AddOperator;
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;

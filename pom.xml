@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.semantalytics.stardog</groupId>
-    <artifactId>stardog-list-util</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>stardog-udf-utils</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
 
     <developers>
         <developer>
@@ -25,10 +25,10 @@
     </developers>
 
     <scm>
-        <url>http://github.com/semantalytics.com/stardog-list-util</url>
+        <url>http://github.com/semantalytics.com/stardog-udf-utils</url>
         <tag>HEAD</tag>
-        <connection>scm:git:http://github.com/semantalytics/stardog-list-util</connection>
-        <developerConnection>scm:git:http://github.com/semantalytics/stardog-list-util</developerConnection>
+        <connection>scm:git:http://github.com/semantalytics/stardog-udf-utils</connection>
+        <developerConnection>scm:git:http://github.com/semantalytics/stardog-udf-utils</developerConnection>
     </scm>
 
     <prerequisites>
@@ -48,17 +48,33 @@
         <url>http://www.semantalytics.com</url>
     </organization>
 
+    <properties>
+        <stardog.version>4.1</stardog.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.complexible.stardog</groupId>
             <artifactId>server</artifactId>
-            <version>4.0.5</version>
+            <version>${stardog.version}</version>
             <type>pom</type>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.joestelmach</groupId>
+            <artifactId>natty</artifactId>
+            <version>0.12</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.21</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -72,6 +88,7 @@
     </repositories>
 
     <build>
+        <finalName>${project.artifactId}-${project.version}-sd${stardog.version}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

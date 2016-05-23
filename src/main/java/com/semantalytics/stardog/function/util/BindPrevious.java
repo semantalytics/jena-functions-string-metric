@@ -1,13 +1,11 @@
-package com.semantalytics.stardog.function.collections.util;
+package com.semantalytics.stardog.function.util;
 
-import com.complexible.stardog.plan.filter.Expression;
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.Function;
 import com.complexible.stardog.plan.filter.functions.UserDefinedFunction;
 import org.openrdf.model.Value;
-import org.openrdf.model.vocabulary.RDF;
 
 public class BindPrevious extends AbstractFunction implements UserDefinedFunction {
 

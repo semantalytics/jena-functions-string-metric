@@ -1,4 +1,4 @@
-package com.semantalytics.stardog.function.collections.util;
+package com.semantalytics.stardog.function.util;
 
 import com.complexible.common.rdf.model.Values;
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
