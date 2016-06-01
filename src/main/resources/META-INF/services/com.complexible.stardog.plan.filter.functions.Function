@@ -2,3 +2,6 @@ com.semantalytics.stardog.function.util.BindPrevious
 com.semantalytics.stardog.function.util.Sleep
 com.semantalytics.stardog.function.util.Index
 com.semantalytics.stardog.function.util.SayTime
+com.semantalytics.stardog.function.util.TimeFromNow
+com.semantalytics.stardog.function.util.InetAddressToNumber
+com.semantalytics.stardog.function.util.InetNumberToAddress
