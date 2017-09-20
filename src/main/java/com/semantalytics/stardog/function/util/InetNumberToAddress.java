@@ -30,14 +30,12 @@ public class InetNumberToAddress extends AbstractFunction implements UserDefined
 
     @Override
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
-        assertNumericLiteral(values[0]);
+        final long ipNumber = assertNumericLiteral(values[0]).longValue();
 
-        long ipNumber = Long.valueOf(values[0].stringValue());
-
-        long firstOctet = ( ipNumber / FIRST_OCTET_BASE ) % 256;
-        long secondOctet = ( ipNumber / SECOND_OCTET_BASE ) % 256;
-        long thirdOctet = ( ipNumber / THIRD_OCTET_BASE ) % 256;
-        long fourthOctet = ( ipNumber / FOURTH_OCTET_BASE ) % 256;
+        final long firstOctet = ( ipNumber / FIRST_OCTET_BASE ) % 256;
+        final long secondOctet = ( ipNumber / SECOND_OCTET_BASE ) % 256;
+        final long thirdOctet = ( ipNumber / THIRD_OCTET_BASE ) % 256;
+        final long fourthOctet = ( ipNumber / FOURTH_OCTET_BASE ) % 256;
 
         return Values.literal(Joiner.on('.').join(firstOctet, secondOctet, thirdOctet, fourthOctet));
     }
