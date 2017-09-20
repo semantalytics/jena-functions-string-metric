@@ -26,14 +26,13 @@ public class SayNumber extends AbstractFunction implements UserDefinedFunction {
 
     @Override
     protected Value internalEvaluate(Value... values) throws ExpressionEvaluationException {
-        int value = assertIntegerLiteral(values[0]).intValue();
+        final int value = assertIntegerLiteral(values[0]).intValue();
         
-        RuleBasedNumberFormat nf = new RuleBasedNumberFormat(Locale.US, RuleBasedNumberFormat.SPELLOUT);
+        final RuleBasedNumberFormat nf = new RuleBasedNumberFormat(Locale.US, RuleBasedNumberFormat.SPELLOUT);
 
-        ValueConverter converter = ValueConverters.ENGLISH_INTEGER;
-        String valueAsWords = converter.asWords(value);
+        final ValueConverter converter = ValueConverters.ENGLISH_INTEGER;
 
-        return Values.literal(valueAsWords);
+        return Values.literal(converter.asWords(value));
     }
 
     @Override
@@ -48,6 +47,6 @@ public class SayNumber extends AbstractFunction implements UserDefinedFunction {
 
     @Override
     public String toString() {
-        return "Convert integer into spoken equivalent";
+        return "sayNumber";
     }
 }
