@@ -16,7 +16,7 @@ import java.util.List;
 public class Ordinalize extends AbstractFunction implements UserDefinedFunction {
 
     public Ordinalize() {
-        super(1, "http://semantalytics.com/2016/03/ns/stardog/udf/util/sayTime");
+        super(1, "http://semantalytics.com/2016/03/ns/stardog/udf/util/ordinalize");
     }
 
     private Ordinalize(final Ordinalize ordinalize) {
@@ -24,26 +24,27 @@ public class Ordinalize extends AbstractFunction implements UserDefinedFunction 
     }
 
     @Override
-    protected Value internalEvaluate(Value... values) throws ExpressionEvaluationException {
-        int n = assertIntegerLiteral(values[0]).intValue();
+    protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
         
-        int mod100 = n % 100;
-        final String ordinal;
-    if (mod100 == 11 || mod100 == 12 || mod100 == 13) {
-      return String.valueOf(n) + "th";
-    }
-    switch (n % 10) {
-      case 1:
-        ordinal = String.valueOf(n) + "st";
-      case 2:
-        ordinal = String.valueOf(n) + "nd";
-      case 3:
-        ordinal = String.valueOf(n) + "rd";
-      default:
-        ordinal = String.valueOf(n) + "th";
+        final int n = assertIntegerLiteral(values[0]).intValue();
         
-
-        return Values.literal(ordinal);
+        switch (n % 100) {
+            case 11:
+            case 12:
+            case 13:
+                return Values.literal(String.valueOf(n) + "th");
+            default:
+                switch (n % 10) {
+                    case 1:
+                        return Values.literal(String.valueOf(n) + "st");
+                    case 2:
+                        return Values.literal(String.valueOf(n) + "nd");
+                    case 3:
+                        return Values.literal(String.valueOf(n) + "rd");
+                    default:
+                        return Values.literal(String.valueOf(n) + "th");
+                }
+        }
     }
 
     @Override
@@ -58,6 +59,6 @@ public class Ordinalize extends AbstractFunction implements UserDefinedFunction 
 
     @Override
     public String toString() {
-        return "";
+        return "ordinalize";
     }
 }
