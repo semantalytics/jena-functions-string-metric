@@ -27,19 +27,19 @@ public class InetAddressToNumber extends AbstractFunction implements UserDefined
         super(1, "http://semantalytics.com/2016/03/ns/stardog/udf/util/inetToNum");
     }
 
-    private InetAddressToNumber(InetAddressToNumber inetAddressToNumber) {
+    private InetAddressToNumber(final InetAddressToNumber inetAddressToNumber) {
         super(inetAddressToNumber);
     }
 
     @Override
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
 
-        assertStringLiteral(values[0]);
+        final String ip = assertStringLiteral(values[0]).stringValue();
 
-        List<String> ipQuads = Splitter.on('.').splitToList(values[0].toString());
+        final List<String> ipQuads = Splitter.on('.').splitToList(ip);
 
         if(ipQuads.size() != 4) {
-            throw new ExpressionEvaluationException("Argument must be fill ip quad. Found " + values[0].stringValue());
+            throw new ExpressionEvaluationException("Argument must be full ip quad. Found " + values[0].stringValue());
         }
 
         return Values.literal(FIRST_OCTET_BASE * Long.valueOf(ipQuads.get(0)) +
