@@ -9,6 +9,7 @@ import com.complexible.stardog.plan.filter.functions.UserDefinedFunction;
 import com.joestelmach.natty.DateGroup;
 import com.joestelmach.natty.Parser;
 import org.openrdf.model.Value;
+com.ibm.icu.text.RuleBasedNumberFormat
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -27,6 +28,8 @@ public class SayNumber extends AbstractFunction implements UserDefinedFunction {
     @Override
     protected Value internalEvaluate(Value... values) throws ExpressionEvaluationException {
         final int value = assertIntegerLiteral(values[0]).intValue();
+        
+        //TODO Handle language tag
         
         final RuleBasedNumberFormat nf = new RuleBasedNumberFormat(Locale.US, RuleBasedNumberFormat.SPELLOUT);
 
