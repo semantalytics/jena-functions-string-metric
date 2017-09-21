@@ -26,7 +26,7 @@ public class Ordinalize extends AbstractFunction implements UserDefinedFunction 
     @Override
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
         
-        final int n = assertIntegerLiteral(values[0]).intValue();
+        final int n = assertNumericLiteral(values[0]).intValue();
         
         switch (n % 100) {
             case 11:
@@ -48,7 +48,7 @@ public class Ordinalize extends AbstractFunction implements UserDefinedFunction 
     }
 
     @Override
-    public SayOrdinal copy() {
+    public Ordinalize copy() {
         return new Ordinalize(this);
     }
 

@@ -6,14 +6,11 @@ import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.UserDefinedFunction;
-import com.joestelmach.natty.DateGroup;
-import com.joestelmach.natty.Parser;
+import com.ibm.icu.text.RuleBasedNumberFormat;
 import org.openrdf.model.Value;
-com.ibm.icu.text.RuleBasedNumberFormat
+import pl.allegro.finance.tradukisto.ValueConverters;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.Locale;
 
 public class SayNumber extends AbstractFunction implements UserDefinedFunction {
 
@@ -27,13 +24,13 @@ public class SayNumber extends AbstractFunction implements UserDefinedFunction {
 
     @Override
     protected Value internalEvaluate(Value... values) throws ExpressionEvaluationException {
-        final int value = assertIntegerLiteral(values[0]).intValue();
+        final int value = assertNumericLiteral(values[0]).intValue();
         
         //TODO Handle language tag
         
         final RuleBasedNumberFormat nf = new RuleBasedNumberFormat(Locale.US, RuleBasedNumberFormat.SPELLOUT);
 
-        final ValueConverter converter = ValueConverters.ENGLISH_INTEGER;
+        final ValueConverters converter = ValueConverters.ENGLISH_INTEGER;
 
         return Values.literal(converter.asWords(value));
     }
