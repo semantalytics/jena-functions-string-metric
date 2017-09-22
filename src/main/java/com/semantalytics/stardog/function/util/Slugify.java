@@ -25,7 +25,8 @@ public class Slugify extends AbstractFunction implements UserDefinedFunction {
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
         final String string = assertStringLiteral(values[0]).stringValue();
 
-        return literal(slug.slugify(string));
+        //return literal(slug.slugify(string));
+        return null;
     }
 
     @Override

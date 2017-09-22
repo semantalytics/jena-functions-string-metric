@@ -32,7 +32,7 @@ public class IsValidXsdLiteral extends AbstractFunction implements UserDefinedFu
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
         final Literal literal = assertLiteral(values[0]);
 
-        return literal(XMLDatatypeUtil.isValidValue(literal.stringValue(), literal.getDatatype());
+        return literal(XMLDatatypeUtil.isValidValue(literal.stringValue(), literal.getDatatype()));
     }
 
     @Override

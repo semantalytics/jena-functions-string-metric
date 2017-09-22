@@ -28,11 +28,9 @@ public class SayNumber extends AbstractFunction implements UserDefinedFunction {
         
         //TODO Handle language tag
         
-        final RuleBasedNumberFormat nf = new RuleBasedNumberFormat(Locale.US, RuleBasedNumberFormat.SPELLOUT);
+        final String number = new RuleBasedNumberFormat(Locale.US, RuleBasedNumberFormat.SPELLOUT).format(value);
 
-        final ValueConverters converter = ValueConverters.ENGLISH_INTEGER;
-
-        return Values.literal(converter.asWords(value));
+        return Values.literal(number);
     }
 
     @Override

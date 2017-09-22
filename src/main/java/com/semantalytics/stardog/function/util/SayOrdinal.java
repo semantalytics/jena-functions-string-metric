@@ -5,6 +5,7 @@ import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.UserDefinedFunction;
+import com.ibm.icu.text.RuleBasedNumberFormat;
 import com.joestelmach.natty.DateGroup;
 import com.joestelmach.natty.Parser;
 import org.openrdf.model.Value;
@@ -12,6 +13,7 @@ import org.openrdf.model.Value;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 
 public class SayOrdinal extends AbstractFunction implements UserDefinedFunction {
 
@@ -25,13 +27,11 @@ public class SayOrdinal extends AbstractFunction implements UserDefinedFunction 
 
     @Override
     protected Value internalEvaluate(Value... values) throws ExpressionEvaluationException {
-        int ordinal = assertIntegerLiteral(values[0]).intValue();
+        int number = assertNumericLiteral(values[0]).intValue();
         
-        RuleBasedNumberFormat nf = new RuleBasedNumberFormat(Locale.US, RuleBasedNumberFormat.SPELLOUT);
+        String ordinal = new RuleBasedNumberFormat(Locale.US, RuleBasedNumberFormat.ORDINAL).format(number);
 
-
-
-        return Values.literal(nf.format(ordinal, "%spellout-ordinal"));
+        return Values.literal(ordinal);
     }
 
     @Override
