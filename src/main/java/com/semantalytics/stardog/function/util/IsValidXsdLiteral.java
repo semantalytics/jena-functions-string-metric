@@ -8,12 +8,15 @@ import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.UserDefinedFunction;
 import com.joestelmach.natty.DateGroup;
 import com.joestelmach.natty.Parser;
+import org.openrdf.model.Literal;
 import org.openrdf.model.Value;
 import org.openrdf.model.datatypes.XMLDatatypeUtil;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+
+import static com.complexible.common.rdf.model.Values.*;
 
 public class IsValidXsdLiteral extends AbstractFunction implements UserDefinedFunction {
 
@@ -29,7 +32,7 @@ public class IsValidXsdLiteral extends AbstractFunction implements UserDefinedFu
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
         final Literal literal = assertLiteral(values[0]);
 
-        return Values.literal(XMLDatatypeUtil.isValidValue(literal.getDatatype()));
+        return literal(XMLDatatypeUtil.isValidValue(literal.stringValue(), literal.getDatatype());
     }
 
     @Override

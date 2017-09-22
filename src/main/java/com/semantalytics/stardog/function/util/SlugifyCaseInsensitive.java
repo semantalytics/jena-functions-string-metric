@@ -7,14 +7,14 @@ import com.complexible.stardog.plan.filter.functions.Function;
 import com.complexible.stardog.plan.filter.functions.UserDefinedFunction;
 import org.openrdf.model.Value;
 
-public class Pluralize extends AbstractFunction implements UserDefinedFunction {
+public class SlugifyCaseInsensitive extends AbstractFunction implements UserDefinedFunction {
 
-    protected Pluralize() {
-        super(1, "http://semantalytics.com/2016/03/ns/stardog/udf/util/pluralize");
+    protected SlugifyCaseInsensitive() {
+        super(1, "http://semantalytics.com/2016/03/ns/stardog/udf/util/slugify");
     }
 
-    public Pluralize(final Pluralize pluralize) {
-        super(pluralize);
+    public SlugifyCaseInsensitive(final SlugifyCaseInsensitive slugify) {
+        super(slugify);
     }
 
     @Override
@@ -25,7 +25,7 @@ public class Pluralize extends AbstractFunction implements UserDefinedFunction {
 
     @Override
     public Function copy() {
-        return new Pluralize(this);
+        return new SlugifyCaseInsensitive(this);
     }
 
     @Override
@@ -35,6 +35,6 @@ public class Pluralize extends AbstractFunction implements UserDefinedFunction {
 
     @Override
     public String toString() {
-        return "pluralize";
+        return "slugify";
     }
 }
