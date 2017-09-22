@@ -49,7 +49,7 @@
     </organization>
 
     <properties>
-        <stardog.version>4.1</stardog.version>
+        <stardog.version>5.0.3</stardog.version>
     </properties>
 
     <dependencies>
