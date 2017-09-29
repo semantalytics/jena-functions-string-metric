@@ -13,16 +13,16 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class ListenTime extends AbstractFunction implements UserDefinedFunction {
+public class FromSpokenTime extends AbstractFunction implements UserDefinedFunction {
 
     private static final Parser parser = new Parser();
 
-    public SayTime() {
+    public FromSpokenTime() {
         super(1, "http://semantalytics.com/2016/03/ns/stardog/udf/util/listenTime");
     }
 
-    private ListenTime(final ListenTime listenTime) {
-        super(listenTime);
+    private FromSpokenTime(final FromSpokenTime fromSpokenTime) {
+        super(fromSpokenTime);
     }
 
     @Override
@@ -46,8 +46,8 @@ public class ListenTime extends AbstractFunction implements UserDefinedFunction 
     }
 
     @Override
-    public SayTime copy() {
-        return new ListenTime(this);
+    public FromSpokenTime copy() {
+        return new FromSpokenTime(this);
     }
 
     @Override
@@ -57,6 +57,6 @@ public class ListenTime extends AbstractFunction implements UserDefinedFunction 
 
     @Override
     public String toString() {
-        return "listenTime";
+        return "fromSpokenTime";
     }
 }
