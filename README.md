@@ -1,2 +1,4 @@
-# stardog-udf-utils
-Misc Stardog user defined functions
+# Stardog Kibbles
+
+A collection of Stardog plugins
+
