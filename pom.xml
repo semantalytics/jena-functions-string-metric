@@ -107,6 +107,11 @@
             <artifactId>prettytime</artifactId>
             <version>3.2.7.Final</version>
         </dependency>
+         <dependency>
+           <groupId>org.ocpsoft.prettytime</groupId>
+           <artifactId>prettytime-nlp</artifactId>
+           <version>3.2.7.FINAL</version>
+         </dependency>             
     </dependencies>
 
     <repositories>
