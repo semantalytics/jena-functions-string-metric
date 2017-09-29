@@ -8,31 +8,33 @@ import com.complexible.stardog.plan.filter.functions.UserDefinedFunction;
 import com.joestelmach.natty.DateGroup;
 import com.joestelmach.natty.Parser;
 import org.openrdf.model.Value;
+import org.ocpsoft.prettytime.PrettyTime;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class SayTime extends AbstractFunction implements UserDefinedFunction {
+public class ToSpokenTime extends AbstractFunction implements UserDefinedFunction {
 
-    private static final Parser parser = new Parser();
+    private static final prettyTime prettyTime = new PrettyTime();
 
     public SayTime() {
-        super(1, "http://semantalytics.com/2016/03/ns/stardog/udf/util/sayTime");
+        super(1, "http://semantalytics.com/2016/03/ns/stardog/udf/util/toSpokenTime");
     }
 
-    private SayTime(final SayTime sayTime) {
-        super(sayTime);
+    private ToSpokenTime(final ToSpokenTime toSpokenTime) {
+        super(toSpokenTime);
     }
 
     @Override
     protected Value internalEvaluate(Value... values) throws ExpressionEvaluationException {
-        return null;
+        final Date date = new Date(assertLiteral(values[0]).calendarValue().getMillisecond());
+        return literal(prettyTime.format(date));
     }
 
     @Override
     public SayTime copy() {
-        return new SayTime(this);
+        return new ToSpokenTime(this);
     }
 
     @Override
@@ -42,6 +44,6 @@ public class SayTime extends AbstractFunction implements UserDefinedFunction {
 
     @Override
     public String toString() {
-        return "sayTime";
+        return "toSpokenTime";
     }
 }
