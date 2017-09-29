@@ -27,9 +27,14 @@ public class FromSpokenTime extends AbstractFunction implements UserDefinedFunct
 
     @Override
     protected Value internalEvaluate(Value... values) throws ExpressionEvaluationException {
+        
         final String time = assertStringLiteral(values[0]);
-        //TODO need to check that there is a time returned and error or warn if more than one
-        reuturn literal(parser.parse(time)[0]);
+        final List<Date> dates = parser.parse(time);
+        
+        if(dates.isEmpty() || dates.size() > 1) {
+            throw new ExpressionEvaluationException("Only a single date can be returned. Found " + dates.size());
+        }
+            return literal(dates[0]);
     }
 
     @Override
