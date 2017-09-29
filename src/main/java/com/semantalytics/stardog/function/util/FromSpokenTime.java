@@ -15,10 +15,10 @@ import java.util.List;
 
 public class FromSpokenTime extends AbstractFunction implements UserDefinedFunction {
 
-    private static final Parser parser = new Parser();
+    private static final PrettyTimeParser parser = new PrettyTimeParser();
 
     public FromSpokenTime() {
-        super(1, "http://semantalytics.com/2016/03/ns/stardog/udf/util/listenTime");
+        super(1, "http://semantalytics.com/2016/03/ns/stardog/udf/util/fromSpokenTime");
     }
 
     private FromSpokenTime(final FromSpokenTime fromSpokenTime) {
@@ -27,22 +27,9 @@ public class FromSpokenTime extends AbstractFunction implements UserDefinedFunct
 
     @Override
     protected Value internalEvaluate(Value... values) throws ExpressionEvaluationException {
-        assertStringLiteral(values[0]);
-        List<DateGroup> dateGroups = parser.parse(values[0].stringValue());
-        if(dateGroups.isEmpty()) {
-            throw new ExpressionEvaluationException("Unable to understand any dates from " + values[0].stringValue());
-        }
-        for(final DateGroup dateGroup : dateGroups) {
-            if (dateGroup.getDates().size() != 1) {
-                throw new ExpressionEvaluationException("Understood more than one date");
-            } else {
-                Calendar calendar = GregorianCalendar.getInstance();
-                calendar.setTimeInMillis(dateGroup.getDates().get(0).getTime());
-                return Values.literal((GregorianCalendar) calendar);
-            }
-
-        }
-        return null;
+        final String time = assertStringLiteral(values[0]);
+        //TODO need to check that there is a time returned and error or warn if more than one
+        reuturn literal(parser.parse(time)[0]);
     }
 
     @Override
