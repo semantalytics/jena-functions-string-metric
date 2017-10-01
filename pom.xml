@@ -4,9 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.semantalytics.stardog</groupId>
-    <artifactId>kibbles</artifactId>
+    <groupId>com.semantalytics.stardog.kibble</groupId>
+    <artifactId>stardog-kibbles</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
     <developers>
         <developer>
@@ -32,14 +33,8 @@
         <module>unit</module>
         <module>util</module>
         <module>date</module>
+        <module>string-similarity</module>
     </modules>
-    <dependencies>
-        <dependency>
-            <groupId>com.complexible.stardog.core</groupId>
-            <artifactId>stardog</artifactId>
-            <version>5.0.3</version>
-        </dependency>
-    </dependencies>
 
     <scm>
         <url>http://github.com/semantalytics.com/stardog-kibbles</url>
@@ -75,8 +70,8 @@
         <natty.version>0.12</natty.version>
         <junit.version>4.12</junit.version>
         <slf4j.version>1.7.21</slf4j.version>
-        <prettytime.version>3.2.7.Final</prettytime.version>
-        <prettytime-nlp.version>4.0.1.Final</prettytime-nlp.version>
+        <prettytime.version>4.0.0.Final</prettytime.version>
+        <prettytime-nlp.version>3.2.1.Final</prettytime-nlp.version>
         <maven.version>3.3.9</maven.version>
     </properties>
 
@@ -138,6 +133,11 @@
                <artifactId>prettytime-nlp</artifactId>
                <version>${prettytime-nlp.version}</version>
              </dependency>
+            <dependency>
+                <groupId>com.complexible.stardog.core</groupId>
+                <artifactId>stardog</artifactId>
+                <version>${stardog.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

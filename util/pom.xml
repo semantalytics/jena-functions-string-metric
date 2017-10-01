@@ -4,14 +4,41 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.semantalytics.stardog</groupId>
+    <groupId>com.semantalytics.stardog.kibble</groupId>
     <artifactId>stardog-kibble-util</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
     <parent>
         <groupId>com.semantalytics.stardog.kibble</groupId>
         <artifactId>stardog-kibbles</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
+
+    <modules>
+        <module>bind-previous</module>
+        <module>compose</module>
+        <module>database-name</module>
+        <module>date-time-formatter</module>
+        <module>from-spoken-time</module>
+        <module>inet-address-to-number</module>
+        <module>inet-number-to-address</module>
+        <module>index</module>
+        <module>is-valid-xsd-literal</module>
+        <module>local-date-parse</module>
+        <module>ordinalize</module>
+        <module>pluralize</module>
+        <module>say-number</module>
+        <module>say-number-ordinal</module>
+        <module>say-ordinal</module>
+        <module>sleep</module>
+        <module>slugify</module>
+        <module>slugify-case-insensitive</module>
+        <module>string-array</module>
+        <module>time-from-now</module>
+        <module>to-spoken-time</module>
+        <module>vocab</module>
+        <module>user</module>
+    </modules>
 
 </project>

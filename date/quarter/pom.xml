@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.semantalytics.stardog.kibble</groupId>
-    <artifactId>stardog-kibble-dates-epochTime</artifactId>
+    <artifactId>stardog-kibble-dates-quarter</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <parent>
@@ -87,6 +87,16 @@
             <artifactId>slf4j-simple</artifactId>
             <version>1.7.21</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.complexible.stardog.core</groupId>
+            <artifactId>stardog</artifactId>
+            <version>5.0.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.semantalytics.stardog.kibble.date</groupId>
+            <artifactId>stardog-kibble-date-vocabulary</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

@@ -37,6 +37,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.semantalytics.stardog.kibble.util.UtilVocabulary;
 import org.openrdf.model.IRI;
 import org.openrdf.model.Literal;
 
@@ -44,7 +45,7 @@ import static com.complexible.common.rdf.model.Values.iri;
 import static com.complexible.common.rdf.model.Values.literal;
 
 public final class DatabaseName implements PropertyFunction {
-	private static final IRI FUNCTION_IRI = iri("http://semantalytics.com/2016/06/ns/stardog/udf/utils/repeat");
+	private static final IRI FUNCTION_IRI = iri(UtilVocabulary.INSTANCE.databaseName.stringValue());
 
 	/**
 	 * {@inheritDoc}
@@ -108,7 +109,7 @@ public final class DatabaseName implements PropertyFunction {
 
 		final DatabaseNamePlanNode aNode = (DatabaseNamePlanNode) theNode;
 
-		return String.format("Repeat(%s %s times)", theTermRenderer.render(aNode.getInput()), aNode.getLimit());
+		return "DatabaseName()";
 	}
 
 	/**
@@ -168,7 +169,7 @@ public final class DatabaseName implements PropertyFunction {
 		 */
 		@Override
 		public DatabaseNamePlanNode copy() {
-			return new RepeatPlanNode(getArg().copy(),
+			return new DatabaseNamePlanNode(getArg().copy(),
 			                          getSubjects(), getObjects(), getContext(), getScope(), getCost(), getCardinality(),
 			                          getSubjectVars(), getPredicateVars(), getObjectVars(), getContextVars(),
 			                          getAssuredVars(), getAllVars());
@@ -286,7 +287,7 @@ public final class DatabaseName implements PropertyFunction {
 		 */
 		private Iterator<Solution> mInputs = null;
 
-		public DatabaseNameOperator(final ExecutionContext theExecutionContext, final RepeatPlanNode theNode, final Operator theOperator) {
+		public DatabaseNameOperator(final ExecutionContext theExecutionContext, final DatabaseNamePlanNode theNode, final Operator theOperator) {
 			super(theExecutionContext, SortType.UNSORTED);
 
 			mNode = Preconditions.checkNotNull(theNode);

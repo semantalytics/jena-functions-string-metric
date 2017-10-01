@@ -1,4 +1,4 @@
-package com.semantalytics.stardog.lab.function;
+package com.semantalytics.stardog.kibble.string;
 
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
@@ -11,7 +11,7 @@ import static com.complexible.common.rdf.model.Values.literal;
 public class LowerCaseFully extends AbstractFunction implements UserDefinedFunction {
 
         public LowerCaseFully() {
-            super(1, "http://semantalytics.com/2016/03/ns/stardog/udf/util/lowerCaseFully");
+            super(1, StringVocabulary.ontology().lowerCaseFully.stringValue());
         }
 
         public LowerCaseFully(final LowerCaseFully lowerCaseFully) {

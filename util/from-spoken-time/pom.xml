@@ -4,129 +4,41 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.semantalytics.stardog</groupId>
-    <artifactId>stardog-kibbles</artifactId>
+    <groupId>com.semantalytics.stardog.kibble</groupId>
+    <artifactId>stardog-kibble-util-from-spoken-time</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <parent>
-        <artifactId>com.semantalytics.stardog</artifactId>
-        <groupId>stardog-kibble-util</groupId>
+        <groupId>com.semantalytics.stardog.kibble</groupId>
+        <artifactId>stardog-kibble-util</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <developers>
-        <developer>
-            <id>zcw100</id>
-            <name>Zachary Whitley</name>
-            <email>zachary.whitley@semantalytics.com</email>
-            <url>http://www.semantalytics.com/people/zcw100</url>
-            <timezone>America/New_York</timezone>
-            <roles>
-                <role>architect</role>
-                <role>developer</role>
-            </roles>
-            <organization>Semantalyltics</organization>
-            <organizationUrl>http://www.semantalytics.com</organizationUrl>
-        </developer>
-    </developers>
-
-    <scm>
-        <url>http://github.com/semantalytics.com/stardog-kibbles</url>
-        <tag>HEAD</tag>
-        <connection>scm:git:http://github.com/semantalytics/stardog-kibbles</connection>
-        <developerConnection>scm:git:http://github.com/semantalytics/stardog-kibbles</developerConnection>
-    </scm>
-
-    <prerequisites>
-        <maven>3.3.9</maven>
-    </prerequisites>
-
-    <licenses>
-        <license>
-            <name>MIT</name>
-            <url>https://opensource.org/licenses/Apache-2.0</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-
-    <organization>
-        <name>Semantalytics</name>
-        <url>http://www.semantalytics.com</url>
-    </organization>
-
-    <properties>
-        <stardog.version>5.0.3</stardog.version>
-    </properties>
-
     <dependencies>
-            <dependency>
-                <groupId>org.threeten</groupId>
-                <artifactId>threeten-extra</artifactId>
-                <version>1.2</version>
-            </dependency>
-            <dependency>
-                <groupId>org.javamoney</groupId>
-                <artifactId>moneta</artifactId>
-                <version>1.1</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.slugify</groupId>
-                <artifactId>slugify</artifactId>
-                <version>2.1.9</version>
-            </dependency>
-            <dependency>
-                <groupId>com.ibm.icu</groupId>
-                <artifactId>icu4j</artifactId>
-                <version>2.6.1</version>
-            </dependency>
-            <dependency>
-                <groupId>com.complexible.stardog</groupId>
-                <artifactId>server</artifactId>
-                <version>${stardog.version}</version>
-                <type>pom</type>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>pl.allegro.finance</groupId>
-                <artifactId>tradukisto</artifactId>
-                <version>1.0.0</version>
-            </dependency>
-            <dependency>
-                <groupId>com.joestelmach</groupId>
-                <artifactId>natty</artifactId>
-                <version>0.12</version>
-            </dependency>
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>4.12</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-simple</artifactId>
-                <version>1.7.21</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.ocpsoft.prettytime</groupId>
-                <artifactId>prettytime</artifactId>
-                <version>3.2.7.Final</version>
-            </dependency>
-            <dependency>
-                <groupId>org.ocpsoft.prettytime</groupId>
-                <artifactId>prettytime-nlp</artifactId>
-                <version>3.2.7.FINAL</version>
-            </dependency>
-        </dependencies>
-
-    <repositories>
-        <repository>
-            <id>stardog-maven-repo</id>
-            <name>Stardog Maven Repo</name>
-            <url>http://maven.stardog.com</url>
-        </repository>
-    </repositories>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.semantalytics.stardog.kibble</groupId>
+            <artifactId>stardog-kibble-util-vocabulary</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.complexible.stardog.core</groupId>
+            <artifactId>stardog</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.ocpsoft.prettytime</groupId>
+            <artifactId>prettytime-nlp</artifactId>
+        </dependency>
+    </dependencies>
 
     <build>
         <finalName>${project.artifactId}-${project.version}-sd${stardog.version}</finalName>

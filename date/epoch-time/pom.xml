@@ -26,23 +26,13 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.semantalytics.stardog</groupId>
-            <artifactId>stardog-kibble-date-vocabulary</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.complexible.stardog</groupId>
-            <artifactId>server</artifactId>
-            <type>pom</type>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.semantalytics.stardog</groupId>
-            <artifactId>stardog-kibble-date-vocabulary</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <groupId>com.complexible.stardog.core</groupId>
+            <artifactId>stardog</artifactId>
         </dependency>
         <dependency>
             <groupId>com.semantalytics.stardog.kibble.date</groupId>
             <artifactId>stardog-kibble-date-vocabulary</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

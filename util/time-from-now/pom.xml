@@ -4,53 +4,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.semantalytics.stardog</groupId>
-    <artifactId>stardog-udf-utils</artifactId>
+    <groupId>com.semantalytics.stardog.kibble</groupId>
+    <artifactId>stardog-kibble-util-time-from-now</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
-    <developers>
-        <developer>
-            <id>zcw100</id>
-            <name>Zachary Whitley</name>
-            <email>zachary.whitley@semantalytics.com</email>
-            <url>http://www.semantalytics.com/people/zcw100</url>
-            <timezone>America/New_York</timezone>
-            <roles>
-                <role>architect</role>
-                <role>developer</role>
-            </roles>
-            <organization>Semantalyltics</organization>
-            <organizationUrl>http://www.semantalytics.com</organizationUrl>
-        </developer>
-    </developers>
-
-    <scm>
-        <url>http://github.com/semantalytics.com/stardog-udf-utils</url>
-        <tag>HEAD</tag>
-        <connection>scm:git:http://github.com/semantalytics/stardog-udf-utils</connection>
-        <developerConnection>scm:git:http://github.com/semantalytics/stardog-udf-utils</developerConnection>
-    </scm>
-
-    <prerequisites>
-        <maven>3.3.9</maven>
-    </prerequisites>
-
-    <licenses>
-        <license>
-            <name>MIT</name>
-            <url>https://opensource.org/licenses/Apache-2.0</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-
-    <organization>
-        <name>Semantalytics</name>
-        <url>http://www.semantalytics.com</url>
-    </organization>
-
-    <properties>
-        <stardog.version>5.0.3</stardog.version>
-    </properties>
+    <parent>
+        <groupId>com.semantalytics.stardog.kibble</groupId>
+        <artifactId>stardog-kibble-util</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
 
     <dependencies>
         <dependency>
@@ -103,14 +65,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-    <repositories>
-        <repository>
-            <id>stardog-maven-repo</id>
-            <name>Stardog Maven Repo</name>
-            <url>http://maven.stardog.com</url>
-        </repository>
-    </repositories>
 
     <build>
         <finalName>${project.artifactId}-${project.version}-sd${stardog.version}</finalName>

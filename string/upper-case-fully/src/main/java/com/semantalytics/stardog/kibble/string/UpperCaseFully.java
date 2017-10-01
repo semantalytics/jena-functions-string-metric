@@ -1,4 +1,4 @@
-package com.semantalytics.stardog.lab.function;
+package com.semantalytics.stardog.kibble.string;
 
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
@@ -11,7 +11,7 @@ import static com.complexible.common.rdf.model.Values.literal;
 public class UpperCaseFully extends AbstractFunction implements UserDefinedFunction {
 
     public UpperCaseFully() {
-        super(1, "http://semantalytics.com/2016/03/ns/stardog/udf/util/upperCaseFully");
+        super(1, StringVocabulary.ontology().upperCaseFully.stringValue());
     }
 
     public UpperCaseFully(final UpperCaseFully upperCaseFully) {
@@ -27,7 +27,7 @@ public class UpperCaseFully extends AbstractFunction implements UserDefinedFunct
     }
 
     @Override
-    public CapitalizeFully copy() {
+    public UpperCaseFully copy() {
         return new UpperCaseFully(this);
     }
 

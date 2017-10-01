@@ -1,21 +1,19 @@
-package com.semantalytics.stardog.function.util;
+package com.semantalytics.stardog.kibble.util;
 
-import com.complexible.common.rdf.model.Values;
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.Function;
 import com.complexible.stardog.plan.filter.functions.UserDefinedFunction;
-import com.complexible.stardog.plan.filter.functions.numeric.Add;
+import org.apache.shiro.SecurityUtils;
 import org.openrdf.model.Value;
+
+import static com.complexible.common.rdf.model.Values.literal;
 
 public final class User extends AbstractFunction implements UserDefinedFunction {
 
-    private Value index;
-    private final Add add = new Add();
-
     public User() {
-        super(0, "http://semantalytics.com/2016/03/ns/stardog/udf/util/user");
+        super(0, UtilVocabulary.INSTANCE.user.stringValue());
     }
 
     private User(final User user) {
@@ -24,7 +22,7 @@ public final class User extends AbstractFunction implements UserDefinedFunction 
 
     @Override
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
-        return literal(SecurityUtils.getSubject().getPricipal());
+        return literal(SecurityUtils.getSubject().getPrincipal().toString());
     }
 
     @Override

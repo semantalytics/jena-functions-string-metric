@@ -5,9 +5,7 @@ import com.complexible.stardog.api.Connection;
 import com.complexible.stardog.api.ConnectionConfiguration;
 import com.complexible.stardog.api.admin.AdminConnection;
 import com.complexible.stardog.api.admin.AdminConnectionConfiguration;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 import org.openrdf.query.TupleQueryResult;
 
 import static org.junit.Assert.assertEquals;
@@ -20,6 +18,7 @@ public class EpochTimeTest {
 
     protected static Stardog SERVER = null;
     protected static final String DB = "test";
+    private Connection aConn;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
@@ -48,13 +47,20 @@ public class EpochTimeTest {
         }
     }
 
-    @Test
-    public void testEpochTime() throws Exception {
-        final Connection aConn = ConnectionConfiguration.to(DB)
+    @Before
+    public void setUp() {
+        aConn = ConnectionConfiguration.to(DB)
                 .credentials("admin", "admin")
                 .connect();
+    }
 
-        try {
+    @After
+    public void tearDown() {
+        aConn.close();
+    }
+
+    @Test
+    public void testEpochTime() throws Exception {
 
             aConn.begin();
 
@@ -71,11 +77,6 @@ public class EpochTimeTest {
 
                 assertFalse("Should have no more results", aResult.hasNext());
             }
-
-        }
-        finally {
-            aConn.close();
-        }
     }
 
 }
