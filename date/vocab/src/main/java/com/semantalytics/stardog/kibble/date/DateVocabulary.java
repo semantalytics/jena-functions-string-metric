@@ -4,30 +4,21 @@ import com.complexible.common.openrdf.vocabulary.Vocabulary;
 import com.complexible.common.rdf.model.StardogValueFactory;
 import org.openrdf.model.IRI;
 
-public class DateVocabulary extends Vocabulary {
+public enum DateVocabulary {
 
-    public static final String NS = "http://semantalytics.com/2017/09/ns/stardog/kibble/date/";
+    epochTime,
+    nextQuarter,
+    previousQuarter,
+    quarter;
 
-    public static final IRI epochTime;
-    public static final IRI nextQuarter;
-    public static final IRI previousQuarter;
-    public static final IRI quarter;
+    public static final String NAMESPACE = "http://semantalytics.com/2017/09/ns/stardog/kibble/date/";
+    public final IRI iri;
 
-    private  static final DateVocabulary INSTANCE = new DateVocabulary();
-
-    private DateVocabulary() {
-        super(NS, StardogValueFactory.instance());
+    DateVocabulary() {
+        iri = StardogValueFactory.instance().createIRI(NAMESPACE, name());
     }
 
-    public static DateVocabulary ontology() {
-        return INSTANCE;
+    public String stringValue() {
+        return iri.stringValue();
     }
-
-    static {
-        epochTime = INSTANCE.term("epochTime");
-        nextQuarter = INSTANCE.term("nextQuarter");
-        previousQuarter = INSTANCE.term("previousQuarter");
-        quarter = INSTANCE.term("quarter");
-    }
-
 }
