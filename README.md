@@ -1,4 +1,4 @@
 # Stardog Kibbles
 
-A collection of Stardog plugins
+A collection of [Stardog](http://stardog.com) plugins
 
