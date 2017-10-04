@@ -1,14 +1,23 @@
-package com.semantalytics.stardog.function.util;
+package com.semantalytics.stardog.kibble.util;
 
+import com.complexible.stardog.Stardog;
 import com.complexible.stardog.api.Connection;
 import com.complexible.stardog.api.ConnectionConfiguration;
+import com.complexible.stardog.api.admin.AdminConnection;
+import com.complexible.stardog.api.admin.AdminConnectionConfiguration;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.After;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openrdf.query.TupleQueryResult;
 
 
-public class TestBindPrevious extends AbstractStardogTest {
+public class TestBindPrevious {
+
     protected static Stardog SERVER = null;
     protected static final String DB = "test";
+    private Connection aConn;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
@@ -23,7 +32,7 @@ public class TestBindPrevious extends AbstractStardogTest {
                 aConn.drop(DB);
             }
 
-            aConn.createMemory(DB);
+            aConn.newDatabase(DB).create();
         }
         finally {
             aConn.close();
@@ -37,6 +46,18 @@ public class TestBindPrevious extends AbstractStardogTest {
         }
     }
 
+    @Before
+    public void setUp() {
+        aConn = ConnectionConfiguration.to(DB)
+                .credentials("admin", "admin")
+                .connect();
+    }
+
+    @After
+    public void tearDown() {
+        aConn.close();
+    }
+
     @Test
     public void testBindPrev() throws Exception {
         final Connection aConn = ConnectionConfiguration.to(DB)
@@ -47,7 +68,7 @@ public class TestBindPrevious extends AbstractStardogTest {
 
             aConn.begin();
 
-            final String aQuery = "prefix util: <http://semantalytics.com/2016/03/ns/stardog/udf/util/> " +
+            final String aQuery = "prefix util: <" + UtilVocabulary.bindPrev.NAMESPACE + "> " +
                     "select ?result where { bind(util:bindPrev(?v) as ?result) values ?v {1 2 3 4 5} } order by ?v";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();

@@ -1,4 +1,4 @@
-package com.semantalytics.stardog.function.util;
+package com.semantalytics.stardog.kibble.util;
 
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
@@ -12,7 +12,7 @@ public class BindPrevious extends AbstractFunction implements UserDefinedFunctio
     private Value prev = null;
 
     protected BindPrevious() {
-        super(1, "http://semantalytics.com/2016/03/ns/stardog/udf/util/bindPrev");
+        super(1, UtilVocabulary.bindPrev.stringValue());
     }
 
     public BindPrevious(final BindPrevious next) {
@@ -49,6 +49,6 @@ public class BindPrevious extends AbstractFunction implements UserDefinedFunctio
 
     @Override
     public String toString() {
-        return "bindPrev";
+        return UtilVocabulary.bindPrev.name();
     }
 }

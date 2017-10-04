@@ -64,7 +64,7 @@ public class EpochTimeTest {
 
             aConn.begin();
 
-            final String aQuery = "prefix date: <" + DateVocabulary.NS + ">" +
+            final String aQuery = "prefix date: <" + DateVocabulary.NAMESPACE + ">" +
                     "select ?result where { bind(date:epochTime(\"2017-09-01\"^^xsd:date) as ?result) }";
 
             try (final TupleQueryResult aResult = aConn.select(aQuery).execute()) {

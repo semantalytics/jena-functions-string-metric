@@ -1,6 +1,5 @@
 package com.semantalytics.stardog.kibble.date;
 
-import com.complexible.common.openrdf.vocabulary.Vocabulary;
 import com.complexible.common.rdf.model.StardogValueFactory;
 import org.openrdf.model.IRI;
 

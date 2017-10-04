@@ -13,7 +13,7 @@ import static com.complexible.common.rdf.model.Values.literal;
 public class EpochTime extends AbstractFunction implements UserDefinedFunction {
 
         public EpochTime() {
-            super(1, DateVocabulary.ontology().epochTime.stringValue());
+            super(1, DateVocabulary.epochTime.stringValue());
         }
 
         public EpochTime(final EpochTime epochTime) {
@@ -40,6 +40,6 @@ public class EpochTime extends AbstractFunction implements UserDefinedFunction {
 
         @Override
         public String toString() {
-            return "epochTime";
+            return DateVocabulary.epochTime.name();
         }
 }

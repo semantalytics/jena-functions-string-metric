@@ -29,11 +29,15 @@
         <module>file</module>
         <module>lab</module>
         <module>money</module>
-        <module>string</module>
         <module>unit</module>
         <module>util</module>
         <module>date</module>
-        <module>string-similarity</module>
+        <module>strings</module>
+        <module>crypto</module>
+        <module>geo</module>
+        <module>file</module>
+        <module>json</module>
+        <module>xml</module>
     </modules>
 
     <scm>
@@ -100,6 +104,12 @@
             <dependency>
                 <groupId>com.complexible.stardog</groupId>
                 <artifactId>server</artifactId>
+                <version>${stardog.version}</version>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>com.complexible.stardog</groupId>
+                <artifactId>client-http</artifactId>
                 <version>${stardog.version}</version>
                 <type>pom</type>
             </dependency>

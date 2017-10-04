@@ -5,14 +5,13 @@ import com.complexible.stardog.api.Connection;
 import com.complexible.stardog.api.ConnectionConfiguration;
 import com.complexible.stardog.api.admin.AdminConnection;
 import com.complexible.stardog.api.admin.AdminConnectionConfiguration;
-import com.semantalytics.stardog.kibble.date.UtilVocabulary;
+import com.semantalytics.stardog.kibble.date.DateVocabulary;
 import org.junit.*;
 import org.openrdf.query.TupleQueryResult;
 
 import static org.junit.Assert.*;
 
 public class PreviousQuarterTest {
-
 
     protected static Stardog SERVER = null;
     protected static final String DB = "test";
@@ -62,7 +61,7 @@ public class PreviousQuarterTest {
 
             aConn.begin();
 
-            final String aQuery = "prefix date: <" + UtilVocabulary.NS + ">" +
+            final String aQuery = "prefix date: <" + DateVocabulary.NAMESPACE + ">" +
                     "select ?result where { bind(date:previousQuarter(\"2017-09-01\"^^xsd:date) as ?result) }";
 
             try (final TupleQueryResult aResult = aConn.select(aQuery).execute()) {

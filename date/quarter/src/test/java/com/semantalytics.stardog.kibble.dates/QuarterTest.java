@@ -62,7 +62,7 @@ public class QuarterTest {
 
             aConn.begin();
 
-            final String aQuery = "prefix date: <" + DateVocabulary.NS + ">" +
+            final String aQuery = "prefix date: <" + DateVocabulary.NAMESPACE + ">" +
                     "select ?result where { bind(date:quarter(\"2017-09-01\"^^xsd:date) as ?result) }";
 
             try (final TupleQueryResult aResult = aConn.select(aQuery).execute()) {
@@ -76,5 +76,4 @@ public class QuarterTest {
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
-
 }
