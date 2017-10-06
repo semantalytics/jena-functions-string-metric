@@ -18,7 +18,7 @@ public class FromSpokenTime extends AbstractFunction implements UserDefinedFunct
     private static final PrettyTimeParser parser = new PrettyTimeParser();
 
     public FromSpokenTime() {
-        super(1, UtilVocabulary.INSTANCE.fromSpokenTime.stringValue());
+        super(1, UtilVocabulary.fromSpokenTime.stringValue());
     }
 
     private FromSpokenTime(final FromSpokenTime fromSpokenTime) {
@@ -51,6 +51,6 @@ public class FromSpokenTime extends AbstractFunction implements UserDefinedFunct
 
     @Override
     public String toString() {
-        return "fromSpokenTime";
+        return UtilVocabulary.fromSpokenTime.name();
     }
 }

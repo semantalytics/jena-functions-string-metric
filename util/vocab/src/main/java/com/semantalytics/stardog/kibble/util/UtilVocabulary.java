@@ -5,7 +5,15 @@ import org.openrdf.model.IRI;
 
 public enum UtilVocabulary {
 
+    index,
+    inetAddressToNumber,
+    inetNumberToAddress,
+    ordinalize,
+    pluralize,
     bindPrev,
+    isValidXsdLiteral,
+    sayNumericOrdinal,
+    sayNumber,
     fromSpokenTime,
     user,
     databaseName;

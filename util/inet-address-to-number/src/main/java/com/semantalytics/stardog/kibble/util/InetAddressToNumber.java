@@ -1,4 +1,4 @@
-package com.semantalytics.stardog.function.util;
+package com.semantalytics.stardog.kibble.util;
 
 
 import com.complexible.common.rdf.model.Values;
@@ -8,6 +8,7 @@ import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.Function;
 import com.complexible.stardog.plan.filter.functions.UserDefinedFunction;
 import com.google.common.base.Splitter;
+import com.semantalytics.stardog.kibble.util.UtilVocabulary;
 import org.openrdf.model.Value;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class InetAddressToNumber extends AbstractFunction implements UserDefined
     private static final long FOURTH_OCTET_BASE = 1;
 
     public InetAddressToNumber() {
-        super(1, "http://semantalytics.com/2016/03/ns/stardog/udf/util/inetToNum");
+        super(1, UtilVocabulary.inetAddressToNumber.stringValue());
     }
 
     private InetAddressToNumber(final InetAddressToNumber inetAddressToNumber) {
@@ -37,10 +38,6 @@ public class InetAddressToNumber extends AbstractFunction implements UserDefined
         final String ip = assertStringLiteral(values[0]).stringValue();
 
         final List<String> ipQuads = Splitter.on('.').splitToList(ip);
-
-        if(ipQuads.size() != 4) {
-            throw new ExpressionEvaluationException("Argument must be full ip quad. Found " + values[0].stringValue());
-        }
 
         return Values.literal(FIRST_OCTET_BASE * Long.valueOf(ipQuads.get(0)) +
                               SECOND_OCTET_BASE * Long.valueOf(ipQuads.get(1)) +
@@ -56,6 +53,11 @@ public class InetAddressToNumber extends AbstractFunction implements UserDefined
     @Override
     public void accept(final ExpressionVisitor expressionVisitor) {
         expressionVisitor.visit(this);
+    }
+
+    @Override
+    public String toString() {
+        return UtilVocabulary.inetAddressToNumber.name();
     }
 
 }

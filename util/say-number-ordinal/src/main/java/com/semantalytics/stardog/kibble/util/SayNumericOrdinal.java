@@ -1,4 +1,4 @@
-package com.semantalytics.stardog.function.util;
+package com.semantalytics.stardog.kibble.util;
 
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
@@ -10,7 +10,7 @@ import org.openrdf.model.Value;
 public class SayNumericOrdinal extends AbstractFunction implements UserDefinedFunction {
 
     protected SayNumericOrdinal() {
-        super(1, "http://semantalytics.com/2016/03/ns/stardog/udf/util/sayNumericOrdinal");
+        super(1, UtilVocabulary.sayNumericOrdinal.stringValue());
     }
 
     public SayNumericOrdinal(final SayNumericOrdinal sayNumericOrdinal) {
@@ -19,7 +19,6 @@ public class SayNumericOrdinal extends AbstractFunction implements UserDefinedFu
 
     @Override
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
-
         return null;
     }
 
@@ -35,6 +34,6 @@ public class SayNumericOrdinal extends AbstractFunction implements UserDefinedFu
 
     @Override
     public String toString() {
-        return "sayNumericOrdinal";
+        return UtilVocabulary.sayNumericOrdinal.name();
     }
 }

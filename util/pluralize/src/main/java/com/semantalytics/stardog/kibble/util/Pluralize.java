@@ -1,4 +1,4 @@
-package com.semantalytics.stardog.function.util;
+package com.semantalytics.stardog.kibble.util;
 
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
@@ -10,7 +10,7 @@ import org.openrdf.model.Value;
 public class Pluralize extends AbstractFunction implements UserDefinedFunction {
 
     protected Pluralize() {
-        super(1, "http://semantalytics.com/2016/03/ns/stardog/udf/util/pluralize");
+        super(1, UtilVocabulary.pluralize.stringValue());
     }
 
     public Pluralize(final Pluralize pluralize) {
@@ -35,6 +35,6 @@ public class Pluralize extends AbstractFunction implements UserDefinedFunction {
 
     @Override
     public String toString() {
-        return "pluralize";
+        return UtilVocabulary.pluralize.name();
     }
 }

@@ -1,5 +1,4 @@
-
-package com.semantalytics.stardog.function.util;
+package com.semantalytics.stardog.kibble.util;
 
 import java.util.Iterator;
 import java.util.List;
@@ -45,7 +44,7 @@ import static com.complexible.common.rdf.model.Values.iri;
 import static com.complexible.common.rdf.model.Values.literal;
 
 public final class DatabaseName implements PropertyFunction {
-	private static final IRI FUNCTION_IRI = iri(UtilVocabulary.INSTANCE.databaseName.stringValue());
+	private static final IRI FUNCTION_IRI = UtilVocabulary.databaseName.iri;
 
 	/**
 	 * {@inheritDoc}

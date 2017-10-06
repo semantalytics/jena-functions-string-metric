@@ -1,22 +1,16 @@
-package com.semantalytics.stardog.function.util;
+package com.semantalytics.stardog.kibble.util;
 
 import com.complexible.common.rdf.model.Values;
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.UserDefinedFunction;
-import com.joestelmach.natty.DateGroup;
-import com.joestelmach.natty.Parser;
 import org.openrdf.model.Value;
-
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.List;
 
 public class Ordinalize extends AbstractFunction implements UserDefinedFunction {
 
     public Ordinalize() {
-        super(1, "http://semantalytics.com/2016/03/ns/stardog/udf/util/ordinalize");
+        super(1, UtilVocabulary.ordinalize.stringValue());
     }
 
     private Ordinalize(final Ordinalize ordinalize) {
@@ -59,6 +53,6 @@ public class Ordinalize extends AbstractFunction implements UserDefinedFunction 
 
     @Override
     public String toString() {
-        return "ordinalize";
+        return UtilVocabulary.ordinalize.name();
     }
 }

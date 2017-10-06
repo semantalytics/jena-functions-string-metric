@@ -1,4 +1,4 @@
-package com.semantalytics.stardog.function.util;
+package com.semantalytics.stardog.kibble.util;
 
 import com.complexible.common.rdf.model.Values;
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
@@ -21,7 +21,7 @@ public class InetNumberToAddress extends AbstractFunction implements UserDefined
     private static final long FOURTH_OCTET_BASE = 1;
 
     public InetNumberToAddress() {
-        super(1, "http://semantalytics.com/2016/03/ns/stardog/udf/util/numToInet");
+        super(1, UtilVocabulary.inetNumberToAddress.stringValue());
     }
 
     private InetNumberToAddress(InetNumberToAddress inetNumberToAddress) {
@@ -48,5 +48,10 @@ public class InetNumberToAddress extends AbstractFunction implements UserDefined
     @Override
     public void accept(final ExpressionVisitor expressionVisitor) {
         expressionVisitor.visit(this);
+    }
+
+    @Override
+    public String toString() {
+        return UtilVocabulary.inetNumberToAddress.name();
     }
 }

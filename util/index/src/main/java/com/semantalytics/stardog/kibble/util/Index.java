@@ -15,7 +15,7 @@ public final class Index extends AbstractFunction implements UserDefinedFunction
     private final Add add = new Add();
 
     public Index() {
-        super(0, "http://semantalytics.com/2016/03/ns/stardog/udf/util/index");
+        super(0, UtilVocabulary.index.stringValue());
     }
 
     private Index(Index index) {
@@ -48,6 +48,6 @@ public final class Index extends AbstractFunction implements UserDefinedFunction
 
     @Override
     public String toString() {
-        return "Index";
+        return UtilVocabulary.index.name();
     }
 }

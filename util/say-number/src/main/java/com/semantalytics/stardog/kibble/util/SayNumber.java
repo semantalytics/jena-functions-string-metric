@@ -1,5 +1,4 @@
-
-package com.semantalytics.stardog.function.util;
+package com.semantalytics.stardog.kibble.util;
 
 import com.complexible.common.rdf.model.Values;
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
@@ -8,14 +7,13 @@ import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.UserDefinedFunction;
 import com.ibm.icu.text.RuleBasedNumberFormat;
 import org.openrdf.model.Value;
-import pl.allegro.finance.tradukisto.ValueConverters;
 
 import java.util.Locale;
 
 public class SayNumber extends AbstractFunction implements UserDefinedFunction {
 
     public SayNumber() {
-        super(1, "http://semantalytics.com/2016/03/ns/stardog/udf/util/sayNumber");
+        super(1, UtilVocabulary.sayNumber.stringValue());
     }
 
     private SayNumber(final SayNumber sayNumber) {
@@ -45,6 +43,6 @@ public class SayNumber extends AbstractFunction implements UserDefinedFunction {
 
     @Override
     public String toString() {
-        return "sayNumber";
+        return UtilVocabulary.sayNumber.name();
     }
 }
