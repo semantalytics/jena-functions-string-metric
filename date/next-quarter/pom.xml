@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.semantalytics.stardog.kibble</groupId>
-    <artifactId>stardog-kibble-date-epoch-time</artifactId>
+    <artifactId>stardog-kibble-date-next-quarter</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <parent>
@@ -16,7 +16,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.semantalytics.stardog.kibble.date</groupId>
+            <groupId>com.semantalytics.stardog.kibble</groupId>
             <artifactId>stardog-kibble-date-vocabulary</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>

@@ -5,8 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.semantalytics.stardog.kibble</groupId>
-    <artifactId>stardog-kibble-file</artifactId>
+    <artifactId>stardog-kibble-date</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
     <parent>
         <groupId>com.semantalytics.stardog.kibble</groupId>
@@ -14,5 +15,29 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
+    <modules>
+        <module>content-type</module>
+        <module>creation-time</module>
+        <module>get</module>
+        <module>group</module>
+        <module>is-directory</module>
+        <module>is-other</module>
+        <module>is-regular-file</module>
+        <module>is-symbolic-link</module>
+        <module>json-path</module>
+        <module>key</module>
+        <module>last-accessed-time</module>
+        <module>last-modified-time</module>
+        <module>md5</module>
+        <module>owner</module>
+        <module>permissions</module>
+        <module>read</module>
+        <module>save</module>
+        <module>sha1</module>
+        <module>sha512</module>
+        <module>size</module>
+        <module>xpath</module>
+        <module>vocab</module>
+    </modules>
 
 </project>

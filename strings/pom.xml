@@ -16,7 +16,9 @@
     </parent>
 
     <modules>
+        <module>metrics</module>
+        <module>phonetic</module>
         <module>string</module>
-        <module>string-similarity</module>
     </modules>
+
 </project>

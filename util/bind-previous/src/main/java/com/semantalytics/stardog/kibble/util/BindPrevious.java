@@ -5,7 +5,6 @@ import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.Function;
 import com.complexible.stardog.plan.filter.functions.UserDefinedFunction;
-import com.semantalytics.stardog.kibble.util.UtilVocabulary;
 import org.openrdf.model.Value;
 
 public class BindPrevious extends AbstractFunction implements UserDefinedFunction {

@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.semantalytics.stardog.kibble</groupId>
-    <artifactId>stardog-kibble-string-upper-case-fully</artifactId>
+    <artifactId>stardog-kibble-strings-string-upper-case-fully</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <parent>
         <groupId>com.semantalytics.stardog.kibble</groupId>
-        <artifactId>stardog-kibble-string</artifactId>
+        <artifactId>stardog-kibble-strings</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 

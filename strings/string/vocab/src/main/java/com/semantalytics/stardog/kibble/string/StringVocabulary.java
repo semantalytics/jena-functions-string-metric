@@ -1,29 +1,21 @@
-package com.semantalytics.stardog.kibble.string;
+package com.semantalytics.stardog.kibble.strings.string;
 
-import com.complexible.common.openrdf.vocabulary.Vocabulary;
 import com.complexible.common.rdf.model.StardogValueFactory;
 import org.openrdf.model.IRI;
 
-public class StringVocabulary extends Vocabulary {
+public enum StringVocabulary {
 
-    public static final String NS = "http://semantalytics.com/2017/09/ns/stardog/kibble/string/";
+    lowerCaseFully,
+    upperCaseFully;
 
-    public static final IRI lowerCaseFully;
-    public static final IRI upperCaseFully;
+    public static final String NAMESPACE = "http://semantalytics.com/2017/09/ns/stardog/kibble/strings/string/";
+    public final IRI iri;
 
-    private  static final StringVocabulary INSTANCE = new StringVocabulary();
-
-    private StringVocabulary() {
-        super(NS, StardogValueFactory.instance());
+    StringVocabulary() {
+        iri = StardogValueFactory.instance().createIRI(NAMESPACE, name());
     }
 
-    public static StringVocabulary ontology() {
-        return INSTANCE;
+    public String stringValue() {
+        return iri.stringValue();
     }
-
-    static {
-        lowerCaseFully = INSTANCE.term("lowerCaseFully");
-        upperCaseFully = INSTANCE.term("upperCaseFully");
-    }
-
 }

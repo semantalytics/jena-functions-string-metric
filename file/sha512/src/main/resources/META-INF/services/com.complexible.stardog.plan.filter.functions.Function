@@ -1,0 +1,13 @@
+com.semantalytics.stardog.plan.filter.functions.file.Cat
+com.semantalytics.stardog.plan.filter.functions.file.CreationTime
+com.semantalytics.stardog.plan.filter.functions.file.JsonPath
+com.semantalytics.stardog.plan.filter.functions.file.LastAccessedTime
+com.semantalytics.stardog.plan.filter.functions.file.LastModifiedTime
+com.semantalytics.stardog.plan.filter.functions.file.Md5
+com.semantalytics.stardog.plan.filter.functions.file.Read
+com.semantalytics.stardog.plan.filter.functions.file.Save
+com.semantalytics.stardog.plan.filter.functions.file.Sha1
+com.semantalytics.stardog.plan.filter.functions.file.Sha256
+com.semantalytics.stardog.kibble.file.Sha512
+com.semantalytics.stardog.plan.filter.functions.file.Size
+

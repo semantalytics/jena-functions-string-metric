@@ -35,7 +35,6 @@
         <module>strings</module>
         <module>crypto</module>
         <module>geo</module>
-        <module>file</module>
         <module>json</module>
         <module>xml</module>
     </modules>
@@ -147,6 +146,11 @@
                 <groupId>com.complexible.stardog.core</groupId>
                 <artifactId>stardog</artifactId>
                 <version>${stardog.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>info.debatty</groupId>
+                <artifactId>java-string-similarity</artifactId>
+                <version>0.24</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

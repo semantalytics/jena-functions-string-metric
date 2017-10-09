@@ -1,0 +1,49 @@
+package com.semantalytics.stardog.kibble.strings.similarity;
+
+import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
+import com.complexible.stardog.plan.filter.ExpressionVisitor;
+import com.complexible.stardog.plan.filter.functions.AbstractFunction;
+import com.complexible.stardog.plan.filter.functions.Function;
+import com.complexible.stardog.plan.filter.functions.string.StringFunction;
+import org.openrdf.model.Value;
+
+import static com.complexible.common.rdf.model.Values.literal;
+
+public final class NormalizedLevenshtein extends AbstractFunction implements StringFunction {
+
+    private static final info.debatty.java.stringsimilarity.NormalizedLevenshtein normalizedLevenshtein;
+
+    static {
+        normalizedLevenshtein = new info.debatty.java.stringsimilarity.NormalizedLevenshtein();
+    }
+
+    protected NormalizedLevenshtein() {
+        super(2, StringSimilarityVocab.NORMALIZED_LEVENSHTEIN.iri().stringValue());
+    }
+
+    private NormalizedLevenshtein(final NormalizedLevenshtein normalizedLevenshtein) {
+        super(normalizedLevenshtein);
+    }
+
+    @Override
+    protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
+
+        final String firstString = assertStringLiteral(values[0]).stringValue();
+        final String secondString = assertStringLiteral(values[1]).stringValue();
+
+        return literal(normalizedLevenshtein.distance(firstString, secondString));
+    }
+
+    public Function copy() {
+        return new NormalizedLevenshtein(this);
+    }
+
+    public void accept(final ExpressionVisitor expressionVisitor) {
+        expressionVisitor.visit(this);
+    }
+
+    @Override
+    public String toString() {
+        return "NormalizedLevenshtein";
+    }
+}

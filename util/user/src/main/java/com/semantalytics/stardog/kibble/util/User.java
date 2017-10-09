@@ -13,7 +13,7 @@ import static com.complexible.common.rdf.model.Values.literal;
 public final class User extends AbstractFunction implements UserDefinedFunction {
 
     public User() {
-        super(0, UtilVocabulary.INSTANCE.user.stringValue());
+        super(0, UtilVocabulary.user.stringValue());
     }
 
     private User(final User user) {
@@ -37,6 +37,6 @@ public final class User extends AbstractFunction implements UserDefinedFunction 
 
     @Override
     public String toString() {
-        return "user";
+        return UtilVocabulary.user.name();
     }
 }

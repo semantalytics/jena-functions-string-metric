@@ -5,33 +5,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.semantalytics.stardog.kibble</groupId>
-    <artifactId>stardog-kibble-string</artifactId>
+    <artifactId>stardog-kibble-strings-string</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
     <parent>
         <groupId>com.semantalytics.stardog.kibble</groupId>
-        <artifactId>stardog-kibbles</artifactId>
+        <artifactId>stardog-kibble-strings</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.complexible.stardog.utils</groupId>
-            <artifactId>stardog-utils-openrdf</artifactId>
-            <version>5.0.3</version>
-        </dependency>
-        <dependency>
-            <groupId>com.complexible.stardog.utils</groupId>
-            <artifactId>stardog-utils-rdf</artifactId>
-            <version>5.0.3</version>
-        </dependency>
-    </dependencies>
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>lower-case-fully</module>
-        <module>upper-case-fully</module>
-        <module>vocab</module>
-    </modules>
 
 </project>
