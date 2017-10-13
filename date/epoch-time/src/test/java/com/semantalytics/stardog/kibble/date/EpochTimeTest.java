@@ -15,7 +15,6 @@ import static org.junit.Assert.assertTrue;
 
 public class EpochTimeTest {
 
-
     protected static Stardog SERVER = null;
     protected static final String DB = "test";
     private Connection aConn;

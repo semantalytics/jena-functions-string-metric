@@ -1,17 +1,17 @@
-package semantalytics.stardog.kibble.string;
+package com.semantalytics.stardog.kibble.strings;
 
 import com.complexible.stardog.Stardog;
 import com.complexible.stardog.api.Connection;
 import com.complexible.stardog.api.ConnectionConfiguration;
 import com.complexible.stardog.api.admin.AdminConnection;
 import com.complexible.stardog.api.admin.AdminConnectionConfiguration;
-import com.semantalytics.stardog.kibble.strings.string.StringVocabulary;
+import com.semantalytics.stardog.kibble.string.StringVocabulary;
 import org.junit.*;
 import org.openrdf.query.TupleQueryResult;
 
 import static org.junit.Assert.*;
 
-public class UpperCaseFullyTest {
+public class LowerCaseFullyTest {
 
 
     protected static Stardog SERVER = null;
@@ -58,12 +58,12 @@ public class UpperCaseFullyTest {
     }
 
     @Test
-    public void testUpperCaseFully() throws Exception {
+    public void testLowerCaseFully() throws Exception {
 
             aConn.begin();
 
-            final String aQuery = "prefix date: <" + StringVocabulary.NAMESPACE + ">" +
-                    "select ?result where { bind(date:upperCaseFully(\"stardog\") as ?result) }";
+            final String aQuery = "prefix util: <" + StringVocabulary.NS + ">" +
+                    "select ?result where { bind(util:lowerCaseFully(\"STARDOG\") as ?result) }";
 
             try (final TupleQueryResult aResult = aConn.select(aQuery).execute()) {
 
@@ -71,7 +71,7 @@ public class UpperCaseFullyTest {
 
                 final String aValue = aResult.next().getValue("result").stringValue();
 
-                assertEquals("STARDOG", aValue);
+                assertEquals("stardog", aValue);
 
                 assertFalse("Should have no more results", aResult.hasNext());
             }
