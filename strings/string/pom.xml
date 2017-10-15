@@ -7,6 +7,17 @@
     <groupId>com.semantalytics.stardog.kibble</groupId>
     <artifactId>stardog-kibble-strings-string</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+    <dependencies>
+        <dependency>
+            <groupId>com.complexible.stardog.core</groupId>
+            <artifactId>stardog</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
     <packaging>pom</packaging>
 
     <parent>
@@ -15,5 +26,46 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
+    <modules>
+        <module>abbreviate-with-marker</module>
+        <module>append-if-missing</module>
+        <module>append-if-missing-ignore-case</module>
+        <module>abbreviate</module>
+        <module>abbreviate-middle</module>
+        <module>capitalize</module>
+        <module>case-format</module>
+        <module>center</module>
+        <module>compare</module>
+        <module>contains</module>
+        <module>contains-whitespace</module>
+        <module>contains-any</module>
+        <module>contains-only</module>
+        <module>common-suffix</module>
+        <module>contains-none</module>
+        <module>compare-ignore-case</module>
+        <module>chomp</module>
+        <module>chop</module>
+        <module>common-prefix</module>
+        <module>count-matches</module>
+        <module>default-if-blank</module>
+        <module>default-if-empty</module>
+        <module>delete-whitespace</module>
+        <module>difference</module>
+        <module>ends-with</module>
+        <module>ends-with-ignore-case</module>
+        <module>equals-any</module>
+        <module>equals-ignore-case</module>
+        <module>first</module>
+        <module>get-digits</module>
+        <module>initials</module>
+        <module>is-all-lower-case</module>
+        <module>is-all-upper-case</module>
+        <module>is-blank</module>
+        <module>is-empty</module>
+        <module>is-mixed-case</module>
+        <module>is-none-blank</module>
+        <module>join-with</module>
+        <module>vocab</module>
+    </modules>
 
 </project>

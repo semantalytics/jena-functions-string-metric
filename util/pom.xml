@@ -7,6 +7,12 @@
     <groupId>com.semantalytics.stardog.kibble</groupId>
     <artifactId>stardog-kibble-util</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+    <dependencies>
+        <dependency>
+            <groupId>com.complexible.stardog.core</groupId>
+            <artifactId>stardog</artifactId>
+        </dependency>
+    </dependencies>
     <packaging>pom</packaging>
 
     <parent>
@@ -39,6 +45,7 @@
         <module>to-spoken-time</module>
         <module>vocab</module>
         <module>user</module>
+        <module>stardog-version</module>
     </modules>
 
 </project>

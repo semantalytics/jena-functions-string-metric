@@ -532,7 +532,7 @@
                                                 <rdf:rest rdf:resource="&rdf;nil"/>
                                                 <rdf:first>
                                                     <swrl:BuiltinAtom>
-                                                        <swrl:builtin rdf:resource="&swrlb;add"/>
+                                                        <swrl:builtin rdf:resource="&swrlb;bottom"/>
                                                         <swrl:arguments>
                                                             <rdf:Description>
                                                                 <rdf:type rdf:resource="&rdf;List"/>
@@ -831,7 +831,7 @@
                                 <rdf:rest rdf:resource="&rdf;nil"/>
                                 <rdf:first>
                                     <swrl:BuiltinAtom>
-                                        <swrl:builtin rdf:resource="&swrlb;add"/>
+                                        <swrl:builtin rdf:resource="&swrlb;bottom"/>
                                         <swrl:arguments>
                                             <rdf:Description>
                                                 <rdf:type rdf:resource="&rdf;List"/>

@@ -11,15 +11,20 @@
 
     <parent>
         <groupId>com.semantalytics.stardog.kibble</groupId>
-        <artifactId>stardog-kibbles-geo</artifactId>
+        <artifactId>stardog-kibble-geo</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
     <modules>
+        <module>add-latitude</module>
+        <module>add-longitude</module>
         <module>encode</module>
-        <module>decode</module>
         <module>latitude</module>
         <module>longitude</module>
+        <module>bottom</module>
+        <module>top</module>
+        <module>left</module>
+        <module>right</module>
         <module>vocab</module>
     </modules>
 

@@ -14,6 +14,7 @@ public enum UtilVocabulary {
     isValidXsdLiteral,
     sayNumericOrdinal,
     sayNumber,
+    stardogVersion,
     fromSpokenTime,
     user,
     databaseName;

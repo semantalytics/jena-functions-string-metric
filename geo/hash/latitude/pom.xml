@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.semantalytics.stardog.kibble</groupId>
-    <artifactId>stardog-kibble-geo-latitude</artifactId>
+    <artifactId>stardog-kibble-geo-hash-latitude</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <parent>
         <groupId>com.semantalytics.stardog.kibble</groupId>
-        <artifactId>stardog-kibble-geo</artifactId>
+        <artifactId>stardog-kibble-geo-hash</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
@@ -41,12 +41,21 @@
         </dependency>
         <dependency>
             <groupId>com.semantalytics.stardog.kibble</groupId>
-            <artifactId>stardog-kibble-geo-vocabulary</artifactId>
+            <artifactId>stardog-kibble-geo-hash-vocabulary</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.github.davidmoten</groupId>
             <artifactId>geo</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.complexible.stardog.core</groupId>
+            <artifactId>stardog</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.semantalytics.stardog.kibble</groupId>
+            <artifactId>stardog-kibble-geo-hash-vocabulary</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
