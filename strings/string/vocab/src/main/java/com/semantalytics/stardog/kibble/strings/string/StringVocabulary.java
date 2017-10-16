@@ -40,8 +40,11 @@ public enum StringVocabulary {
     isEmpty,
     isMixedCase,
     isNoneBlank,
+    isNotBlank,
     join,
     lowerCaseFully,
+    mid,
+    normalizeSpace,
     upperCaseFully;
 
     public static final String NAMESPACE = "http://semantalytics.com/2017/09/ns/stardog/kibble/strings/string/";

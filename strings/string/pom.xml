@@ -64,7 +64,11 @@
         <module>is-empty</module>
         <module>is-mixed-case</module>
         <module>is-none-blank</module>
+        <module>is-not-blank</module>
+        <module>is-none-empty</module>
         <module>join-with</module>
+        <module>mid</module>
+        <module>normalize-space</module>
         <module>vocab</module>
     </modules>
 
