@@ -16,13 +16,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.complexible.stardog</groupId>
-            <artifactId>server</artifactId>
-            <version>${stardog.version}</version>
-            <type>pom</type>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
@@ -40,13 +33,12 @@
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.semantalytics.stardog.kibble</groupId>
-            <artifactId>stardog-kibble-date-vocabulary</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
             <groupId>org.threeten</groupId>
             <artifactId>threeten-extra</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.complexible.stardog.core</groupId>
+            <artifactId>stardog</artifactId>
         </dependency>
     </dependencies>
 

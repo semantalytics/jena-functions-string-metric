@@ -1,4 +1,4 @@
-package com.semantalytics.stardog.plan.filter.functions.strings;
+package com.semantalytics.stardog.kibble.strings.string;
 
 import com.complexible.common.rdf.model.Values;
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class Reverse extends AbstractFunction implements StringFunction {
 
     protected Reverse() {
-        super(1, StringsVocab.ontology().reverse.toString());
+        super(1, StringVocabulary.reverse.toString());
     }
 
     private Reverse(final Reverse reverse) {
@@ -38,6 +38,6 @@ public final class Reverse extends AbstractFunction implements StringFunction {
 
     @Override
     public String toString() {
-        return "Reverses a String";
+        return StringVocabulary.reverse.name();
     }
 }

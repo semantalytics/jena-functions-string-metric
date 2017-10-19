@@ -169,9 +169,18 @@ public final class DatabaseName implements PropertyFunction {
 		@Override
 		public DatabaseNamePlanNode copy() {
 			return new DatabaseNamePlanNode(getArg().copy(),
-			                          getSubjects(), getObjects(), getContext(), getScope(), getCost(), getCardinality(),
-			                          getSubjectVars(), getPredicateVars(), getObjectVars(), getContextVars(),
-			                          getAssuredVars(), getAllVars());
+					                        getSubjects(),
+					                        getObjects(),
+					                        getContext(),
+					                        getScope(),
+					                        getCost(),
+					                        getCardinality(),
+			                                getSubjectVars(),
+					                        getPredicateVars(),
+					                        getObjectVars(),
+					                        getContextVars(),
+			                                getAssuredVars(),
+					                        getAllVars());
 		}
 
 		/**
@@ -204,20 +213,11 @@ public final class DatabaseName implements PropertyFunction {
 		protected void validate() {
 			super.validate();
 
-			Preconditions.checkState(mSubjects.size() <= 2);
-			Preconditions.checkState(mObjects.size() == 2);
+			Preconditions.checkState(mSubjects.size() == 1);
+			Preconditions.checkState(mObjects.size() == 1);
 
-			Preconditions.checkState(mSubjects.get(0).isVariable());
-			Preconditions.checkState(mSubjects.size() == 1 || mSubjects.get(1).isVariable());
+			Preconditions.checkState(mObjects.get(0).isVariable());
 
-			Preconditions.checkState(mObjects.get(1).getValue() instanceof Literal);
-
-			try {
-				((Literal)mObjects.get(1).getValue()).longValue();
-			}
-			catch (Exception e) {
-				throw new IllegalStateException("Repeat limit is not a valid long", e);
-			}
 		}
 
 		/**
@@ -225,9 +225,9 @@ public final class DatabaseName implements PropertyFunction {
 		 */
 		@Override
 		protected DatabaseNamePlanNode createNode(final ImmutableSet<Integer> theSubjVars,
-		                                    final ImmutableSet<Integer> theObjVars,
-		                                    final ImmutableSet<Integer> theContextVars,
-		                                    final ImmutableSet<Integer> theAllVars) {
+		                                          final ImmutableSet<Integer> theObjVars,
+		                                          final ImmutableSet<Integer> theContextVars,
+		                                          final ImmutableSet<Integer> theAllVars) {
 
 			return new DatabaseNamePlanNode(mArg, mSubjects, mObjects, mContext, mScope, mCost, mCardinality, theSubjVars,
 			                          ImmutableSet.<Integer> of(), theObjVars, theContextVars,

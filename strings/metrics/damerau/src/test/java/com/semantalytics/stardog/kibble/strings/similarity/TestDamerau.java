@@ -64,7 +64,7 @@ public class TestDamerau {
 
         try {
 
-            final String aQuery = "prefix ss: <" + StringSimilarityVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(ss:damerau(\"ABCDEF\", \"BACDFE\") as ?result) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -95,7 +95,7 @@ public class TestDamerau {
                 .connect();
 
         try {
-            final String aQuery = "prefix ss: <" + StringSimilarityVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(ss:damerau(\"one\", \"two\", \"three\") as ?result) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -127,7 +127,7 @@ public class TestDamerau {
                 .connect();
 
         try {
-            final String aQuery = "prefix ss: <" + StringSimilarityVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(ss:damerau(\"one\") as ?result) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -159,7 +159,7 @@ public class TestDamerau {
 
         try {
 
-            final String aQuery = "prefix ss: <" + StringSimilarityVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(ss:damerau(7, \"Stardog\") as ?result) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -191,7 +191,7 @@ public class TestDamerau {
 
         try {
 
-            final String aQuery = "prefix ss: <" + StringSimilarityVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(ss:damerau(\"Stardog\", 7) as ?result) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();

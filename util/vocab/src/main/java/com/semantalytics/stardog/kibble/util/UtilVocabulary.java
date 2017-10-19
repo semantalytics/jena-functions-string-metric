@@ -12,6 +12,7 @@ public enum UtilVocabulary {
     pluralize,
     bindPrev,
     isValidXsdLiteral,
+    proquint,
     sayNumericOrdinal,
     sayNumber,
     stardogVersion,

@@ -1,4 +1,4 @@
-package com.semantalytics.stardog.plan.filter.functions.strings;
+package com.semantalytics.stardog.kibble.strings.string;
 
 import com.complexible.common.rdf.model.Values;
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class PadStart extends AbstractFunction implements StringFunction {
 
     protected PadStart() {
-        super(3, StringsVocab.ontology().padStart.toString());
+        super(3, StringVocabulary.padStart.toString());
     }
 
     private PadStart(final PadStart padStart) {
@@ -40,6 +40,6 @@ public final class PadStart extends AbstractFunction implements StringFunction {
 
     @Override
     public String toString() {
-        return "pad start of string to min length";
+        return StringVocabulary.padStart.name();
     }
 }

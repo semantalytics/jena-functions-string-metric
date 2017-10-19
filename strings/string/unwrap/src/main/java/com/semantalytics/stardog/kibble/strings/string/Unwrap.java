@@ -1,4 +1,4 @@
-package com.semantalytics.stardog.plan.filter.functions.strings;
+package com.semantalytics.stardog.kibble.strings.string;
 
 import com.complexible.common.rdf.model.Values;
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class Unwrap extends AbstractFunction implements StringFunction {
 
     protected Unwrap() {
-        super(2, StringsVocab.ontology().unwrap.toString());
+        super(2, StringVocabulary.unwrap.toString());
     }
 
     private Unwrap(final Unwrap unWrap) {
@@ -39,6 +39,6 @@ public final class Unwrap extends AbstractFunction implements StringFunction {
 
     @Override
     public String toString() {
-        return "Unwrap a String using ellipses";
+        return StringVocabulary.unwrap.name();
     }
 }

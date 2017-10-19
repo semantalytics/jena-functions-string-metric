@@ -1,4 +1,4 @@
-package com.semantalytics.stardog.plan.filter.functions.strings;
+package com.semantalytics.stardog.kibble.strings.string;
 
 import com.complexible.common.rdf.model.Values;
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class Overlay extends AbstractFunction implements StringFunction {
 
     protected Overlay() {
-        super(4, StringsVocab.ontology().overlay.toString());
+        super(4, StringVocabulary.overlay.toString());
     }
 
     private Overlay(final Overlay overlay) {
@@ -41,6 +41,6 @@ public final class Overlay extends AbstractFunction implements StringFunction {
 
     @Override
     public String toString() {
-        return "Overlay a String using ellipses";
+        return StringVocabulary.overlay.name();
     }
 }

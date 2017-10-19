@@ -1,4 +1,4 @@
-package com.semantalytics.stardog.plan.filter.functions.strings;
+package com.semantalytics.stardog.kibble.strings.string;
 
 import com.complexible.common.rdf.model.Values;
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
@@ -13,7 +13,7 @@ import static com.google.common.base.Preconditions.checkElementIndex;
 public final class WrapIfMissing extends AbstractFunction implements StringFunction {
 
     protected WrapIfMissing() {
-        super(2, StringsVocab.ontology().wrapIfMissing.toString());
+        super(2, StringVocabulary.wrapIfMissing.toString());
     }
 
     private WrapIfMissing(final WrapIfMissing wrapIfMissing) {
@@ -43,6 +43,6 @@ public final class WrapIfMissing extends AbstractFunction implements StringFunct
 
     @Override
     public String toString() {
-        return " Wraps a string with a string if that string is missing from the start or end of the given string.";
+        return StringVocabulary.wrapIfMissing.name();
     }
 }

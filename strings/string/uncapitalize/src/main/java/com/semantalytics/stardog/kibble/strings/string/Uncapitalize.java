@@ -1,4 +1,4 @@
-package com.semantalytics.stardog.plan.filter.functions.strings;
+package com.semantalytics.stardog.kibble.strings.string;
 
 import com.complexible.common.rdf.model.Values;
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class Uncapitalize extends AbstractFunction implements StringFunction {
 
     protected Uncapitalize() {
-        super(1, StringsVocab.ontology().uncapitalize.toString());
+        super(1, StringVocabulary.uncapitalize.toString());
     }
 
     private Uncapitalize(final Uncapitalize uncapitalize) {
@@ -38,6 +38,6 @@ public final class Uncapitalize extends AbstractFunction implements StringFuncti
 
     @Override
     public String toString() {
-        return "Uncapitalizes a String changing the first character to title case";
+        return StringVocabulary.uncapitalize.name();
     }
 }

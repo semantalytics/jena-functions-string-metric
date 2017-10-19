@@ -18,7 +18,7 @@ public final class Damerau extends AbstractFunction implements StringFunction {
     }
 
     protected Damerau() {
-        super(2, StringSimilarityVocabulary.damerau.stringValue());
+        super(2, StringMetricsVocabulary.damerau.stringValue());
     }
 
     private Damerau(final Damerau damerau) {
@@ -44,6 +44,6 @@ public final class Damerau extends AbstractFunction implements StringFunction {
 
     @Override
     public String toString() {
-        return StringSimilarityVocabulary.damerau.name();
+        return StringMetricsVocabulary.damerau.name();
     }
 }

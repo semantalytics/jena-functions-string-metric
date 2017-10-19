@@ -1,4 +1,4 @@
-package com.semantalytics.stardog.plan.filter.functions.strings;
+package com.semantalytics.stardog.kibble.strings.string;
 
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.*;
 public final class PadEnd extends AbstractFunction implements StringFunction {
 
     protected PadEnd() {
-        super(3, StringsVocab.ontology().padEnd.toString());
+        super(3, StringVocabulary.padEnd.toString());
     }
 
     private PadEnd(final PadEnd padEnd) {
@@ -41,6 +41,6 @@ public final class PadEnd extends AbstractFunction implements StringFunction {
 
     @Override
     public String toString() {
-        return "padEnd";
+        return StringVocabulary.padEnd.name();
     }
 }

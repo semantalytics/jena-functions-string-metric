@@ -1,4 +1,4 @@
-package com.semantalytics.stardog.plan.filter.functions.strings;
+package com.semantalytics.stardog.kibble.strings.string;
 
 import com.complexible.common.rdf.model.Values;
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class Rotate extends AbstractFunction implements StringFunction {
 
     protected Rotate() {
-        super(2, StringsVocab.ontology().rotate.toString());
+        super(2, StringVocabulary.rotate.toString());
     }
 
     private Rotate(final Rotate rotate) {
@@ -39,6 +39,6 @@ public final class Rotate extends AbstractFunction implements StringFunction {
 
     @Override
     public String toString() {
-        return "Rotate (circular shift) a String of shift characters.";
+        return StringVocabulary.rotate.name();
     }
 }

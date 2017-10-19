@@ -1,4 +1,4 @@
-package com.semantalytics.stardog.plan.filter.functions.strings;
+package com.semantalytics.stardog.kibble.strings.string;
 
 import com.complexible.common.rdf.model.Values;
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class Repeat extends AbstractFunction implements StringFunction {
 
     protected Repeat() {
-        super(2, StringsVocab.ontology().repeat.toString());
+        super(2, StringVocabulary.repeat.toString());
     }
 
     private Repeat(final Repeat repeat) {
@@ -38,6 +38,6 @@ public final class Repeat extends AbstractFunction implements StringFunction {
 
     @Override
     public String toString() {
-        return "repeat string";
+        return StringVocabulary.repeat.name();
     }
 }

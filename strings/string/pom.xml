@@ -58,6 +58,8 @@
         <module>first</module>
         <module>get-digits</module>
         <module>initials</module>
+        <module>index-of-any</module>
+        <module>index-of-any-but</module>
         <module>is-all-lower-case</module>
         <module>is-all-upper-case</module>
         <module>is-blank</module>
@@ -65,8 +67,42 @@
         <module>is-mixed-case</module>
         <module>is-none-blank</module>
         <module>is-not-blank</module>
+        <module>is-not-empty</module>
+        <module>is-numeric</module>
+        <module>is-numeric-space</module>
         <module>is-none-empty</module>
+        <module>is-whitespace</module>
+        <module>last-index-of</module>
+        <module>last-index-of-any</module>
+        <module>last-index-of-ignore-case</module>
+        <module>last-ordinal-index-of</module>
+        <module>left</module>
+        <module>left-pad</module>
+        <module>length</module>
+        <module>ordinal-index-of</module>
         <module>join-with</module>
+        <module>lower-case</module>
+        <module>overlay</module>
+        <module>pad-end</module>
+        <module>pad-start</module>
+        <module>prepend-if-missing</module>
+        <module>prepend-if-missing-ignore-case</module>
+        <module>random</module>
+        <module>remove</module>
+        <module>remove-all</module>
+        <module>remove-end</module>
+        <module>remove-end-ignore-space</module>
+        <module>remove-first</module>
+        <module>reverse</module>
+        <module>rotate</module>
+        <module>strip-accents</module>
+        <module>truncate</module>
+        <module>uncapitalize</module>
+        <module>unwrap</module>
+        <module>wrap</module>
+        <module>wrap-if-missing</module>
+        <module>repeat</module>
+        <module>reverse-delimited</module>
         <module>mid</module>
         <module>normalize-space</module>
         <module>vocab</module>

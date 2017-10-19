@@ -1,4 +1,4 @@
-package com.semantalytics.stardog.plan.filter.functions.strings;
+package com.semantalytics.stardog.kibble.strings.string;
 
 import com.complexible.common.rdf.model.Values;
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
@@ -12,7 +12,7 @@ import static com.google.common.base.Preconditions.checkElementIndex;
 public final class Wrap extends AbstractFunction implements StringFunction {
 
     protected Wrap() {
-        super(2, StringsVocab.ontology().wrap.toString());
+        super(2, StringVocabulary.wrap.toString());
     }
 
     private Wrap(final Wrap wrap) {
@@ -42,6 +42,6 @@ public final class Wrap extends AbstractFunction implements StringFunction {
 
     @Override
     public String toString() {
-        return "Wraps a string with a char.";
+        return StringVocabulary.wrap.name();
     }
 }

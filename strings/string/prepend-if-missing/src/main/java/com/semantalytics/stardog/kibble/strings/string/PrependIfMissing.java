@@ -1,5 +1,4 @@
-
-package com.semantalytics.stardog.plan.filter.functions.strings;
+package com.semantalytics.stardog.kibble.strings.string;
 
 import com.complexible.common.rdf.model.Values;
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
@@ -12,7 +11,7 @@ import org.openrdf.model.Value;
 public final class PrependIfMissing extends AbstractFunction implements StringFunction {
 
     protected PrependIfMissing() {
-        super(3, StringsVocab.ontology().prependIfMissing.toString());
+        super(3, StringVocabulary.prependIfMissing.toString());
     }
 
     private PrependIfMissing(final PrependIfMissing prependIfMissing) {
@@ -41,6 +40,6 @@ public final class PrependIfMissing extends AbstractFunction implements StringFu
 
     @Override
     public String toString() {
-        return "Prepends the prefix to the start of the string if the string does not already start with any of the prefixes. ";
+        return StringVocabulary.prependIfMissing.name();
     }
 }

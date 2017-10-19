@@ -68,7 +68,7 @@ public class ContentTypeTest {
             URI file = Resources.getResource("test-target.txt").toURI();
 
             final String aQuery = "prefix file: <" + FileVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(file:contentType(<" + file.toString() + ">) as ?result) }";
+                    "select ?result where { bind(file:contentType(\"" + file.toString() + "\") as ?result) }";
 
 
             try(final TupleQueryResult aResult = aConn.select(aQuery).execute()) {

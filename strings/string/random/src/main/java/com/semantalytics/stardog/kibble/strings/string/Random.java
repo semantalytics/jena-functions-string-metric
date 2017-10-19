@@ -1,17 +1,17 @@
-package com.semantalytics.stardog.plan.filter.functions.strings;
+package com.semantalytics.stardog.kibble.strings.string;
 
 import com.complexible.common.rdf.model.Values;
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.string.StringFunction;
-import org.apache.commons.lang.RandomStringUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.openrdf.model.Value;
 
 public final class Random extends AbstractFunction implements StringFunction {
 
     protected Random() {
-        super(2, StringsVocab.ontology().random.toString());
+        super(2, StringVocabulary.random.toString());
     }
 
     private Random(final Random random) {
@@ -39,6 +39,6 @@ public final class Random extends AbstractFunction implements StringFunction {
 
     @Override
     public String toString() {
-        return "Random a String using ellipses";
+        return StringVocabulary.random.name();
     }
 }

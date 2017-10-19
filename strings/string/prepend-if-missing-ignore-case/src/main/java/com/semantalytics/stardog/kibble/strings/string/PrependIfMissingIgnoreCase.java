@@ -1,4 +1,4 @@
-package com.semantalytics.stardog.plan.filter.functions.strings;
+package com.semantalytics.stardog.kibble.strings.string;
 
 import com.complexible.common.rdf.model.Values;
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class PrependIfMissingIgnoreCase extends AbstractFunction implements StringFunction {
 
     protected PrependIfMissingIgnoreCase() {
-        super(3, StringsVocab.ontology().prependIfMissingIgnoreCase.toString());
+        super(3, StringVocabulary.prependIfMissingIgnoreCase.toString());
     }
 
     private PrependIfMissingIgnoreCase(final PrependIfMissingIgnoreCase prependIfMissingIgnoreCase) {
@@ -40,6 +40,6 @@ public final class PrependIfMissingIgnoreCase extends AbstractFunction implement
 
     @Override
     public String toString() {
-        return "Prepends the prefix to the start of the string if the string does not already start with any of the prefixes ignoring case. ";
+        return StringVocabulary.prependIfMissingIgnoreCase.name();
     }
 }

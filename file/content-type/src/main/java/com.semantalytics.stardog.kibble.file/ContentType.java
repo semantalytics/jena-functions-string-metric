@@ -30,7 +30,7 @@ public class ContentType extends AbstractFunction implements UserDefinedFunction
         final String file = assertStringLiteral(values[0]).stringValue();
 
         try {
-            return iri(Files.probeContentType(Paths.get(file)));
+            return literal(Files.probeContentType(Paths.get(file)));
         } catch (IOException e) {
             throw new ExpressionEvaluationException(e);
         }

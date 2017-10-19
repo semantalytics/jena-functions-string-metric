@@ -1,4 +1,4 @@
-package com.semantalytics.stardog.plan.filter.functions.strings;
+package com.semantalytics.stardog.kibble.strings.string;
 
 import com.complexible.common.rdf.model.Values;
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
@@ -13,7 +13,7 @@ import static com.google.common.base.Preconditions.checkElementIndex;
 public final class ReverseDelimited extends AbstractFunction implements StringFunction {
 
     protected ReverseDelimited() {
-        super(2, StringsVocab.ontology().reverseDelimited.toString());
+        super(2, StringVocabulary.reverseDelimited.toString());
     }
 
     private ReverseDelimited(final ReverseDelimited reverseDelimited) {
@@ -43,6 +43,6 @@ public final class ReverseDelimited extends AbstractFunction implements StringFu
 
     @Override
     public String toString() {
-        return "ReverseDelimited a String using ellipses";
+        return StringVocabulary.reverseDelimited.name();
     }
 }

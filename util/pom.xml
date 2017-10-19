@@ -46,6 +46,7 @@
         <module>vocab</module>
         <module>user</module>
         <module>stardog-version</module>
+        <module>proquint</module>
     </modules>
 
 </project>

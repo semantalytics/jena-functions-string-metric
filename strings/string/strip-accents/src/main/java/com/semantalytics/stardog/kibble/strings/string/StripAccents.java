@@ -1,4 +1,4 @@
-package com.semantalytics.stardog.plan.filter.functions.strings;
+package com.semantalytics.stardog.kibble.strings.string;
 
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.*;
 public final class StripAccents extends AbstractFunction implements StringFunction {
 
     protected StripAccents() {
-        super(1, StringsVocab.ontology().stripAccents.toString());
+        super(1, StringVocabulary.stripAccents.toString());
     }
 
     private StripAccents(final StripAccents stripAccents) {
@@ -39,6 +39,6 @@ public final class StripAccents extends AbstractFunction implements StringFuncti
 
     @Override
     public String toString() {
-        return "stripAccents";
+        return StringVocabulary.stripAccents.name();
     }
 }
