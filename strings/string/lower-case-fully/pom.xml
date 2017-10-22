@@ -10,7 +10,7 @@
 
     <parent>
         <groupId>com.semantalytics.stardog.kibble</groupId>
-        <artifactId>stardog-kibble-strings</artifactId>
+        <artifactId>stardog-kibble-strings-string</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 

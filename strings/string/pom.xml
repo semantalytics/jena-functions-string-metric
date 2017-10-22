@@ -7,17 +7,6 @@
     <groupId>com.semantalytics.stardog.kibble</groupId>
     <artifactId>stardog-kibble-strings-string</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <dependencies>
-        <dependency>
-            <groupId>com.complexible.stardog.core</groupId>
-            <artifactId>stardog</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
     <packaging>pom</packaging>
 
     <parent>
@@ -82,6 +71,7 @@
         <module>ordinal-index-of</module>
         <module>join-with</module>
         <module>lower-case</module>
+        <module>lower-case-fully</module>
         <module>overlay</module>
         <module>pad-end</module>
         <module>pad-start</module>
