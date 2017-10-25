@@ -1,4 +1,4 @@
-package com.semantalytics.stardog.kibble.escape;
+package com.semantalytics.stardog.kibble.strings.escape;
 
 import com.complexible.stardog.Stardog;
 import com.complexible.stardog.api.Connection;

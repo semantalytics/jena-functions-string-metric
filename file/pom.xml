@@ -21,6 +21,7 @@
         <module>get</module>
         <module>group</module>
         <module>is-directory</module>
+        <module>is-same-file</module>
         <module>is-other</module>
         <module>is-regular-file</module>
         <module>is-symbolic-link</module>

@@ -5,7 +5,7 @@ import com.complexible.stardog.api.Connection;
 import com.complexible.stardog.api.ConnectionConfiguration;
 import com.complexible.stardog.api.admin.AdminConnection;
 import com.complexible.stardog.api.admin.AdminConnectionConfiguration;
-import com.semantalytics.stardog.kibble.date.DateVocabulary;
+import com.semantalytics.stardog.kibble.file.DateVocabulary;
 import org.junit.*;
 import org.openrdf.query.TupleQueryResult;
 

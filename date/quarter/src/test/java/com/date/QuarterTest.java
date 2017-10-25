@@ -1,4 +1,4 @@
-package com.semantalytics.stardog.kibble.date;
+package com.semantalytics.stardog.kibble.file;
 
 import com.complexible.stardog.Stardog;
 import com.complexible.stardog.api.Connection;

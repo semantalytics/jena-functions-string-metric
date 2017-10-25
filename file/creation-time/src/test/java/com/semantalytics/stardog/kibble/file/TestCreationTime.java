@@ -1,16 +1,12 @@
 package com.semantalytics.stardog.kibble.file;
 
-import com.complexible.common.protocols.server.Server;
 import com.complexible.stardog.Stardog;
 import com.complexible.stardog.api.Connection;
 import com.complexible.stardog.api.ConnectionConfiguration;
 import com.complexible.stardog.api.admin.AdminConnection;
 import com.complexible.stardog.api.admin.AdminConnectionConfiguration;
-import com.complexible.stardog.protocols.snarl.SNARLProtocolConstants;
 import com.google.common.io.Resources;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.TupleQueryResult;
 
@@ -20,15 +16,13 @@ import static org.junit.Assert.*;
 
 public class TestCreationTime {
 
-    private static Server SERVER = null;
-
-    private static final String DB = "test";
+    protected static Stardog SERVER = null;
+    protected static final String DB = "test";
+    private Connection aConn;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        SERVER = Stardog.buildServer()
-                .bind(SNARLProtocolConstants.EMBEDDED_ADDRESS)
-                .start();
+        SERVER = Stardog.builder().create();
 
         final AdminConnection aConn = AdminConnectionConfiguration.toEmbeddedServer()
                 .credentials("admin", "admin")
@@ -39,7 +33,7 @@ public class TestCreationTime {
                 aConn.drop(DB);
             }
 
-            aConn.createMemory(DB);
+            aConn.newDatabase(DB).create();
         }
         finally {
             aConn.close();
@@ -49,8 +43,20 @@ public class TestCreationTime {
     @AfterClass
     public static void afterClass() {
         if (SERVER != null) {
-            SERVER.stop();
+            SERVER.shutdown();
         }
+    }
+
+    @Before
+    public void setUp() {
+        aConn = ConnectionConfiguration.to(DB)
+                .credentials("admin", "admin")
+                .connect();
+    }
+
+    @After
+    public void tearDown() {
+        aConn.close();
     }
 
     @Test
@@ -63,7 +69,7 @@ public class TestCreationTime {
 
             URI file = Resources.getResource("test-target.txt").toURI();
 
-            final String aQuery = "prefix file: <http://semantalytics.com/2016/04/ns/stardog/udf/file/> " +
+            final String aQuery = "prefix file: <" + FileVocabulary.NAMESPACE + "> " +
                     "select ?creationTime where { bind(file:creationTime(<" + file.toString() + ">) as ?creationTime) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -97,7 +103,7 @@ public class TestCreationTime {
 
             URI file = Resources.getResource("test-target.txt").toURI();
 
-            final String aQuery = "prefix file: <http://semantalytics.com/2016/04/ns/stardog/udf/file/> " +
+            final String aQuery = "prefix file: <" + FileVocabulary.NAMESPACE + "> " +
                     "select ?creationTime where { bind(file:creationTime(<" + file.toString() + ">, 1) as ?creationTime) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -121,8 +127,6 @@ public class TestCreationTime {
         }
     }
 
-
-
     @Test
     public void testCreationTimeWrongType() throws Exception {
         final Connection aConn = ConnectionConfiguration.to(DB)
@@ -133,7 +137,7 @@ public class TestCreationTime {
 
             URI file = Resources.getResource("test-target.txt").toURI();
 
-            final String aQuery = "prefix file: <http://semantalytics.com/2016/04/ns/stardog/udf/file/> " +
+            final String aQuery = "prefix file: <" + FileVocabulary.NAMESPACE + "> " +
                     "select ?creationTime where { bind(file:creationTime(1) as ?creationTime) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();

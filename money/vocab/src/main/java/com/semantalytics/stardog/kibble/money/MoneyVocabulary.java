@@ -1,19 +1,16 @@
-package com.semantalytics.stardog.kibble.date;
+package com.semantalytics.stardog.kibble.money;
 
 import com.complexible.common.rdf.model.StardogValueFactory;
 import org.openrdf.model.IRI;
 
-public enum DateVocabulary {
+public enum MoneyVocabulary {
 
-    epochTime,
-    nextQuarter,
-    previousQuarter,
-    quarter;
+    subtract;
 
-    public static final String NAMESPACE = "http://semantalytics.com/2017/09/ns/stardog/kibble/date/";
+    public static final String NAMESPACE = "http://semantalytics.com/2017/09/ns/stardog/kibble/money/";
     public final IRI iri;
 
-    DateVocabulary() {
+    MoneyVocabulary() {
         iri = StardogValueFactory.instance().createIRI(NAMESPACE, name());
     }
 

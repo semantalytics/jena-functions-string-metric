@@ -1,4 +1,4 @@
-package com.semantalytics.stardog.kibble.file;
+package com.semantalytics.stardog.kibble.json;
 
 import com.complexible.common.rdf.model.Values;
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
@@ -6,6 +6,7 @@ import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.Function;
 import com.complexible.stardog.plan.filter.functions.UserDefinedFunction;
+import com.jayway.jsonpath.JsonPath;
 import org.openrdf.model.Value;
 
 import java.io.BufferedReader;
@@ -15,14 +16,14 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.stream.Collectors;
 
-public final class JsonPath extends AbstractFunction implements UserDefinedFunction {
+public final class Path extends AbstractFunction implements UserDefinedFunction {
 
-    public JsonPath() {
-        super(2, FileVocabulary.jsonPath.stringValue());
+    public Path() {
+        super(2, JsonVocabulary.path.stringValue());
     }
 
-    private JsonPath(final JsonPath jsonPath) {
-        super(jsonPath);
+    private Path(final Path path) {
+        super(path);
     }
 
     @Override
@@ -49,7 +50,7 @@ public final class JsonPath extends AbstractFunction implements UserDefinedFunct
 
         final String path = values[1].stringValue();
 
-        String result = com.jayway.jsonpath.JsonPath.parse(json).read(path);
+        String result = JsonPath.parse(json).read(path);
 
         return Values.literal(result);
 
@@ -57,7 +58,7 @@ public final class JsonPath extends AbstractFunction implements UserDefinedFunct
 
     @Override
     public Function copy() {
-        return new JsonPath(this);
+        return new Path(this);
     }
 
     @Override
@@ -67,6 +68,6 @@ public final class JsonPath extends AbstractFunction implements UserDefinedFunct
 
     @Override
     public String toString() {
-        return "JsonPath";
+        return JsonVocabulary.path.name();
     }
 }

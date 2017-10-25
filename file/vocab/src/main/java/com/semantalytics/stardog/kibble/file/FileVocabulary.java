@@ -1,4 +1,4 @@
-package com.semantalytics.stardog.kibble.date;
+package com.semantalytics.stardog.kibble.file;
 
 import com.complexible.common.rdf.model.StardogValueFactory;
 import org.openrdf.model.IRI;

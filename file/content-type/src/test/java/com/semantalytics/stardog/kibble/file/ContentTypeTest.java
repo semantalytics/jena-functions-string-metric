@@ -1,13 +1,11 @@
 package com.semantalytics.stardog.kibble.file;
 
-import com.complexible.common.protocols.server.Server;
 import com.complexible.stardog.Stardog;
 import com.complexible.stardog.api.Connection;
 import com.complexible.stardog.api.ConnectionConfiguration;
 import com.complexible.stardog.api.admin.AdminConnection;
 import com.complexible.stardog.api.admin.AdminConnectionConfiguration;
 import com.google.common.io.Resources;
-import com.semantalytics.stardog.kibble.date.FileVocabulary;
 import org.junit.*;
 import org.openrdf.query.TupleQueryResult;
 
@@ -68,7 +66,7 @@ public class ContentTypeTest {
             URI file = Resources.getResource("test-target.txt").toURI();
 
             final String aQuery = "prefix file: <" + FileVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(file:contentType(\"" + file.toString() + "\") as ?result) }";
+                    "select ?result where { bind(file:contentType(<" + file + ">) as ?result) }";
 
 
             try(final TupleQueryResult aResult = aConn.select(aQuery).execute()) {
@@ -76,7 +74,7 @@ public class ContentTypeTest {
 
                 final String aValue = aResult.next().getValue("result").stringValue();
 
-                assertEquals("Stardog test file", aValue);
+                assertEquals("text/plain", aValue);
 
                 assertFalse("Should have no more results", aResult.hasNext());
             }

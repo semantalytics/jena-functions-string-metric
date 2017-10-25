@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.semantalytics.stardog.kibble</groupId>
-    <artifactId>stardog-kibble-date-vocabulary</artifactId>
+    <artifactId>stardog-kibble-money-vocabulary</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <parent>
         <groupId>com.semantalytics.stardog.kibble</groupId>
-        <artifactId>stardog-kibble-date</artifactId>
+        <artifactId>stardog-kibble-money</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 

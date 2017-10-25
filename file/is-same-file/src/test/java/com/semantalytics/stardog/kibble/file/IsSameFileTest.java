@@ -1,13 +1,11 @@
 package com.semantalytics.stardog.kibble.file;
 
-import com.complexible.common.protocols.server.Server;
 import com.complexible.stardog.Stardog;
 import com.complexible.stardog.api.Connection;
 import com.complexible.stardog.api.ConnectionConfiguration;
 import com.complexible.stardog.api.admin.AdminConnection;
 import com.complexible.stardog.api.admin.AdminConnectionConfiguration;
 import com.google.common.io.Resources;
-import com.semantalytics.stardog.kibble.date.FileVocabulary;
 import org.junit.*;
 import org.openrdf.query.TupleQueryResult;
 
@@ -15,7 +13,7 @@ import java.net.URI;
 
 import static org.junit.Assert.*;
 
-public class IsDirectoryTest {
+public class IsSameFileTest {
 
     protected static Stardog SERVER = null;
     protected static final String DB = "test";

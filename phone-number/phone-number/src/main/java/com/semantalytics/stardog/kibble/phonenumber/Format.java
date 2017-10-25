@@ -11,13 +11,13 @@ import org.openrdf.model.Value;
 
 import static com.complexible.common.rdf.model.Values.literal;
 
-public class PhoneNumber extends AbstractFunction implements UserDefinedFunction {
+public class Format extends AbstractFunction implements UserDefinedFunction {
 
-    protected PhoneNumber() {
+    protected Format() {
         super(1, PhoneNumberVocabulary.format.stringValue());
     }
 
-    public PhoneNumber(final PhoneNumber next) {
+    public Format(final Format next) {
         super(next);
     }
 
@@ -38,8 +38,8 @@ public class PhoneNumber extends AbstractFunction implements UserDefinedFunction
     }
 
     @Override
-    public PhoneNumber copy() {
-        return new PhoneNumber(this);
+    public Format copy() {
+        return new Format(this);
     }
 
     @Override

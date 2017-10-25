@@ -14,5 +14,9 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
+    <modules>
+        <module>path</module>
+        <module>vocab</module>
+    </modules>
 
 </project>

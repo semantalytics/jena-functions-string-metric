@@ -1,33 +1,16 @@
-package com.semantalytics.stardog.kibble.strings.similarity;
+package com.semantalytics.stardog.kibble.strings.escape;
 
 import com.complexible.common.rdf.model.StardogValueFactory;
 import org.openrdf.model.IRI;
 
-public enum StringMetricsVocabulary {
+public enum EscapeVocabulary {
 
-    cosine,
-    damerau,
-    hammingDistance,
-    isub,
-    jaroWinkler,
-    levenschtein,
-    longestCommonSubsequence,
-    longestCommonSubstring,
-    metricLongestCommonSubsequence,
-    needlemanWunch,
-    ngram,
-    normalizedLevenshtein,
-    overlapCoefficient,
-    qgram,
-    smithWaterman,
-    smithWatermanGotoh,
-    sorensenDice,
-    weithtedLevenshtein;
+    csv;
 
-    public static final String NAMESPACE = "http://semantalytics.com/2017/09/ns/stardog/kibble/strings/metrics/";
+    public static final String NAMESPACE = "http://semantalytics.com/2017/09/ns/stardog/kibble/strings/escape/";
     public final IRI iri;
 
-    StringMetricsVocabulary() {
+    EscapeVocabulary() {
         iri = StardogValueFactory.instance().createIRI(NAMESPACE, name());
     }
 

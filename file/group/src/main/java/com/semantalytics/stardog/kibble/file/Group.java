@@ -1,18 +1,23 @@
 package com.semantalytics.stardog.kibble.file;
 
+import com.complexible.common.rdf.model.Values;
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.Function;
 import com.complexible.stardog.plan.filter.functions.UserDefinedFunction;
-import com.semantalytics.stardog.kibble.date.FileVocabulary;
 import org.openrdf.model.Value;
+
+import java.net.URI;
 import java.nio.file.Files;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.attribute.GroupPrincipal;
 import java.nio.file.attribute.PosixFileAttributeView;
 import java.nio.file.attribute.PosixFileAttributes;
+import java.util.GregorianCalendar;
 
 import static com.complexible.common.rdf.model.Values.*;
 
@@ -31,24 +36,14 @@ public class Group extends AbstractFunction implements UserDefinedFunction {
 
         assertIRI(values[0]);
         Path path = Paths.get(URI.create(values[0].stringValue()));
-        PosixFileAttributeView posixFileAttributes;
+        GroupPrincipal groupPrincipal;
         try {
-            posixFileAttributes = Files.readAttributes(path, PosixFileAttributes.class);
+            groupPrincipal = Files.readAttributes(path, PosixFileAttributes.class).group();
         } catch (IOException e) {
             throw new ExpressionEvaluationException("Unable to read file attributes");
         }
-        posixFileAttributes.group();
-        GregorianCalendar calendar = new GregorianCalendar();
-        calendar.setTimeInMillis(creationTime);
-        return Values.literal(calendar);
+        return literal(groupPrincipal.getName());
 
-        final String file = assertStringLiteral(values[0]).stringValue();
-
-        try {
-            return iri(Files.probeGroup(Paths.get(file)));
-        } catch (IOException e) {
-            throw new ExpressionEvaluationException(e);
-        }
     }
 
     @Override

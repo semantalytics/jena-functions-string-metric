@@ -7,16 +7,12 @@ import com.complexible.common.rdf.model.Values;
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
-import com.complexible.stardog.plan.filter.functions.Function;
 import com.complexible.stardog.plan.filter.functions.UserDefinedFunction;
-import com.semantalytics.stardog.kibble.date.FileVocabulary;
 import org.openrdf.model.Value;
 import java.nio.file.Files;
 
 import java.io.IOException;
 import java.nio.file.Paths;
-
-import static com.complexible.common.rdf.model.Values.*;
 
 public class IsOther extends AbstractFunction implements UserDefinedFunction {
 

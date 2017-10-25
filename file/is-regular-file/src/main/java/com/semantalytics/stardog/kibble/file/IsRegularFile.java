@@ -4,9 +4,7 @@ package com.semantalytics.stardog.kibble.file;
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
-import com.complexible.stardog.plan.filter.functions.Function;
 import com.complexible.stardog.plan.filter.functions.UserDefinedFunction;
-import com.semantalytics.stardog.kibble.date.FileVocabulary;
 import org.openrdf.model.Value;
 import java.nio.file.Files;
 
@@ -30,11 +28,7 @@ public class IsRegularFile extends AbstractFunction implements UserDefinedFuncti
 
         final String file = assertStringLiteral(values[0]).stringValue();
 
-        try {
-            return iri(Files.probeGroup(Paths.get(file)));
-        } catch (IOException e) {
-            throw new ExpressionEvaluationException(e);
-        }
+        return literal(Files.isRegularFile(Paths.get(file)));
     }
 
     @Override

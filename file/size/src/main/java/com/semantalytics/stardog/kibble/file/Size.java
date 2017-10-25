@@ -27,15 +27,13 @@ public final class Size extends AbstractFunction implements UserDefinedFunction 
 
     @Override
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
-        assertIRI(values[0]);
-        Path path = Paths.get(URI.create(values[0].stringValue()));
-        BasicFileAttributes basicFileAttributes;
+        Path path = Paths.get(URI.create(assertIRI(values[0]).stringValue()));
+        final long size;
         try {
-            basicFileAttributes = Files.readAttributes(path, BasicFileAttributes.class);
+            size = Files.size(path);
         } catch (IOException e) {
             throw new ExpressionEvaluationException("Unable to read file attributes");
         }
-        long size = basicFileAttributes.size();
         return Values.literal(size);
     }
 

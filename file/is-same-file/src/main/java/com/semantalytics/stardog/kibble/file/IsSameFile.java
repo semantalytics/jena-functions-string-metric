@@ -4,35 +4,41 @@ import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.UserDefinedFunction;
-import com.semantalytics.stardog.kibble.date.FileVocabulary;
 import org.openrdf.model.Value;
+
+import java.io.IOException;
 import java.nio.file.Files;
 
 import java.nio.file.Paths;
 
 import static com.complexible.common.rdf.model.Values.*;
 
-public class IsDirectory extends AbstractFunction implements UserDefinedFunction {
+public class IsSameFile extends AbstractFunction implements UserDefinedFunction {
 
-    IsDirectory() {
+    IsSameFile() {
         super(1, FileVocabulary.isDirectory.stringValue());
     }
 
-    private IsDirectory(final IsDirectory isDirectory) {
-        super(isDirectory);
+    private IsSameFile(final IsSameFile isSameFile) {
+        super(isSameFile);
     }
 
     @Override
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
 
-        final String file = assertIRI(values[0]).stringValue();
+        final String file1 = assertIRI(values[0]).stringValue();
+        final String file2 = assertIRI(values[1]).stringValue();
 
-        return literal(Files.isDirectory(Paths.get(file)));
+        try {
+            return literal(Files.isSameFile(Paths.get(file1.substring(5)), Paths.get(file2.substring(5))));
+        } catch (IOException e) {
+            throw new ExpressionEvaluationException(e);
+        }
     }
 
     @Override
-    public IsDirectory copy() {
-        return new IsDirectory(this);
+    public IsSameFile copy() {
+        return new IsSameFile(this);
     }
 
     @Override

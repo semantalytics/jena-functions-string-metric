@@ -1,13 +1,11 @@
 package com.semantalytics.stardog.kibble.file;
 
-import com.complexible.common.protocols.server.Server;
 import com.complexible.stardog.Stardog;
 import com.complexible.stardog.api.Connection;
 import com.complexible.stardog.api.ConnectionConfiguration;
 import com.complexible.stardog.api.admin.AdminConnection;
 import com.complexible.stardog.api.admin.AdminConnectionConfiguration;
 import com.google.common.io.Resources;
-import com.semantalytics.stardog.kibble.date.FileVocabulary;
 import org.junit.*;
 import org.openrdf.query.TupleQueryResult;
 
@@ -72,7 +70,7 @@ public class IsDirectoryTest {
             URI file = Resources.getResource("test-target.txt").toURI();
 
             final String aQuery = "prefix file: <" + FileVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(file:isDirectory(<" + file.toString() + ">) as ?result) }";
+                    "select ?result where { bind(file:isDirectory(<" + file + ">) as ?result) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
 
@@ -81,7 +79,7 @@ public class IsDirectoryTest {
 
                 final String aValue = aResult.next().getValue("result").stringValue();
 
-                assertEquals("Stardog test file", aValue);
+                assertEquals("false", aValue);
 
                 assertFalse("Should have no more results", aResult.hasNext());
             }

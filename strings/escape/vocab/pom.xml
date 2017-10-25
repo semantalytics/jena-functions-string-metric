@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.semantalytics.stardog.kibble</groupId>
-    <artifactId>stardog-kibble-strings-metrics-vocabulary</artifactId>
+    <artifactId>stardog-kibble-strings-escape-vocabulary</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <parent>
         <groupId>com.semantalytics.stardog.kibble</groupId>
-        <artifactId>stardog-kibble-strings-metrics</artifactId>
+        <artifactId>stardog-kibble-strings-escape</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
@@ -29,6 +29,11 @@
             <groupId>org.openrdf.sesame</groupId>
             <artifactId>sesame-model</artifactId>
             <version>4.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.complexible.stardog.utils</groupId>
+            <artifactId>stardog-utils-rdf</artifactId>
+            <version>5.0.3</version>
         </dependency>
     </dependencies>
 

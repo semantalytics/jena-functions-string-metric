@@ -1,4 +1,3 @@
-
 package com.semantalytics.stardog.kibble.file;
 
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
@@ -6,32 +5,32 @@ import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.Function;
 import com.complexible.stardog.plan.filter.functions.UserDefinedFunction;
-import com.semantalytics.stardog.kibble.date.FileVocabulary;
 import org.openrdf.model.Value;
 import java.nio.file.Files;
 
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.nio.file.attribute.PosixFileAttributes;
 
 import static com.complexible.common.rdf.model.Values.*;
 
-public class Group extends AbstractFunction implements UserDefinedFunction {
+public class Owner extends AbstractFunction implements UserDefinedFunction {
 
-    Group() {
-        super(1, FileVocabulary.group.stringValue());
+    Owner() {
+        super(1, FileVocabulary.owner.stringValue());
     }
 
-    private Group(final Group contentType) {
+    private Owner(final Owner contentType) {
         super(contentType);
     }
 
     @Override
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
 
-        final String file = assertStringLiteral(values[0]).stringValue();
+        final String file = assertFileIri(assertIRI(values[0]).stringValue());
 
         try {
-            return iri(Files.probeGroup(Paths.get(file)));
+            return literal(Files.readAttributes(Paths.get(file.substring(5)), PosixFileAttributes.class).owner().getName());
         } catch (IOException e) {
             throw new ExpressionEvaluationException(e);
         }
@@ -39,7 +38,7 @@ public class Group extends AbstractFunction implements UserDefinedFunction {
 
     @Override
     public Function copy() {
-        return new Group(this);
+        return new Owner(this);
     }
 
     @Override
@@ -50,5 +49,12 @@ public class Group extends AbstractFunction implements UserDefinedFunction {
     @Override
     public String toString() {
         return FileVocabulary.contentType.name();
+    }
+
+    private String assertFileIri(final String file) throws ExpressionEvaluationException {
+        if(!file.startsWith("file:")) {
+            throw new ExpressionEvaluationException("IRI protocol must be file:");
+        }
+        return file;
     }
 }

@@ -1,19 +1,16 @@
-package com.semantalytics.stardog.kibble.date;
+package com.semantalytics.stardog.kibble.phonenumber;
 
 import com.complexible.common.rdf.model.StardogValueFactory;
 import org.openrdf.model.IRI;
 
-public enum DateVocabulary {
+public enum PhoneNumberVocabulary {
 
-    epochTime,
-    nextQuarter,
-    previousQuarter,
-    quarter;
+    format;
 
-    public static final String NAMESPACE = "http://semantalytics.com/2017/09/ns/stardog/kibble/date/";
+    public static final String NAMESPACE = "http://semantalytics.com/2017/09/ns/stardog/kibble/phonenumber/";
     public final IRI iri;
 
-    DateVocabulary() {
+    PhoneNumberVocabulary() {
         iri = StardogValueFactory.instance().createIRI(NAMESPACE, name());
     }
 

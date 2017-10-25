@@ -16,9 +16,10 @@
     </parent>
 
     <modules>
-        <module>metrics</module>
+        <module>comparison</module>
         <module>phonetic</module>
         <module>string</module>
+        <module>escape</module>
     </modules>
 
 </project>

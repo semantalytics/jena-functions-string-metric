@@ -9,7 +9,6 @@ import com.complexible.stardog.plan.filter.functions.UserDefinedFunction;
 import com.google.common.collect.Range;
 import com.google.common.hash.Hashing;
 import com.google.common.io.Files;
-import com.semantalytics.stardog.kibble.date.FileVocabulary;
 import org.apache.http.client.fluent.Request;
 import org.openrdf.model.Value;
 

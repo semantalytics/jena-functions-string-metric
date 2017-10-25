@@ -13,7 +13,7 @@ import java.net.URI;
 
 import static org.junit.Assert.*;
 
-public class ContentTypeTest {
+public class TestGroup {
 
     protected static Stardog SERVER = null;
     protected static final String DB = "test";
@@ -59,14 +59,14 @@ public class ContentTypeTest {
     }
 
     @Test
-    public void testContentType() throws Exception {
+    public void testGroup() throws Exception {
 
         try {
 
             URI file = Resources.getResource("test-target.txt").toURI();
 
             final String aQuery = "prefix file: <" + FileVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(file:contentType(<" + file + ">) as ?result) }";
+                    "select ?result where { bind(file:group(<" + file + ">) as ?result) }";
 
 
             try(final TupleQueryResult aResult = aConn.select(aQuery).execute()) {
@@ -74,7 +74,7 @@ public class ContentTypeTest {
 
                 final String aValue = aResult.next().getValue("result").stringValue();
 
-                assertEquals("text/plain", aValue);
+                assertEquals("staff", aValue);
 
                 assertFalse("Should have no more results", aResult.hasNext());
             }

@@ -4,7 +4,6 @@ import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.UserDefinedFunction;
-import com.semantalytics.stardog.kibble.date.FileVocabulary;
 import org.openrdf.model.Value;
 import java.nio.file.Files;
 
@@ -25,7 +24,7 @@ public class IsDirectory extends AbstractFunction implements UserDefinedFunction
     @Override
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
 
-        final String file = assertStringLiteral(values[0]).stringValue();
+        final String file = assertIRI(values[0]).stringValue();
 
         return literal(Files.isDirectory(Paths.get(file)));
     }

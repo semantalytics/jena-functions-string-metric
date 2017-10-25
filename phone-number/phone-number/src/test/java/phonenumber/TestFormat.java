@@ -1,12 +1,12 @@
-package com.semantalytics.stardog.kibble.util;
+package phonenumber;
 
-import com.complexible.common.base.Streams;
 import com.complexible.stardog.Stardog;
 import com.complexible.stardog.api.Connection;
 import com.complexible.stardog.api.ConnectionConfiguration;
 import com.complexible.stardog.api.admin.AdminConnection;
 import com.complexible.stardog.api.admin.AdminConnectionConfiguration;
 import com.complexible.stardog.plan.eval.ExecutionException;
+import com.semantalytics.stardog.kibble.phonenumber.PhoneNumberVocabulary;
 import org.junit.*;
 import org.openrdf.query.TupleQueryResult;
 
@@ -15,10 +15,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
 
 
-public class TestPhoneNumber {
+public class TestFormat {
 
     protected static Stardog SERVER = null;
     protected static final String DB = "test";
@@ -73,8 +72,8 @@ public class TestPhoneNumber {
 
             aConn.begin();
 
-            final String aQuery = "prefix util: <" + UtilVocabulary.bindPrev.NAMESPACE + "> " +
-                    "select ?result where { bind(util:bindPrev(?v) as ?result) values ?v {1 2 3 4 5} } order by ?v";
+            final String aQuery = "prefix ph: <" + PhoneNumberVocabulary.NAMESPACE + "> " +
+                    "select ?result where { bind(ph:format(?v) as ?result) }";
 
 
             List<String> results = new ArrayList(5);
