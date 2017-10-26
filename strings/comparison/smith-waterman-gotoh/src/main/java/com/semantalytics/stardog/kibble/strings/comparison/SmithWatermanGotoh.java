@@ -13,7 +13,7 @@ import org.openrdf.model.Value;
 import org.simmetrics.metrics.functions.MatchMismatch;
 
 public final class SmithWatermanGotoh extends AbstractFunction implements StringFunction {
-    ::
+
     private org.simmetrics.metrics.SmithWatermanGotoh smithWatermanGotoh;
 
     protected SmithWatermanGotoh() {

@@ -44,7 +44,7 @@ public final class LongestCommonSubstring extends AbstractFunction implements St
 
     @Override
     public String toString() {
-        return StringComparisonVocabulary.longestCommonSubstring
+        return StringComparisonVocabulary.longestCommonSubstring.name();
     }
 }
 
