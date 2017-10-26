@@ -64,7 +64,7 @@ public class TestNGram {
 
         try {
 
-            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?dist where { bind(ss:ngram(\"ABCD\", \"ABUTIO\", 2) as ?dist) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -95,7 +95,7 @@ public class TestNGram {
                 .connect();
 
         try {
-            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?str where { bind(ss:ngram(\"one\", \"two\", \"three\", \"four\") as ?str) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -127,7 +127,7 @@ public class TestNGram {
 
         try {
 
-            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?str where { bind(ss:ngram(7) as ?str) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();

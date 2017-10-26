@@ -64,7 +64,7 @@ public class TestNormalizedLevenshtein {
 
         try {
 
-            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?dist where { bind(ss:normalizedLevenshtein(\"My string\", \"My $tring\") as ?dist) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -95,7 +95,7 @@ public class TestNormalizedLevenshtein {
                 .connect();
 
         try {
-            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?str where { bind(ss:normalizedLevenshtein(\"one\", \"two\", \"three\") as ?str) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -127,7 +127,7 @@ public class TestNormalizedLevenshtein {
 
         try {
 
-            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?str where { bind(ss:normalizedLevenshtein(7) as ?str) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();

@@ -64,7 +64,7 @@ public class TestNeedlemanWunch {
 
         try {
 
-            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?dist where { bind(ss:needlemanWunch(\"Stardog\", \"Starman\") as ?dist) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -95,7 +95,7 @@ public class TestNeedlemanWunch {
                 .connect();
 
         try {
-            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?dist where { bind(ss:needlemanWunch(\"one\", \"two\", \"three\", \"four\") as ?dist) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -129,7 +129,7 @@ public class TestNeedlemanWunch {
 
         try {
 
-            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?dist where { bind(ss:needlemanWunch(7) as ?dist) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();

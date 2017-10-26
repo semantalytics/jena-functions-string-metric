@@ -63,7 +63,7 @@ public class TestSmithWaterman {
 
         try {
 
-            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(ss:smithWaterman(\"Stardog\", \"Starman\") as ?result) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -91,7 +91,7 @@ public class TestSmithWaterman {
 
         try {
 
-            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(ss:smithWaterman(\"Stardog\", \"Starman\", -5.0, -1.0, 5.0, -3.0, " + Integer.MAX_VALUE + ") as ?result) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -119,7 +119,7 @@ public class TestSmithWaterman {
 
         try {
 
-            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(ss:smithWaterman(\"Stardog\", \"Starman\", 1.0) as ?result) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -148,7 +148,7 @@ public class TestSmithWaterman {
 
         try {
 
-            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(ss:smithWaterman(7) as ?result) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();

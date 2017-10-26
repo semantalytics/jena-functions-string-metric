@@ -64,7 +64,7 @@ public class TestSorensenDice {
 
         try {
 
-            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?dist where { bind(ss:sorensenDice(\"ABCDE\", \"ABCDFG\", 2) as ?dist) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -95,7 +95,7 @@ public class TestSorensenDice {
                 .connect();
 
         try {
-            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?str where { bind(ss:sorensenDice(\"one\", \"two\", \"three\", \"four\") as ?str) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -127,7 +127,7 @@ public class TestSorensenDice {
 
         try {
 
-            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?str where { bind(ss:sorensenDice(7) as ?str) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();

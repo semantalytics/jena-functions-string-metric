@@ -36,6 +36,11 @@
             <groupId>com.complexible.stardog.core</groupId>
             <artifactId>stardog</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.semantalytics.stardog.kibble</groupId>
+            <artifactId>stardog-kibble-strings-comparison-vocabulary</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>

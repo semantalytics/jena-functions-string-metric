@@ -64,7 +64,7 @@ public class TestHammingDistance {
 
         try {
 
-            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?hammingDistance where { bind(ss:hammingDistance(\"Stardog\", \"Starman\") as ?hammingDistance) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -95,7 +95,7 @@ public class TestHammingDistance {
                 .connect();
 
         try {
-            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?hammingDistance where { bind(ss:hammingDistance(\"one\", \"two\", \"three\", \"four\") as ?hammingDistance) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -129,7 +129,7 @@ public class TestHammingDistance {
 
         try {
 
-            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?hammingDistance where { bind(ss:hammingDistance(7) as ?hammingDistance) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();

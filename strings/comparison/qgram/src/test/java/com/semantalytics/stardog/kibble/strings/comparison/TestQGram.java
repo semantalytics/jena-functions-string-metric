@@ -64,7 +64,7 @@ public class TestQGram {
 
         try {
 
-            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?dist where { bind(ss:qgram(\"ABCD\", \"ABCE\", 2) as ?dist) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -95,7 +95,7 @@ public class TestQGram {
                 .connect();
 
         try {
-            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?str where { bind(ss:qgram(\"one\", \"two\", \"three\", \"four\") as ?str) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -127,7 +127,7 @@ public class TestQGram {
 
         try {
 
-            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?str where { bind(ss:qgram(7) as ?str) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();

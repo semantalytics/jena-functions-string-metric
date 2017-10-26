@@ -63,7 +63,7 @@ public class TestSmithWatermanGotoh {
 
         try {
 
-            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(ss:smithWatermanGotoh(\"Stardog\", \"Starman\") as ?result) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -91,7 +91,7 @@ public class TestSmithWatermanGotoh {
 
         try {
 
-            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(ss:smithWatermanGotoh(\"Stardog\", \"Starman\", -0.5, 1.0, -2.0) as ?result) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -117,7 +117,7 @@ public class TestSmithWatermanGotoh {
     public void testSmithWatermanGotohTooManyArgs() throws Exception {
 
         try {
-            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?dist where { bind(ss:smithWatermanGotoh(\"one\", \"two\", \"three\", \"four\") as ?dist) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -146,7 +146,7 @@ public class TestSmithWatermanGotoh {
 
         try {
 
-            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?dist where { bind(ss:smithWatermanGotoh(7) as ?dist) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();

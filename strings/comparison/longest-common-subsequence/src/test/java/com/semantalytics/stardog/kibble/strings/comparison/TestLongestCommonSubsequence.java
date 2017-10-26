@@ -63,7 +63,7 @@ public class TestLongestCommonSubsequence {
 
         try {
 
-            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(ss:longestCommonSubsequence(\"AGCAT\", \"GAC\") as ?result) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -90,7 +90,7 @@ public class TestLongestCommonSubsequence {
     public void testLongestCommonSubsequenceTooManyArgs() throws Exception {
 
         try {
-            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(ss:longestCommonSubsequence(\"one\", \"two\", \"three\") as ?result) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -119,7 +119,7 @@ public class TestLongestCommonSubsequence {
 
         try {
 
-            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(ss:longestCommonSubsequence(7) as ?result) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();

@@ -5,7 +5,7 @@ import com.complexible.stardog.api.Connection;
 import com.complexible.stardog.api.ConnectionConfiguration;
 import com.complexible.stardog.api.admin.AdminConnection;
 import com.complexible.stardog.api.admin.AdminConnectionConfiguration;
-import com.semantalytics.stardog.kibble.strings.similarity.StringMetricsVocabulary;
+import com.semantalytics.stardog.kibble.strings.comparison.StringComparisonVocabulary;
 import org.junit.*;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.TupleQueryResult;
@@ -67,7 +67,7 @@ public class TestLevenshtein {
 
         try {
 
-            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?dist where { bind(ss:levenshtein(\"My string\", \"My tring\") as ?dist) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -98,7 +98,7 @@ public class TestLevenshtein {
                 .connect();
 
         try {
-            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?str where { bind(ss:levenshtein(\"one\", \"two\", \"three\") as ?str) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -130,7 +130,7 @@ public class TestLevenshtein {
 
         try {
 
-            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?str where { bind(ss:levenshtein(7) as ?str) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();

@@ -60,7 +60,7 @@ public class TestCosine {
     public void testCosineTwoArg() throws Exception {
 
 
-            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(ss:cosine(\"ABC\", \"ABCE\") as ?result) }";
 
             final TupleQueryResult aResult = connection.select(aQuery).execute();
@@ -82,7 +82,7 @@ public class TestCosine {
     @Test
     public void testCosineThreeArg() throws Exception {
 
-            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(ss:cosine(\"ABC\", \"ABCE\", 3) as ?result) }";
 
             final TupleQueryResult aResult = connection.select(aQuery).execute();
@@ -104,7 +104,7 @@ public class TestCosine {
     @Test
     public void testCosineTooManyArgs() throws Exception {
 
-            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(ss:cosine(\"one\", \"two\", \"three\", \"four\") as ?result) }";
 
             final TupleQueryResult aResult = connection.select(aQuery).execute();
@@ -127,7 +127,7 @@ public class TestCosine {
     @Test
     public void testCosineWrongTypeFirstArg() throws Exception {
 
-            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + ">" +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + ">" +
                     "select ?result where { bind(ss:cosine(7) as ?result) }";
 
             final TupleQueryResult aResult = connection.select(aQuery).execute();
@@ -150,7 +150,7 @@ public class TestCosine {
     @Test
     public void testCosineWrongTypeSecondArg() throws Exception {
 
-            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + ">" +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + ">" +
                     "select ?result where { bind(ss:cosine(\"Stardog\", 2) as ?result) }";
 
             final TupleQueryResult aResult = connection.select(aQuery).execute();
@@ -173,7 +173,7 @@ public class TestCosine {
     @Test
     public void testCosineWrongTypeThirdArg() throws Exception {
 
-            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + ">" +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + ">" +
                     "select ?result where { bind(ss:cosine(\"Stardog\", \"Starlight\", \"Starship\") as ?result) }";
 
             final TupleQueryResult aResult = connection.select(aQuery).execute();
@@ -196,7 +196,7 @@ public class TestCosine {
     @Test
     public void testCosineThirdArgNotConstant() throws Exception {
 
-            final String aQuery = "prefix ss: <" + StringMetricsVocabulary.NAMESPACE + ">" +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + ">" +
                     "select ?result where { bind(ss:cosine(\"Stardog\", \"Starlight\", ?thirdArg) as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {

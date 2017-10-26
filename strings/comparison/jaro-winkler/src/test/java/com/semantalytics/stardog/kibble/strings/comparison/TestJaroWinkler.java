@@ -1,15 +1,60 @@
 package com.semantalytics.stardog.kibble.strings.comparison;
 
+import com.complexible.stardog.Stardog;
 import com.complexible.stardog.api.Connection;
 import com.complexible.stardog.api.ConnectionConfiguration;
-import org.junit.Test;
+import com.complexible.stardog.api.admin.AdminConnection;
+import com.complexible.stardog.api.admin.AdminConnectionConfiguration;
+import org.junit.*;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.TupleQueryResult;
 
 import static org.junit.Assert.*;
 
-public class TestJaroWinkler extends AbstractStardogTest {
+public class TestJaroWinkler {
 
+    protected static Stardog SERVER = null;
+    protected static final String DB = "test";
+    Connection connection;
+
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        SERVER = Stardog.builder().create();
+
+        final AdminConnection aConn = AdminConnectionConfiguration.toEmbeddedServer()
+                .credentials("admin", "admin")
+                .connect();
+
+        try {
+            if (aConn.list().contains(DB)) {
+                aConn.drop(DB);
+            }
+
+            aConn.newDatabase(DB).create();
+        }
+        finally {
+            aConn.close();
+        }
+    }
+
+    @AfterClass
+    public static void afterClass() {
+        if (SERVER != null) {
+            SERVER.shutdown();
+        }
+    }
+
+    @Before
+    public void setUp() {
+        connection = ConnectionConfiguration.to(DB)
+                .credentials("admin", "admin")
+                .connect();
+    }
+
+    @After
+    public void tearDown() {
+        connection.close();
+    }
     @Test
     public void testJaroWinkler() throws Exception {
         final Connection aConn = ConnectionConfiguration.to(DB)
@@ -18,7 +63,7 @@ public class TestJaroWinkler extends AbstractStardogTest {
 
         try {
 
-            final String aQuery = "prefix ss: <" + StringSimilarityVocab.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?dist where { bind(ss:jaroWinkler(\"My string\", \"My tsring\") as ?dist) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -49,7 +94,7 @@ public class TestJaroWinkler extends AbstractStardogTest {
 
         try {
 
-            final String aQuery = "prefix ss: <" + StringSimilarityVocab.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?similarity where { bind(ss:jaroWinkler(\"My string\", \"My tsring\", \"s\") as ?similarity) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -80,7 +125,7 @@ public class TestJaroWinkler extends AbstractStardogTest {
 
         try {
 
-            final String aQuery = "prefix ss: <" + StringSimilarityVocab.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?distance where { bind(ss:jaroWinkler(\"My string\", \"My tsring\", \"d\") as ?distance) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -111,7 +156,7 @@ public class TestJaroWinkler extends AbstractStardogTest {
 
         try {
 
-            final String aQuery = "prefix ss: <" + StringSimilarityVocab.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?distance where { bind(ss:jaroWinkler(\"My string\", \"My tsring\", \"x\") as ?distance) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -143,7 +188,7 @@ public class TestJaroWinkler extends AbstractStardogTest {
                 .connect();
 
         try {
-            final String aQuery = "prefix ss: <" + StringSimilarityVocab.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?str where { bind(ss:jaroWinkler(\"one\", \"two\", \"three\") as ?str) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -175,7 +220,7 @@ public class TestJaroWinkler extends AbstractStardogTest {
 
         try {
 
-            final String aQuery = "prefix ss: <" + StringSimilarityVocab.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?str where { bind(ss:jaroWinkler(7) as ?str) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();

@@ -1,14 +1,60 @@
 package com.semantalytics.stardog.kibble.strings.comparison;
 
+import com.complexible.stardog.Stardog;
 import com.complexible.stardog.api.Connection;
 import com.complexible.stardog.api.ConnectionConfiguration;
-import org.junit.Test;
+import com.complexible.stardog.api.admin.AdminConnection;
+import com.complexible.stardog.api.admin.AdminConnectionConfiguration;
+import org.junit.*;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.TupleQueryResult;
 
 import static org.junit.Assert.*;
 
-public class TestOverlapCoefficient extends AbstractStardogTest {
+public class TestOverlapCoefficient {
+
+    protected static Stardog SERVER = null;
+    protected static final String DB = "test";
+    Connection connection;
+
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        SERVER = Stardog.builder().create();
+
+        final AdminConnection aConn = AdminConnectionConfiguration.toEmbeddedServer()
+                .credentials("admin", "admin")
+                .connect();
+
+        try {
+            if (aConn.list().contains(DB)) {
+                aConn.drop(DB);
+            }
+
+            aConn.newDatabase(DB).create();
+        }
+        finally {
+            aConn.close();
+        }
+    }
+
+    @AfterClass
+    public static void afterClass() {
+        if (SERVER != null) {
+            SERVER.shutdown();
+        }
+    }
+
+    @Before
+    public void setUp() {
+        connection = ConnectionConfiguration.to(DB)
+                .credentials("admin", "admin")
+                .connect();
+    }
+
+    @After
+    public void tearDown() {
+        connection.close();
+    }
 
     @Test
     public void testOverlapCoefficient() throws Exception {
@@ -18,7 +64,7 @@ public class TestOverlapCoefficient extends AbstractStardogTest {
 
         try {
 
-            final String aQuery = "prefix ss: <" + StringSimilarityVocab.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?overlapCoefficient where { bind(ss:overlapCoefficient(\"Stardog\", \"Starman\") as ?overlapCoefficient) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -49,7 +95,7 @@ public class TestOverlapCoefficient extends AbstractStardogTest {
                 .connect();
 
         try {
-            final String aQuery = "prefix ss: <" + StringSimilarityVocab.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?overlapCoefficient where { bind(ss:overlapCoefficient(\"one\", \"two\", \"three\", \"four\") as ?overlapCoefficient) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -83,7 +129,7 @@ public class TestOverlapCoefficient extends AbstractStardogTest {
 
         try {
 
-            final String aQuery = "prefix ss: <" + StringSimilarityVocab.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?overlapCoefficient where { bind(ss:overlapCoefficient(7) as ?overlapCoefficient) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
