@@ -1,12 +1,10 @@
-package com.semantalytics.stardog.plan.filter.functions.string.comparison.phonetic;
+package com.semantalytics.stardog.kibble.strings.phonetic;
 
-import com.complexible.common.rdf.model.Values;
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.Function;
 import com.complexible.stardog.plan.filter.functions.string.StringFunction;
-import com.semantalytics.stardog.plan.filter.functions.string.comparison.StringSimilarityVocab;
 import org.openrdf.model.Value;
 
 import static com.complexible.common.rdf.model.Values.literal;
@@ -20,7 +18,7 @@ public class DaitchMokotoffSoundex extends AbstractFunction implements StringFun
     }
 
     protected DaitchMokotoffSoundex() {
-        super(1, StringSimilarityVocab.DAITCHMOKOTOFF_SOUNDEX.iri().stringValue());
+        super(1, PhoneticVocabulary.daitchMokotoffSoundex.stringValue());
     }
 
     private DaitchMokotoffSoundex(final DaitchMokotoffSoundex daitchMokotoffSoundex) {
@@ -46,7 +44,7 @@ public class DaitchMokotoffSoundex extends AbstractFunction implements StringFun
 
     @Override
     public String toString() {
-        return "daitochMokotoffSoundex";
+        return PhoneticVocabulary.daitchMokotoffSoundex.name();
     }
 }
 

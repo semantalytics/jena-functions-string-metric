@@ -1,11 +1,10 @@
-package com.semantalytics.kibble.strings.phonetic;
+package com.semantalytics.stardog.kibble.strings.phonetic;
 
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.Function;
 import com.complexible.stardog.plan.filter.functions.string.StringFunction;
-import com.semantalytics.stardog.plan.filter.functions.string.comparison.StringSimilarityVocab;
 import org.openrdf.model.Value;
 
 import static com.complexible.common.rdf.model.Values.*;
@@ -19,7 +18,7 @@ public final class Caverphone2 extends AbstractFunction implements StringFunctio
     }
 
     protected Caverphone2() {
-        super(1, StringSimilarityVocab.CAVERPHONE2.iri().stringValue());
+        super(1, PhoneticVocabulary.carverphone2.stringValue());
     }
 
     private Caverphone2(final Caverphone2 caverphone2) {
@@ -45,6 +44,6 @@ public final class Caverphone2 extends AbstractFunction implements StringFunctio
 
     @Override
     public String toString() {
-        return "caverphone2";
+        return PhoneticVocabulary.carverphone2.name();
     }
 }

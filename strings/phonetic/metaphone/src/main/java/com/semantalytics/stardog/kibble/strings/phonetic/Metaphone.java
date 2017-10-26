@@ -1,41 +1,40 @@
-package com.semantalytics.stardog.plan.filter.functions.string.comparison.phonetic;
+package com.semantalytics.stardog.kibble.strings.phonetic;
 
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.Function;
 import com.complexible.stardog.plan.filter.functions.string.StringFunction;
-import com.semantalytics.stardog.plan.filter.functions.string.comparison.StringSimilarityVocab;
 import org.openrdf.model.Value;
 
 import static com.complexible.common.rdf.model.Values.literal;
 
-public class DoubleMetaphone extends AbstractFunction implements StringFunction {
+public class Metaphone extends AbstractFunction implements StringFunction {
 
-    private static final org.apache.commons.codec.language.DoubleMetaphone doubleMetaphone;
+    private static final org.apache.commons.codec.language.Metaphone metaphone;
 
     static {
-        doubleMetaphone = new org.apache.commons.codec.language.DoubleMetaphone();
+        metaphone = new org.apache.commons.codec.language.Metaphone();
     }
 
-    protected DoubleMetaphone() {
-        super(1, StringSimilarityVocab.DOUBLE_METAPHONE.iri().stringValue());
+    protected Metaphone() {
+        super(1, PhoneticVocabulary.metaphone.stringValue());
     }
 
-    private DoubleMetaphone(DoubleMetaphone doubleMetaphone) {
+    private Metaphone(Metaphone doubleMetaphone) {
         super(doubleMetaphone);
     }
 
     @Override
     public Function copy() {
-        return new DoubleMetaphone(this);
+        return new Metaphone(this);
     }
 
     @Override
     public Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
         final String string = assertStringLiteral(values[0]).stringValue();
 
-        return literal(doubleMetaphone.doubleMetaphone(string));
+        return literal(metaphone.metaphone(string));
     }
 
     @Override
@@ -45,6 +44,6 @@ public class DoubleMetaphone extends AbstractFunction implements StringFunction 
 
     @Override
     public String toString() {
-        return "doubleMetaphone";
+        return PhoneticVocabulary.metaphone.name();
     }
 }

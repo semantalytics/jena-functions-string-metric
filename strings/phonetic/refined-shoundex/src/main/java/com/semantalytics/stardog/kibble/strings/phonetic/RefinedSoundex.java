@@ -1,41 +1,42 @@
-package com.semantalytics.stardog.plan.filter.functions.string.comparison.phonetic;
+package com.semantalytics.stardog.kibble.strings.phonetic;
 
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.Function;
 import com.complexible.stardog.plan.filter.functions.string.StringFunction;
-import com.semantalytics.stardog.plan.filter.functions.string.comparison.StringSimilarityVocab;
 import org.openrdf.model.Value;
 
 import static com.complexible.common.rdf.model.Values.literal;
 
-public class Metaphone extends AbstractFunction implements StringFunction {
+public class RefinedSoundex extends AbstractFunction implements StringFunction {
 
-    private static final org.apache.commons.codec.language.Metaphone metaphone;
+    private static final org.apache.commons.codec.language.RefinedSoundex refinedSoundex;
 
     static {
-        metaphone = new org.apache.commons.codec.language.Metaphone();
+        refinedSoundex = new org.apache.commons.codec.language.RefinedSoundex();
     }
 
-    protected Metaphone() {
-        super(1, StringSimilarityVocab.METAPHONE.iri().stringValue());
+    protected RefinedSoundex() {
+        super(1, PhoneticVocabulary.refinedSoundex.stringValue());
     }
 
-    private Metaphone(Metaphone doubleMetaphone) {
+    private RefinedSoundex(RefinedSoundex doubleMetaphone) {
         super(doubleMetaphone);
     }
 
     @Override
     public Function copy() {
-        return new Metaphone(this);
+        return new RefinedSoundex(this);
     }
 
     @Override
     public Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
         final String string = assertStringLiteral(values[0]).stringValue();
 
-        return literal(metaphone.metaphone(string));
+        //TODO check language
+
+        return literal(refinedSoundex.soundex(string));
     }
 
     @Override
@@ -45,6 +46,6 @@ public class Metaphone extends AbstractFunction implements StringFunction {
 
     @Override
     public String toString() {
-        return "metaphone";
+        return PhoneticVocabulary.refinedSoundex.name();
     }
 }

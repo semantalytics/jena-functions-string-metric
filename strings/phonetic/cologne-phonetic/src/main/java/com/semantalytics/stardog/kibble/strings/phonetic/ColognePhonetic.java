@@ -1,11 +1,10 @@
-package com.semantalytics.stardog.plan.filter.functions.string.comparison.phonetic;
+package com.semantalytics.stardog.kibble.strings.phonetic;
 
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.Function;
 import com.complexible.stardog.plan.filter.functions.string.StringFunction;
-import com.semantalytics.stardog.plan.filter.functions.string.comparison.StringSimilarityVocab;
 import org.openrdf.model.Value;
 
 import static com.complexible.common.rdf.model.Values.literal;
@@ -19,7 +18,7 @@ public final class ColognePhonetic extends AbstractFunction implements StringFun
     }
 
     protected ColognePhonetic() {
-        super(1, StringSimilarityVocab.COLOGNE_PHONETIC.iri().stringValue());
+        super(1, PhoneticVocabulary.colognePhonetic.stringValue());
     }
 
     private ColognePhonetic(final ColognePhonetic colognePhonetic) {
@@ -44,6 +43,6 @@ public final class ColognePhonetic extends AbstractFunction implements StringFun
 
     @Override
     public String toString() {
-        return "colognePhonetic";
+        return PhoneticVocabulary.colognePhonetic.name();
     }
 }

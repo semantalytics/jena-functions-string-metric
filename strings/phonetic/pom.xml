@@ -24,6 +24,7 @@
         <module>nysiis</module>
         <module>refined-shoundex</module>
         <module>soundex</module>
+        <module>vocab</module>
     </modules>
 
 </project>
