@@ -16,24 +16,28 @@
     </parent>
 
     <modules>
-        <module>cosine</module>
-        <module>damerau</module>
+        <module>cosine-similarity</module>
+        <module>cosine-distance</module>
+        <module>damerau-distance</module>
         <module>hamming-distance</module>
         <module>isub</module>
-        <module>jaro-winkler</module>
-        <module>levenschtein</module>
+        <module>jaro-winkler-distance</module>
+        <module>jaro-winkler-similarity</module>
+        <module>levenschtein-distance</module>
         <module>longest-common-subsequence</module>
         <module>longest-common-substring</module>
         <module>metric-longest-common-subsequence</module>
         <module>needleman-wunch</module>
         <module>ngram</module>
-        <module>normalized-levenshtein</module>
+        <module>normalized-levenshtein-distance</module>
+        <module>normalized-levenshtein-similarity</module>
         <module>overlap-coefficient</module>
         <module>qgram</module>
         <module>smith-waterman</module>
         <module>smith-waterman-gotoh</module>
-        <module>sorensen-dice</module>
-        <module>weighted-levenshtein</module>
+        <module>sorensen-dice-distance</module>
+        <module>sorensen-dice-similarity</module>
+        <module>weighted-levenshtein-distance</module>
         <module>vocab</module>
     </modules>
 

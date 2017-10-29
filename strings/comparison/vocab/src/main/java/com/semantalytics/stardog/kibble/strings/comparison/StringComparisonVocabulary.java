@@ -5,24 +5,27 @@ import org.openrdf.model.IRI;
 
 public enum StringComparisonVocabulary {
 
-    cosine,
+    cosineDistance,
+    cosineSimilarity,
     damerau,
     hammingDistance,
     isub,
-    jaroWinkler,
+    jaroWinklerSimilarity,
+    jaroWinklerDistance,
     levenschtein,
     longestCommonSubsequence,
     longestCommonSubstring,
     metricLongestCommonSubsequence,
     needlemanWunch,
     ngram,
-    normalizedLevenshtein,
+    normalizedLevenshteinDistance,
+    normalizedLevenshteinSimarity,
     overlapCoefficient,
     qgram,
     smithWaterman,
     smithWatermanGotoh,
     sorensenDice,
-    weithtedLevenshtein;
+    weithtedLevenshteinDistance;
 
     public static final String NAMESPACE = "http://semantalytics.com/2017/09/ns/stardog/kibble/strings/comparison/";
     public final IRI iri;

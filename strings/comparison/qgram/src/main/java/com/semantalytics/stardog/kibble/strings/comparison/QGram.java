@@ -35,13 +35,14 @@ public final class QGram extends AbstractFunction implements StringFunction {
     @Override
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
 
-        assertStringLiteral(values[0]);
-        assertStringLiteral(values[1]);
+        final String firstString = assertStringLiteral(values[0]).stringValue();
+        final String secondString = assertStringLiteral(values[1]).stringValue();
+
         if(values.length == 3) {
             assertNumericLiteral(values[2]);
         }
 
-        return literal(qGram.distance(values[1].stringValue(), values[2].stringValue()));
+        return literal(qGram.distance(firstString, secondString));
     }
 
     public Function copy() {

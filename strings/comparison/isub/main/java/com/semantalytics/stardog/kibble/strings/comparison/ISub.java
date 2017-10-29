@@ -1,6 +1,5 @@
 package com.semantalytics.stardog.kibble.strings.comparison;
 
-import com.amazonaws.auth.policy.conditions.StringCondition;
 import com.complexible.common.rdf.model.Values;
 import com.complexible.stardog.plan.filter.EvalUtil;
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
@@ -37,8 +36,8 @@ public final class ISub extends AbstractFunction implements StringFunction {
 
     @Override
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
-        assertLiteral(values[0]);
-        assertLiteral(values[1]);
+        final String firstString = assertLiteral(values[0]).stringValue();
+        final String secondString = assertLiteral(values[1]).stringValue();
 
         boolean normalizeStrings = false;
 
@@ -49,7 +48,7 @@ public final class ISub extends AbstractFunction implements StringFunction {
             normalizeStrings = EvalUtil.toBoolean(values[2].stringValue());
         }
 
-        return Values.literal(iSub.score(values[0].stringValue(), values[1].stringValue(), normalizeStrings));
+        return Values.literal(iSub.score(firstString, secondString, normalizeStrings));
     }
 
     @Override
