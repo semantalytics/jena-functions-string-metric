@@ -16,7 +16,6 @@
     </parent>
 
     <modules>
-        <module>ecmaScript</module>
         <module>ecma-script</module>
         <module>vocab</module>
         <module>html3</module>

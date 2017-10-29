@@ -12,14 +12,8 @@ import static com.complexible.common.rdf.model.Values.literal;
 
 public final class JaroWinkler extends AbstractFunction implements StringFunction {
 
-    private static final info.debatty.java.stringsimilarity.JaroWinkler jaroWinkler;
-    private static final double defaultThreshold;
+    private info.debatty.java.stringsimilarity.JaroWinkler jaroWinkler;
     private char similarityOrDistance = 's';
-
-    static {
-        jaroWinkler = new info.debatty.java.stringsimilarity.JaroWinkler();
-        defaultThreshold = jaroWinkler.getThreshold();
-    }
 
     protected JaroWinkler() {
         super(Range.closed(2, 4), StringComparisonVocabulary.jaroWinkler.stringValue());
@@ -41,9 +35,9 @@ public final class JaroWinkler extends AbstractFunction implements StringFunctio
 
         if(values.length == 4) {
             final double threshold = assertNumericLiteral(values[3]).doubleValue();
-            jaroWinkler.setThreshold(threshold);
+            jaroWinkler = new info.debatty.java.stringsimilarity.JaroWinkler(threshold);
         } else {
-            jaroWinkler.setThreshold(defaultThreshold);
+            jaroWinkler = new info.debatty.java.stringsimilarity.JaroWinkler();
         }
 
         return literal(compare(firstString, secondString));
@@ -76,11 +70,6 @@ public final class JaroWinkler extends AbstractFunction implements StringFunctio
             throw new ExpressionEvaluationException("Unrecognized option " + similarityOrDistance + ". Acceptable options are 's' for similarity or 'd' for distance");
         }
         return similarityOrDistance.charAt(0);
-    }
-
-    @Override
-    public void initialize() {
-        jaroWinkler.setThreshold(defaultThreshold);
     }
 
     public Function copy() {

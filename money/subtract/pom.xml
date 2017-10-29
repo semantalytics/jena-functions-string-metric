@@ -31,21 +31,6 @@
         </dependency>
         <dependency>
             <groupId>com.semantalytics.stardog.kibble</groupId>
-            <artifactId>stardog-kibble-date-vocabulary</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.semantalytics.stardog.kibble</groupId>
-            <artifactId>stardog-kibble-date-vocabulary</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.semantalytics.stardog.kibble</groupId>
-            <artifactId>stardog-kibble-date-vocabulary</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.semantalytics.stardog.kibble</groupId>
             <artifactId>stardog-kibble-money-vocabulary</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>

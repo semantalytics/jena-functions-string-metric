@@ -30,21 +30,6 @@
             <artifactId>stardog</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.semantalytics.stardog.kibble</groupId>
-            <artifactId>stardog-kibble-file-vocabulary</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.semantalytics.stardog.kibble</groupId>
-            <artifactId>stardog-kibble-file-vocabulary</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.semantalytics.stardog.kibble</groupId>
-            <artifactId>stardog-kibble-geo-hash-vocabulary</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
             <groupId>com.github.davidmoten</groupId>
             <artifactId>geo</artifactId>
         </dependency>

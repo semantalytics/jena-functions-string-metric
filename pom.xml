@@ -46,8 +46,8 @@
         <module>phone-number</module>
         <module>textplots</module>
         <module>statistics</module>
-        <module>phone-number</module>
         <module>nlp</module>
+	<module>javascript</module>
     </modules>
 
     <scm>
@@ -197,6 +197,16 @@
                 <groupId>com.github.mpkorstanje</groupId>
                 <artifactId>simmetrics-core</artifactId>
                 <version>4.1.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tika</groupId>
+                <artifactId>tika-core</artifactId>
+                <version>1.16</version>
+            </dependency>
+            <dependency>
+                <groupId>com.complexible.stardog.utils</groupId>
+                <artifactId>stardog-utils-rdf</artifactId>
+                <version>${stardog.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
