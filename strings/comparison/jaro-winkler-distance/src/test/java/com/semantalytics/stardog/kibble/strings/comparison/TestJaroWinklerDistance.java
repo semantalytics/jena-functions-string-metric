@@ -56,15 +56,15 @@ public class TestJaroWinklerDistance {
         connection.close();
     }
     @Test
-    public void testJaroWinkler() throws Exception {
+    public void testTwoArg() throws Exception {
         final Connection aConn = ConnectionConfiguration.to(DB)
                 .credentials("admin", "admin")
                 .connect();
 
         try {
 
-            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                    "select ?dist where { bind(ss:jaroWinkler(\"My string\", \"My tsring\") as ?dist) }";
+            final String aQuery = "prefix stringcomparision: <" + StringComparisonVocabulary.NAMESPACE + "> " +
+                    "select ?dist where { bind(stringcomparision:jaroWinklerDistance(\"My string\", \"My tsring\") as ?dist) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
 
@@ -73,7 +73,7 @@ public class TestJaroWinklerDistance {
 
                 final String aValue = aResult.next().getValue("dist").stringValue();
 
-                assertEquals(0.9740740656852722, Double.parseDouble(aValue), 0.000001);
+                assertEquals(0.025925, Double.parseDouble(aValue), 0.000001);
 
                 assertFalse("Should have no more results", aResult.hasNext());
             }
@@ -87,46 +87,15 @@ public class TestJaroWinklerDistance {
     }
 
     @Test
-    public void testJaroWinklerThreeArgSimilarity() throws Exception {
+    public void testThreeArg() throws Exception {
         final Connection aConn = ConnectionConfiguration.to(DB)
                 .credentials("admin", "admin")
                 .connect();
 
         try {
 
-            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                    "select ?similarity where { bind(ss:jaroWinkler(\"My string\", \"My tsring\", \"s\") as ?similarity) }";
-
-            final TupleQueryResult aResult = aConn.select(aQuery).execute();
-
-            try {
-                assertTrue("Should have a result", aResult.hasNext());
-
-                final String aValue = aResult.next().getValue("similarity").stringValue();
-
-                assertEquals(0.9740740656852722, Double.parseDouble(aValue), 0.000001);
-
-                assertFalse("Should have no more results", aResult.hasNext());
-            }
-            finally {
-                aResult.close();
-            }
-        }
-        finally {
-            aConn.close();
-        }
-    }
-
-    @Test
-    public void testJaroWinklerThreeArgDistance() throws Exception {
-        final Connection aConn = ConnectionConfiguration.to(DB)
-                .credentials("admin", "admin")
-                .connect();
-
-        try {
-
-            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                    "select ?distance where { bind(ss:jaroWinkler(\"My string\", \"My tsring\", \"d\") as ?distance) }";
+            final String aQuery = "prefix stringcomparision: <" + StringComparisonVocabulary.NAMESPACE + "> " +
+                    "select ?distance where { bind(stringcomparision:jaroWinklerDistance(\"My string\", \"My tsring\", 0.1) as ?distance) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
 
@@ -135,7 +104,7 @@ public class TestJaroWinklerDistance {
 
                 final String aValue = aResult.next().getValue("distance").stringValue();
 
-                assertEquals(0.025925934314727783, Double.parseDouble(aValue), 0.000001);
+                assertEquals(0.025925, Double.parseDouble(aValue), 0.000001);
 
                 assertFalse("Should have no more results", aResult.hasNext());
             }
@@ -149,15 +118,15 @@ public class TestJaroWinklerDistance {
     }
 
     @Test
-    public void testJaroWinklerThreeArgIncorrectThirdArg() throws Exception {
+    public void testThreeArgIncorrectTypeThirdArg() throws Exception {
         final Connection aConn = ConnectionConfiguration.to(DB)
                 .credentials("admin", "admin")
                 .connect();
 
         try {
 
-            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                    "select ?distance where { bind(ss:jaroWinkler(\"My string\", \"My tsring\", \"x\") as ?distance) }";
+            final String aQuery = "prefix stringcomparision: <" + StringComparisonVocabulary.NAMESPACE + "> " +
+                    "select ?distance where { bind(stringcomparision:jaroWinklerDistance(\"My string\", \"My tsring\", \"x\") as ?distance) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
             try {
@@ -181,15 +150,15 @@ public class TestJaroWinklerDistance {
     }
 
     @Test
-    public void testJaroWinklerTooManyArgs() throws Exception {
+    public void testTooManyArgs() throws Exception {
 
         final Connection aConn = ConnectionConfiguration.to(DB)
                 .credentials("admin", "admin")
                 .connect();
 
         try {
-            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                    "select ?str where { bind(ss:jaroWinkler(\"one\", \"two\", \"three\") as ?str) }";
+            final String aQuery = "prefix stringcomparision: <" + StringComparisonVocabulary.NAMESPACE + "> " +
+                    "select ?str where { bind(stringcomparision:jaroWinklerDistance(\"one\", \"two\", 0.7, \"four\") as ?str) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
             try {
@@ -213,15 +182,15 @@ public class TestJaroWinklerDistance {
     }
 
     @Test
-    public void testJaroWinklerWrongType() throws Exception {
+    public void testTooFewArgs() throws Exception {
         final Connection aConn = ConnectionConfiguration.to(DB)
                 .credentials("admin", "admin")
                 .connect();
 
         try {
 
-            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                    "select ?str where { bind(ss:jaroWinkler(7) as ?str) }";
+            final String aQuery = "prefix stringcomparision: <" + StringComparisonVocabulary.NAMESPACE + "> " +
+                    "select ?str where { bind(stringcomparision:jaroWinklerDistance(7) as ?str) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
             try {

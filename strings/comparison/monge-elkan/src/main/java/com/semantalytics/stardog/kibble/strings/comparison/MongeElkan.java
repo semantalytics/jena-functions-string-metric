@@ -4,24 +4,23 @@ import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.expr.Constant;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
-import com.complexible.stardog.plan.filter.functions.Function;
 import com.complexible.stardog.plan.filter.functions.string.StringFunction;
 import com.google.common.collect.Range;
 import org.openrdf.model.Value;
 
 import static com.complexible.common.rdf.model.Values.literal;
 
-public final class CosineDistance extends AbstractFunction implements StringFunction {
+public final class MongeElkan extends AbstractFunction implements StringFunction {
 
     private info.debatty.java.stringsimilarity.Cosine cosine;
 
-    protected CosineDistance() {
+    protected MongeElkan() {
         super(Range.closed(2, 3), StringComparisonVocabulary.cosineDistance.stringValue());
     }
 
-    private CosineDistance(final CosineDistance cosineDistance) {
-        super(cosineDistance);
-        this.cosine = cosineDistance.cosine;
+    private MongeElkan(final MongeElkan mongeElkan) {
+        super(mongeElkan);
+        this.cosine = mongeElkan.cosine;
     }
 
     public info.debatty.java.stringsimilarity.Cosine getCosineFunction(final Value... values) throws ExpressionEvaluationException {
@@ -55,8 +54,8 @@ public final class CosineDistance extends AbstractFunction implements StringFunc
     }
 
     @Override
-    public CosineDistance copy() {
-        return new CosineDistance(this);
+    public MongeElkan copy() {
+        return new MongeElkan(this);
     }
 
     @Override

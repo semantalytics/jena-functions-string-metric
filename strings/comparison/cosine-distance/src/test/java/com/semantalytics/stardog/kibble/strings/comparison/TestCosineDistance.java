@@ -60,8 +60,8 @@ public class TestCosineDistance {
     public void testCosineTwoArg() throws Exception {
 
 
-            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(ss:cosine(\"ABC\", \"ABCE\") as ?result) }";
+            final String aQuery = "prefix stringcomparison: <" + StringComparisonVocabulary.NAMESPACE + "> " +
+                    "select ?result where { bind(stringcomparison:cosineDistance(\"ABC\", \"ABCE\") as ?result) }";
 
             final TupleQueryResult aResult = connection.select(aQuery).execute();
 
@@ -82,8 +82,8 @@ public class TestCosineDistance {
     @Test
     public void testCosineThreeArg() throws Exception {
 
-            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(ss:cosine(\"ABC\", \"ABCE\", 3) as ?result) }";
+            final String aQuery = "prefix stringcomparison: <" + StringComparisonVocabulary.NAMESPACE + "> " +
+                    "select ?result where { bind(stringcomparison:cosineDistance(\"ABC\", \"ABCE\", 3) as ?result) }";
 
             final TupleQueryResult aResult = connection.select(aQuery).execute();
 
@@ -104,8 +104,8 @@ public class TestCosineDistance {
     @Test
     public void testCosineTooManyArgs() throws Exception {
 
-            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(ss:cosine(\"one\", \"two\", \"three\", \"four\") as ?result) }";
+            final String aQuery = "prefix stringcomparison: <" + StringComparisonVocabulary.NAMESPACE + "> " +
+                    "select ?result where { bind(stringcomparison:cosineDistance(\"one\", \"two\", \"three\", \"four\") as ?result) }";
 
             final TupleQueryResult aResult = connection.select(aQuery).execute();
             try {
@@ -127,8 +127,8 @@ public class TestCosineDistance {
     @Test
     public void testCosineWrongTypeFirstArg() throws Exception {
 
-            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + ">" +
-                    "select ?result where { bind(ss:cosine(7) as ?result) }";
+            final String aQuery = "prefix stringcomparison: <" + StringComparisonVocabulary.NAMESPACE + ">" +
+                    "select ?result where { bind(stringcomparison:cosineDistance(7) as ?result) }";
 
             final TupleQueryResult aResult = connection.select(aQuery).execute();
             try {
@@ -150,8 +150,8 @@ public class TestCosineDistance {
     @Test
     public void testCosineWrongTypeSecondArg() throws Exception {
 
-            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + ">" +
-                    "select ?result where { bind(ss:cosine(\"Stardog\", 2) as ?result) }";
+            final String aQuery = "prefix stringcomparison: <" + StringComparisonVocabulary.NAMESPACE + ">" +
+                    "select ?result where { bind(stringcomparison:cosineDistance(\"Stardog\", 2) as ?result) }";
 
             final TupleQueryResult aResult = connection.select(aQuery).execute();
             try {
@@ -173,8 +173,8 @@ public class TestCosineDistance {
     @Test
     public void testCosineWrongTypeThirdArg() throws Exception {
 
-            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + ">" +
-                    "select ?result where { bind(ss:cosine(\"Stardog\", \"Starlight\", \"Starship\") as ?result) }";
+            final String aQuery = "prefix stringcomparison: <" + StringComparisonVocabulary.NAMESPACE + ">" +
+                    "select ?result where { bind(stringcomparison:cosineDistance(\"Stardog\", \"Starlight\", \"Starship\") as ?result) }";
 
             final TupleQueryResult aResult = connection.select(aQuery).execute();
             try {
@@ -196,8 +196,8 @@ public class TestCosineDistance {
     @Test
     public void testCosineThirdArgNotConstant() throws Exception {
 
-            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + ">" +
-                    "select ?result where { bind(ss:cosine(\"Stardog\", \"Starlight\", ?thirdArg) as ?result) }";
+            final String aQuery = "prefix stringcomparison: <" + StringComparisonVocabulary.NAMESPACE + ">" +
+                    "select ?result where { bind(stringcomparison:cosineDistance(\"Stardog\", \"Starlight\", ?thirdArg) as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
                 // there should be a result because implicit in the query is the singleton set, so because the bind

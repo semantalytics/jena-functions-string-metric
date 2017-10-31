@@ -38,6 +38,8 @@
         <module>sorensen-dice-distance</module>
         <module>sorensen-dice-similarity</module>
         <module>weighted-levenshtein-distance</module>
+        <module>sift4</module>
+        <module>monge-elkan</module>
         <module>vocab</module>
     </modules>
 

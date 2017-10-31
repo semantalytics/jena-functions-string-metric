@@ -12,11 +12,9 @@ import static com.complexible.common.rdf.model.Values.literal;
 
 public final class JaroWinklerSimilarity extends AbstractFunction implements StringFunction {
 
-    private info.debatty.java.stringsimilarity.JaroWinkler jaroWinkler;
-    private char similarityOrDistance = 's';
 
     protected JaroWinklerSimilarity() {
-        super(Range.closed(2, 3), StringComparisonVocabulary.jaroWinklerSimilarity.stringValue());
+        super(Range.closed(2, 5), StringComparisonVocabulary.jaroWinklerSimilarity.stringValue());
     }
 
     private JaroWinklerSimilarity(final JaroWinklerSimilarity jaroWinklerSimilarity) {
@@ -29,14 +27,24 @@ public final class JaroWinklerSimilarity extends AbstractFunction implements Str
         final String firstString = assertStringLiteral(values[0]).stringValue();
         final String secondString = assertStringLiteral(values[1]).stringValue();
 
-        if(values.length == 3) {
-            final double threshold = assertNumericLiteral(values[3]).doubleValue();
-            jaroWinkler = new info.debatty.java.stringsimilarity.JaroWinkler(threshold);
-        } else {
-            jaroWinkler = new info.debatty.java.stringsimilarity.JaroWinkler();
+        float boostThreshold = 0.7f;
+        float prefixScale = 0.1f;
+        int maxPrefixLength = 4;
+
+        if(values.length >= 3) {
+            boostThreshold = assertNumericLiteral(values[2]).floatValue();
+        }
+        if(values.length >= 4) {
+            prefixScale = assertNumericLiteral(values[3]).floatValue();
+        }
+        if(values.length == 5) {
+            maxPrefixLength = assertNumericLiteral(values[4]).intValue();
         }
 
-        return literal(jaroWinkler.similarity(firstString, secondString));
+        final org.simmetrics.metrics.JaroWinkler jaroWinkler;
+        jaroWinkler = new org.simmetrics.metrics.JaroWinkler(boostThreshold, prefixScale, maxPrefixLength);
+
+        return literal(jaroWinkler.compare(firstString, secondString));
     }
 
     public Function copy() {

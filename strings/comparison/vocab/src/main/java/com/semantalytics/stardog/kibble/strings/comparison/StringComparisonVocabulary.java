@@ -7,7 +7,7 @@ public enum StringComparisonVocabulary {
 
     cosineDistance,
     cosineSimilarity,
-    damerau,
+    damerauDistance,
     hammingDistance,
     isub,
     jaroWinklerSimilarity,
@@ -22,6 +22,7 @@ public enum StringComparisonVocabulary {
     normalizedLevenshteinSimarity,
     overlapCoefficient,
     qgram,
+    sift4,
     smithWaterman,
     smithWatermanGotoh,
     sorensenDice,

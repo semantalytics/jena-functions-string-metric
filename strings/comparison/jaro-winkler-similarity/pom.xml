@@ -41,6 +41,10 @@
             <groupId>info.debatty</groupId>
             <artifactId>java-string-similarity</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.github.mpkorstanje</groupId>
+            <artifactId>simmetrics-core</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

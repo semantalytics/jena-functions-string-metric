@@ -11,7 +11,7 @@ import org.openrdf.query.TupleQueryResult;
 
 import static org.junit.Assert.*;
 
-public class TestDamerauDistance {
+public class TestMongeElkan {
 
     protected static Stardog SERVER = null;
     protected static final String DB = "test";
@@ -57,48 +57,57 @@ public class TestDamerauDistance {
     }
 
     @Test
-    public void testTwoArgument() throws Exception {
-        final Connection aConn = ConnectionConfiguration.to(DB)
-                .credentials("admin", "admin")
-                .connect();
+    public void testCosineTwoArg() throws Exception {
 
-        try {
 
-            final String aQuery = "prefix stringcomparision: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(stringcomparision:damerauDistance(\"ABCDEF\", \"BACDFE\") as ?result) }";
+            final String aQuery = "prefix stringcomparison: <" + StringComparisonVocabulary.NAMESPACE + "> " +
+                    "select ?result where { bind(stringcomparison:cosineDistance(\"ABC\", \"ABCE\") as ?result) }";
 
-            final TupleQueryResult aResult = aConn.select(aQuery).execute();
+            final TupleQueryResult aResult = connection.select(aQuery).execute();
 
             try {
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final String aValue = aResult.next().getValue("result").stringValue();
 
-                assertEquals(2.0, Double.parseDouble(aValue), 0.0);
+                assertEquals(0.29289, Double.parseDouble(aValue), 0.0001);
 
                 assertFalse("Should have no more results", aResult.hasNext());
             }
             finally {
                 aResult.close();
             }
-        }
-        finally {
-            aConn.close();
-        }
     }
 
     @Test
-    public void testTooManyArgs() throws Exception {
+    public void testCosineThreeArg() throws Exception {
 
-        final Connection aConn = ConnectionConfiguration.to(DB)
-                .credentials("admin", "admin")
-                .connect();
+            final String aQuery = "prefix stringcomparison: <" + StringComparisonVocabulary.NAMESPACE + "> " +
+                    "select ?result where { bind(stringcomparison:cosineDistance(\"ABC\", \"ABCE\", 3) as ?result) }";
 
-        try {
-            final String aQuery = "prefix stringcomparision: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(stringcomparision:damerauDistance(\"one\", \"two\", \"three\") as ?result) }";
+            final TupleQueryResult aResult = connection.select(aQuery).execute();
 
-            final TupleQueryResult aResult = aConn.select(aQuery).execute();
+            try {
+                assertTrue("Should have a result", aResult.hasNext());
+
+                final String aValue = aResult.next().getValue("result").stringValue();
+
+                assertEquals(0.29289, Double.parseDouble(aValue), 0.0001);
+
+                assertFalse("Should have no more results", aResult.hasNext());
+            }
+            finally {
+                aResult.close();
+            }
+    }
+
+    @Test
+    public void testCosineTooManyArgs() throws Exception {
+
+            final String aQuery = "prefix stringcomparison: <" + StringComparisonVocabulary.NAMESPACE + "> " +
+                    "select ?result where { bind(stringcomparison:cosineDistance(\"one\", \"two\", \"three\", \"four\") as ?result) }";
+
+            final TupleQueryResult aResult = connection.select(aQuery).execute();
             try {
                 // there should be a result because implicit in the query is the singleton set, so because the bind
                 // should fail due to the value error, we expect a single empty binding
@@ -113,24 +122,15 @@ public class TestDamerauDistance {
             finally {
                 aResult.close();
             }
-        }
-        finally {
-            aConn.close();
-        }
     }
 
     @Test
-    public void testTooFewArgs() throws Exception {
+    public void testCosineWrongTypeFirstArg() throws Exception {
 
-        final Connection aConn = ConnectionConfiguration.to(DB)
-                .credentials("admin", "admin")
-                .connect();
+            final String aQuery = "prefix stringcomparison: <" + StringComparisonVocabulary.NAMESPACE + ">" +
+                    "select ?result where { bind(stringcomparison:cosineDistance(7) as ?result) }";
 
-        try {
-            final String aQuery = "prefix stringcomparision: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(stringcomparision:damerauDistance(\"one\") as ?result) }";
-
-            final TupleQueryResult aResult = aConn.select(aQuery).execute();
+            final TupleQueryResult aResult = connection.select(aQuery).execute();
             try {
                 // there should be a result because implicit in the query is the singleton set, so because the bind
                 // should fail due to the value error, we expect a single empty binding
@@ -145,24 +145,15 @@ public class TestDamerauDistance {
             finally {
                 aResult.close();
             }
-        }
-        finally {
-            aConn.close();
-        }
     }
 
     @Test
-    public void testFirstArgumentWrongType() throws Exception {
-        final Connection aConn = ConnectionConfiguration.to(DB)
-                .credentials("admin", "admin")
-                .connect();
+    public void testCosineWrongTypeSecondArg() throws Exception {
 
-        try {
+            final String aQuery = "prefix stringcomparison: <" + StringComparisonVocabulary.NAMESPACE + ">" +
+                    "select ?result where { bind(stringcomparison:cosineDistance(\"Stardog\", 2) as ?result) }";
 
-            final String aQuery = "prefix stringcomparision: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(stringcomparision:damerauDistance(7, \"Stardog\") as ?result) }";
-
-            final TupleQueryResult aResult = aConn.select(aQuery).execute();
+            final TupleQueryResult aResult = connection.select(aQuery).execute();
             try {
                 // there should be a result because implicit in the query is the singleton set, so because the bind
                 // should fail due to the value error, we expect a single empty binding
@@ -177,24 +168,15 @@ public class TestDamerauDistance {
             finally {
                 aResult.close();
             }
-        }
-        finally {
-            aConn.close();
-        }
     }
 
     @Test
-    public void testSecondArgumentWrongType() throws Exception {
-        final Connection aConn = ConnectionConfiguration.to(DB)
-                .credentials("admin", "admin")
-                .connect();
+    public void testCosineWrongTypeThirdArg() throws Exception {
 
-        try {
+            final String aQuery = "prefix stringcomparison: <" + StringComparisonVocabulary.NAMESPACE + ">" +
+                    "select ?result where { bind(stringcomparison:cosineDistance(\"Stardog\", \"Starlight\", \"Starship\") as ?result) }";
 
-            final String aQuery = "prefix stringcomparision: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(stringcomparision:damerauDistance(\"Stardog\", 7) as ?result) }";
-
-            final TupleQueryResult aResult = aConn.select(aQuery).execute();
+            final TupleQueryResult aResult = connection.select(aQuery).execute();
             try {
                 // there should be a result because implicit in the query is the singleton set, so because the bind
                 // should fail due to the value error, we expect a single empty binding
@@ -209,9 +191,24 @@ public class TestDamerauDistance {
             finally {
                 aResult.close();
             }
-        }
-        finally {
-            aConn.close();
-        }
+    }
+
+    @Test
+    public void testCosineThirdArgNotConstant() throws Exception {
+
+            final String aQuery = "prefix stringcomparison: <" + StringComparisonVocabulary.NAMESPACE + ">" +
+                    "select ?result where { bind(stringcomparison:cosineDistance(\"Stardog\", \"Starlight\", ?thirdArg) as ?result) }";
+
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+                // there should be a result because implicit in the query is the singleton set, so because the bind
+                // should fail due to the value error, we expect a single empty binding
+                assertTrue("Should have a result", aResult.hasNext());
+
+                final BindingSet aBindingSet = aResult.next();
+
+                assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+
+                assertFalse("Should have no more results", aResult.hasNext());
+            }
     }
 }
