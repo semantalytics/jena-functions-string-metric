@@ -1,4 +1,4 @@
-package com.semantalytics.stardog.kibble.strings.string;
+package com.semantalytics.stardog.kibble.strings.comparison;
 
 import com.complexible.common.rdf.model.Values;
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
