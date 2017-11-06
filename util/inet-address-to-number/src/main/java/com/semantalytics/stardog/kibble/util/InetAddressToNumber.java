@@ -18,7 +18,7 @@ import java.util.List;
  * integer that represents the numeric value of the address in network byte order (big endian)
  */
 public class InetAddressToNumber extends AbstractFunction implements UserDefinedFunction {
-
+    //TODO user Guava Ints
     private static final long FIRST_OCTET_BASE = 16777216;
     private static final long SECOND_OCTET_BASE = 65536;
     private static final long THIRD_OCTET_BASE = 256;
