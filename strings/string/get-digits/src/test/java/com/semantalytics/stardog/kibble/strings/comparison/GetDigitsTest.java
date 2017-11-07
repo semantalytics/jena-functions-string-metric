@@ -64,7 +64,7 @@ public class GetDigitsTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:getDigits(\"Stard0g\") AS ?result) }";
 
 
@@ -92,7 +92,7 @@ public class GetDigitsTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:getDigits(\"12345\") AS ?result) }";
 
 
@@ -119,7 +119,7 @@ public class GetDigitsTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:getDigits(\"\") as ?result) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -150,7 +150,7 @@ public class GetDigitsTest {
                 .connect();
 
         try {
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:getDigits() as ?result) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -182,7 +182,7 @@ public class GetDigitsTest {
                 .connect();
 
         try {
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:getDigits(\"Stardog\", \"one\") as ?result) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -214,7 +214,7 @@ public class GetDigitsTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:getDigits(4) as ?result) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();

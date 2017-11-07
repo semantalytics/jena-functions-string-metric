@@ -64,7 +64,7 @@ public class ChopTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:chop(\"Stardog\") AS ?result) }";
 
 
@@ -92,7 +92,7 @@ public class ChopTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:chop(\"\", 5) as ?result) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -123,7 +123,7 @@ public class ChopTest {
                 .connect();
 
         try {
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:chop(\"one\") as ?result) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -156,7 +156,7 @@ public class ChopTest {
                 .connect();
 
         try {
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:chop(\"one\", 2, \"three\") as ?result) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -190,7 +190,7 @@ public class ChopTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:chop(4, 5) as ?result) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -222,7 +222,7 @@ public class ChopTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:chop(\"one\", \"two\") as ?result) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -254,7 +254,7 @@ public class ChopTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:chop(\"Stardog\", 3) as ?result) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();

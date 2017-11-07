@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class Mid extends AbstractFunction implements StringFunction {
 
     protected Mid() {
-        super(3, ComparisonVocabulary.mid.toString());
+        super(3, StringVocabulary.mid.toString());
     }
 
     private Mid(final Mid mid) {
@@ -40,6 +40,6 @@ public final class Mid extends AbstractFunction implements StringFunction {
 
     @Override
     public String toString() {
-        return ComparisonVocabulary.mid.name();
+        return StringVocabulary.mid.name();
     }
 }

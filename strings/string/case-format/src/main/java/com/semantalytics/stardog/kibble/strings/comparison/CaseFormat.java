@@ -13,7 +13,7 @@ import static com.google.common.base.CaseFormat.*;
 public final class CaseFormat extends AbstractFunction implements StringFunction {
 
     protected CaseFormat() {
-        super(3, ComparisonVocabulary.caseFormat.toString());
+        super(3, StringVocabulary.caseFormat.toString());
     }
 
     private CaseFormat(final CaseFormat caseFormat) {
@@ -55,7 +55,7 @@ public final class CaseFormat extends AbstractFunction implements StringFunction
 
     @Override
     public String toString() {
-        return ComparisonVocabulary.caseFormat.name();
+        return StringVocabulary.caseFormat.name();
     }
 
     public com.google.common.base.CaseFormat getFormatType(final String formatString) throws ExpressionEvaluationException {

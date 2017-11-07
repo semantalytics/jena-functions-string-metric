@@ -64,7 +64,7 @@ public class RandomTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:random(\"Stardog graph database\", \"...\", 8) AS ?abbreviation) }";
 
 
@@ -92,7 +92,7 @@ public class RandomTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:random(\"\", 5) as ?abbreviation) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -123,7 +123,7 @@ public class RandomTest {
                 .connect();
 
         try {
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:random(\"one\") as ?abbreviation) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -156,7 +156,7 @@ public class RandomTest {
                 .connect();
 
         try {
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:random(\"one\", 2, \"three\") as ?abbreviation) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -190,7 +190,7 @@ public class RandomTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:random(4, 5) as ?abbreviation) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -222,7 +222,7 @@ public class RandomTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:random(\"one\", \"two\") as ?abbreviation) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -254,7 +254,7 @@ public class RandomTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:random(\"Stardog\", 3) as ?abbreviation) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();

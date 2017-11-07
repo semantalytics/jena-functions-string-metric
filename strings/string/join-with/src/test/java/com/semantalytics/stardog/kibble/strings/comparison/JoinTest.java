@@ -64,7 +64,7 @@ public class JoinTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:join(\"Stardog graph database\", \"...\", 8) AS ?abbreviation) }";
 
 
@@ -92,7 +92,7 @@ public class JoinTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:join(\"\", 5) as ?abbreviation) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -123,7 +123,7 @@ public class JoinTest {
                 .connect();
 
         try {
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:join(\"one\") as ?abbreviation) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -156,7 +156,7 @@ public class JoinTest {
                 .connect();
 
         try {
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:join(\"one\", 2, \"three\") as ?abbreviation) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -190,7 +190,7 @@ public class JoinTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:join(4, 5) as ?abbreviation) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -222,7 +222,7 @@ public class JoinTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:join(\"one\", \"two\") as ?abbreviation) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -254,7 +254,7 @@ public class JoinTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:join(\"Stardog\", 3) as ?abbreviation) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();

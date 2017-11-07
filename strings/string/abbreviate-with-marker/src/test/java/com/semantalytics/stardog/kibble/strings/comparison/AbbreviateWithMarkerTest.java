@@ -57,14 +57,14 @@ public class AbbreviateWithMarkerTest {
     }
 
     @Test
-    public void testAbbreviateWithMarkerThreeArg() throws Exception {
+    public void testThreeArg() throws Exception {
         final Connection aConn = ConnectionConfiguration.to(DB)
                 .credentials("admin", "admin")
                 .connect();
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:abbreviateWithMarker(\"Stardog graph database\", \"***\" , 10) AS ?result) }";
 
 
@@ -85,14 +85,14 @@ public class AbbreviateWithMarkerTest {
     }
 
     @Test
-    public void testAbbreviateWithMarkerFourArg() throws Exception {
+    public void testFourArg() throws Exception {
         final Connection aConn = ConnectionConfiguration.to(DB)
                 .credentials("admin", "admin")
                 .connect();
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:abbreviateWithMarker(\"Stardog graph database\", \"***\", 10, 3) AS ?result) }";
 
 
@@ -120,7 +120,7 @@ public class AbbreviateWithMarkerTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:abbreviateWithMarker(\"\", 5) as ?abbreviation) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -151,7 +151,7 @@ public class AbbreviateWithMarkerTest {
                 .connect();
 
         try {
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:abbreviateWithMarker(\"one\") as ?abbreviation) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -184,7 +184,7 @@ public class AbbreviateWithMarkerTest {
                 .connect();
 
         try {
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:abbreviateWithMarker(\"one\", 2, \"three\") as ?abbreviation) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -218,7 +218,7 @@ public class AbbreviateWithMarkerTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:abbreviateWithMarker(4, 5) as ?abbreviation) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -250,7 +250,7 @@ public class AbbreviateWithMarkerTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:abbreviateWithMarker(\"one\", \"two\") as ?abbreviation) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -282,7 +282,7 @@ public class AbbreviateWithMarkerTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:abbreviateWithMarker(\"Stardog\", 3) as ?abbreviation) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();

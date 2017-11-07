@@ -64,7 +64,7 @@ public class StripAccentsTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:stripAccents(\"Stardog\") AS ?result) }";
 
 
@@ -92,7 +92,7 @@ public class StripAccentsTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:stripAccents(\"\\u00E9clair\") AS ?result) }";
 
 
@@ -120,7 +120,7 @@ public class StripAccentsTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:stripAccents(\"\") AS ?result) }";
 
 
@@ -149,7 +149,7 @@ public class StripAccentsTest {
                 .connect();
 
         try {
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:stripAccents() as ?result) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -182,7 +182,7 @@ public class StripAccentsTest {
                 .connect();
 
         try {
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:stripAccents(\"one\", \"two\") as ?result) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -214,7 +214,7 @@ public class StripAccentsTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:stripAccents(4) as ?result) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();

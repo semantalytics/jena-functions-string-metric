@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public class NormalizeSpace extends AbstractFunction implements StringFunction {
 
     protected NormalizeSpace() {
-        super(1, ComparisonVocabulary.normalizeSpace.toString());
+        super(1, StringVocabulary.normalizeSpace.toString());
     }
 
     private NormalizeSpace(final NormalizeSpace normalizeSpace) {
@@ -38,6 +38,6 @@ public class NormalizeSpace extends AbstractFunction implements StringFunction {
 
     @Override
     public String toString() {
-        return ComparisonVocabulary.normalizeSpace.name();
+        return StringVocabulary.normalizeSpace.name();
     }
 }

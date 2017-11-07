@@ -16,6 +16,18 @@
     </parent>
 
     <modules>
+        <module>is-all-blank</module>
+        <module>is-all-empty</module>
+        <module>index-of</module>
+        <module>index-of-difference</module>
+        <module>index-of-ignore-case</module>
+        <module>is-alpha</module>
+        <module>is-alpha-space</module>
+        <module>is-alphanumeric</module>
+        <module>is-alphanumeric-space</module>
+        <module>is-any-blank</module>
+        <module>is-any-empty</module>
+        <module>is-ascii-printable</module>
         <module>abbreviate-with-marker</module>
         <module>append-if-missing</module>
         <module>append-if-missing-ignore-case</module>

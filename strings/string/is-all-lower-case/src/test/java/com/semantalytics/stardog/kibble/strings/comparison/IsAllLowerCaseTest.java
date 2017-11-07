@@ -64,7 +64,7 @@ public class IsAllLowerCaseTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:isAllLowerCase(\"Stardog graph database\", \"...\", 8) AS ?abbreviation) }";
 
 
@@ -92,7 +92,7 @@ public class IsAllLowerCaseTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:isAllLowerCase(\"\", 5) as ?abbreviation) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -123,7 +123,7 @@ public class IsAllLowerCaseTest {
                 .connect();
 
         try {
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:isAllLowerCase(\"one\") as ?abbreviation) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -156,7 +156,7 @@ public class IsAllLowerCaseTest {
                 .connect();
 
         try {
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:isAllLowerCase(\"one\", 2, \"three\") as ?abbreviation) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -190,7 +190,7 @@ public class IsAllLowerCaseTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:isAllLowerCase(4, 5) as ?abbreviation) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -222,7 +222,7 @@ public class IsAllLowerCaseTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:isAllLowerCase(\"one\", \"two\") as ?abbreviation) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -254,7 +254,7 @@ public class IsAllLowerCaseTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:isAllLowerCase(\"Stardog\", 3) as ?abbreviation) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();

@@ -64,7 +64,7 @@ public class CenterTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:center(\"Stardog\", 15) AS ?result) }";
 
 
@@ -92,7 +92,7 @@ public class CenterTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:center(\"Stardog\", 15, \"*\") AS ?result) }";
 
 
@@ -120,7 +120,7 @@ public class CenterTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:center(\"\", 5) as ?abbreviation) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -151,7 +151,7 @@ public class CenterTest {
                 .connect();
 
         try {
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:center(\"one\") as ?abbreviation) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -184,7 +184,7 @@ public class CenterTest {
                 .connect();
 
         try {
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:center(\"one\", 2, \"three\", \"four\") as ?abbreviation) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -218,7 +218,7 @@ public class CenterTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:center(4, 5) as ?abbreviation) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -250,7 +250,7 @@ public class CenterTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:center(\"one\", \"two\") as ?abbreviation) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -282,7 +282,7 @@ public class CenterTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:center(\"one\", 2, 3) as ?result) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();

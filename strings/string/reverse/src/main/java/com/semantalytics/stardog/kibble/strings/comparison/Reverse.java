@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class Reverse extends AbstractFunction implements StringFunction {
 
     protected Reverse() {
-        super(1, ComparisonVocabulary.reverse.toString());
+        super(1, StringVocabulary.reverse.toString());
     }
 
     private Reverse(final Reverse reverse) {
@@ -38,6 +38,6 @@ public final class Reverse extends AbstractFunction implements StringFunction {
 
     @Override
     public String toString() {
-        return ComparisonVocabulary.reverse.name();
+        return StringVocabulary.reverse.name();
     }
 }

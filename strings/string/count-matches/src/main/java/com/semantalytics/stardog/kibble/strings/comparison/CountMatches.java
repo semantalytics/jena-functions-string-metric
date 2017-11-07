@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class CountMatches extends AbstractFunction implements StringFunction {
 
     protected CountMatches() {
-        super(2, ComparisonVocabulary.countMatches.toString());
+        super(2, StringVocabulary.countMatches.toString());
     }
 
     private CountMatches(final CountMatches countMatches) {
@@ -39,6 +39,6 @@ public final class CountMatches extends AbstractFunction implements StringFuncti
 
     @Override
     public String toString() {
-        return ComparisonVocabulary.countMatches.name();
+        return StringVocabulary.countMatches.name();
     }
 }

@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class Capitalize extends AbstractFunction implements StringFunction {
 
     protected Capitalize() {
-        super(1, ComparisonVocabulary.capitalize.toString());
+        super(1, StringVocabulary.capitalize.toString());
     }
 
     private Capitalize(final Capitalize capitalize) {
@@ -38,6 +38,6 @@ public final class Capitalize extends AbstractFunction implements StringFunction
 
     @Override
     public String toString() {
-        return ComparisonVocabulary.capitalize.name();
+        return StringVocabulary.capitalize.name();
     }
 }

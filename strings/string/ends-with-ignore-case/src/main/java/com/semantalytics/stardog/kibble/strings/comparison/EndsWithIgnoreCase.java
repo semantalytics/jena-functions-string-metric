@@ -12,7 +12,7 @@ import org.openrdf.model.Value;
 public final class EndsWithIgnoreCase extends AbstractFunction implements StringFunction {
 
     protected EndsWithIgnoreCase() {
-        super(Range.closed(2, 3), ComparisonVocabulary.endsWithIgnoreCase.toString());
+        super(Range.closed(2, 3), StringVocabulary.endsWithIgnoreCase.toString());
     }
 
     private EndsWithIgnoreCase(final EndsWithIgnoreCase endsWithIgnoreCase) {
@@ -44,6 +44,6 @@ public final class EndsWithIgnoreCase extends AbstractFunction implements String
 
     @Override
     public String toString() {
-        return ComparisonVocabulary.endsWithIgnoreCase.name();
+        return StringVocabulary.endsWithIgnoreCase.name();
     }
 }

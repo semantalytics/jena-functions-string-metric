@@ -64,7 +64,7 @@ public class CommonPrefixTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:commonPrefix(\"Stardog\", \"Starman\") AS ?result) }";
 
             try (final TupleQueryResult aResult = aConn.select(aQuery).execute()) {
@@ -91,7 +91,7 @@ public class CommonPrefixTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:commonPrefix(\"\", 5) as ?result) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -122,7 +122,7 @@ public class CommonPrefixTest {
                 .connect();
 
         try {
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:commonPrefix(\"one\") as ?result) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -155,7 +155,7 @@ public class CommonPrefixTest {
                 .connect();
 
         try {
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:commonPrefix(\"one\", 2, \"three\") as ?result) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -189,7 +189,7 @@ public class CommonPrefixTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:commonPrefix(4, 5) as ?result) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -221,7 +221,7 @@ public class CommonPrefixTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:commonPrefix(\"one\", \"two\") as ?result) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -253,7 +253,7 @@ public class CommonPrefixTest {
 
         try {
 
-            final String aQuery = "prefix string: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:commonPrefix(\"Stardog\", 3) as ?result) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();

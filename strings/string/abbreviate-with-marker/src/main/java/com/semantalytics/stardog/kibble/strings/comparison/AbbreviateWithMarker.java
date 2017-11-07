@@ -9,12 +9,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.openrdf.model.Value;
 
 import static com.complexible.common.rdf.model.Values.*;
-import static com.google.common.base.Preconditions.checkArgument;
 
 public final class AbbreviateWithMarker extends AbstractFunction implements StringFunction {
 
     protected AbbreviateWithMarker() {
-        super(Range.closed(3, 4), ComparisonVocabulary.abbreviateWithMarker.toString());
+        super(Range.closed(3, 4), StringVocabulary.abbreviateWithMarker.toString());
     }
 
     private AbbreviateWithMarker(final AbbreviateWithMarker abbreviateWithMarker) {
@@ -28,16 +27,18 @@ public final class AbbreviateWithMarker extends AbstractFunction implements Stri
       final String abbrevMarker = assertStringLiteral(values[1]).stringValue();
       final int maxWidth = assertIntegerLiteral(values[2]).intValue();
 
-      checkArgument(maxWidth > 3, "maxWidth must be greater than 3. Found " + maxWidth);
+      if(maxWidth <= 3) {
+          throw new ExpressionEvaluationException("maxWidth must be greater than 3. Found " + maxWidth);
+      }
 
-        switch(values.length) {
-            case 3:
-                return literal(StringUtils.abbreviate(string, abbrevMarker, maxWidth));
-            case 4:
-                final int offset = assertIntegerLiteral(values[3]).intValue();
-                return literal(StringUtils.abbreviate(string, abbrevMarker, offset, maxWidth));
-            default:
-                throw new ExpressionEvaluationException("function takes 2 or 3 arguments. Found " + values.length);
+      switch(values.length) {
+        case 3:
+            return literal(StringUtils.abbreviate(string, abbrevMarker, maxWidth));
+        case 4:
+            final int offset = assertIntegerLiteral(values[3]).intValue();
+            return literal(StringUtils.abbreviate(string, abbrevMarker, offset, maxWidth));
+        default:
+            throw new ExpressionEvaluationException("function takes 2 or 3 arguments. Found " + values.length);
         }
     }
 
@@ -53,6 +54,6 @@ public final class AbbreviateWithMarker extends AbstractFunction implements Stri
 
     @Override
     public String toString() {
-        return ComparisonVocabulary.abbreviateWithMarker.name();
+        return StringVocabulary.abbreviateWithMarker.name();
     }
 }

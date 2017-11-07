@@ -12,7 +12,7 @@ import org.openrdf.model.Value;
 public final class Center extends AbstractFunction implements StringFunction {
 
     protected Center() {
-        super(Range.closed(2, 3), ComparisonVocabulary.center.toString());
+        super(Range.closed(2, 3), StringVocabulary.center.toString());
     }
 
     private Center(final Center center) {
@@ -49,6 +49,6 @@ public final class Center extends AbstractFunction implements StringFunction {
 
     @Override
     public String toString() {
-        return ComparisonVocabulary.center.name();
+        return StringVocabulary.center.name();
     }
 }

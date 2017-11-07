@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class Chop extends AbstractFunction implements StringFunction {
 
     protected Chop() {
-        super(1, ComparisonVocabulary.chop.toString());
+        super(1, StringVocabulary.chop.toString());
     }
 
     private Chop(final Chop chop) {
@@ -38,6 +38,6 @@ public final class Chop extends AbstractFunction implements StringFunction {
 
     @Override
     public String toString() {
-        return ComparisonVocabulary.chop.name();
+        return StringVocabulary.chop.name();
     }
 }

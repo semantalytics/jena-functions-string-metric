@@ -10,7 +10,7 @@ import org.openrdf.model.Value;
 public final class RemoveEndIgnoreSpace extends AbstractFunction implements StringFunction {
 
     protected RemoveEndIgnoreSpace() {
-        super(1, ComparisonVocabulary.removeEndIgnoreSpace.toString());
+        super(1, StringVocabulary.removeEndIgnoreSpace.toString());
     }
 
     private RemoveEndIgnoreSpace(final RemoveEndIgnoreSpace removeEndIgnoreSpace) {
@@ -37,6 +37,6 @@ public final class RemoveEndIgnoreSpace extends AbstractFunction implements Stri
 
     @Override
     public String toString() {
-        return ComparisonVocabulary.removeEndIgnoreSpace.name();
+        return StringVocabulary.removeEndIgnoreSpace.name();
     }
 }

@@ -13,7 +13,7 @@ import static com.google.common.base.Preconditions.checkElementIndex;
 public final class ReverseDelimited extends AbstractFunction implements StringFunction {
 
     protected ReverseDelimited() {
-        super(2, ComparisonVocabulary.reverseDelimited.toString());
+        super(2, StringVocabulary.reverseDelimited.toString());
     }
 
     private ReverseDelimited(final ReverseDelimited reverseDelimited) {
@@ -43,6 +43,6 @@ public final class ReverseDelimited extends AbstractFunction implements StringFu
 
     @Override
     public String toString() {
-        return ComparisonVocabulary.reverseDelimited.name();
+        return StringVocabulary.reverseDelimited.name();
     }
 }

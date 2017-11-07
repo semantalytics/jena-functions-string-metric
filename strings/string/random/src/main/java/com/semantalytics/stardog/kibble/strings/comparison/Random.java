@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class Random extends AbstractFunction implements StringFunction {
 
     protected Random() {
-        super(2, ComparisonVocabulary.random.toString());
+        super(2, StringVocabulary.random.toString());
     }
 
     private Random(final Random random) {
@@ -39,6 +39,6 @@ public final class Random extends AbstractFunction implements StringFunction {
 
     @Override
     public String toString() {
-        return ComparisonVocabulary.random.name();
+        return StringVocabulary.random.name();
     }
 }

@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.*;
 public final class LastIndexOf extends AbstractFunction implements StringFunction {
 
     protected LastIndexOf() {
-        super(1, ComparisonVocabulary.lastIndexOf.toString());
+        super(1, StringVocabulary.lastIndexOf.toString());
     }
 
     private LastIndexOf(final LastIndexOf lastIndexOf) {
@@ -39,6 +39,6 @@ public final class LastIndexOf extends AbstractFunction implements StringFunctio
 
     @Override
     public String toString() {
-        return ComparisonVocabulary.lastIndexOf.name();
+        return StringVocabulary.lastIndexOf.name();
     }
 }

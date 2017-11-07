@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class Truncate extends AbstractFunction implements StringFunction {
 
     protected Truncate() {
-        super(3, ComparisonVocabulary.truncate.toString());
+        super(3, StringVocabulary.truncate.toString());
     }
 
     private Truncate(final Truncate truncate) {
@@ -39,6 +39,6 @@ public final class Truncate extends AbstractFunction implements StringFunction {
 
     @Override
     public String toString() {
-        return ComparisonVocabulary.truncate.name();
+        return StringVocabulary.truncate.name();
     }
 }

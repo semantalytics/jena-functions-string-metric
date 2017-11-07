@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class GetDigits extends AbstractFunction implements StringFunction {
 
     protected GetDigits() {
-        super(1, ComparisonVocabulary.getDigits.toString());
+        super(1, StringVocabulary.getDigits.toString());
     }
 
     private GetDigits(final GetDigits getDigits) {
@@ -38,6 +38,6 @@ public final class GetDigits extends AbstractFunction implements StringFunction 
 
     @Override
     public String toString() {
-        return ComparisonVocabulary.getDigits.name();
+        return StringVocabulary.getDigits.name();
     }
 }

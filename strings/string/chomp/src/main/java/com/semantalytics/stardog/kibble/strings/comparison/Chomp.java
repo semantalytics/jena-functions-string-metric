@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class Chomp extends AbstractFunction implements StringFunction {
 
     protected Chomp() {
-        super(1, ComparisonVocabulary.chomp.toString());
+        super(1, StringVocabulary.chomp.toString());
     }
 
     private Chomp(final Chomp chomp) {
@@ -38,6 +38,6 @@ public final class Chomp extends AbstractFunction implements StringFunction {
 
     @Override
     public String toString() {
-        return ComparisonVocabulary.chomp.name();
+        return StringVocabulary.chomp.name();
     }
 }

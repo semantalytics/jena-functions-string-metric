@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.*;
 public final class RemoveFirst extends AbstractFunction implements StringFunction {
 
     protected RemoveFirst() {
-        super(1, ComparisonVocabulary.removeFirst.toString());
+        super(1, StringVocabulary.removeFirst.toString());
     }
 
     private RemoveFirst(final RemoveFirst removeFirst) {
@@ -39,6 +39,6 @@ public final class RemoveFirst extends AbstractFunction implements StringFunctio
 
     @Override
     public String toString() {
-        return ComparisonVocabulary.removeFirst.name();
+        return StringVocabulary.removeFirst.name();
     }
 }

@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.*;
 public final class LeftPad extends AbstractFunction implements StringFunction {
 
     protected LeftPad() {
-        super(1, ComparisonVocabulary.leftPad.toString());
+        super(1, StringVocabulary.leftPad.toString());
     }
 
     private LeftPad(final LeftPad leftPad) {
@@ -39,6 +39,6 @@ public final class LeftPad extends AbstractFunction implements StringFunction {
 
     @Override
     public String toString() {
-        return ComparisonVocabulary.leftPad.name();
+        return StringVocabulary.leftPad.name();
     }
 }

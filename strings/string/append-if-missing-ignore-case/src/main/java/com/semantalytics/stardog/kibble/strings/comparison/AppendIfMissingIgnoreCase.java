@@ -12,7 +12,7 @@ import org.openrdf.model.Value;
 public final class AppendIfMissingIgnoreCase extends AbstractFunction implements StringFunction {
 
     protected AppendIfMissingIgnoreCase() {
-        super(Range.atLeast(2), ComparisonVocabulary.appendIfMissingIgnoreCase.toString());
+        super(Range.atLeast(2), StringVocabulary.appendIfMissingIgnoreCase.toString());
     }
 
     private AppendIfMissingIgnoreCase(final AppendIfMissingIgnoreCase appendIfMissingIgnoreCase) {
@@ -46,6 +46,6 @@ public final class AppendIfMissingIgnoreCase extends AbstractFunction implements
 
     @Override
     public String toString() {
-        return ComparisonVocabulary.appendIfMissingIgnoreCase.name();
+        return StringVocabulary.appendIfMissingIgnoreCase.name();
     }
 }

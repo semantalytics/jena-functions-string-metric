@@ -13,7 +13,7 @@ import static com.google.common.base.Preconditions.checkElementIndex;
 public final class WrapIfMissing extends AbstractFunction implements StringFunction {
 
     protected WrapIfMissing() {
-        super(2, ComparisonVocabulary.wrapIfMissing.toString());
+        super(2, StringVocabulary.wrapIfMissing.toString());
     }
 
     private WrapIfMissing(final WrapIfMissing wrapIfMissing) {
@@ -43,6 +43,6 @@ public final class WrapIfMissing extends AbstractFunction implements StringFunct
 
     @Override
     public String toString() {
-        return ComparisonVocabulary.wrapIfMissing.name();
+        return StringVocabulary.wrapIfMissing.name();
     }
 }

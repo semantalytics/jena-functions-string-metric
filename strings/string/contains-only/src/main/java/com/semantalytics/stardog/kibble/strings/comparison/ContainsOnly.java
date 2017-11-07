@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class ContainsOnly extends AbstractFunction implements StringFunction {
 
     protected ContainsOnly() {
-        super(2, ComparisonVocabulary.containsOnly.toString());
+        super(2, StringVocabulary.containsOnly.toString());
     }
 
     private ContainsOnly(final ContainsOnly containsOnly) {
@@ -39,6 +39,6 @@ public final class ContainsOnly extends AbstractFunction implements StringFuncti
 
     @Override
     public String toString() {
-        return ComparisonVocabulary.containsOnly.name();
+        return StringVocabulary.containsOnly.name();
     }
 }

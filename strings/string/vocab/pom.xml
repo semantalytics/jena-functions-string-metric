@@ -30,6 +30,10 @@
             <artifactId>stardog-utils-openrdf</artifactId>
             <version>5.0.3</version>
         </dependency>
+        <dependency>
+            <groupId>com.complexible.stardog.utils</groupId>
+            <artifactId>stardog-utils-rdf</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

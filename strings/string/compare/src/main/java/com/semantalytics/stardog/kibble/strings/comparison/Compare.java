@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class Compare extends AbstractFunction implements StringFunction {
 
     protected Compare() {
-        super(2, ComparisonVocabulary.compare.toString());
+        super(2, StringVocabulary.compare.toString());
     }
 
     private Compare(final Compare compare) {
@@ -39,6 +39,6 @@ public final class Compare extends AbstractFunction implements StringFunction {
 
     @Override
     public String toString() {
-        return ComparisonVocabulary.compare.name();
+        return StringVocabulary.compare.name();
     }
 }

@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class IsMixedCase extends AbstractFunction implements StringFunction {
 
     protected IsMixedCase() {
-        super(1, ComparisonVocabulary.isMixedCase.toString());
+        super(1, StringVocabulary.isMixedCase.toString());
     }
 
     private IsMixedCase(final IsMixedCase isMixedCase) {
@@ -38,6 +38,6 @@ public final class IsMixedCase extends AbstractFunction implements StringFunctio
 
     @Override
     public String toString() {
-        return ComparisonVocabulary.isMixedCase.name();
+        return StringVocabulary.isMixedCase.name();
     }
 }

@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.*;
 public final class Left extends AbstractFunction implements StringFunction {
 
     protected Left() {
-        super(1, ComparisonVocabulary.left.toString());
+        super(1, StringVocabulary.left.toString());
     }
 
     private Left(final Left left) {
@@ -40,6 +40,6 @@ public final class Left extends AbstractFunction implements StringFunction {
 
     @Override
     public String toString() {
-        return ComparisonVocabulary.left.name();
+        return StringVocabulary.left.name();
     }
 }

@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class PadStart extends AbstractFunction implements StringFunction {
 
     protected PadStart() {
-        super(3, ComparisonVocabulary.padStart.toString());
+        super(3, StringVocabulary.padStart.toString());
     }
 
     private PadStart(final PadStart padStart) {
@@ -40,6 +40,6 @@ public final class PadStart extends AbstractFunction implements StringFunction {
 
     @Override
     public String toString() {
-        return ComparisonVocabulary.padStart.name();
+        return StringVocabulary.padStart.name();
     }
 }

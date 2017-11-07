@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class IsEmpty extends AbstractFunction implements StringFunction {
 
     protected IsEmpty() {
-        super(1, ComparisonVocabulary.isEmpty.toString());
+        super(1, StringVocabulary.isEmpty.toString());
     }
 
     private IsEmpty(final IsEmpty isEmpty) {
@@ -38,6 +38,6 @@ public final class IsEmpty extends AbstractFunction implements StringFunction {
 
     @Override
     public String toString() {
-        return ComparisonVocabulary.isEmpty.name();
+        return StringVocabulary.isEmpty.name();
     }
 }

@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class IndexOfAny extends AbstractFunction implements StringFunction {
 
     protected IndexOfAny() {
-        super(1, ComparisonVocabulary.indexOfAny.toString());
+        super(1, StringVocabulary.indexOfAny.toString());
     }
 
     private IndexOfAny(final IndexOfAny indexOfAny) {
@@ -42,6 +42,6 @@ public final class IndexOfAny extends AbstractFunction implements StringFunction
 
     @Override
     public String toString() {
-        return ComparisonVocabulary.indexOfAny.name();
+        return StringVocabulary.indexOfAny.name();
     }
 }

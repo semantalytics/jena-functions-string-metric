@@ -63,7 +63,7 @@ public class CaseFormatTest {
 
         try {
 
-            final String aQuery = "prefix ss: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?caseFormat where { bind(ss:caseFormat(\"caseFormat\", \"CASE_FORMAT\", \"stardogUnion\") as ?caseFormat) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -94,7 +94,7 @@ public class CaseFormatTest {
 
         try {
 
-            final String aQuery = "prefix ss: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?caseFormat where { bind(ss:caseFormat(\"caseFormat\", \"case_format\", \"stardogUnion\") as ?caseFormat) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -125,7 +125,7 @@ public class CaseFormatTest {
 
         try {
 
-            final String aQuery = "prefix ss: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?caseFormat where { bind(ss:caseFormat(\"caseFormat\", \"case-format\", \"stardogUnion\") as ?caseFormat) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -156,7 +156,7 @@ public class CaseFormatTest {
 
         try {
 
-            final String aQuery = "prefix ss: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?caseFormat where { bind(ss:caseFormat(\"caseFormat\", \"CaseFormat\", \"stardogUnion\") as ?caseFormat) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -187,7 +187,7 @@ public class CaseFormatTest {
                 .connect();
 
         try {
-            final String aQuery = "prefix ss: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?caseFormat where { bind(ss:caseFormat(\"one\", \"two\", \"three\", \"four\") as ?caseFormat) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
@@ -221,7 +221,7 @@ public class CaseFormatTest {
 
         try {
 
-            final String aQuery = "prefix ss: <" + ComparisonVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix ss: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?caseFormat where { bind(ss:caseFormat(7, 8, 9) as ?caseFormat) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();

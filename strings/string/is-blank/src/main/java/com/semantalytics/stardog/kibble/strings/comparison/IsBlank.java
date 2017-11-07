@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class IsBlank extends AbstractFunction implements StringFunction {
 
     protected IsBlank() {
-        super(1, ComparisonVocabulary.isBlank.toString());
+        super(1, StringVocabulary.isBlank.toString());
     }
 
     private IsBlank(final IsBlank isBlank) {
@@ -38,6 +38,6 @@ public final class IsBlank extends AbstractFunction implements StringFunction {
 
     @Override
     public String toString() {
-        return ComparisonVocabulary.isBlank.name();
+        return StringVocabulary.isBlank.name();
     }
 }

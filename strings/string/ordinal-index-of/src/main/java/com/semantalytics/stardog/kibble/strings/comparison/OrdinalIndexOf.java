@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.*;
 public final class OrdinalIndexOf extends AbstractFunction implements StringFunction {
 
     protected OrdinalIndexOf() {
-        super(1, ComparisonVocabulary.ordinalIndexOf.toString());
+        super(1, StringVocabulary.ordinalIndexOf.toString());
     }
 
     private OrdinalIndexOf(final OrdinalIndexOf ordinalIndexOf) {
@@ -39,6 +39,6 @@ public final class OrdinalIndexOf extends AbstractFunction implements StringFunc
 
     @Override
     public String toString() {
-        return ComparisonVocabulary.ordinalIndexOf.name();
+        return StringVocabulary.ordinalIndexOf.name();
     }
 }

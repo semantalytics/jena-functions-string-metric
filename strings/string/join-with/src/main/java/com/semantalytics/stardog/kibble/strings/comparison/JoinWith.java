@@ -17,7 +17,7 @@ import static java.util.stream.Collectors.toList;
 public final class JoinWith extends AbstractFunction implements StringFunction {
 
     protected JoinWith() {
-        super(Range.atLeast(1), ComparisonVocabulary.join.toString());
+        super(Range.atLeast(1), StringVocabulary.join.toString());
     }
 
     private JoinWith(final JoinWith join) {
@@ -45,6 +45,6 @@ public final class JoinWith extends AbstractFunction implements StringFunction {
 
     @Override
     public String toString() {
-        return ComparisonVocabulary.join.name();
+        return StringVocabulary.join.name();
     }
 }

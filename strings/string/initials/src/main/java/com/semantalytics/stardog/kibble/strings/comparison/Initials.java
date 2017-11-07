@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class Initials extends AbstractFunction implements StringFunction {
 
     protected Initials() {
-        super(2, ComparisonVocabulary.initials.toString());
+        super(2, StringVocabulary.initials.toString());
     }
 
     private Initials(final Initials initials) {
@@ -39,6 +39,6 @@ public final class Initials extends AbstractFunction implements StringFunction {
 
     @Override
     public String toString() {
-        return ComparisonVocabulary.initials.name();
+        return StringVocabulary.initials.name();
     }
 }

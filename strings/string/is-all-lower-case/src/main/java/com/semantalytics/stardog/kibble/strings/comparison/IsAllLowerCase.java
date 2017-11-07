@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class IsAllLowerCase extends AbstractFunction implements StringFunction {
 
     protected IsAllLowerCase() {
-        super(2, ComparisonVocabulary.isAllLowerCase.toString());
+        super(2, StringVocabulary.isAllLowerCase.toString());
     }
 
     private IsAllLowerCase(final IsAllLowerCase isAllLowerCase) {
@@ -38,6 +38,6 @@ public final class IsAllLowerCase extends AbstractFunction implements StringFunc
 
     @Override
     public String toString() {
-        return ComparisonVocabulary.isAllLowerCase.name();
+        return StringVocabulary.isAllLowerCase.name();
     }
 }

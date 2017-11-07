@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class DefaultIfBlank extends AbstractFunction implements StringFunction {
 
     protected DefaultIfBlank() {
-        super(2, ComparisonVocabulary.defaultIfBlank.toString());
+        super(2, StringVocabulary.defaultIfBlank.toString());
     }
 
     private DefaultIfBlank(final DefaultIfBlank abbreviate) {
@@ -39,6 +39,6 @@ public final class DefaultIfBlank extends AbstractFunction implements StringFunc
 
     @Override
     public String toString() {
-        return ComparisonVocabulary.defaultIfBlank.name();
+        return StringVocabulary.defaultIfBlank.name();
     }
 }

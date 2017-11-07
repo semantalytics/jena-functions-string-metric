@@ -12,7 +12,7 @@ import org.openrdf.model.Value;
 public final class EqualsAny extends AbstractFunction implements StringFunction {
 
     protected EqualsAny() {
-        super(Range.closed(2, 3), ComparisonVocabulary.equalsAny.toString());
+        super(Range.closed(2, 3), StringVocabulary.equalsAny.toString());
     }
 
     private EqualsAny(final EqualsAny equalsAny) {
@@ -44,6 +44,6 @@ public final class EqualsAny extends AbstractFunction implements StringFunction 
 
     @Override
     public String toString() {
-        return ComparisonVocabulary.equalsAny.name();
+        return StringVocabulary.equalsAny.name();
     }
 }

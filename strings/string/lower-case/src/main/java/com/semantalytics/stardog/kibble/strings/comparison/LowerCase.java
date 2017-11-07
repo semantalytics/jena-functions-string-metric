@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.*;
 public final class LowerCase extends AbstractFunction implements StringFunction {
 
     protected LowerCase() {
-        super(1, ComparisonVocabulary.lowerCase.toString());
+        super(1, StringVocabulary.lowerCase.toString());
     }
 
     private LowerCase(final LowerCase lowerCase) {
@@ -39,6 +39,6 @@ public final class LowerCase extends AbstractFunction implements StringFunction 
 
     @Override
     public String toString() {
-        return ComparisonVocabulary.lowerCase.name();
+        return StringVocabulary.lowerCase.name();
     }
 }

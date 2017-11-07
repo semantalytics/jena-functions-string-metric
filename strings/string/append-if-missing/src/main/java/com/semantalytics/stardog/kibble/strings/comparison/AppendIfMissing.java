@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class AppendIfMissing extends AbstractFunction implements StringFunction {
 
     protected AppendIfMissing() {
-        super(3, ComparisonVocabulary.appendIfMissing.toString());
+        super(3, StringVocabulary.appendIfMissing.toString());
     }
 
     private AppendIfMissing(final AppendIfMissing appendIfMissing) {
@@ -40,6 +40,6 @@ public final class AppendIfMissing extends AbstractFunction implements StringFun
 
     @Override
     public String toString() {
-        return ComparisonVocabulary.appendIfMissing.name();
+        return StringVocabulary.appendIfMissing.name();
     }
 }
