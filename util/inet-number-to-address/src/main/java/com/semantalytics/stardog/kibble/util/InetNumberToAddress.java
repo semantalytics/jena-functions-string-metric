@@ -31,7 +31,7 @@ public class InetNumberToAddress extends AbstractFunction implements UserDefined
     @Override
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
         final long ipNumber = assertNumericLiteral(values[0]).longValue();
-
+        //TODO use Guava InetNumber
         final long firstOctet = ( ipNumber / FIRST_OCTET_BASE ) % 256;
         final long secondOctet = ( ipNumber / SECOND_OCTET_BASE ) % 256;
         final long thirdOctet = ( ipNumber / THIRD_OCTET_BASE ) % 256;
