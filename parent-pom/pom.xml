@@ -25,25 +25,6 @@
         </developer>
     </developers>
 
-    <modules>
-        <module>file</module>
-        <module>lab</module>
-        <module>money</module>
-        <module>unit</module>
-        <module>util</module>
-        <module>date</module>
-        <module>strings</module>
-        <module>crypto</module>
-        <module>geo</module>
-        <module>json</module>
-        <module>xml</module>
-        <module>phone-number</module>
-        <module>textplots</module>
-        <module>statistics</module>
-        <module>nlp</module>
-	    <module>javascript</module>
-    </modules>
-
     <scm>
         <url>http://github.com/semantalytics.com/stardog-kibbles</url>
         <tag>HEAD</tag>
@@ -81,6 +62,7 @@
         <prettytime.version>4.0.0.Final</prettytime.version>
         <prettytime-nlp.version>3.2.1.Final</prettytime-nlp.version>
         <maven.version>3.3.9</maven.version>
+        <jansi.version>1.16</jansi.version>
     </properties>
 
     <dependencyManagement>
@@ -201,6 +183,11 @@
                 <groupId>com.complexible.stardog.utils</groupId>
                 <artifactId>stardog-utils-rdf</artifactId>
                 <version>${stardog.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.fusesource.jansi</groupId>
+                <artifactId>jansi</artifactId>
+                <version>${jansi.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

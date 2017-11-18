@@ -28,6 +28,7 @@
 	    <module>javascript</module>
         <module>parent-pom</module>
         <module>net</module>
+        <module>console</module>
     </modules>
 
 </project>

@@ -1,0 +1,13 @@
+com.semantalytics.stardog.kibble.strings.emoji.Aliases
+com.semantalytics.stardog.kibble.strings.emoji.Count
+com.semantalytics.stardog.kibble.strings.emoji.DecimalHtml
+com.semantalytics.stardog.kibble.strings.emoji.DecimalHtmlShort
+com.semantalytics.stardog.kibble.strings.emoji.DecimalSurrogateHtml
+com.semantalytics.stardog.kibble.strings.emoji.Emojify
+com.semantalytics.stardog.kibble.strings.emoji.Emoji
+com.semantalytics.stardog.kibble.strings.emoji.Emoticon
+com.semantalytics.stardog.kibble.strings.emoji.HexHtmlify
+com.semantalytics.stardog.kibble.strings.emoji.Htmlify
+com.semantalytics.stardog.kibble.strings.emoji.IsEmoji
+com.semantalytics.stardog.kibble.strings.emoji.Remove
+com.semantalytics.stardog.kibble.strings.emoji.ShortCodify

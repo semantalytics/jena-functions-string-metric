@@ -10,7 +10,7 @@
 
     <parent>
         <groupId>com.semantalytics.stardog.kibble</groupId>
-        <artifactId>stardog-kibbles</artifactId>
+        <artifactId>stardog-kibbles-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
         <relativePath>../parent-pom</relativePath>
     </parent>
@@ -19,7 +19,7 @@
         <module>comparison</module>
         <module>phonetic</module>
         <module>string</module>
-        <module>escape</module>
+        <module>emoji</module>
     </modules>
 
 </project>

@@ -13,7 +13,7 @@ import java.net.URI;
 
 import static org.junit.Assert.*;
 
-public class ContentTypeTest {
+public class CatTest {
 
     protected static Stardog SERVER = null;
     protected static final String DB = "test";

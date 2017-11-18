@@ -11,7 +11,7 @@
 
     <parent>
         <groupId>com.semantalytics.stardog.kibble</groupId>
-        <artifactId>stardog-kibbles</artifactId>
+        <artifactId>stardog-kibbles-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
         <relativePath>../parent-pom</relativePath>
     </parent>
@@ -22,8 +22,6 @@
         <module>database-name</module>
         <module>date-time-formatter</module>
         <module>from-spoken-time</module>
-        <module>inet-address-to-number</module>
-        <module>inet-number-to-address</module>
         <module>index</module>
         <module>is-valid-xsd-literal</module>
         <module>local-date-parse</module>
