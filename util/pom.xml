@@ -7,7 +7,6 @@
     <groupId>com.semantalytics.stardog.kibble</groupId>
     <artifactId>stardog-kibble-util</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
 
     <parent>
         <groupId>com.semantalytics.stardog.kibble</groupId>
@@ -16,30 +15,66 @@
         <relativePath>../parent-pom</relativePath>
     </parent>
 
-    <modules>
-        <module>bind-previous</module>
-        <module>compose</module>
-        <module>database-name</module>
-        <module>date-time-formatter</module>
-        <module>from-spoken-time</module>
-        <module>index</module>
-        <module>is-valid-xsd-literal</module>
-        <module>local-date-parse</module>
-        <module>ordinalize</module>
-        <module>pluralize</module>
-        <module>say-number</module>
-        <module>say-number-ordinal</module>
-        <module>say-ordinal</module>
-        <module>sleep</module>
-        <module>slugify</module>
-        <module>slugify-case-insensitive</module>
-        <module>string-array</module>
-        <module>time-from-now</module>
-        <module>to-spoken-time</module>
-        <module>vocab</module>
-        <module>user</module>
-        <module>stardog-version</module>
-        <module>proquint</module>
-    </modules>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.complexible.stardog.core</groupId>
+            <artifactId>stardog</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}-${project.version}-sd${stardog.version}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.4.3</version>
+                <configuration>
+                    <filters>
+                        <filter>
+                            <artifact>*:*</artifact>
+                            <excludes>
+                                <exclude>META-INF/*.SF</exclude>
+                                <exclude>META-INF/*.DSA</exclude>
+                                <exclude>META-INF/*.RSA</exclude>
+                            </excludes>
+                        </filter>
+                    </filters>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"/>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
