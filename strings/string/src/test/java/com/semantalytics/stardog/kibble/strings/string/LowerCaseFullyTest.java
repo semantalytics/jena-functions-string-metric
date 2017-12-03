@@ -1,11 +1,10 @@
-package com.semantalytics.stardog.kibble.strings.comparison;
+package com.semantalytics.stardog.kibble.strings.string;
 
 import com.complexible.stardog.Stardog;
 import com.complexible.stardog.api.Connection;
 import com.complexible.stardog.api.ConnectionConfiguration;
 import com.complexible.stardog.api.admin.AdminConnection;
 import com.complexible.stardog.api.admin.AdminConnectionConfiguration;
-import com.semantalytics.stardog.kibble.string.StringVocabulary;
 import org.junit.*;
 import org.openrdf.query.TupleQueryResult;
 
@@ -62,7 +61,7 @@ public class LowerCaseFullyTest {
 
             aConn.begin();
 
-            final String aQuery = "prefix util: <" + StringVocabulary.NS + ">" +
+            final String aQuery = "prefix util: <" + StringVocabulary.NAMESPACE + ">" +
                     "select ?result where { bind(util:lowerCaseFully(\"STARDOG\") as ?result) }";
 
             try (final TupleQueryResult aResult = aConn.select(aQuery).execute()) {

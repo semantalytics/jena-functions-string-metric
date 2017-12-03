@@ -1,1 +1,0 @@
-Stardog test file

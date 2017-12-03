@@ -1,0 +1,6 @@
+com.semantalytics.stardog.kibble.geo.hash.AddLatitude
+com.semantalytics.stardog.kibble.geo.hash.AddLongitude
+com.semantalytics.stardog.kibble.geo.hash.Bottom
+com.semantalytics.stardog.kibble.geo.hash.Encode
+com.semantalytics.stardog.kibble.geo.hash.Latitude
+com.semantalytics.stardog.kibble.geo.hash.Longitude

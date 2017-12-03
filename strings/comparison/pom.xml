@@ -5,42 +5,94 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.semantalytics.stardog.kibble</groupId>
-    <artifactId>stardog-kibble-strings-comparison</artifactId>
+    <artifactId>stardog-kibble-strings-comparision-cosine-distance</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
 
     <parent>
         <groupId>com.semantalytics.stardog.kibble</groupId>
-        <artifactId>stardog-kibble-strings</artifactId>
+        <artifactId>stardog-kibble-strings-comparison</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <modules>
-        <module>cosine-similarity</module>
-        <module>cosine-distance</module>
-        <module>damerau-distance</module>
-        <module>hamming-distance</module>
-        <module>isub</module>
-        <module>jaro-winkler-distance</module>
-        <module>jaro-winkler-similarity</module>
-        <module>levenschtein-distance</module>
-        <module>longest-common-subsequence</module>
-        <module>longest-common-substring</module>
-        <module>metric-longest-common-subsequence</module>
-        <module>needleman-wunch</module>
-        <module>ngram</module>
-        <module>normalized-levenshtein-distance</module>
-        <module>normalized-levenshtein-similarity</module>
-        <module>overlap-coefficient</module>
-        <module>qgram</module>
-        <module>smith-waterman</module>
-        <module>smith-waterman-gotoh</module>
-        <module>sorensen-dice-distance</module>
-        <module>sorensen-dice-similarity</module>
-        <module>weighted-levenshtein-distance</module>
-        <module>sift4</module>
-        <module>monge-elkan</module>
-        <module>vocab</module>
-    </modules>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.complexible.stardog.core</groupId>
+            <artifactId>stardog</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>info.debatty</groupId>
+            <artifactId>java-string-similarity</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.semantalytics.stardog.kibble</groupId>
+            <artifactId>stardog-kibble-strings-comparison-vocabulary</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}-${project.version}-sd${stardog.version}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.4.3</version>
+                <configuration>
+                    <filters>
+                        <filter>
+                            <artifact>*:*</artifact>
+                            <excludes>
+                                <exclude>META-INF/*.SF</exclude>
+                                <exclude>META-INF/*.DSA</exclude>
+                                <exclude>META-INF/*.RSA</exclude>
+                            </excludes>
+                        </filter>
+                    </filters>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"/>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

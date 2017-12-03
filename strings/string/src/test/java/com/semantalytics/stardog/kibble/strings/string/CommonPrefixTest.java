@@ -1,4 +1,5 @@
-package com.semantalytics.stardog.kibble.strings.comparison;
+package com.semantalytics.stardog.kibble.strings.string;
+
 
 import com.complexible.stardog.Stardog;
 import com.complexible.stardog.api.Connection;

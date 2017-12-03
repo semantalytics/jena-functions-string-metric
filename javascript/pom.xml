@@ -7,6 +7,12 @@
     <groupId>com.semantalytics.stardog.kibble</groupId>
     <artifactId>stardog-kibble-javascript</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+    <dependencies>
+        <dependency>
+            <groupId>com.complexible.stardog.utils</groupId>
+            <artifactId>stardog-utils-rdf</artifactId>
+        </dependency>
+    </dependencies>
     <packaging>pom</packaging>
 
     <parent>

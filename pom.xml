@@ -29,6 +29,7 @@
         <module>parent-pom</module>
         <module>net</module>
         <module>console</module>
+        <module>jdbc</module>
     </modules>
 
 </project>

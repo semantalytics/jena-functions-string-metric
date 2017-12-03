@@ -12,7 +12,7 @@ public class InternetAddress extends AbstractFunction implements UserDefinedFunc
     private Value prev = null;
 
     protected InternetAddress() {
-        super(1, UtilVocabulary.bindPrev.stringValue());
+        super(1, "");
     }
 
     public InternetAddress(final InternetAddress next) {
@@ -49,6 +49,6 @@ public class InternetAddress extends AbstractFunction implements UserDefinedFunc
 
     @Override
     public String toString() {
-        return UtilVocabulary.bindPrev.name();
+        return "";
     }
 }

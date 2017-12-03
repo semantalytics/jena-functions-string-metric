@@ -1,18 +1,16 @@
-package semantalytics.stardog.kibble.string;
+package com.semantalytics.stardog.kibble.strings.string;
 
 import com.complexible.stardog.Stardog;
 import com.complexible.stardog.api.Connection;
 import com.complexible.stardog.api.ConnectionConfiguration;
 import com.complexible.stardog.api.admin.AdminConnection;
 import com.complexible.stardog.api.admin.AdminConnectionConfiguration;
-import com.semantalytics.stardog.kibble.strings.comparison.StringVocabulary;
 import org.junit.*;
 import org.openrdf.query.TupleQueryResult;
 
 import static org.junit.Assert.*;
 
 public class UpperCaseFullyTest {
-
 
     protected static Stardog SERVER = null;
     protected static final String DB = "test";

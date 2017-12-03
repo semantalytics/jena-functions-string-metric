@@ -7,6 +7,7 @@ import com.complexible.stardog.api.ConnectionConfiguration;
 import com.complexible.stardog.api.admin.AdminConnection;
 import com.complexible.stardog.api.admin.AdminConnectionConfiguration;
 import com.complexible.stardog.plan.eval.ExecutionException;
+import com.semantalytics.stardog.kibble.net.NetVocabulary;
 import org.junit.*;
 import org.openrdf.query.TupleQueryResult;
 
@@ -73,7 +74,7 @@ public class InternetAddressTest {
 
             aConn.begin();
 
-            final String aQuery = "prefix util: <" + NetVocabulary.bindPrev.NAMESPACE + "> " +
+            final String aQuery = "prefix util: <" + NetVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(util:bindPrev(?v) as ?result) values ?v {1 2 3 4 5} } order by ?v";
 
 
