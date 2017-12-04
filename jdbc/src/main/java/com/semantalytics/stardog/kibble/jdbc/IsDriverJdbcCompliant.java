@@ -5,17 +5,19 @@ import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.UserDefinedFunction;
 import org.openrdf.model.Value;
+
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
 import static com.complexible.common.rdf.model.Values.literal;
 
-public class IsDriverRegistered extends AbstractFunction implements UserDefinedFunction {
+public class IsDriverJdbcCompliant extends AbstractFunction implements UserDefinedFunction {
 
-    public IsDriverRegistered() {
+    public IsDriverJdbcCompliant() {
         super(1, JdbcVocabulary.isDriverRegistered.stringValue());
     }
 
-    public IsDriverRegistered(final IsDriverRegistered executeDouble) {
+    public IsDriverJdbcCompliant(final IsDriverJdbcCompliant executeDouble) {
         super(executeDouble);
     }
 
@@ -32,8 +34,8 @@ public class IsDriverRegistered extends AbstractFunction implements UserDefinedF
     }
 
     @Override
-    public IsDriverRegistered copy() {
-        return new IsDriverRegistered(this);
+    public IsDriverJdbcCompliant copy() {
+        return new IsDriverJdbcCompliant(this);
     }
 
     @Override

@@ -23,7 +23,7 @@ public class PreviousQuarter extends AbstractFunction implements UserDefinedFunc
     @Override
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
 
-        final Quarter quarter = Quarter.from(assertLiteral(values[0]).calendarValue().toGregorianCalendar().toZonedDateTime().toLocalDate());
+        final Quarter quarter = org.threeten.extra.Quarter.from(assertLiteral(values[0]).calendarValue().toGregorianCalendar().toZonedDateTime().toLocalDate());
 
         return literal(quarter.minus(1).getValue());
     }

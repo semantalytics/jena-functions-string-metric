@@ -5,13 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.semantalytics.stardog.kibble</groupId>
-    <artifactId>stardog-kibble-money-subtract</artifactId>
+    <artifactId>stardog-kibble-money</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <parent>
         <groupId>com.semantalytics.stardog.kibble</groupId>
-        <artifactId>stardog-kibble-money</artifactId>
+        <artifactId>stardog-kibbles-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../parent-pom</relativePath>
     </parent>
 
     <dependencies>
@@ -28,11 +29,6 @@
         <dependency>
             <groupId>com.complexible.stardog.core</groupId>
             <artifactId>stardog</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.semantalytics.stardog.kibble</groupId>
-            <artifactId>stardog-kibble-money-vocabulary</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>javax.money</groupId>

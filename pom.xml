@@ -16,7 +16,11 @@
         <module>unit</module>
         <module>util</module>
         <module>date</module>
-        <module>strings</module>
+        <module>strings/emoji</module>
+        <module>strings/comparison</module>
+        <module>strings/escape</module>
+        <module>strings/phonetic</module>
+        <module>strings/string</module>
         <module>crypto</module>
         <module>geo</module>
         <module>json</module>
