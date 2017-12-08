@@ -20,19 +20,21 @@ public class Execute extends AbstractFunction implements UserDefinedFunction {
         super(Range.atLeast(1), JavascriptVocabulary.exec.stringValue());
     }
 
-    public Execute(final Execute executeDouble) {
-        super(executeDouble);
+    public Execute(final Execute execute) {
+        super(execute);
     }
 
     @Override
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
 
         final String script = assertStringLiteral(values[0]).stringValue();
+        
         final ScriptEngine scriptEngine = new ScriptEngineManager().getEngineByName("javascript");
         final Bindings bindings = scriptEngine.createBindings();
+        
         bindings.put("values", Arrays.stream(values).skip(1).collect(toList()));
+        
         try {
-
             return literal(scriptEngine.eval(script, bindings).toString());
         } catch (final ScriptException e) {
             throw new ExpressionEvaluationException(e);
@@ -51,6 +53,6 @@ public class Execute extends AbstractFunction implements UserDefinedFunction {
 
     @Override
     public String toString() {
-        return JavascriptVocabulary.execDouble.name();
+        return JavascriptVocabulary.exec.name();
     }
 }
