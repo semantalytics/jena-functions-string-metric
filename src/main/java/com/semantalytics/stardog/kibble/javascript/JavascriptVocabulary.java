@@ -5,9 +5,7 @@ import org.openrdf.model.IRI;
 
 public enum JavascriptVocabulary {
 
-    exec,
-    execString,
-    execDouble;
+    exec;
 
     public static final String NAMESPACE = "http://semantalytics.com/2017/09/ns/stardog/kibble/javascript/";
     public final IRI iri;
