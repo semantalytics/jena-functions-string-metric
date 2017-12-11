@@ -5,6 +5,7 @@ import com.complexible.stardog.api.Connection;
 import com.complexible.stardog.api.ConnectionConfiguration;
 import com.complexible.stardog.api.admin.AdminConnection;
 import com.complexible.stardog.api.admin.AdminConnectionConfiguration;
+import com.semantalytics.stardog.kibble.net.inetaddress.InetAddressVocabulary;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.After;
@@ -70,7 +71,7 @@ public class HasParentTest {
 
             aConn.begin();
 
-            final String aQuery = "prefix util: <" + InternetDomainNameVocabulary.NAMESPACE + "> " +
+            final String aQuery = "prefix util: <" + InetAddressVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(util:inetAddressToNumber(\"192.168.0.1\") as ?result) }";
 
             try (final TupleQueryResult aResult = aConn.select(aQuery).execute()) {
