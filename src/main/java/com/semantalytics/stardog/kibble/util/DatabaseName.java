@@ -8,17 +8,7 @@ import java.util.stream.Collectors;
 
 import com.complexible.stardog.index.statistics.Accuracy;
 import com.complexible.stardog.index.statistics.Cardinality;
-import com.complexible.stardog.plan.AbstractPropertyFunctionNodeBuilder;
-import com.complexible.stardog.plan.AbstractPropertyFunctionPlanNode;
-import com.complexible.stardog.plan.PlanException;
-import com.complexible.stardog.plan.PlanNode;
-import com.complexible.stardog.plan.PlanNodes;
-import com.complexible.stardog.plan.PropertyFunction;
-import com.complexible.stardog.plan.PropertyFunctionNodeBuilder;
-import com.complexible.stardog.plan.PropertyFunctionPlanNode;
-import com.complexible.stardog.plan.QueryDataset;
-import com.complexible.stardog.plan.QueryTerm;
-import com.complexible.stardog.plan.SortType;
+import com.complexible.stardog.plan.*;
 import com.complexible.stardog.plan.eval.ExecutionContext;
 import com.complexible.stardog.plan.eval.TranslateException;
 import com.complexible.stardog.plan.eval.operator.EmptyOperator;
@@ -78,7 +68,7 @@ public final class DatabaseName implements PropertyFunction {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void estimate(final PropertyFunctionPlanNode theNode) throws PlanException {
+	public void estimate(final PropertyFunctionPlanNode theNode, Costs.CostingContext theContext) throws PlanException {
 		Preconditions.checkArgument(theNode instanceof DatabaseNamePlanNode);
 
 		final long aLimit = ((DatabaseNamePlanNode) theNode).getLimit();
