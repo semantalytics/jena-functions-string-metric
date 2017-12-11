@@ -62,7 +62,7 @@ public class UserTest {
 
             aConn.begin();
 
-            final String aQuery = "prefix date: <" + UtilVocabulary.NS + ">" +
+            final String aQuery = "prefix date: <" + UtilVocabulary.NAMESPACE + ">" +
                     "select ?result where { bind(date:user() as ?result) }";
 
             try (final TupleQueryResult aResult = aConn.select(aQuery).execute()) {

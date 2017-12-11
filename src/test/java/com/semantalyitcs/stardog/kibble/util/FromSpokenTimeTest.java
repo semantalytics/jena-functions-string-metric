@@ -62,7 +62,7 @@ public class FromSpokenTimeTest {
 
             aConn.begin();
 
-            final String aQuery = "prefix util: <" + UtilVocabulary.NS + ">" +
+            final String aQuery = "prefix util: <" + UtilVocabulary.NAMESPACE + ">" +
                     "select ?result where { bind(util:fromSpokenTime(\"next week\") as ?result) }";
 
             try (final TupleQueryResult aResult = aConn.select(aQuery).execute()) {

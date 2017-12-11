@@ -6,6 +6,7 @@ import com.complexible.stardog.api.ConnectionConfiguration;
 import com.complexible.stardog.api.admin.AdminConnection;
 import com.complexible.stardog.api.admin.AdminConnectionConfiguration;
 import org.junit.*;
+import org.openrdf.query.BindingSet;
 import org.openrdf.query.TupleQueryResult;
 
 import static org.junit.Assert.*;
@@ -80,7 +81,7 @@ public class ConsoleTest {
     public void testCreationTimeTooManyArgs() throws Exception {
 
         final String aQuery = "prefix c: <http://semantalytics.com/2017/11/ns/stardog/kibble/console/>" +
-                "select ?creationTime where { bind(file:creationTime(<" + file.toString() + ">, 1) as ?creationTime) }";
+                "select ?result where { bind(c:bold(\"Stardog\">) as ?result) }";
 
         final TupleQueryResult aResult = aConn.select(aQuery).execute();
         try {

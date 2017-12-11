@@ -1,4 +1,4 @@
-package com.semantalytics.stardog.kibble.net.inetaddress;
+package com.semantalyitcs.stardog.kibble.util;
 
 import com.complexible.stardog.Stardog;
 import com.complexible.stardog.api.Connection;
@@ -6,6 +6,7 @@ import com.complexible.stardog.api.ConnectionConfiguration;
 import com.complexible.stardog.api.admin.AdminConnection;
 import com.complexible.stardog.api.admin.AdminConnectionConfiguration;
 import com.complexible.stardog.plan.eval.ExecutionException;
+import com.semantalytics.stardog.kibble.net.inetaddress.InetAddressVocabulary;
 import org.junit.*;
 import org.openrdf.query.TupleQueryResult;
 
