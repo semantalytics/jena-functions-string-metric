@@ -49,7 +49,7 @@
     </organization>
 
     <properties>
-        <stardog.version>5.0.5</stardog.version>
+        <stardog.version>5.1.0</stardog.version>
         <icu4j.version>2.6.1</icu4j.version>
         <slugify.version>2.1.9</slugify.version>
         <moneta.version>1.1</moneta.version>
@@ -62,9 +62,48 @@
         <prettytime-nlp.version>3.2.1.Final</prettytime-nlp.version>
         <maven.version>3.3.9</maven.version>
         <jansi.version>1.16</jansi.version>
+        <uima.version>2.8.1</uima.version>
+        <heideltime.version>2.2.1</heideltime.version>
+        <emoji4j.version>5.0</emoji4j.version>
+        <guava.version>23.3-jre</guava.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.kcthota</groupId>
+            <artifactId>emoji4j</artifactId>
+            <version>${emoji4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>args4j</groupId>
+            <artifactId>args4j</artifactId>
+            <version>2.32</version>
+        </dependency>
+        <dependency>
+            <groupId>com.dbtsai.lbfgs</groupId>
+            <artifactId>lbfgs</artifactId>
+            <version>0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>edu.stanford.nlp</groupId>
+            <artifactId>stanford-corenlp</artifactId>
+            <version>3.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.uima</groupId>
+            <artifactId>uimaj-core</artifactId>
+            <version>${uima.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.heideltime</groupId>
+            <artifactId>heideltime</artifactId>
+            <version>${heideltime.version}</version>
+        </dependency>
          <dependency>
            <groupId>org.threeten</groupId>
            <artifactId>threeten-extra</artifactId>

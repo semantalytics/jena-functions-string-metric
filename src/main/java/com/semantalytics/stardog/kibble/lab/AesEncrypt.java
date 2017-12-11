@@ -1,4 +1,4 @@
-package com.semantalytics.stardog.lab.function;
+package com.semantalytics.stardog.kibble.lab;
 
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
@@ -31,25 +31,25 @@ public class AesEncrypt extends AbstractFunction implements UserDefinedFunction 
     @Override
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
 
-        final String key = assertStringLiteral(values[0]).stringValue();
+        String encryptedVal;
+        try {
+        final String secKey = assertStringLiteral(values[0]).stringValue();
         final String valueEnc = assertStringLiteral(values[1]).stringValue();
 
-        KeyGenerator keyGenerator = KeyGenerator.getInstance("AES/CTR/PKCS5PADDING");
+        KeyGenerator keyGenerator = null;
+            keyGenerator = KeyGenerator.getInstance("AES/CTR/PKCS5PADDING");
         keyGenerator.init(128);
         SecretKey secretKey = keyGenerator.generateKey();
-        Cipher cipher = Cipher.getInstance("AES");
-        cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+        Cipher cipher = null;
+            cipher = Cipher.getInstance("AES");
+            cipher.init(Cipher.ENCRYPT_MODE, secretKey);
 
-
-        String encryptedVal;
-
-        try {
             final Key key = generateKeyFromString(secKey);
             final Cipher c = Cipher.getInstance(ALGORITHM);
             c.init(Cipher.ENCRYPT_MODE, key);
             final byte[] encValue = c.doFinal(valueEnc.getBytes());
             encryptedVal = new BASE64Encoder().encode(encValue);
-        } catch (IOException | NoSuchAlgorithmException | InvalidKeyException | NoSuchPaddingException | BadPaddingException | IllegalBlockSizeException e) {
+        } catch (IOException | InvalidKeyException | BadPaddingException | IllegalBlockSizeException | NoSuchAlgorithmException | NoSuchPaddingException e) {
             throw new ExpressionEvaluationException(e);
         }
 

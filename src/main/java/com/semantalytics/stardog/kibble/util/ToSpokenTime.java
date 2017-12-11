@@ -1,24 +1,21 @@
-package com.semantalytics.stardog.function.util;
+package com.semantalytics.stardog.kibble.util;
 
-import com.complexible.common.rdf.model.Values;
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.UserDefinedFunction;
-import com.joestelmach.natty.DateGroup;
-import com.joestelmach.natty.Parser;
 import org.openrdf.model.Value;
 import org.ocpsoft.prettytime.PrettyTime;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.Date;
+
+import static com.complexible.common.rdf.model.Values.literal;
 
 public class ToSpokenTime extends AbstractFunction implements UserDefinedFunction {
 
-    private static final prettyTime prettyTime = new PrettyTime();
+    private static final PrettyTime prettyTime = new PrettyTime();
 
-    public SayTime() {
+    public ToSpokenTime() {
         super(1, "http://semantalytics.com/2016/03/ns/stardog/udf/util/toSpokenTime");
     }
 
@@ -33,7 +30,7 @@ public class ToSpokenTime extends AbstractFunction implements UserDefinedFunctio
     }
 
     @Override
-    public SayTime copy() {
+    public ToSpokenTime copy() {
         return new ToSpokenTime(this);
     }
 

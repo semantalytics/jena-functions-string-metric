@@ -1,5 +1,5 @@
 
-package com.semantalytics.stardog.kibble.file;
+package com.semantalytics.stardog.kibble.xml;
 
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
@@ -8,38 +8,26 @@ import com.complexible.stardog.plan.filter.functions.Function;
 import com.complexible.stardog.plan.filter.functions.UserDefinedFunction;
 import com.semantalytics.stardog.kibble.file.FileVocabulary;
 import org.openrdf.model.Value;
-import java.nio.file.Files;
 
-import java.io.IOException;
-import java.nio.file.Paths;
+public class Xpath extends AbstractFunction implements UserDefinedFunction {
 
-import static com.complexible.common.rdf.model.Values.*;
-
-public class Group extends AbstractFunction implements UserDefinedFunction {
-
-    Group() {
-        super(1, FileVocabulary.group.stringValue());
+    Xpath() {
+        super(1, XmlVocabulary.xPath.stringValue());
     }
 
-    private Group(final Group contentType) {
+    private Xpath(final Xpath contentType) {
         super(contentType);
     }
 
     @Override
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
 
-        final String file = assertStringLiteral(values[0]).stringValue();
-
-        try {
-            return iri(Files.probeGroup(Paths.get(file)));
-        } catch (IOException e) {
-            throw new ExpressionEvaluationException(e);
-        }
+        return null;
     }
 
     @Override
     public Function copy() {
-        return new Group(this);
+        return new Xpath(this);
     }
 
     @Override

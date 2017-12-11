@@ -13,6 +13,7 @@ public enum FileVocabulary {
     isRegularFile,
     isDirectory,
     isOther,
+    cat,
     group,
     owner,
     get,

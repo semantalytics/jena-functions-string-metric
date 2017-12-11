@@ -1,9 +1,14 @@
 package com.semantalytics.stardog.function.util;
 
+import com.complexible.stardog.Stardog;
 import com.complexible.stardog.api.Connection;
 import com.complexible.stardog.api.ConnectionConfiguration;
+import com.complexible.stardog.api.admin.AdminConnection;
+import com.complexible.stardog.api.admin.AdminConnectionConfiguration;
 import org.joda.time.Days;
 import org.joda.time.Period;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openrdf.query.TupleQueryResult;
 
@@ -16,7 +21,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 
-public class TestSpokenTime extends AbstractStardogTest {
+public class TestSpokenTime  {
+
     protected static Stardog SERVER = null;
     protected static final String DB = "test";
 

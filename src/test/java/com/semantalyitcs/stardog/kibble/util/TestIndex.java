@@ -5,13 +5,14 @@ import com.complexible.stardog.api.Connection;
 import com.complexible.stardog.api.ConnectionConfiguration;
 import com.complexible.stardog.api.admin.AdminConnection;
 import com.complexible.stardog.api.admin.AdminConnectionConfiguration;
+import com.semantalytics.stardog.kibble.util.UtilVocabulary;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openrdf.query.TupleQueryResult;
 
-
 public class TestIndex {
+
     protected static Stardog SERVER = null;
     protected static final String DB = "test";
 
@@ -52,7 +53,7 @@ public class TestIndex {
 
             aConn.begin();
 
-            final String aQuery = "prefix util: <http://semantalytics.com/2016/03/ns/stardog/udf/util/> " +
+            final String aQuery = "prefix util: + <" + UtilVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(util:index(?v) as ?result) values ?v {1 2 3 4 5} } order by ?v";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();

@@ -8,7 +8,8 @@ public enum DateVocabulary {
     epochTime,
     nextQuarter,
     previousQuarter,
-    quarter;
+    quarter,
+    parseDate;
 
     public static final String NAMESPACE = "http://semantalytics.com/2017/09/ns/stardog/kibble/date/";
     public final IRI iri;

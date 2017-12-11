@@ -6,13 +6,18 @@ import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.Function;
 import com.complexible.stardog.plan.filter.functions.UserDefinedFunction;
+import com.google.common.hash.HashFunction;
 import com.google.common.hash.Hashing;
 import com.google.common.io.Files;
+import org.apache.commons.io.Charsets;
+import org.openrdf.model.IRI;
 import org.openrdf.model.Value;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+import java.nio.charset.Charset;
+import java.nio.file.Paths;
 
 public class Sha1 extends AbstractFunction implements UserDefinedFunction {
 
@@ -27,25 +32,10 @@ public class Sha1 extends AbstractFunction implements UserDefinedFunction {
     @Override
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
 
-        //TODO handle IRI or literal, check for file: protocol 
-        final IRI file = assertIRI(values[0]);
-
-        final File file = new File(URI.create(file.stringValue()));
-        final String hash;
-        try {
-            hash = Files.hash(file, Hashing.sha1()).toString();
-        } catch(IOException e) {
-            throw new ExpressionEvaluationException("Error while trying to hash file");
-        }
-        return Values.literal(hash);
+        //TODO handle IRI or literal, check for file: protocol
+        return null;
     }
 
-    private String hash(final String string) {
-    }
-    
-    private String hash(final URI uri) {
-    }
-    
     @Override
     public Function copy() {
         return new Sha1(this);

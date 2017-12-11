@@ -14,13 +14,13 @@ import java.nio.file.Paths;
 
 import static com.complexible.common.rdf.model.Values.*;
 
-public class Group extends AbstractFunction implements UserDefinedFunction {
+public class Permissions extends AbstractFunction implements UserDefinedFunction {
 
-    Group() {
+    Permissions() {
         super(1, FileVocabulary.group.stringValue());
     }
 
-    private Group(final Group contentType) {
+    private Permissions(final Permissions contentType) {
         super(contentType);
     }
 
@@ -30,7 +30,7 @@ public class Group extends AbstractFunction implements UserDefinedFunction {
         final String file = assertStringLiteral(values[0]).stringValue();
 
         try {
-            return iri(Files.probeGroup(Paths.get(file)));
+            return literal(Files.getPosixFilePermissions(Paths.get(file)).toString());
         } catch (IOException e) {
             throw new ExpressionEvaluationException(e);
         }
@@ -38,7 +38,7 @@ public class Group extends AbstractFunction implements UserDefinedFunction {
 
     @Override
     public Function copy() {
-        return new Group(this);
+        return new Permissions(this);
     }
 
     @Override

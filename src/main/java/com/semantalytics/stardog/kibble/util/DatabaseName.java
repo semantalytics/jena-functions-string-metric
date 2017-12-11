@@ -6,7 +6,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.complexible.common.rdf.model.Namespaces;
 import com.complexible.stardog.index.statistics.Accuracy;
 import com.complexible.stardog.index.statistics.Cardinality;
 import com.complexible.stardog.plan.AbstractPropertyFunctionNodeBuilder;
@@ -36,11 +35,9 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import com.semantalytics.stardog.kibble.util.UtilVocabulary;
 import org.openrdf.model.IRI;
 import org.openrdf.model.Literal;
 
-import static com.complexible.common.rdf.model.Values.iri;
 import static com.complexible.common.rdf.model.Values.literal;
 
 public final class DatabaseName implements PropertyFunction {

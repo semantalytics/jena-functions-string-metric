@@ -10,6 +10,7 @@ import com.google.common.collect.Range;
 import com.google.common.hash.Hashing;
 import com.google.common.io.Files;
 import org.apache.http.client.fluent.Request;
+import org.apache.shiro.SecurityUtils;
 import org.openrdf.model.Value;
 
 import java.io.File;
@@ -21,11 +22,8 @@ public class Get extends AbstractFunction implements UserDefinedFunction {
     private static String downloadsDir;
 
     static {
-        if(System.getenv("STARDOG_HOME") == null) {
-            downloadsDir = System.getProperty("user.home") + SLASH + "stardog-downloads";
-        } else {
-            downloadsDir = System.getenv("STARDOG_HOME") + SLASH + "downloads";
-        }
+            final String user = SecurityUtils.getSubject().getPrincipal().toString();
+            downloadsDir = System.getenv("STARDOG_HOME") + SLASH + "downloads" + "SLASH" + user;
     }
 
     Get() {

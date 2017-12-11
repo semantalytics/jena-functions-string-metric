@@ -1,39 +1,51 @@
 package com.semantalytics.stardog.kibble.file;
 
+import com.complexible.stardog.plan.filter.EvalUtil;
+import com.complexible.stardog.plan.filter.Expression;
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.UserDefinedFunction;
+import com.google.common.collect.Range;
 import org.apache.tika.Tika;
+import org.openrdf.model.IRI;
+import org.openrdf.model.Literal;
 import org.openrdf.model.Value;
+
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.Arrays;
 
 import static com.complexible.common.rdf.model.Values.*;
 
-public class ContentType extends AbstractFunction implements UserDefinedFunction {
+public class Cat extends AbstractFunction implements UserDefinedFunction {
 
     private Tika tika;
 
-    ContentType() {
-        super(1, FileVocabulary.contentType.stringValue());
+    Cat() {
+        super(Range.all(), FileVocabulary.contentType.stringValue());
     }
 
-    private ContentType(final ContentType contentType) {
-        super(contentType);
+    private Cat(final Cat cat) {
+        super(cat);
     }
 
     @Override
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
-        final String file = assertFileIri(assertIRI(values[0]).stringValue());
 
-        try {
-            return literal(tika.detect(Paths.get(file.substring(5))));
-        } catch (IOException e) {
-            throw new ExpressionEvaluationException(e);
+        for(final Value value : values) {
+            assertFileIriOrStringLiteral(value);
         }
+
+        final StringBuffer sb = new StringBuffer();
+        for(final Value value : values) {
+            sb.append(stringValue(value));
+        }
+        return literal(sb.toString());
     }
 
     @Override
@@ -42,8 +54,8 @@ public class ContentType extends AbstractFunction implements UserDefinedFunction
     }
 
     @Override
-    public ContentType copy() {
-        return new ContentType(this);
+    public Cat copy() {
+        return new Cat(this);
     }
 
     @Override
@@ -53,13 +65,58 @@ public class ContentType extends AbstractFunction implements UserDefinedFunction
 
     @Override
     public String toString() {
-        return FileVocabulary.contentType.name();
+        return FileVocabulary.cat.name();
     }
 
-    private String assertFileIri(final String file) throws ExpressionEvaluationException {
-        if(!file.startsWith("file:")) {
-            throw new ExpressionEvaluationException("IRI protocol must be file:");
+    private static boolean isFileIri(final Value value) {
+        if(isIri(value) && ((IRI)value).stringValue().startsWith("file:")) {
+            return true;
+        } else {
+            return false;
         }
-        return file;
+    }
+
+    public static String stringValue(final Value value) throws ExpressionEvaluationException {
+        if(isFileIri(value)) {
+            final URI uri;
+            try {
+                uri = new URI(value.stringValue());
+            } catch(URISyntaxException e) {
+                throw new ExpressionEvaluationException("Unable to parse URI " + value.stringValue());
+            }
+
+
+            final byte[] encoded;
+
+            try {
+                encoded = Files.readAllBytes(Paths.get(uri));
+            } catch(IOException e) {
+                throw new ExpressionEvaluationException("Unable to open file " + uri);
+            }
+
+            return new String(encoded);
+        } else {
+            return value.stringValue();
+        }
+    }
+
+    private static Value assertFileIriOrStringLiteral(final Value value) throws ExpressionEvaluationException {
+        if(isFileIri(value) || isStringLiteral(value)) {
+            return  value;
+        } else {
+            throw new ExpressionEvaluationException("Argument must be a either a string literal or file: IRI");
+        }
+    }
+
+    private static boolean isStringLiteral(final Value value) {
+        if(value instanceof Literal && EvalUtil.isStringLiteral((Literal) value)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private static boolean isIri(final Value value) {
+        return value instanceof IRI ? true : false;
     }
 }

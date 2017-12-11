@@ -9,10 +9,11 @@ import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.UserDefinedFunction;
 import org.openrdf.model.Value;
-import java.nio.file.Files;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.attribute.BasicFileAttributes;
 
 public class IsOther extends AbstractFunction implements UserDefinedFunction {
 
@@ -29,11 +30,15 @@ public class IsOther extends AbstractFunction implements UserDefinedFunction {
 
         final String file = assertStringLiteral(values[0]).stringValue();
 
+        final Boolean isOther;
+
         try {
-            return Values.literal(Files.isOther(Paths.get(file)));
+            isOther = Files.readAttributes(Paths.get(file), BasicFileAttributes.class).isOther();
         } catch (IOException e) {
             throw new ExpressionEvaluationException(e);
         }
+
+        return Values.literal(isOther);
     }
 
     @Override
