@@ -66,9 +66,15 @@
         <heideltime.version>2.2.1</heideltime.version>
         <emoji4j.version>5.0</emoji4j.version>
         <guava.version>23.3-jre</guava.version>
+        <jhardwave.version>0.8.5</jhardware.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.jhardware</groupId>
+            <artifactId>jHardware</artifactId>
+            <version>${jhardware.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
