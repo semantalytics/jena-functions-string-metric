@@ -1,4 +1,4 @@
-package semantalytics.stardog.kibble.strings.comparison;
+package com.semantalytics.stardog.kibble.strings.comparison;
 
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
