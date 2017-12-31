@@ -1,4 +1,4 @@
-package com.semantalytics.stardog.plan.filter.functions.string.comparison;
+package com.semantalytics.stardog.kibble.strings.comparison;
 
 import com.complexible.stardog.Stardog;
 import com.complexible.stardog.api.Connection;
@@ -10,9 +10,11 @@ import org.junit.*;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.TupleQueryResult;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-public class TestISub {
+public class TestLevenshteinDistance {
 
     protected static Stardog SERVER = null;
     protected static final String DB = "test";
@@ -58,7 +60,7 @@ public class TestISub {
     }
 
     @Test
-    public void testISubTwoArg() throws Exception {
+    public void testLevenshtein() throws Exception {
         final Connection aConn = ConnectionConfiguration.to(DB)
                 .credentials("admin", "admin")
                 .connect();
@@ -66,7 +68,7 @@ public class TestISub {
         try {
 
             final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                    "select ?dist where { bind(ss:iSub(\"ABC\", \"ABCE\") as ?dist) }";
+                    "select ?dist where { bind(ss:levenshtein(\"My string\", \"My tring\") as ?dist) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
 
@@ -75,7 +77,7 @@ public class TestISub {
 
                 final String aValue = aResult.next().getValue("dist").stringValue();
 
-                assertEquals(0.9, Double.parseDouble(aValue), 0.0001);
+                assertEquals(1.0, Double.parseDouble(aValue), 0.0);
 
                 assertFalse("Should have no more results", aResult.hasNext());
             }
@@ -89,38 +91,7 @@ public class TestISub {
     }
 
     @Test
-    public void testISubThreeArg() throws Exception {
-        final Connection aConn = ConnectionConfiguration.to(DB)
-                .credentials("admin", "admin")
-                .connect();
-
-        try {
-
-            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                    "select ?dist where { bind(ss:iSub(\"ABC\", \"ABCE\", true) as ?dist) }";
-
-            final TupleQueryResult aResult = aConn.select(aQuery).execute();
-
-            try {
-                assertTrue("Should have a result", aResult.hasNext());
-
-                final String aValue = aResult.next().getValue("dist").stringValue();
-
-                assertEquals(0.9, Double.parseDouble(aValue), 0.0001);
-
-                assertFalse("Should have no more results", aResult.hasNext());
-            }
-            finally {
-                aResult.close();
-            }
-        }
-        finally {
-            aConn.close();
-        }
-    }
-
-    @Test
-    public void testISubTooManyArgs() throws Exception {
+    public void testLevenstheinTooManyArgs() throws Exception {
 
         final Connection aConn = ConnectionConfiguration.to(DB)
                 .credentials("admin", "admin")
@@ -128,7 +99,7 @@ public class TestISub {
 
         try {
             final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                    "select ?str where { bind(ss:iSub(\"one\", \"two\", \"three\", \"four\") as ?str) }";
+                    "select ?str where { bind(ss:levenshtein(\"one\", \"two\", \"three\") as ?str) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
             try {
@@ -151,10 +122,8 @@ public class TestISub {
         }
     }
 
-
-
     @Test
-    public void testISubWrongType() throws Exception {
+    public void testLevenshteinWrongType() throws Exception {
         final Connection aConn = ConnectionConfiguration.to(DB)
                 .credentials("admin", "admin")
                 .connect();
@@ -162,7 +131,7 @@ public class TestISub {
         try {
 
             final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                    "select ?str where { bind(ss:iSub(7) as ?str) }";
+                    "select ?str where { bind(ss:levenshtein(7) as ?str) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
             try {

@@ -1,4 +1,4 @@
-package com.semantalyitcs.stardog.kibble.util;
+package com.semantalytics.stardog.kibble.util;
 
 import com.complexible.stardog.Stardog;
 import com.complexible.stardog.api.Connection;

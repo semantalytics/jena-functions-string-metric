@@ -1,4 +1,4 @@
-package com.semantalyitcs.stardog.kibble.util;
+package com.semantalytics.stardog.kibble.util;
 
 import com.complexible.stardog.Stardog;
 import com.complexible.stardog.api.Connection;
@@ -11,7 +11,7 @@ import org.openrdf.query.TupleQueryResult;
 
 import static org.junit.Assert.*;
 
-public class DatabaseNameTest {
+public class FromSpokenTimeTest {
 
 
     protected static Stardog SERVER = null;
@@ -58,12 +58,12 @@ public class DatabaseNameTest {
     }
 
     @Test
-    public void testQuarter() throws Exception {
+    public void testFromSpokenTime() throws Exception {
 
             aConn.begin();
 
-            final String aQuery = "prefix date: <" + UtilVocabulary.NAMESPACE + ">" +
-                    "select ?result where { bind(date:user() as ?result) }";
+            final String aQuery = "prefix util: <" + UtilVocabulary.NAMESPACE + ">" +
+                    "select ?result where { bind(util:fromSpokenTime(\"next week\") as ?result) }";
 
             try (final TupleQueryResult aResult = aConn.select(aQuery).execute()) {
 
@@ -71,7 +71,7 @@ public class DatabaseNameTest {
 
                 final long aValue = Long.parseLong(aResult.next().getValue("result").stringValue());
 
-                assertEquals("admin", aValue);
+                assertEquals(3, aValue);
 
                 assertFalse("Should have no more results", aResult.hasNext());
             }

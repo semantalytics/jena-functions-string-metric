@@ -1,4 +1,4 @@
-package com.semantalyitcs.stardog.kibble.util;
+package com.semantalytics.stardog.kibble.util;
 
 import com.complexible.stardog.Stardog;
 import com.complexible.stardog.api.Connection;
@@ -9,12 +9,10 @@ import com.semantalytics.stardog.kibble.util.UtilVocabulary;
 import org.junit.*;
 import org.openrdf.query.TupleQueryResult;
 
+import static org.junit.Assert.*;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+public class DatabaseNameTest {
 
-public class TestStardogVersion {
 
     protected static Stardog SERVER = null;
     protected static final String DB = "test";
@@ -60,29 +58,23 @@ public class TestStardogVersion {
     }
 
     @Test
-    public void testStardogVersion() throws Exception {
+    public void testQuarter() throws Exception {
 
-        try {
+            aConn.begin();
 
-            final String aQuery = "prefix util: <" + UtilVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(util:stardogVersion() AS ?result) }";
-
+            final String aQuery = "prefix date: <" + UtilVocabulary.NAMESPACE + ">" +
+                    "select ?result where { bind(date:user() as ?result) }";
 
             try (final TupleQueryResult aResult = aConn.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final String aValue = aResult.next().getValue("result").stringValue();
+                final long aValue = Long.parseLong(aResult.next().getValue("result").stringValue());
 
-                assertEquals("5.0.4", aValue);
+                assertEquals("admin", aValue);
 
                 assertFalse("Should have no more results", aResult.hasNext());
             }
-        }
-        finally {
-            aConn.close();
-        }
-
     }
 
 }

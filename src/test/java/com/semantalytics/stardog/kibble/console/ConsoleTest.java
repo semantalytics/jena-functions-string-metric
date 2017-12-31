@@ -1,18 +1,18 @@
-package com.semantalyitcs.stardog.kibble.util;
+package com.semantalytics.stardog.kibble.console;
 
 import com.complexible.stardog.Stardog;
 import com.complexible.stardog.api.Connection;
 import com.complexible.stardog.api.ConnectionConfiguration;
 import com.complexible.stardog.api.admin.AdminConnection;
 import com.complexible.stardog.api.admin.AdminConnectionConfiguration;
-import com.semantalytics.stardog.kibble.util.UtilVocabulary;
 import org.junit.*;
+import org.openrdf.query.BindingSet;
 import org.openrdf.query.TupleQueryResult;
 
 import static org.junit.Assert.*;
 
-public class UserTest {
 
+public class ConsoleTest {
 
     protected static Stardog SERVER = null;
     protected static final String DB = "test";
@@ -58,23 +58,44 @@ public class UserTest {
     }
 
     @Test
-    public void testQuarter() throws Exception {
+    public void testEpochTime() throws Exception {
 
             aConn.begin();
 
-            final String aQuery = "prefix date: <" + UtilVocabulary.NAMESPACE + ">" +
-                    "select ?result where { bind(date:user() as ?result) }";
+            final String aQuery = "prefix c: <http://semantalytics.com/2017/11/ns/stardog/kibble/console/>" +
+                    "select ?result where { bind(c:bgRed(\"Woof!\") as ?result) }";
 
             try (final TupleQueryResult aResult = aConn.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final long aValue = Long.parseLong(aResult.next().getValue("result").stringValue());
+                final String aValue = aResult.next().getValue("result").stringValue();
 
-                assertEquals("admin", aValue);
+                //assertEquals(1504238400000L, aValue);
 
-                assertFalse("Should have no more results", aResult.hasNext());
+                //assertFalse("Should have no more results", aResult.hasNext());
             }
     }
 
+    @Test
+    public void testCreationTimeTooManyArgs() throws Exception {
+
+        final String aQuery = "prefix c: <http://semantalytics.com/2017/11/ns/stardog/kibble/console/>" +
+                "select ?result where { bind(c:bold(\"Stardog\">) as ?result) }";
+
+        final TupleQueryResult aResult = aConn.select(aQuery).execute();
+        try {
+            // there should be a result because implicit in the query is the singleton set, so because the bind
+            // should fail due to the value error, we expect a single empty binding
+            assertTrue("Should have a result", aResult.hasNext());
+
+            final BindingSet aBindingSet = aResult.next();
+
+            assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+
+            assertFalse("Should have no more results", aResult.hasNext());
+        } finally {
+            aResult.close();
+        }
+    }
 }

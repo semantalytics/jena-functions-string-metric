@@ -13,6 +13,8 @@ import static com.complexible.common.rdf.model.Values.literal;
 
 public class Format extends AbstractFunction implements UserDefinedFunction {
 
+    private Phonenumber.PhoneNumber phoneNumber = new Phonenumber.PhoneNumber();
+
     protected Format() {
         super(1, PhoneNumberVocabulary.format.stringValue());
     }
@@ -28,8 +30,9 @@ public class Format extends AbstractFunction implements UserDefinedFunction {
         final String regionCode = assertStringLiteral(values[1]).stringValue();
 
         PhoneNumberUtil phoneNumberUtil = PhoneNumberUtil.getInstance();
+
         try {
-            Phonenumber.PhoneNumber phoneNumber = phoneNumberUtil.parse(number, regionCode);
+            phoneNumberUtil.parse(number, regionCode, phoneNumber);
             return literal(phoneNumberUtil.format(phoneNumber, PhoneNumberUtil.PhoneNumberFormat.INTERNATIONAL));
 
         } catch (NumberParseException e) {

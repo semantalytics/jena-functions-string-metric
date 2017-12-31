@@ -1,4 +1,4 @@
-package com.semantalyitcs.stardog.kibble.util;
+package com.semantalytics.stardog.kibble.util;
 
 import com.complexible.stardog.Stardog;
 import com.complexible.stardog.api.Connection;
@@ -6,17 +6,15 @@ import com.complexible.stardog.api.ConnectionConfiguration;
 import com.complexible.stardog.api.admin.AdminConnection;
 import com.complexible.stardog.api.admin.AdminConnectionConfiguration;
 import com.semantalytics.stardog.kibble.util.UtilVocabulary;
-import org.junit.*;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.openrdf.query.TupleQueryResult;
 
-import static org.junit.Assert.*;
-
-public class IndexTest {
-
+public class TestIndex {
 
     protected static Stardog SERVER = null;
     protected static final String DB = "test";
-    private Connection aConn;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
@@ -31,7 +29,7 @@ public class IndexTest {
                 aConn.drop(DB);
             }
 
-            aConn.newDatabase(DB).create();
+            aConn.createMemory(DB);
         }
         finally {
             aConn.close();
@@ -45,36 +43,35 @@ public class IndexTest {
         }
     }
 
-    @Before
-    public void setUp() {
-        aConn = ConnectionConfiguration.to(DB)
+    @Test
+    public void testBindIndex() throws Exception {
+        final Connection aConn = ConnectionConfiguration.to(DB)
                 .credentials("admin", "admin")
                 .connect();
-    }
 
-    @After
-    public void tearDown() {
-        aConn.close();
-    }
-
-    @Test
-    public void testQuarter() throws Exception {
+        try {
 
             aConn.begin();
 
-            final String aQuery = "prefix date: <" + UtilVocabulary.NAMESPACE + ">" +
-                    "select ?result where { bind(date:quarter(\"2017-09-01\"^^xsd:date) as ?result) }";
+            final String aQuery = "prefix util: + <" + UtilVocabulary.NAMESPACE + "> " +
+                    "select ?result where { bind(util:index(?v) as ?result) values ?v {1 2 3 4 5} } order by ?v";
 
-            try (final TupleQueryResult aResult = aConn.select(aQuery).execute()) {
+            final TupleQueryResult aResult = aConn.select(aQuery).execute();
 
-                assertTrue("Should have a result", aResult.hasNext());
+            try {
 
-                final long aValue = Long.parseLong(aResult.next().getValue("result").stringValue());
-
-                assertEquals(3, aValue);
-
-                assertFalse("Should have no more results", aResult.hasNext());
+                //final String aValue = aResult.next().getValue("result").stringValue();
+                while(aResult.hasNext()) {
+                    System.out.println(aResult.next().getValue("result").stringValue());
+                }
             }
+            finally {
+                aResult.close();
+            }
+        }
+        finally {
+            aConn.close();
+        }
     }
 
 }

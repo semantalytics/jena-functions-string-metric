@@ -1,24 +1,24 @@
-package com.semantalytics.stardog.kibble.net;
+package com.semantalytics.stardog.kibble.net.inetaddress;
 
 import com.complexible.stardog.Stardog;
 import com.complexible.stardog.api.Connection;
 import com.complexible.stardog.api.ConnectionConfiguration;
 import com.complexible.stardog.api.admin.AdminConnection;
 import com.complexible.stardog.api.admin.AdminConnectionConfiguration;
+import com.complexible.stardog.plan.eval.ExecutionException;
 import com.semantalytics.stardog.kibble.net.inetaddress.InetAddressVocabulary;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.After;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 import org.openrdf.query.TupleQueryResult;
 
+import java.net.InetAddress;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 
-public class HasParentTest {
+public class InternetAddressTest {
 
     protected static Stardog SERVER = null;
     protected static final String DB = "test";
@@ -63,28 +63,38 @@ public class HasParentTest {
         aConn.close();
     }
 
+    @Ignore
     @Test
-    public void testInetAddressToNumber() throws Exception {
-        final Connection aConn = ConnectionConfiguration.to(DB)
-                .credentials("admin", "admin")
-                .connect();
+    public void testBindPrev() throws Exception {
+
+        try(final Connection aConn = ConnectionConfiguration.to(DB)
+                                                            .credentials("admin", "admin")
+                                                            .connect()) {
 
             aConn.begin();
 
             final String aQuery = "prefix util: <" + InetAddressVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(util:inetAddressToNumber(\"192.168.0.1\") as ?result) }";
+                    "select ?result where { bind(util:bindPrev(?v) as ?result) values ?v {1 2 3 4 5} } order by ?v";
 
-            try (final TupleQueryResult aResult = aConn.select(aQuery).execute()) {
 
-                assertTrue("Should have a result", aResult.hasNext());
+            List<String> results = new ArrayList(5);
+            List<String> expected = Arrays.asList(null, "1", "2", "3", "4");
 
-                final long aValue = Long.parseLong(aResult.next().getValue("result").stringValue());
+            try(final TupleQueryResult aResult = aConn.select(aQuery).execute()) {
 
-                assertEquals(3232235521L, aValue);
-
-                assertFalse("Should have no more results", aResult.hasNext());
-            } finally {
-                aConn.close();
+                //final String aValue = aResult.next().getValue("result").stringValue();
+                while(aResult.hasNext()) {
+                    results.add(aResult.next().getValue("result").stringValue());
+                }
             }
+
+            assertEquals(expected, results);
+
+            aConn.close();
+
+        } catch (final ExecutionException e) {
+            aConn.rollback();
+        }
     }
+
 }
