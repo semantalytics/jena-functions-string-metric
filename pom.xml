@@ -66,7 +66,7 @@
         <heideltime.version>2.2.1</heideltime.version>
         <emoji4j.version>5.0</emoji4j.version>
         <guava.version>23.3-jre</guava.version>
-        <jhardwave.version>0.8.5</jhardware.version>
+        <jhardware.version>0.8.5</jhardware.version>
         <oshi.version>3.4.4</oshi.version>
     </properties>
 
