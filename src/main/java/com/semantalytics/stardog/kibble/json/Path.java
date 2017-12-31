@@ -28,7 +28,7 @@ public final class Path extends AbstractFunction implements UserDefinedFunction 
 
     @Override
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
-
+        // check for file: iri or string literal
         assertIRI(values[0]);
         assertStringLiteral(values[1]);
 
