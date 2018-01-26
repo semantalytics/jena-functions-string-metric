@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.*;
 public final class IsAsciiPrintable extends AbstractFunction implements StringFunction {
 
     protected IsAsciiPrintable() {
-        super(1, StringVocabulary.isAsciiPrintable.toString());
+        super(1, StringVocabulary.isAsciiPrintable.stringValue());
     }
 
     private IsAsciiPrintable(final IsAsciiPrintable isAsciiPrintable) {
