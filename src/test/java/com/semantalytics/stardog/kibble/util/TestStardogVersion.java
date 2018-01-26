@@ -14,55 +14,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class TestStardogVersion {
+public class TestStardogVersion  extends AbstractStardogTest {
 
-    protected static Stardog SERVER = null;
-    protected static final String DB = "test";
-    private Connection aConn;
-
-    @BeforeClass
-    public static void beforeClass() throws Exception {
-        SERVER = Stardog.builder().create();
-
-        final AdminConnection aConn = AdminConnectionConfiguration.toEmbeddedServer()
-                .credentials("admin", "admin")
-                .connect();
-
-        try {
-            if (aConn.list().contains(DB)) {
-                aConn.drop(DB);
-            }
-
-            aConn.newDatabase(DB).create();
-        }
-        finally {
-            aConn.close();
-        }
-    }
-
-    @AfterClass
-    public static void afterClass() {
-        if (SERVER != null) {
-            SERVER.shutdown();
-        }
-    }
-
-    @Before
-    public void setUp() {
-        aConn = ConnectionConfiguration.to(DB)
-                .credentials("admin", "admin")
-                .connect();
-    }
-
-    @After
-    public void tearDown() {
-        aConn.close();
-    }
-
+ 
     @Test
     public void testStardogVersion() throws Exception {
-
-        try {
 
             final String aQuery = "prefix util: <" + UtilVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(util:stardogVersion() AS ?result) }";
@@ -78,10 +34,7 @@ public class TestStardogVersion {
 
                 assertFalse("Should have no more results", aResult.hasNext());
             }
-        }
-        finally {
-            aConn.close();
-        }
+
 
     }
 
