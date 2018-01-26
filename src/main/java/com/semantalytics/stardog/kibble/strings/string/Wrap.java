@@ -12,7 +12,7 @@ import static com.google.common.base.Preconditions.checkElementIndex;
 public final class Wrap extends AbstractFunction implements StringFunction {
 
     protected Wrap() {
-        super(2, StringVocabulary.wrap.toString());
+        super(2, StringVocabulary.wrap.stringValue());
     }
 
     private Wrap(final Wrap wrap) {
