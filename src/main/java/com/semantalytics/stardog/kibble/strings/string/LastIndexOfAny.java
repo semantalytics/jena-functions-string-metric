@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.*;
 public final class LastIndexOfAny extends AbstractFunction implements StringFunction {
 
     protected LastIndexOfAny() {
-        super(1, StringVocabulary.lastIndexOfAny.toString());
+        super(1, StringVocabulary.lastIndexOfAny.stringValue());
     }
 
     private LastIndexOfAny(final LastIndexOfAny lastIndexOfAny) {
