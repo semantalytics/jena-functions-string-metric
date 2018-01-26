@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class Rotate extends AbstractFunction implements StringFunction {
 
     protected Rotate() {
-        super(2, StringVocabulary.rotate.toString());
+        super(2, StringVocabulary.rotate.stringValue());
     }
 
     private Rotate(final Rotate rotate) {
