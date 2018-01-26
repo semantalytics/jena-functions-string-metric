@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class PrependIfMissing extends AbstractFunction implements StringFunction {
 
     protected PrependIfMissing() {
-        super(3, StringVocabulary.prependIfMissing.toString());
+        super(3, StringVocabulary.prependIfMissing.stringValue());
     }
 
     private PrependIfMissing(final PrependIfMissing prependIfMissing) {
