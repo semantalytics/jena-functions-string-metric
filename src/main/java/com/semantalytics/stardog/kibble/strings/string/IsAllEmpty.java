@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class IsAllEmpty extends AbstractFunction implements StringFunction {
 
     protected IsAllEmpty() {
-        super(2, StringVocabulary.isAllEmpty.toString());
+        super(2, StringVocabulary.isAllEmpty.stringValue());
     }
 
     private IsAllEmpty(final IsAllEmpty isAllEmpty) {
