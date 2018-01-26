@@ -11,58 +11,12 @@ import org.openrdf.query.TupleQueryResult;
 
 import static org.junit.Assert.*;
 
-public class DefaultIfBlankTest {
+public class DefaultIfBlankTest  extends AbstractStardogTest {
 
-    protected static Stardog SERVER = null;
-    protected static final String DB = "test";
-    private Connection aConn;
-
-    @BeforeClass
-    public static void beforeClass() throws Exception {
-        SERVER = Stardog.builder().create();
-
-        final AdminConnection aConn = AdminConnectionConfiguration.toEmbeddedServer()
-                .credentials("admin", "admin")
-                .connect();
-
-        try {
-            if (aConn.list().contains(DB)) {
-                aConn.drop(DB);
-            }
-
-            aConn.newDatabase(DB).create();
-        }
-        finally {
-            aConn.close();
-        }
-    }
-
-    @AfterClass
-    public static void afterClass() {
-        if (SERVER != null) {
-            SERVER.shutdown();
-        }
-    }
-
-    @Before
-    public void setUp() {
-        aConn = ConnectionConfiguration.to(DB)
-                .credentials("admin", "admin")
-                .connect();
-    }
-
-    @After
-    public void tearDown() {
-        aConn.close();
-    }
 
     @Test
     public void testAbbreviateMiddle() throws Exception {
-        final Connection aConn = ConnectionConfiguration.to(DB)
-                .credentials("admin", "admin")
-                .connect();
-
-        try {
+   
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:defaultIfBlank(\"Stardog graph database\", \"...\", 8) AS ?abbreviation) }";
@@ -78,26 +32,18 @@ public class DefaultIfBlankTest {
 
                 assertFalse("Should have no more results", aResult.hasNext());
             }
-        }
-        finally {
-            aConn.close();
-        }
+      
     }
 
     @Test
     public void testEmptyString() throws Exception {
-        final Connection aConn = ConnectionConfiguration.to(DB)
-                .credentials("admin", "admin")
-                .connect();
-
-        try {
-
+    
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:defaultIfBlank(\"\", 5) as ?abbreviation) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
 
-            try {
+       
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final String aValue = aResult.next().getValue("abbreviation").stringValue();
@@ -105,29 +51,17 @@ public class DefaultIfBlankTest {
                 assertEquals("", aValue);
 
                 assertFalse("Should have no more results", aResult.hasNext());
-            }
-            finally {
-                aResult.close();
-            }
-        }
-        finally {
-            aConn.close();
-        }
+           
     }
 
     @Test
     public void testTooFewArgs() throws Exception {
 
-        final Connection aConn = ConnectionConfiguration.to(DB)
-                .credentials("admin", "admin")
-                .connect();
-
-        try {
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:defaultIfBlank(\"one\") as ?abbreviation) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
-            try {
+   
                 // there should be a result because implicit in the query is the singleton set, so because the bind
                 // should fail due to the value error, we expect a single empty binding
                 assertTrue("Should have a result", aResult.hasNext());
@@ -137,30 +71,19 @@ public class DefaultIfBlankTest {
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
 
                 assertFalse("Should have no more results", aResult.hasNext());
-            }
-            finally {
-                aResult.close();
-            }
-        }
-        finally {
-            aConn.close();
-        }
+           
     }
 
 
     @Test
     public void testTooManyArgs() throws Exception {
 
-        final Connection aConn = ConnectionConfiguration.to(DB)
-                .credentials("admin", "admin")
-                .connect();
-
-        try {
+     
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:defaultIfBlank(\"one\", 2, \"three\") as ?abbreviation) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
-            try {
+       
                 // there should be a result because implicit in the query is the singleton set, so because the bind
                 // should fail due to the value error, we expect a single empty binding
                 assertTrue("Should have a result", aResult.hasNext());
@@ -170,31 +93,19 @@ public class DefaultIfBlankTest {
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
 
                 assertFalse("Should have no more results", aResult.hasNext());
-            }
-            finally {
-                aResult.close();
-            }
-        }
-        finally {
-            aConn.close();
-        }
+           
     }
 
 
 
     @Test
     public void testWrongTypeFirstArg() throws Exception {
-        final Connection aConn = ConnectionConfiguration.to(DB)
-                .credentials("admin", "admin")
-                .connect();
-
-        try {
-
+       
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:defaultIfBlank(4, 5) as ?abbreviation) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
-            try {
+       
                 // there should be a result because implicit in the query is the singleton set, so because the bind
                 // should fail due to the value error, we expect a single empty binding
                 assertTrue("Should have a result", aResult.hasNext());
@@ -204,29 +115,18 @@ public class DefaultIfBlankTest {
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
 
                 assertFalse("Should have no more results", aResult.hasNext());
-            }
-            finally {
-                aResult.close();
-            }
-        }
-        finally {
-            aConn.close();
-        }
+           
     }
 
     @Test
     public void testWrongTypeSecondArg() throws Exception {
-        final Connection aConn = ConnectionConfiguration.to(DB)
-                .credentials("admin", "admin")
-                .connect();
-
-        try {
+     
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:defaultIfBlank(\"one\", \"two\") as ?abbreviation) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
-            try {
+        
                 // there should be a result because implicit in the query is the singleton set, so because the bind
                 // should fail due to the value error, we expect a single empty binding
                 assertTrue("Should have a result", aResult.hasNext());
@@ -236,29 +136,18 @@ public class DefaultIfBlankTest {
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
 
                 assertFalse("Should have no more results", aResult.hasNext());
-            }
-            finally {
-                aResult.close();
-            }
-        }
-        finally {
-            aConn.close();
-        }
+           
     }
 
     @Test
     public void testLengthTooShort() throws Exception {
-        final Connection aConn = ConnectionConfiguration.to(DB)
-                .credentials("admin", "admin")
-                .connect();
-
-        try {
+  
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:defaultIfBlank(\"Stardog\", 3) as ?abbreviation) }";
 
             final TupleQueryResult aResult = aConn.select(aQuery).execute();
-            try {
+      
                 // there should be a result because implicit in the query is the singleton set, so because the bind
                 // should fail due to the value error, we expect a single empty binding
                 assertTrue("Should have a result", aResult.hasNext());
@@ -268,13 +157,6 @@ public class DefaultIfBlankTest {
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
 
                 assertFalse("Should have no more results", aResult.hasNext());
-            }
-            finally {
-                aResult.close();
-            }
-        }
-        finally {
-            aConn.close();
-        }
+           
     }
 }
