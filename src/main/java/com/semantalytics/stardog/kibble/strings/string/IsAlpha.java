@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.*;
 public final class IsAlpha extends AbstractFunction implements StringFunction {
 
     protected IsAlpha() {
-        super(1, StringVocabulary.isAlpha.toString());
+        super(1, StringVocabulary.isAlpha.stringValue());
     }
 
     private IsAlpha(final IsAlpha isUpperCase) {
