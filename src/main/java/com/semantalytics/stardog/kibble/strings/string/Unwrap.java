@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class Unwrap extends AbstractFunction implements StringFunction {
 
     protected Unwrap() {
-        super(2, StringVocabulary.unwrap.toString());
+        super(2, StringVocabulary.unwrap.stringValue());
     }
 
     private Unwrap(final Unwrap unWrap) {
