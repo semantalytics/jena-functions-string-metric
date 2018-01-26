@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.*;
 public final class IsNumeric extends AbstractFunction implements StringFunction {
 
     protected IsNumeric() {
-        super(1, StringVocabulary.isNumeric.toString());
+        super(1, StringVocabulary.isNumeric.stringValue());
     }
 
     private IsNumeric(final IsNumeric isNumeric) {
