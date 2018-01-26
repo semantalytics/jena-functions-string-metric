@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.*;
 public final class StripAccents extends AbstractFunction implements StringFunction {
 
     protected StripAccents() {
-        super(1, StringVocabulary.stripAccents.toString());
+        super(1, StringVocabulary.stripAccents.stringValue());
     }
 
     private StripAccents(final StripAccents stripAccents) {
