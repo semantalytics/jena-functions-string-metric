@@ -13,7 +13,7 @@ import static com.complexible.common.rdf.model.Values.*;
 public final class LastIndexOf extends AbstractFunction implements StringFunction {
 
     protected LastIndexOf() {
-        super(Range.closed(2, 3), StringVocabulary.lastIndexOf.toString());
+        super(Range.closed(2, 3), StringVocabulary.lastIndexOf.stringValue());
     }
 
     private LastIndexOf(final LastIndexOf lastIndexOf) {
