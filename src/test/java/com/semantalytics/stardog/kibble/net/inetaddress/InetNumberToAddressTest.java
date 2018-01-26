@@ -25,8 +25,6 @@ public class InetNumberToAddressTest extends AbstractStardogTest {
                 assertEquals("192.168.0.1", aValue);
 
                 assertFalse("Should have no more results", aResult.hasNext());
-            } finally {
-                aConn.close();
             }
     }
 }
