@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.*;
 public final class IsAnyEmpty extends AbstractFunction implements StringFunction {
 
     protected IsAnyEmpty() {
-        super(1, StringVocabulary.isAnyEmpty.toString());
+        super(1, StringVocabulary.isAnyEmpty.stringValue());
     }
 
     private IsAnyEmpty(final IsAnyEmpty isUpperCase) {
