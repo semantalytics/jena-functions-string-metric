@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.*;
 public final class IsAlphanumericSpace extends AbstractFunction implements StringFunction {
 
     protected IsAlphanumericSpace() {
-        super(1, StringVocabulary.isAlphanumericSpace.toString());
+        super(1, StringVocabulary.isAlphanumericSpace.stringValue());
     }
 
     private IsAlphanumericSpace(final IsAlphanumericSpace isUpperCase) {
