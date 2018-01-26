@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.*;
 public class IndexOfDifference extends AbstractFunction implements StringFunction {
 
     protected IndexOfDifference() {
-        super(1, StringVocabulary.indexOfDifference.toString());
+        super(1, StringVocabulary.indexOfDifference.stringValue());
     }
 
     private IndexOfDifference(final IndexOfDifference indexOfDifference) {
