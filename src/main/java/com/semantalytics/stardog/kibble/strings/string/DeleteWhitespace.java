@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class DeleteWhitespace extends AbstractFunction implements StringFunction {
 
     protected DeleteWhitespace() {
-        super(1, StringVocabulary.deleteWhitespace.toString());
+        super(1, StringVocabulary.deleteWhitespace.stringValue());
     }
 
     private DeleteWhitespace(final DeleteWhitespace deleteWhitespace) {
