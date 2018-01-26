@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.*;
 public final class PadEnd extends AbstractFunction implements StringFunction {
 
     protected PadEnd() {
-        super(3, StringVocabulary.padEnd.toString());
+        super(3, StringVocabulary.padEnd.stringValue());
     }
 
     private PadEnd(final PadEnd padEnd) {
