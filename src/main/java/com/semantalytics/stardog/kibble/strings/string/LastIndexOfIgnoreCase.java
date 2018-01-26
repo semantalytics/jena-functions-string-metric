@@ -13,7 +13,7 @@ import static com.complexible.common.rdf.model.Values.*;
 public final class LastIndexOfIgnoreCase extends AbstractFunction implements StringFunction {
 
     protected LastIndexOfIgnoreCase() {
-        super(Range.closed(2, 3), StringVocabulary.lastIndexOfIgnoreCase.toString());
+        super(Range.closed(2, 3), StringVocabulary.lastIndexOfIgnoreCase.stringValue());
     }
 
     private LastIndexOfIgnoreCase(final LastIndexOfIgnoreCase lastIndexOfIgnoreCase) {
