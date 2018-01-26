@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class Capitalize extends AbstractFunction implements StringFunction {
 
     protected Capitalize() {
-        super(1, StringVocabulary.capitalize.toString());
+        super(1, StringVocabulary.capitalize.stringValue());
     }
 
     private Capitalize(final Capitalize capitalize) {
