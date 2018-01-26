@@ -21,16 +21,13 @@ public class Get extends AbstractFunction implements UserDefinedFunction {
     private static final String SLASH = File.separator;
     private static String downloadsDir;
 
-    static {
-            final String user = SecurityUtils.getSubject().getPrincipal().toString();
-            downloadsDir = System.getenv("STARDOG_HOME") + SLASH + "downloads" + "SLASH" + user;
-    }
-
     Get() {
         super(Range.closed(1, 1), FileVocabulary.get.stringValue());
     }
 
     private File getDestinationFile(final String hash) {
+        final String user = SecurityUtils.getSubject().getPrincipal().toString();
+        downloadsDir = System.getenv("STARDOG_HOME") + SLASH + "downloads" + "SLASH" + user;
         return new File(downloadsDir + SLASH + hash.substring(0, 4) + SLASH + hash.substring(4,8) + SLASH + hash.substring(7));
     }
 

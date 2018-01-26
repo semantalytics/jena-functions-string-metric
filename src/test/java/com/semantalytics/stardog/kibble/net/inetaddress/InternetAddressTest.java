@@ -6,72 +6,21 @@ import com.complexible.stardog.api.ConnectionConfiguration;
 import com.complexible.stardog.api.admin.AdminConnection;
 import com.complexible.stardog.api.admin.AdminConnectionConfiguration;
 import com.complexible.stardog.plan.eval.ExecutionException;
-import com.semantalytics.stardog.kibble.net.inetaddress.InetAddressVocabulary;
+import com.semantalytics.stardog.kibble.AbstractStardogTest;
 import org.junit.*;
 import org.openrdf.query.TupleQueryResult;
 
-import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-
-public class InternetAddressTest {
-
-    protected static Stardog SERVER = null;
-    protected static final String DB = "test";
-    private Connection aConn;
-
-    @BeforeClass
-    public static void beforeClass() throws Exception {
-        SERVER = Stardog.builder().create();
-
-        final AdminConnection aConn = AdminConnectionConfiguration.toEmbeddedServer()
-                .credentials("admin", "admin")
-                .connect();
-
-        try {
-            if (aConn.list().contains(DB)) {
-                aConn.drop(DB);
-            }
-
-            aConn.newDatabase(DB).create();
-        }
-        finally {
-            aConn.close();
-        }
-    }
-
-    @AfterClass
-    public static void afterClass() {
-        if (SERVER != null) {
-            SERVER.shutdown();
-        }
-    }
-
-    @Before
-    public void setUp() {
-        aConn = ConnectionConfiguration.to(DB)
-                .credentials("admin", "admin")
-                .connect();
-    }
-
-    @After
-    public void tearDown() {
-        aConn.close();
-    }
+public class InternetAddressTest extends AbstractStardogTest {
 
     @Ignore
     @Test
     public void testBindPrev() throws Exception {
-
-        try(final Connection aConn = ConnectionConfiguration.to(DB)
-                                                            .credentials("admin", "admin")
-                                                            .connect()) {
-
-            aConn.begin();
 
             final String aQuery = "prefix util: <" + InetAddressVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(util:bindPrev(?v) as ?result) values ?v {1 2 3 4 5} } order by ?v";
@@ -90,11 +39,6 @@ public class InternetAddressTest {
 
             assertEquals(expected, results);
 
-            aConn.close();
-
-        } catch (final ExecutionException e) {
-            aConn.rollback();
-        }
     }
 
 }

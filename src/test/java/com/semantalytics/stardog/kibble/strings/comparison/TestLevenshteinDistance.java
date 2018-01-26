@@ -5,6 +5,7 @@ import com.complexible.stardog.api.Connection;
 import com.complexible.stardog.api.ConnectionConfiguration;
 import com.complexible.stardog.api.admin.AdminConnection;
 import com.complexible.stardog.api.admin.AdminConnectionConfiguration;
+import com.semantalytics.stardog.kibble.AbstractStardogTest;
 import com.semantalytics.stardog.kibble.strings.comparison.StringComparisonVocabulary;
 import org.junit.*;
 import org.openrdf.query.BindingSet;
@@ -14,7 +15,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class TestLevenshteinDistance {
+public class TestLevenshteinDistance extends AbstractStardogTest {
 
     protected static Stardog SERVER = null;
     protected static final String DB = "test";
