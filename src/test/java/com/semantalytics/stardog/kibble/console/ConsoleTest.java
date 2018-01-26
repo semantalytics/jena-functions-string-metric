@@ -37,7 +37,7 @@ public class ConsoleTest extends AbstractStardogTest {
                 "select ?result where { bind(c:bold(\"Stardog\">) as ?result) }";
 
         final TupleQueryResult aResult = aConn.select(aQuery).execute();
-        try {
+
             // there should be a result because implicit in the query is the singleton set, so because the bind
             // should fail due to the value error, we expect a single empty binding
             assertTrue("Should have a result", aResult.hasNext());
@@ -47,8 +47,6 @@ public class ConsoleTest extends AbstractStardogTest {
             assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
 
             assertFalse("Should have no more results", aResult.hasNext());
-        } finally {
-            aResult.close();
-        }
+
     }
 }
