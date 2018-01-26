@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.*;
 public final class Length extends AbstractFunction implements StringFunction {
 
     protected Length() {
-        super(1, StringVocabulary.length.toString());
+        super(1, StringVocabulary.length.stringValue());
     }
 
     private Length(final Length length) {
