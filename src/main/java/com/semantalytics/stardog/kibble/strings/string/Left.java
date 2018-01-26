@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.*;
 public final class Left extends AbstractFunction implements StringFunction {
 
     protected Left() {
-        super(1, StringVocabulary.left.toString());
+        super(1, StringVocabulary.left.stringValue());
     }
 
     private Left(final Left left) {
