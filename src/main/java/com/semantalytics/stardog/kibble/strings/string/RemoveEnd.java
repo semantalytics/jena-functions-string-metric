@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.*;
 public final class RemoveEnd extends AbstractFunction implements StringFunction {
 
     protected RemoveEnd() {
-        super(2, StringVocabulary.removeEnd.toString());
+        super(2, StringVocabulary.removeEnd.stringValue());
     }
 
     private RemoveEnd(final RemoveEnd removeEnd) {
