@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.*;
 public final class CommonPrefix extends AbstractFunction implements StringFunction {
 
     protected CommonPrefix() {
-        super(2, StringVocabulary.commonPrefix.toString());
+        super(2, StringVocabulary.commonPrefix.stringValue());
     }
 
     private CommonPrefix(final CommonPrefix commonPrefix) {
