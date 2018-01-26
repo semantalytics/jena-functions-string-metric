@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.*;
 public class IndexOf extends AbstractFunction implements StringFunction {
 
     protected IndexOf() {
-        super(1, StringVocabulary.indexOf.toString());
+        super(1, StringVocabulary.indexOf.stringValue());
     }
 
     private IndexOf(final IndexOf indexOf) {
