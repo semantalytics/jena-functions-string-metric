@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.*;
 public class IndexOfIgnoreCase extends AbstractFunction implements StringFunction {
 
     protected IndexOfIgnoreCase() {
-        super(1, StringVocabulary.indexOfIgnoreCase.toString());
+        super(1, StringVocabulary.indexOfIgnoreCase.stringValue());
     }
 
     private IndexOfIgnoreCase(final IndexOfIgnoreCase indexOfIgnoreCase) {
