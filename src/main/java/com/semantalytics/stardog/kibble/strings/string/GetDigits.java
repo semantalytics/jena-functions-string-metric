@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class GetDigits extends AbstractFunction implements StringFunction {
 
     protected GetDigits() {
-        super(1, StringVocabulary.getDigits.toString());
+        super(1, StringVocabulary.getDigits.stringValue());
     }
 
     private GetDigits(final GetDigits getDigits) {
