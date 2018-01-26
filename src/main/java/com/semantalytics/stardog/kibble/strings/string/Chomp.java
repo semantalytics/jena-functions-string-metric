@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class Chomp extends AbstractFunction implements StringFunction {
 
     protected Chomp() {
-        super(1, StringVocabulary.chomp.toString());
+        super(1, StringVocabulary.chomp.stringValue());
     }
 
     private Chomp(final Chomp chomp) {
