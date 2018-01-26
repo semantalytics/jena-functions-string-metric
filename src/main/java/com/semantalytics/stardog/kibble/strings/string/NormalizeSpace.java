@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public class NormalizeSpace extends AbstractFunction implements StringFunction {
 
     protected NormalizeSpace() {
-        super(1, StringVocabulary.normalizeSpace.toString());
+        super(1, StringVocabulary.normalizeSpace.stringValue());
     }
 
     private NormalizeSpace(final NormalizeSpace normalizeSpace) {
