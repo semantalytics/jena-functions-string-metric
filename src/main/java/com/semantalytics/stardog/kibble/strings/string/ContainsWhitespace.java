@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class ContainsWhitespace extends AbstractFunction implements StringFunction {
 
     protected ContainsWhitespace() {
-        super(2, StringVocabulary.containsWhitespace.toString());
+        super(2, StringVocabulary.containsWhitespace.stringValue());
     }
 
     private ContainsWhitespace(final ContainsWhitespace containsWhitespace) {
