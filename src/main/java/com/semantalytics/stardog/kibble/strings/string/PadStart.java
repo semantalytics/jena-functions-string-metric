@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class PadStart extends AbstractFunction implements StringFunction {
 
     protected PadStart() {
-        super(3, StringVocabulary.padStart.toString());
+        super(3, StringVocabulary.padStart.stringValue());
     }
 
     private PadStart(final PadStart padStart) {
