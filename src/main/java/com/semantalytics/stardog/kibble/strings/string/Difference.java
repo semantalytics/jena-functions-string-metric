@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class Difference extends AbstractFunction implements StringFunction {
 
     protected Difference() {
-        super(2, StringVocabulary.difference.toString());
+        super(2, StringVocabulary.difference.stringValue());
     }
 
     private Difference(final Difference difference) {
