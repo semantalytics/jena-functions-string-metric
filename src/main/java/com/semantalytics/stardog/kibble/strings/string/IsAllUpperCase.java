@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class IsAllUpperCase extends AbstractFunction implements StringFunction {
 
     protected IsAllUpperCase() {
-        super(1, StringVocabulary.isAllUpperCase.toString());
+        super(1, StringVocabulary.isAllUpperCase.stringValue());
     }
 
     private IsAllUpperCase(final IsAllUpperCase isUpperCase) {
