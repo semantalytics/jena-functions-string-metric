@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class PrependIfMissingIgnoreCase extends AbstractFunction implements StringFunction {
 
     protected PrependIfMissingIgnoreCase() {
-        super(3, StringVocabulary.prependIfMissingIgnoreCase.toString());
+        super(3, StringVocabulary.prependIfMissingIgnoreCase.stringValue());
     }
 
     private PrependIfMissingIgnoreCase(final PrependIfMissingIgnoreCase prependIfMissingIgnoreCase) {
