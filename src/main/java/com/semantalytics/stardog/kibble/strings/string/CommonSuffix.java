@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class CommonSuffix extends AbstractFunction implements StringFunction {
 
     protected CommonSuffix() {
-        super(2, StringVocabulary.commonSuffix.toString());
+        super(2, StringVocabulary.commonSuffix.stringValue());
     }
 
     private CommonSuffix(final CommonSuffix commonSuffix) {
