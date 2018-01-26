@@ -13,7 +13,7 @@ import static com.complexible.common.rdf.model.Values.*;
 public final class LeftPad extends AbstractFunction implements StringFunction {
 
     protected LeftPad() {
-        super(Range.closed(2, 3), StringVocabulary.leftPad.toString());
+        super(Range.closed(2, 3), StringVocabulary.leftPad.stringValue());
     }
 
     private LeftPad(final LeftPad leftPad) {
