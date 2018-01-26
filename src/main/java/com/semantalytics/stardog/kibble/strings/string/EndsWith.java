@@ -12,7 +12,7 @@ import org.openrdf.model.Value;
 public final class EndsWith extends AbstractFunction implements StringFunction {
 
     protected EndsWith() {
-        super(Range.closed(2, 3), StringVocabulary.endsWith.toString());
+        super(Range.closed(2, 3), StringVocabulary.endsWith.stringValue());
     }
 
     private EndsWith(final EndsWith endsWith) {
