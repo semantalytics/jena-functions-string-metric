@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class IndexOfAnyBut extends AbstractFunction implements StringFunction {
 
     protected IndexOfAnyBut() {
-        super(1, StringVocabulary.indexOfAnyBut.toString());
+        super(1, StringVocabulary.indexOfAnyBut.stringValue());
     }
 
     private IndexOfAnyBut(final IndexOfAnyBut indexOfAnyBut) {
