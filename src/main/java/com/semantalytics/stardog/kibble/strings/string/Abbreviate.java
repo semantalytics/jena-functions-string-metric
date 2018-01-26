@@ -14,7 +14,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 public final class Abbreviate extends AbstractFunction implements StringFunction {
 
     protected Abbreviate() {
-        super(Range.closed(2, 3), StringVocabulary.abbreviate.toString());
+        super(Range.closed(2, 3), StringVocabulary.abbreviate.stringValue());
     }
 
     private Abbreviate(final Abbreviate abbreviate) {
