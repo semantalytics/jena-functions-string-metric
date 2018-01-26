@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.*;
 public final class IsAlphaSpace extends AbstractFunction implements StringFunction {
 
     protected IsAlphaSpace() {
-        super(1, StringVocabulary.isAlphaSpace.toString());
+        super(1, StringVocabulary.isAlphaSpace.stringValue());
     }
 
     private IsAlphaSpace(final IsAlphaSpace isUpperCase) {
