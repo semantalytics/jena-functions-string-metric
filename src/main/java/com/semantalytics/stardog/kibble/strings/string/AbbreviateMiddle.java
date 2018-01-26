@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.*;
 public final class AbbreviateMiddle extends AbstractFunction implements StringFunction {
 
     protected AbbreviateMiddle() {
-        super(3, StringVocabulary.abbreviateMiddle.toString());
+        super(3, StringVocabulary.abbreviateMiddle.stringValue());
     }
 
     private AbbreviateMiddle(final AbbreviateMiddle abbreviateMiddle) {
