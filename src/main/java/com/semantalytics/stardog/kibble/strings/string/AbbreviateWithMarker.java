@@ -13,7 +13,7 @@ import static com.complexible.common.rdf.model.Values.*;
 public final class AbbreviateWithMarker extends AbstractFunction implements StringFunction {
 
     protected AbbreviateWithMarker() {
-        super(Range.closed(3, 4), StringVocabulary.abbreviateWithMarker.toString());
+        super(Range.closed(3, 4), StringVocabulary.abbreviateWithMarker.stringValue());
     }
 
     private AbbreviateWithMarker(final AbbreviateWithMarker abbreviateWithMarker) {
