@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class ContainsNone extends AbstractFunction implements StringFunction {
 
     protected ContainsNone() {
-        super(2, StringVocabulary.containsNone.toString());
+        super(2, StringVocabulary.containsNone.stringValue());
     }
 
     private ContainsNone(final ContainsNone containsNone) {
