@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.*;
 public final class IsWhitespace extends AbstractFunction implements StringFunction {
 
     protected IsWhitespace() {
-        super(1, StringVocabulary.isWhitespace.toString());
+        super(1, StringVocabulary.isWhitespace.stringValue());
     }
 
     private IsWhitespace(final IsWhitespace isWhitespace) {
