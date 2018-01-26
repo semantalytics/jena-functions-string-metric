@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class Repeat extends AbstractFunction implements StringFunction {
 
     protected Repeat() {
-        super(2, StringVocabulary.repeat.toString());
+        super(2, StringVocabulary.repeat.stringValue());
     }
 
     private Repeat(final Repeat repeat) {
