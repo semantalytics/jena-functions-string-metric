@@ -34,8 +34,6 @@ public class InetAddressToNumberTest extends AbstractStardogTest {
                 assertEquals(3232235521L, aValue);
 
                 assertFalse("Should have no more results", aResult.hasNext());
-            } finally {
-                aConn.close();
-            }
+            } 
     }
 }
