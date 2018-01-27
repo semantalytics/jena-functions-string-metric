@@ -15,7 +15,7 @@ import static org.fusesource.jansi.Ansi.ansi;
 public class IntensityFaint extends AbstractFunction implements UserDefinedFunction {
 
     public IntensityFaint() {
-        super(Range.all(), "http://semantalytics.com/2017/11/ns/stardog/kibble/console/bgBlack");
+        super(Range.all(), ConsoleVocabulary.intensityFaint.stringValue());
     }
 
     public IntensityFaint(final IntensityFaint console) {
@@ -47,6 +47,6 @@ public class IntensityFaint extends AbstractFunction implements UserDefinedFunct
 
     @Override
     public String toString() {
-        return "background";
+        return ConsoleVocabulary.intensityFaint.name();
     }
 }

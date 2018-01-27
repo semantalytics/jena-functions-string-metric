@@ -16,7 +16,7 @@ import static org.fusesource.jansi.Ansi.ansi;
 public class NegativeOff extends AbstractFunction implements UserDefinedFunction {
 
     public NegativeOff() {
-        super(0, "http://semantalytics.com/2017/11/ns/stardog/kibble/console/negativeOff");
+        super(0, ConsoleVocabulary.negativeOff.stringValue());
     }
 
     public NegativeOff(final NegativeOff console) {
@@ -40,6 +40,6 @@ public class NegativeOff extends AbstractFunction implements UserDefinedFunction
 
     @Override
     public String toString() {
-        return "negativeOff";
+        return ConsoleVocabulary.negativeOff.name();
     }
 }

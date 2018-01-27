@@ -17,7 +17,7 @@ import static org.fusesource.jansi.Ansi.ansi;
 public class Negative extends AbstractFunction implements UserDefinedFunction {
 
     public Negative() {
-        super(Range.all(), "http://semantalytics.com/2017/11/ns/stardog/kibble/console/negative");
+        super(Range.all(), ConsoleVocabulary.negative.stringValue());
     }
 
     public Negative(final Negative console) {
@@ -49,6 +49,6 @@ public class Negative extends AbstractFunction implements UserDefinedFunction {
 
     @Override
     public String toString() {
-        return "negative";
+        return ConsoleVocabulary.negative.name();
     }
 }

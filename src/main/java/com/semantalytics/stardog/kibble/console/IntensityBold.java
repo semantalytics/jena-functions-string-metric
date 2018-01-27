@@ -15,7 +15,7 @@ import static org.fusesource.jansi.Ansi.ansi;
 public class IntensityBold extends AbstractFunction implements UserDefinedFunction {
 
     public IntensityBold() {
-        super(1, "http://semantalytics.com/2017/11/ns/stardog/kibble/console/intensityBold");
+        super(1, ConsoleVocabulary.intensityBold.stringValue());
     }
 
     public IntensityBold(final IntensityBold console) {
@@ -47,6 +47,6 @@ public class IntensityBold extends AbstractFunction implements UserDefinedFuncti
 
     @Override
     public String toString() {
-        return "intensityBold";
+        return ConsoleVocabulary.intensityBold.name();
     }
 }

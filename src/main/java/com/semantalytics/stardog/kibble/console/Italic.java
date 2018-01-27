@@ -16,7 +16,7 @@ import static org.fusesource.jansi.Ansi.ansi;
 public class Italic extends AbstractFunction implements UserDefinedFunction {
 
     public Italic() {
-        super(1, "http://semantalytics.com/2017/11/ns/stardog/kibble/console/italic");
+        super(1, ConsoleVocabulary.italic.stringValue());
     }
 
     public Italic(final Italic console) {
@@ -46,6 +46,6 @@ public class Italic extends AbstractFunction implements UserDefinedFunction {
 
     @Override
     public String toString() {
-        return "italic";
+        return ConsoleVocabulary.italic.name();
     }
 }

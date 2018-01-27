@@ -19,7 +19,7 @@ import static org.fusesource.jansi.Ansi.ansi;
 public class UnderlineOff extends AbstractFunction implements UserDefinedFunction {
 
     public UnderlineOff() {
-        super(Range.all(), "http://semantalytics.com/2017/11/ns/stardog/kibble/console/underlineOff");
+        super(Range.all(), ConsoleVocabulary.underlineOff.stringValue());
     }
 
     public UnderlineOff(final UnderlineOff console) {
@@ -43,6 +43,6 @@ public class UnderlineOff extends AbstractFunction implements UserDefinedFunctio
 
     @Override
     public String toString() {
-        return "underlineOff";
+        return ConsoleVocabulary.underlineOff.name();
     }
 }

@@ -14,7 +14,7 @@ import static org.fusesource.jansi.Ansi.ansi;
 public class ForegroundDefault extends AbstractFunction implements UserDefinedFunction {
 
     public ForegroundDefault() {
-        super(1, "http://semantalytics.com/2017/11/ns/stardog/kibble/console/fgDefault");
+        super(1, ConsoleVocabulary.foregroundDefault.stringValue());
     }
 
     public ForegroundDefault(final ForegroundDefault foreground) {
@@ -40,6 +40,6 @@ public class ForegroundDefault extends AbstractFunction implements UserDefinedFu
 
     @Override
     public String toString() {
-        return "foreground";
+        return ConsoleVocabulary.foregroundDefault.name();
     }
 }

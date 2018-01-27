@@ -14,7 +14,7 @@ import static org.fusesource.jansi.Ansi.ansi;
 public class ItalicOff extends AbstractFunction implements UserDefinedFunction {
 
     public ItalicOff() {
-        super(0, "http://semantalytics.com/2017/11/ns/stardog/kibble/console/italicOff");
+        super(0, ConsoleVocabulary.italicOff.stringValue());
     }
 
     public ItalicOff(final ItalicOff italicOff) {
@@ -38,6 +38,6 @@ public class ItalicOff extends AbstractFunction implements UserDefinedFunction {
 
     @Override
     public String toString() {
-        return "italicOff";
+        return ConsoleVocabulary.italicOff.name();
     }
 }

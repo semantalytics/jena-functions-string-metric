@@ -20,7 +20,7 @@ import static org.fusesource.jansi.Ansi.ansi;
 public class StrikeThroughOff extends AbstractFunction implements UserDefinedFunction {
 
     public StrikeThroughOff() {
-        super(Range.all(), "http://semantalytics.com/2017/11/ns/stardog/kibble/console/strikethroughOff");
+        super(Range.all(), ConsoleVocabulary.strikeThroughOff.stringValue());
     }
 
     public StrikeThroughOff(final StrikeThroughOff console) {
@@ -44,6 +44,6 @@ public class StrikeThroughOff extends AbstractFunction implements UserDefinedFun
 
     @Override
     public String toString() {
-        return "strikethroughOff";
+        return ConsoleVocabulary.strikeThroughOff.name();
     }
 }

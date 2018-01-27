@@ -13,7 +13,7 @@ import static org.fusesource.jansi.Ansi.ansi;
 public class IntensityBoldOn extends AbstractFunction implements UserDefinedFunction {
 
     public IntensityBoldOn() {
-        super(1, "http://semantalytics.com/2017/11/ns/stardog/kibble/console/fg");
+        super(1, ConsoleVocabulary.intensityBoldOn.stringValue());
     }
 
     public IntensityBoldOn(final IntensityBoldOn console) {
@@ -38,6 +38,6 @@ public class IntensityBoldOn extends AbstractFunction implements UserDefinedFunc
 
     @Override
     public String toString() {
-        return "background";
+        return ConsoleVocabulary.intensityBoldOn.name();
     }
 }

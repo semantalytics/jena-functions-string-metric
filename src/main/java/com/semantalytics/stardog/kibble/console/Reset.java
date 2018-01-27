@@ -13,7 +13,7 @@ import static org.fusesource.jansi.Ansi.ansi;
 public class Reset extends AbstractFunction implements UserDefinedFunction {
 
     public Reset() {
-        super(0, "http://semantalytics.com/2017/11/ns/stardog/kibble/console/reset");
+        super(0, ConsoleVocabulary.reset.stringValue());
     }
 
     public Reset(final Reset reset) {
@@ -37,6 +37,6 @@ public class Reset extends AbstractFunction implements UserDefinedFunction {
 
     @Override
     public String toString() {
-        return "reset";
+        return ConsoleVocabulary.reset.name();
     }
 }
