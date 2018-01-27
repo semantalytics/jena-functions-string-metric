@@ -14,7 +14,7 @@ import static com.complexible.common.rdf.model.Values.literal;
 public class DetermineDatabaseType extends AbstractFunction implements UserDefinedFunction {
 
     public DetermineDatabaseType() {
-        super(1, JdbcVocabulary.isDriverRegistered.stringValue());
+        super(1, JdbcVocabulary.determineDatabaseType.stringValue());
     }
 
     public DetermineDatabaseType(final DetermineDatabaseType executeDouble) {

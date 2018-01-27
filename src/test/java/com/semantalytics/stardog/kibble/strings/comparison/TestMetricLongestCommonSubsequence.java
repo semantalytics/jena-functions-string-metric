@@ -1,7 +1,5 @@
 package com.semantalytics.stardog.kibble.strings.comparison;
 
-import com.complexible.stardog.api.Connection;
-import com.complexible.stardog.api.ConnectionConfiguration;
 import com.semantalytics.stardog.kibble.AbstractStardogTest;
 import org.junit.*;
 import org.openrdf.query.BindingSet;
@@ -17,7 +15,7 @@ public class TestMetricLongestCommonSubsequence extends AbstractStardogTest {
         final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                 "select ?dist where { bind(ss:metricLongestCommonSubsequence(\"ABCDEFG\", \"ABCDEFHJKL\") as ?dist) }";
 
-        final TupleQueryResult aResult = aConn.select(aQuery).execute();
+        final TupleQueryResult aResult = connection.select(aQuery).execute();
 
         assertTrue("Should have a result", aResult.hasNext());
 
@@ -34,7 +32,7 @@ public class TestMetricLongestCommonSubsequence extends AbstractStardogTest {
         final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                 "select ?str where { bind(ss:metricLongestCommonSubsequence(\"one\", \"two\", \"three\") as ?str) }";
 
-        final TupleQueryResult aResult = aConn.select(aQuery).execute();
+        final TupleQueryResult aResult = connection.select(aQuery).execute();
         // there should be a result because implicit in the query is the singleton set, so because the bind
         // should fail due to the value error, we expect a single empty binding
         assertTrue("Should have a result", aResult.hasNext());
@@ -52,7 +50,7 @@ public class TestMetricLongestCommonSubsequence extends AbstractStardogTest {
         final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                 "select ?str where { bind(ss:metricLongestCommonSubsequence(7) as ?str) }";
 
-        final TupleQueryResult aResult = aConn.select(aQuery).execute();
+        final TupleQueryResult aResult = connection.select(aQuery).execute();
         // there should be a result because implicit in the query is the singleton set, so because the bind
         // should fail due to the value error, we expect a single empty binding
         assertTrue("Should have a result", aResult.hasNext());

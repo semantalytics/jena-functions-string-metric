@@ -19,7 +19,7 @@ import java.util.GregorianCalendar;
 public class LastAccessedTime extends AbstractFunction implements UserDefinedFunction {
 
     public LastAccessedTime() {
-        super(1, "http://semantalytics.com/2016/04/ns/stardog/udf/file/lastAccessedTime");
+        super(1, FileVocabulary.lastAccessedTime.stringValue());
     }
 
     public LastAccessedTime(final LastAccessedTime file) {
@@ -54,6 +54,6 @@ public class LastAccessedTime extends AbstractFunction implements UserDefinedFun
 
     @Override
     public String toString() {
-        return "LastAccessedTime";
+        return FileVocabulary.lastAccessedTime.name();
     }
 }

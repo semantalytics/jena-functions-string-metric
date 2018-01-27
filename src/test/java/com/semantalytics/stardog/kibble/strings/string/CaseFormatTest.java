@@ -1,17 +1,13 @@
 package com.semantalytics.stardog.kibble.strings.string;
 
-import com.complexible.stardog.Stardog;
-import com.complexible.stardog.api.Connection;
-import com.complexible.stardog.api.ConnectionConfiguration;
-import com.complexible.stardog.api.admin.AdminConnection;
-import com.complexible.stardog.api.admin.AdminConnectionConfiguration;
+import com.semantalytics.stardog.kibble.AbstractStardogTest;
 import org.junit.*;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.TupleQueryResult;
 
 import static org.junit.Assert.*;
 
-public class CaseFormatTest {
+public class CaseFormatTest extends AbstractStardogTest {
  
 
     @Test
@@ -20,7 +16,7 @@ public class CaseFormatTest {
             final String aQuery = "prefix ss: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?caseFormat where { bind(ss:caseFormat(\"caseFormat\", \"CASE_FORMAT\", \"stardogUnion\") as ?caseFormat) }";
 
-            final TupleQueryResult aResult = aConn.select(aQuery).execute();
+            final TupleQueryResult aResult = connection.select(aQuery).execute();
 
        
                 assertTrue("Should have a result", aResult.hasNext());
@@ -39,7 +35,7 @@ public class CaseFormatTest {
             final String aQuery = "prefix ss: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?caseFormat where { bind(ss:caseFormat(\"caseFormat\", \"case_format\", \"stardogUnion\") as ?caseFormat) }";
 
-            final TupleQueryResult aResult = aConn.select(aQuery).execute();
+            final TupleQueryResult aResult = connection.select(aQuery).execute();
 
    
                 assertTrue("Should have a result", aResult.hasNext());
@@ -59,7 +55,7 @@ public class CaseFormatTest {
             final String aQuery = "prefix ss: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?caseFormat where { bind(ss:caseFormat(\"caseFormat\", \"case-format\", \"stardogUnion\") as ?caseFormat) }";
 
-            final TupleQueryResult aResult = aConn.select(aQuery).execute();
+            final TupleQueryResult aResult = connection.select(aQuery).execute();
 
            
                 assertTrue("Should have a result", aResult.hasNext());
@@ -79,7 +75,7 @@ public class CaseFormatTest {
             final String aQuery = "prefix ss: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?caseFormat where { bind(ss:caseFormat(\"caseFormat\", \"CaseFormat\", \"stardogUnion\") as ?caseFormat) }";
 
-            final TupleQueryResult aResult = aConn.select(aQuery).execute();
+            final TupleQueryResult aResult = connection.select(aQuery).execute();
 
       
                 assertTrue("Should have a result", aResult.hasNext());
@@ -99,7 +95,7 @@ public class CaseFormatTest {
             final String aQuery = "prefix ss: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?caseFormat where { bind(ss:caseFormat(\"one\", \"two\", \"three\", \"four\") as ?caseFormat) }";
 
-            final TupleQueryResult aResult = aConn.select(aQuery).execute();
+            final TupleQueryResult aResult = connection.select(aQuery).execute();
         
                 // there should be a result because implicit in the query is the singleton set, so because the bind
                 // should fail due to the value error, we expect a single empty binding
@@ -122,7 +118,7 @@ public class CaseFormatTest {
             final String aQuery = "prefix ss: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?caseFormat where { bind(ss:caseFormat(7, 8, 9) as ?caseFormat) }";
 
-            final TupleQueryResult aResult = aConn.select(aQuery).execute();
+            final TupleQueryResult aResult = connection.select(aQuery).execute();
         
                 // there should be a result because implicit in the query is the singleton set, so because the bind
                 // should fail due to the value error, we expect a single empty binding

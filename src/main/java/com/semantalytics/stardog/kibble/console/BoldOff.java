@@ -15,7 +15,7 @@ import static org.fusesource.jansi.Ansi.ansi;
 public class BoldOff extends AbstractFunction implements UserDefinedFunction {
 
     public BoldOff() {
-        super(1, "http://semantalytics.com/2017/11/ns/stardog/kibble/console/boldOff");
+        super(1, ConsoleVocabulary.boldOff.stringValue());
     }
 
     public BoldOff(final BoldOff boldOn) {
@@ -39,6 +39,6 @@ public class BoldOff extends AbstractFunction implements UserDefinedFunction {
 
     @Override
     public String toString() {
-        return "boldOff";
+        return ConsoleVocabulary.boldOff.name();
     }
 }

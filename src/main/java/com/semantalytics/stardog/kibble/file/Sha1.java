@@ -22,7 +22,7 @@ import java.nio.file.Paths;
 public class Sha1 extends AbstractFunction implements UserDefinedFunction {
 
     public Sha1() {
-        super(1, "http://semantalytics.com/2016/04/ns/stardog/udf/file/sha1");
+        super(1, FileVocabulary.sha1.stringValue());
     }
 
     public Sha1(final Sha1 sha1) {
@@ -48,6 +48,6 @@ public class Sha1 extends AbstractFunction implements UserDefinedFunction {
 
     @Override
     public String toString() {
-        return "Sha1";
+        return FileVocabulary.sha1.name();
     }
 }

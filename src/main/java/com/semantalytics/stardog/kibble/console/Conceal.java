@@ -14,7 +14,7 @@ import static org.fusesource.jansi.Ansi.ansi;
 public class Conceal extends AbstractFunction implements UserDefinedFunction {
 
     public Conceal() {
-        super(Range.all(), "http://semantalytics.com/2017/11/ns/stardog/kibble/console/conceal");
+        super(Range.all(), ConsoleVocabulary.conceal.stringValue());
     }
 
     public Conceal(final Conceal conceal) {
@@ -46,6 +46,6 @@ public class Conceal extends AbstractFunction implements UserDefinedFunction {
 
     @Override
     public String toString() {
-        return "conceal";
+        return ConsoleVocabulary.conceal.name();
     }
 }

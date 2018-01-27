@@ -14,12 +14,12 @@ public class EpochTimeTest extends AbstractStardogTest {
     @Test
     public void testEpochTime() throws Exception {
 
-            aConn.begin();
+            connection.begin();
 
             final String aQuery = "prefix date: <" + DateVocabulary.NAMESPACE + ">" +
                     "select ?result where { bind(date:epochTime(\"2017-09-01\"^^xsd:date) as ?result) }";
 
-            try (final TupleQueryResult aResult = aConn.select(aQuery).execute()) {
+            try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 

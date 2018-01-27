@@ -16,7 +16,7 @@ import static com.complexible.common.rdf.model.Values.*;
 public class IsSameFile extends AbstractFunction implements UserDefinedFunction {
 
     IsSameFile() {
-        super(1, FileVocabulary.isDirectory.stringValue());
+        super(1, FileVocabulary.isSameFile.stringValue());
     }
 
     private IsSameFile(final IsSameFile isSameFile) {
@@ -48,6 +48,6 @@ public class IsSameFile extends AbstractFunction implements UserDefinedFunction 
 
     @Override
     public String toString() {
-        return FileVocabulary.contentType.name();
+        return FileVocabulary.isSameFile.name();
     }
 }

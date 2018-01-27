@@ -12,7 +12,7 @@ public enum StringComparisonVocabulary {
     isub,
     jaroWinklerSimilarity,
     jaroWinklerDistance,
-    levenschtein,
+    levenshteinDistance,
     longestCommonSubsequence,
     longestCommonSubstring,
     metricLongestCommonSubsequence,
@@ -25,7 +25,8 @@ public enum StringComparisonVocabulary {
     sift4,
     smithWaterman,
     smithWatermanGotoh,
-    sorensenDice,
+    sorensenDiceSimilarity,
+    sorensenDiceDistance,
     weithtedLevenshteinDistance;
 
     public static final String NAMESPACE = "http://semantalytics.com/2017/09/ns/stardog/kibble/strings/comparison/";
@@ -33,6 +34,10 @@ public enum StringComparisonVocabulary {
 
     StringComparisonVocabulary() {
         iri = StardogValueFactory.instance().createIRI(NAMESPACE, name());
+    }
+
+    public static String sparqlPrefix(String prefixName) {
+        return "PREFIX " + prefixName + ": <" + NAMESPACE + "> ";
     }
 
     public String stringValue() {

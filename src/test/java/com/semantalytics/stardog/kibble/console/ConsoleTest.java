@@ -13,12 +13,12 @@ public class ConsoleTest extends AbstractStardogTest {
     @Test
     public void testEpochTime() throws Exception {
 
-            aConn.begin();
+            connection.begin();
 
             final String aQuery = "prefix c: <http://semantalytics.com/2017/11/ns/stardog/kibble/console/>" +
                     "select ?result where { bind(c:bgRed(\"Woof!\") as ?result) }";
 
-            try (final TupleQueryResult aResult = aConn.select(aQuery).execute()) {
+            try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
@@ -36,7 +36,7 @@ public class ConsoleTest extends AbstractStardogTest {
         final String aQuery = "prefix c: <http://semantalytics.com/2017/11/ns/stardog/kibble/console/>" +
                 "select ?result where { bind(c:bold(\"Stardog\">) as ?result) }";
 
-        final TupleQueryResult aResult = aConn.select(aQuery).execute();
+        final TupleQueryResult aResult = connection.select(aQuery).execute();
 
             // there should be a result because implicit in the query is the singleton set, so because the bind
             // should fail due to the value error, we expect a single empty binding

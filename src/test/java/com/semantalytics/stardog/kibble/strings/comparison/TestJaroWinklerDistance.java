@@ -1,10 +1,5 @@
 package com.semantalytics.stardog.kibble.strings.comparison;
 
-import com.complexible.stardog.Stardog;
-import com.complexible.stardog.api.Connection;
-import com.complexible.stardog.api.ConnectionConfiguration;
-import com.complexible.stardog.api.admin.AdminConnection;
-import com.complexible.stardog.api.admin.AdminConnectionConfiguration;
 import com.semantalytics.stardog.kibble.AbstractStardogTest;
 import org.junit.*;
 import org.openrdf.query.BindingSet;
@@ -20,7 +15,7 @@ public class TestJaroWinklerDistance extends AbstractStardogTest {
         final String aQuery = "prefix stringcomparision: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                 "select ?dist where { bind(stringcomparision:jaroWinklerDistance(\"My string\", \"My tsring\") as ?dist) }";
 
-        final TupleQueryResult aResult = aConn.select(aQuery).execute();
+        final TupleQueryResult aResult = connection.select(aQuery).execute();
 
         assertTrue("Should have a result", aResult.hasNext());
 
@@ -37,7 +32,7 @@ public class TestJaroWinklerDistance extends AbstractStardogTest {
         final String aQuery = "prefix stringcomparision: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                 "select ?distance where { bind(stringcomparision:jaroWinklerDistance(\"My string\", \"My tsring\", 0.1) as ?distance) }";
 
-        final TupleQueryResult aResult = aConn.select(aQuery).execute();
+        final TupleQueryResult aResult = connection.select(aQuery).execute();
 
         assertTrue("Should have a result", aResult.hasNext());
 
@@ -54,7 +49,7 @@ public class TestJaroWinklerDistance extends AbstractStardogTest {
         final String aQuery = "prefix stringcomparision: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                 "select ?distance where { bind(stringcomparision:jaroWinklerDistance(\"My string\", \"My tsring\", \"x\") as ?distance) }";
 
-        final TupleQueryResult aResult = aConn.select(aQuery).execute();
+        final TupleQueryResult aResult = connection.select(aQuery).execute();
         // there should be a result because implicit in the query is the singleton set, so because the bind
         // should fail due to the value error, we expect a single empty binding
         assertTrue("Should have a result", aResult.hasNext());
@@ -72,7 +67,7 @@ public class TestJaroWinklerDistance extends AbstractStardogTest {
         final String aQuery = "prefix stringcomparision: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                 "select ?str where { bind(stringcomparision:jaroWinklerDistance(\"one\", \"two\", 0.7, \"four\") as ?str) }";
 
-        final TupleQueryResult aResult = aConn.select(aQuery).execute();
+        final TupleQueryResult aResult = connection.select(aQuery).execute();
         // there should be a result because implicit in the query is the singleton set, so because the bind
         // should fail due to the value error, we expect a single empty binding
         assertTrue("Should have a result", aResult.hasNext());
@@ -89,7 +84,7 @@ public class TestJaroWinklerDistance extends AbstractStardogTest {
         final String aQuery = "prefix stringcomparision: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                 "select ?str where { bind(stringcomparision:jaroWinklerDistance(7) as ?str) }";
 
-        final TupleQueryResult aResult = aConn.select(aQuery).execute();
+        final TupleQueryResult aResult = connection.select(aQuery).execute();
         // there should be a result because implicit in the query is the singleton set, so because the bind
         // should fail due to the value error, we expect a single empty binding
         assertTrue("Should have a result", aResult.hasNext());

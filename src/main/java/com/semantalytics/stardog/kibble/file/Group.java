@@ -58,6 +58,6 @@ public class Group extends AbstractFunction implements UserDefinedFunction {
 
     @Override
     public String toString() {
-        return FileVocabulary.contentType.name();
+        return FileVocabulary.group.name();
     }
 }

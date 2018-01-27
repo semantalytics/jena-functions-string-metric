@@ -53,6 +53,6 @@ public class IsOther extends AbstractFunction implements UserDefinedFunction {
 
     @Override
     public String toString() {
-        return FileVocabulary.contentType.name();
+        return FileVocabulary.isOther.name();
     }
 }

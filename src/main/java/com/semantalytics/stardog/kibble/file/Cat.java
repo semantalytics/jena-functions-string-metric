@@ -27,7 +27,7 @@ public class Cat extends AbstractFunction implements UserDefinedFunction {
     private Tika tika;
 
     Cat() {
-        super(Range.all(), FileVocabulary.contentType.stringValue());
+        super(Range.all(), FileVocabulary.cat.stringValue());
     }
 
     private Cat(final Cat cat) {

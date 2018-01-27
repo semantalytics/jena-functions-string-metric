@@ -16,7 +16,7 @@ public class TestMongeElkan extends AbstractStardogTest {
             final String aQuery = "prefix stringcomparison: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(stringcomparison:cosineDistance(\"ABC\", \"ABCE\") as ?result) }";
 
-            final TupleQueryResult aResult = aConn.select(aQuery).execute();
+            final TupleQueryResult aResult = connection.select(aQuery).execute();
 
             try {
                 assertTrue("Should have a result", aResult.hasNext());
@@ -38,7 +38,7 @@ public class TestMongeElkan extends AbstractStardogTest {
             final String aQuery = "prefix stringcomparison: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(stringcomparison:cosineDistance(\"ABC\", \"ABCE\", 3) as ?result) }";
 
-            final TupleQueryResult aResult = aConn.select(aQuery).execute();
+            final TupleQueryResult aResult = connection.select(aQuery).execute();
 
             try {
                 assertTrue("Should have a result", aResult.hasNext());
@@ -60,7 +60,7 @@ public class TestMongeElkan extends AbstractStardogTest {
             final String aQuery = "prefix stringcomparison: <" + StringComparisonVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(stringcomparison:cosineDistance(\"one\", \"two\", \"three\", \"four\") as ?result) }";
 
-            final TupleQueryResult aResult = aConn.select(aQuery).execute();
+            final TupleQueryResult aResult = connection.select(aQuery).execute();
             try {
                 // there should be a result because implicit in the query is the singleton set, so because the bind
                 // should fail due to the value error, we expect a single empty binding
@@ -83,7 +83,7 @@ public class TestMongeElkan extends AbstractStardogTest {
             final String aQuery = "prefix stringcomparison: <" + StringComparisonVocabulary.NAMESPACE + ">" +
                     "select ?result where { bind(stringcomparison:cosineDistance(7) as ?result) }";
 
-            final TupleQueryResult aResult = aConn.select(aQuery).execute();
+            final TupleQueryResult aResult = connection.select(aQuery).execute();
             try {
                 // there should be a result because implicit in the query is the singleton set, so because the bind
                 // should fail due to the value error, we expect a single empty binding
@@ -106,7 +106,7 @@ public class TestMongeElkan extends AbstractStardogTest {
             final String aQuery = "prefix stringcomparison: <" + StringComparisonVocabulary.NAMESPACE + ">" +
                     "select ?result where { bind(stringcomparison:cosineDistance(\"Stardog\", 2) as ?result) }";
 
-            final TupleQueryResult aResult = aConn.select(aQuery).execute();
+            final TupleQueryResult aResult = connection.select(aQuery).execute();
             try {
                 // there should be a result because implicit in the query is the singleton set, so because the bind
                 // should fail due to the value error, we expect a single empty binding
@@ -129,7 +129,7 @@ public class TestMongeElkan extends AbstractStardogTest {
             final String aQuery = "prefix stringcomparison: <" + StringComparisonVocabulary.NAMESPACE + ">" +
                     "select ?result where { bind(stringcomparison:cosineDistance(\"Stardog\", \"Starlight\", \"Starship\") as ?result) }";
 
-            final TupleQueryResult aResult = aConn.select(aQuery).execute();
+            final TupleQueryResult aResult = connection.select(aQuery).execute();
             try {
                 // there should be a result because implicit in the query is the singleton set, so because the bind
                 // should fail due to the value error, we expect a single empty binding
@@ -152,7 +152,7 @@ public class TestMongeElkan extends AbstractStardogTest {
             final String aQuery = "prefix stringcomparison: <" + StringComparisonVocabulary.NAMESPACE + ">" +
                     "select ?result where { bind(stringcomparison:cosineDistance(\"Stardog\", \"Starlight\", ?thirdArg) as ?result) }";
 
-            try(final TupleQueryResult aResult = aConn.select(aQuery).execute()) {
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
                 // there should be a result because implicit in the query is the singleton set, so because the bind
                 // should fail due to the value error, we expect a single empty binding
                 assertTrue("Should have a result", aResult.hasNext());

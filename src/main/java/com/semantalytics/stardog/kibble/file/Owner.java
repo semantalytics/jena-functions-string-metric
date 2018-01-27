@@ -48,7 +48,7 @@ public class Owner extends AbstractFunction implements UserDefinedFunction {
 
     @Override
     public String toString() {
-        return FileVocabulary.contentType.name();
+        return FileVocabulary.owner.name();
     }
 
     private String assertFileIri(final String file) throws ExpressionEvaluationException {

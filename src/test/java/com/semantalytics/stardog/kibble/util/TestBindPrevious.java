@@ -1,12 +1,6 @@
 package com.semantalytics.stardog.kibble.util;
 
-import com.complexible.stardog.Stardog;
-import com.complexible.stardog.api.Connection;
-import com.complexible.stardog.api.ConnectionConfiguration;
-import com.complexible.stardog.api.admin.AdminConnection;
-import com.complexible.stardog.api.admin.AdminConnectionConfiguration;
-import com.complexible.stardog.plan.eval.ExecutionException;
-import com.semantalytics.stardog.kibble.util.UtilVocabulary;
+import com.semantalytics.stardog.kibble.AbstractStardogTest;
 import org.junit.*;
 import org.openrdf.query.TupleQueryResult;
 
@@ -33,7 +27,7 @@ public class TestBindPrevious  extends AbstractStardogTest {
             List<String> results = new ArrayList(5);
             List<String> expected = Arrays.asList(null, "1", "2", "3", "4");
 
-            try(final TupleQueryResult aResult = aConn.select(aQuery).execute()) {
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 //final String aValue = aResult.next().getValue("result").stringValue();
                 while(aResult.hasNext()) {

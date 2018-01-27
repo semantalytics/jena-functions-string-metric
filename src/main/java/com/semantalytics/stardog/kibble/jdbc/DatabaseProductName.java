@@ -14,7 +14,7 @@ import static com.complexible.common.rdf.model.Values.literal;
 public class DatabaseProductName extends AbstractFunction implements UserDefinedFunction {
 
     public DatabaseProductName() {
-        super(1, JdbcVocabulary.isDriverRegistered.stringValue());
+        super(1, JdbcVocabulary.databaseProductName.stringValue());
     }
 
     public DatabaseProductName(final DatabaseProductName executeDouble) {

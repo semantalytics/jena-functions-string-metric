@@ -18,7 +18,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 public final class Size extends AbstractFunction implements UserDefinedFunction {
 
     public Size() {
-        super(1, "http://semantalytics.com/2016/04/ns/stardog/udf/file/size");
+        super(1, FileVocabulary.size.stringValue());
     }
 
     public Size(final Size file) {
@@ -49,6 +49,6 @@ public final class Size extends AbstractFunction implements UserDefinedFunction 
 
     @Override
     public String toString() {
-        return "Size";
+        return FileVocabulary.size.name();
     }
 }

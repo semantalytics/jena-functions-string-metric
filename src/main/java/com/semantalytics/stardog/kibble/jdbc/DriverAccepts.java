@@ -14,7 +14,7 @@ import static com.complexible.common.rdf.model.Values.literal;
 public class DriverAccepts extends AbstractFunction implements UserDefinedFunction {
 
     public DriverAccepts() {
-        super(1, JdbcVocabulary.isDriverRegistered.stringValue());
+        super(1, JdbcVocabulary.driverAccepts.stringValue());
     }
 
     public DriverAccepts(final DriverAccepts executeDouble) {

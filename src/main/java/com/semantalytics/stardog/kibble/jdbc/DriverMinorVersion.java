@@ -14,7 +14,7 @@ import static com.complexible.common.rdf.model.Values.literal;
 public class DriverMinorVersion extends AbstractFunction implements UserDefinedFunction {
 
     public DriverMinorVersion() {
-        super(1, JdbcVocabulary.isDriverRegistered.stringValue());
+        super(1, JdbcVocabulary.driverMinorVersion.stringValue());
     }
 
     public DriverMinorVersion(final DriverMinorVersion executeDouble) {

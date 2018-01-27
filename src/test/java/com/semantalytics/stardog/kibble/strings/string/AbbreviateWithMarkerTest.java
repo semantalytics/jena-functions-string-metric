@@ -1,11 +1,6 @@
 package com.semantalytics.stardog.kibble.strings.string;
 
-import com.complexible.stardog.Stardog;
-import com.complexible.stardog.api.Connection;
-import com.complexible.stardog.api.ConnectionConfiguration;
-import com.complexible.stardog.api.admin.AdminConnection;
-import com.complexible.stardog.api.admin.AdminConnectionConfiguration;
-import com.semantalytics.stardog.kibble.strings.string.StringVocabulary;
+import com.semantalytics.stardog.kibble.AbstractStardogTest;
 import org.junit.*;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.TupleQueryResult;
@@ -22,7 +17,7 @@ public class AbbreviateWithMarkerTest  extends AbstractStardogTest {
                     "select ?result where { bind(string:abbreviateWithMarker(\"Stardog graph database\", \"***\" , 10) AS ?result) }";
 
 
-            try (final TupleQueryResult aResult = aConn.select(aQuery).execute()) {
+            try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
@@ -43,7 +38,7 @@ public class AbbreviateWithMarkerTest  extends AbstractStardogTest {
                     "select ?result where { bind(string:abbreviateWithMarker(\"Stardog graph database\", \"***\", 10, 3) AS ?result) }";
 
 
-            try (final TupleQueryResult aResult = aConn.select(aQuery).execute()) {
+            try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
@@ -63,7 +58,7 @@ public class AbbreviateWithMarkerTest  extends AbstractStardogTest {
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:abbreviateWithMarker(\"\", 5) as ?abbreviation) }";
 
-            final TupleQueryResult aResult = aConn.select(aQuery).execute();
+            final TupleQueryResult aResult = connection.select(aQuery).execute();
 
     
                 assertTrue("Should have a result", aResult.hasNext());
@@ -83,7 +78,7 @@ public class AbbreviateWithMarkerTest  extends AbstractStardogTest {
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:abbreviateWithMarker(\"one\") as ?abbreviation) }";
 
-            final TupleQueryResult aResult = aConn.select(aQuery).execute();
+            final TupleQueryResult aResult = connection.select(aQuery).execute();
        
                 // there should be a result because implicit in the query is the singleton set, so because the bind
                 // should fail due to the value error, we expect a single empty binding
@@ -105,7 +100,7 @@ public class AbbreviateWithMarkerTest  extends AbstractStardogTest {
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:abbreviateWithMarker(\"one\", 2, \"three\") as ?abbreviation) }";
 
-            final TupleQueryResult aResult = aConn.select(aQuery).execute();
+            final TupleQueryResult aResult = connection.select(aQuery).execute();
        
                 // there should be a result because implicit in the query is the singleton set, so because the bind
                 // should fail due to the value error, we expect a single empty binding
@@ -128,7 +123,7 @@ public class AbbreviateWithMarkerTest  extends AbstractStardogTest {
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:abbreviateWithMarker(4, 5) as ?abbreviation) }";
 
-            final TupleQueryResult aResult = aConn.select(aQuery).execute();
+            final TupleQueryResult aResult = connection.select(aQuery).execute();
     
                 // there should be a result because implicit in the query is the singleton set, so because the bind
                 // should fail due to the value error, we expect a single empty binding
@@ -148,7 +143,7 @@ public class AbbreviateWithMarkerTest  extends AbstractStardogTest {
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:abbreviateWithMarker(\"one\", \"two\") as ?abbreviation) }";
 
-            final TupleQueryResult aResult = aConn.select(aQuery).execute();
+            final TupleQueryResult aResult = connection.select(aQuery).execute();
           
                 // there should be a result because implicit in the query is the singleton set, so because the bind
                 // should fail due to the value error, we expect a single empty binding
@@ -168,7 +163,7 @@ public class AbbreviateWithMarkerTest  extends AbstractStardogTest {
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:abbreviateWithMarker(\"Stardog\", 3) as ?abbreviation) }";
 
-            final TupleQueryResult aResult = aConn.select(aQuery).execute();
+            final TupleQueryResult aResult = connection.select(aQuery).execute();
      
                 // there should be a result because implicit in the query is the singleton set, so because the bind
                 // should fail due to the value error, we expect a single empty binding

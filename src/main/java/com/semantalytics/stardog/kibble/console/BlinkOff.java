@@ -15,7 +15,7 @@ import static org.fusesource.jansi.Ansi.ansi;
 public class BlinkOff extends AbstractFunction implements UserDefinedFunction {
 
     public BlinkOff() {
-        super(0, "http://semantalytics.com/2017/11/ns/stardog/kibble/console/blinkOff");
+        super(0, ConsoleVocabulary.blinkOff.stringValue());
     }
 
     public BlinkOff(final BlinkOff blinkOff) {
@@ -39,6 +39,6 @@ public class BlinkOff extends AbstractFunction implements UserDefinedFunction {
 
     @Override
     public String toString() {
-        return "blinkOff";
+        return ConsoleVocabulary.blinkOff.name();
     }
 }

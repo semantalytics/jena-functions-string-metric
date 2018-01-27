@@ -17,7 +17,7 @@ import static com.complexible.common.rdf.model.Values.*;
 public class Permissions extends AbstractFunction implements UserDefinedFunction {
 
     Permissions() {
-        super(1, FileVocabulary.group.stringValue());
+        super(1, FileVocabulary.permissions.stringValue());
     }
 
     private Permissions(final Permissions contentType) {
@@ -48,6 +48,6 @@ public class Permissions extends AbstractFunction implements UserDefinedFunction
 
     @Override
     public String toString() {
-        return FileVocabulary.contentType.name();
+        return FileVocabulary.permissions.name();
     }
 }

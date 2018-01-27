@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class AddLongitude extends AbstractFunction implements StringFunction {
 
     protected AddLongitude() {
-        super(1, GeoHashVocabulary.decode.iri.stringValue());
+        super(1, GeoHashVocabulary.addLongitude.iri.stringValue());
     }
 
     private AddLongitude(final AddLongitude addLongitude) {

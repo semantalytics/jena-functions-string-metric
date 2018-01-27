@@ -9,14 +9,13 @@ import org.fusesource.jansi.Ansi;
 import org.openrdf.model.Value;
 
 import static com.complexible.common.rdf.model.Values.literal;
-import static org.fusesource.jansi.Ansi.Color;
 import static org.fusesource.jansi.Ansi.Color.*;
 import static org.fusesource.jansi.Ansi.ansi;
 
 public class BackgroundYellow extends AbstractFunction implements UserDefinedFunction {
 
     public BackgroundYellow() {
-        super(Range.all(), "http://semantalytics.com/2017/11/ns/stardog/kibble/console/bgYellow");
+        super(Range.all(), ConsoleVocabulary.backgroundYellow.stringValue());
     }
 
     public BackgroundYellow(final BackgroundYellow console) {
@@ -48,6 +47,6 @@ public class BackgroundYellow extends AbstractFunction implements UserDefinedFun
 
     @Override
     public String toString() {
-        return "bgYellow";
+        return ConsoleVocabulary.backgroundYellow.name();
     }
 }

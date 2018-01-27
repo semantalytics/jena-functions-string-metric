@@ -14,7 +14,7 @@ import static com.complexible.common.rdf.model.Values.literal;
 public class IsDriverJdbcCompliant extends AbstractFunction implements UserDefinedFunction {
 
     public IsDriverJdbcCompliant() {
-        super(1, JdbcVocabulary.isDriverRegistered.stringValue());
+        super(1, JdbcVocabulary.isDriverJdbcCompliant.stringValue());
     }
 
     public IsDriverJdbcCompliant(final IsDriverJdbcCompliant executeDouble) {

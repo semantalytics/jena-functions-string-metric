@@ -43,6 +43,6 @@ public class IsRegularFile extends AbstractFunction implements UserDefinedFuncti
 
     @Override
     public String toString() {
-        return FileVocabulary.contentType.name();
+        return FileVocabulary.isRegularFile.name();
     }
 }

@@ -6,7 +6,17 @@ import org.openrdf.model.IRI;
 public enum JdbcVocabulary {
 
     exec,
-    isDriverRegistered;
+    isDriverRegistered,
+    isDriverJdbcCompliant,
+    driverPropertyInfo,
+    driverMinorVersion,
+    driverMajorVersion,
+    driverAccepts,
+    determineDatabaseType,
+    databaseProductVersion,
+    databaseProductName,
+    databaseMinorVersion,
+    databaseMajorVersion;
 
     public static final String NAMESPACE = "http://semantalytics.com/2017/09/ns/stardog/kibble/jdbc/";
     public final IRI iri;

@@ -15,7 +15,7 @@ import static org.fusesource.jansi.Ansi.ansi;
 public class ForegroundBlack extends AbstractFunction implements UserDefinedFunction {
 
     public ForegroundBlack() {
-        super(1, "http://semantalytics.com/2017/11/ns/stardog/kibble/console/fgBlack");
+        super(1, ConsoleVocabulary.foregroundBlack.stringValue());
     }
 
     public ForegroundBlack(final ForegroundBlack foreground) {
@@ -47,6 +47,6 @@ public class ForegroundBlack extends AbstractFunction implements UserDefinedFunc
 
     @Override
     public String toString() {
-        return "fgBlack";
+        return ConsoleVocabulary.foregroundBlack.name();
     }
 }

@@ -1,10 +1,6 @@
 package com.semantalytics.stardog.kibble.strings.emoji;
 
-import com.complexible.stardog.Stardog;
-import com.complexible.stardog.api.Connection;
-import com.complexible.stardog.api.ConnectionConfiguration;
-import com.complexible.stardog.api.admin.AdminConnection;
-import com.complexible.stardog.api.admin.AdminConnectionConfiguration;
+import com.semantalytics.stardog.kibble.AbstractStardogTest;
 import org.junit.*;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.TupleQueryResult;
@@ -24,7 +20,7 @@ public class EmojifyTest  extends AbstractStardogTest {
             final String aQuery = "prefix emoji: <http://semantalytics.com/2017/11/ns/stardog/strings/emoji/>" +
                     "select ?result where { bind(emoji:emojify(\"A :cat:, :dog: and a :mouse: became friends<3. For :dog:'s birthday party, they all had :hamburger:s, :fries:s, :cookie:s and :cake:.\") as ?result) }";
 
-            try (final TupleQueryResult aResult = aConn.select(aQuery).execute()) {
+            try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
@@ -42,7 +38,7 @@ public class EmojifyTest  extends AbstractStardogTest {
         final String aQuery = "prefix emoji: <http://semantalytics.com/2017/11/ns/stardog/strings/emoji/>" +
                 "select ?result where { bind(emoji:isEmoji() as ?result) }";
 
-        final TupleQueryResult aResult = aConn.select(aQuery).execute();
+        final TupleQueryResult aResult = connection.select(aQuery).execute();
     
             // there should be a result because implicit in the query is the singleton set, so because the bind
             // should fail due to the value error, we expect a single empty binding
@@ -62,7 +58,7 @@ public class EmojifyTest  extends AbstractStardogTest {
         final String aQuery = "prefix emoji: <http://semantalytics.com/2017/11/ns/stardog/strings/emoji/>" +
                 "select ?result where { bind(emoji:isEmoji(\"star\", \"dog\") as ?result) }";
 
-        final TupleQueryResult aResult = aConn.select(aQuery).execute();
+        final TupleQueryResult aResult = connection.select(aQuery).execute();
    
             // there should be a result because implicit in the query is the singleton set, so because the bind
             // should fail due to the value error, we expect a single empty binding
@@ -82,7 +78,7 @@ public class EmojifyTest  extends AbstractStardogTest {
         final String aQuery = "prefix emoji: <http://semantalytics.com/2017/11/ns/stardog/strings/emoji/>" +
                 "select ?result where { bind(emoji:isEmoji(<http://example.com>) as ?result) }";
 
-        final TupleQueryResult aResult = aConn.select(aQuery).execute();
+        final TupleQueryResult aResult = connection.select(aQuery).execute();
     
             // there should be a result because implicit in the query is the singleton set, so because the bind
             // should fail due to the value error, we expect a single empty binding
@@ -102,7 +98,7 @@ public class EmojifyTest  extends AbstractStardogTest {
         final String aQuery = "prefix emoji: <http://semantalytics.com/2017/11/ns/stardog/strings/emoji/>" +
                 "select ?result where { bind(emoji:isEmoji(1) as ?result) }";
 
-        final TupleQueryResult aResult = aConn.select(aQuery).execute();
+        final TupleQueryResult aResult = connection.select(aQuery).execute();
      
             // there should be a result because implicit in the query is the singleton set, so because the bind
             // should fail due to the value error, we expect a single empty binding

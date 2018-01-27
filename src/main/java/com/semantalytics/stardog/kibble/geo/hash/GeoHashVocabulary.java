@@ -12,7 +12,8 @@ public enum GeoHashVocabulary {
     decode,
     encode,
     latitude,
-    longitude;
+    longitude,
+    addLongitude;
 
     public static final String namespace = "http://semantalytics.com/2017/09/ns/stardog/kibble/geo/hash/";
     public final IRI iri;

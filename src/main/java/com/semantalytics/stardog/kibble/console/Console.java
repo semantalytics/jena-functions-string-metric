@@ -14,7 +14,7 @@ import static org.fusesource.jansi.Ansi.*;
 public class Console extends AbstractFunction implements UserDefinedFunction {
 
         public Console() {
-            super(Range.all(), "http://semantalytics.com/2017/11/ns/stardog/kibble/console");
+            super(Range.all(), ConsoleVocabulary.console.stringValue());
         }
 
         public Console(final Console console) {
@@ -42,6 +42,6 @@ public class Console extends AbstractFunction implements UserDefinedFunction {
 
         @Override
         public String toString() {
-            return "console";
+            return ConsoleVocabulary.console.name();
         }
 }

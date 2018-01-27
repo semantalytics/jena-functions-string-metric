@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public final class Read extends AbstractFunction implements UserDefinedFunction {
 
     Read() {
-        super(1, "http://semantalytics.com/2016/04/ns/stardog/udf/file/read");
+        super(1, FileVocabulary.read.stringValue());
     }
 
     private Read(final Read cat) {
@@ -60,6 +60,6 @@ public final class Read extends AbstractFunction implements UserDefinedFunction 
 
     @Override
     public String toString() {
-        return "read";
+        return FileVocabulary.read.name();
     }
 }

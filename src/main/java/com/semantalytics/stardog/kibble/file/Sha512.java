@@ -16,7 +16,7 @@ import java.net.URI;
 public class Sha512 extends AbstractFunction implements UserDefinedFunction {
 
     public Sha512() {
-        super(1, "http://semantalytics.com/2016/04/ns/stardog/udf/file/sha512");
+        super(1, FileVocabulary.sha512.stringValue());
     }
 
     public Sha512(final Sha512 file) {
@@ -50,6 +50,6 @@ public class Sha512 extends AbstractFunction implements UserDefinedFunction {
 
     @Override
     public String toString() {
-        return "Sha512";
+        return FileVocabulary.sha512.name();
     }
 }

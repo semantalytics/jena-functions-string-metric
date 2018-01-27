@@ -1,10 +1,5 @@
 package com.semantalytics.stardog.kibble.strings.comparison;
 
-import com.complexible.stardog.Stardog;
-import com.complexible.stardog.api.Connection;
-import com.complexible.stardog.api.ConnectionConfiguration;
-import com.complexible.stardog.api.admin.AdminConnection;
-import com.complexible.stardog.api.admin.AdminConnectionConfiguration;
 import com.semantalytics.stardog.kibble.AbstractStardogTest;
 import org.junit.*;
 import org.openrdf.query.BindingSet;
@@ -14,14 +9,15 @@ import static org.junit.Assert.*;
 
 public class TestSmithWatermanGotoh extends AbstractStardogTest {
 
+    private static final String SPARQL_PREFIX = "PREFIX ss: <" + StringComparisonVocabulary.NAMESPACE + "> ";
 
     @Test
-    public void testSmithWatermanGotohTwoArg() throws Exception {
+    public void testSmithWatermanGotohTwoArg() {
 
-        final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
+        final String aQuery = SPARQL_PREFIX +
                 "select ?result where { bind(ss:smithWatermanGotoh(\"Stardog\", \"Starman\") as ?result) }";
 
-        final TupleQueryResult aResult = aConn.select(aQuery).execute();
+        final TupleQueryResult aResult = connection.select(aQuery).execute();
 
         assertTrue("Should have a result", aResult.hasNext());
 
@@ -33,12 +29,12 @@ public class TestSmithWatermanGotoh extends AbstractStardogTest {
     }
 
     @Test
-    public void testSmithWatermanGotohFiveArg() throws Exception {
+    public void testSmithWatermanGotohFiveArg() {
 
-        final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
+        final String aQuery = SPARQL_PREFIX +
                 "select ?result where { bind(ss:smithWatermanGotoh(\"Stardog\", \"Starman\", -0.5, 1.0, -2.0) as ?result) }";
 
-        final TupleQueryResult aResult = aConn.select(aQuery).execute();
+        final TupleQueryResult aResult = connection.select(aQuery).execute();
 
         assertTrue("Should have a result", aResult.hasNext());
 
@@ -50,12 +46,12 @@ public class TestSmithWatermanGotoh extends AbstractStardogTest {
     }
 
     @Test
-    public void testSmithWatermanGotohTooManyArgs() throws Exception {
+    public void testSmithWatermanGotohTooManyArgs() {
 
-        final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                "select ?dist where { bind(ss:smithWatermanGotoh(\"one\", \"two\", \"three\", \"four\") as ?dist) }";
+        final String aQuery = SPARQL_PREFIX +
+                "select ?result where { bind(ss:smithWatermanGotoh(\"one\", \"two\", \"three\", \"four\") as ?result) }";
 
-        final TupleQueryResult aResult = aConn.select(aQuery).execute();
+        final TupleQueryResult aResult = connection.select(aQuery).execute();
         // there should be a result because implicit in the query is the singleton set, so because the bind
         // should fail due to the value error, we expect a single empty binding
         assertTrue("Should have a result", aResult.hasNext());
@@ -67,32 +63,12 @@ public class TestSmithWatermanGotoh extends AbstractStardogTest {
     }
     
     @Test
-    public void testSmithWatermanGotohTooManyArgs() throws Exception {
+    public void testSmithWatermanGotohWrongType() {
 
-      
-            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                    "select ?dist where { bind(ss:smithWatermanGotoh(\"one\", \"two\", \"three\", \"four\") as ?dist) }";
+        final String aQuery = SPARQL_PREFIX +
+                "select ?result where { bind(ss:smithWatermanGotoh(7) as ?result) }";
 
-            final TupleQueryResult aResult = aConn.select(aQuery).execute();
-        
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
-                assertTrue("Should have a result", aResult.hasNext());
-
-                final BindingSet aBindingSet = aResult.next();
-
-                assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
-                assertFalse("Should have no more results", aResult.hasNext());
-    }
-
-    @Test
-    public void testSmithWatermanGotohWrongType() throws Exception {
-
-        final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                "select ?dist where { bind(ss:smithWatermanGotoh(7) as ?dist) }";
-
-        final TupleQueryResult aResult = aConn.select(aQuery).execute();
+        final TupleQueryResult aResult = connection.select(aQuery).execute();
         // there should be a result because implicit in the query is the singleton set, so because the bind
         // should fail due to the value error, we expect a single empty binding
         assertTrue("Should have a result", aResult.hasNext());

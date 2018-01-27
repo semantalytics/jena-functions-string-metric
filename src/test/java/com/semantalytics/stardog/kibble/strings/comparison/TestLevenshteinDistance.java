@@ -17,141 +17,56 @@ import static org.junit.Assert.assertTrue;
 
 public class TestLevenshteinDistance extends AbstractStardogTest {
 
-    protected static Stardog SERVER = null;
-    protected static final String DB = "test";
-    Connection connection;
+    @Test
+    public void testLevenshtein() {
 
-    @BeforeClass
-    public static void beforeClass() throws Exception {
-        SERVER = Stardog.builder().create();
+        final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
+                "select ?dist where { bind(ss:levenshteinDistance(\"My string\", \"My tring\") as ?dist) }";
 
-        final AdminConnection aConn = AdminConnectionConfiguration.toEmbeddedServer()
-                .credentials("admin", "admin")
-                .connect();
+        final TupleQueryResult aResult = connection.select(aQuery).execute();
 
-        try {
-            if (aConn.list().contains(DB)) {
-                aConn.drop(DB);
-            }
+        assertTrue("Should have a result", aResult.hasNext());
 
-            aConn.newDatabase(DB).create();
-        }
-        finally {
-            aConn.close();
-        }
-    }
+        final String aValue = aResult.next().getValue("dist").stringValue();
 
-    @AfterClass
-    public static void afterClass() {
-        if (SERVER != null) {
-            SERVER.shutdown();
-        }
-    }
+        assertEquals(1.0, Double.parseDouble(aValue), 0.0);
 
-    @Before
-    public void setUp() {
-        connection = ConnectionConfiguration.to(DB)
-                .credentials("admin", "admin")
-                .connect();
-    }
-
-    @After
-    public void tearDown() {
-        connection.close();
+        assertFalse("Should have no more results", aResult.hasNext());
     }
 
     @Test
-    public void testLevenshtein() throws Exception {
-        final Connection aConn = ConnectionConfiguration.to(DB)
-                .credentials("admin", "admin")
-                .connect();
+    public void testLevenstheinTooManyArgs() {
 
-        try {
+        final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
+                "select ?str where { bind(ss:levenshteinDistance(\"one\", \"two\", \"three\") as ?str) }";
 
-            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                    "select ?dist where { bind(ss:levenshtein(\"My string\", \"My tring\") as ?dist) }";
+        final TupleQueryResult aResult = connection.select(aQuery).execute();
+        // there should be a result because implicit in the query is the singleton set, so because the bind
+        // should fail due to the value error, we expect a single empty binding
+        assertTrue("Should have a result", aResult.hasNext());
 
-            final TupleQueryResult aResult = aConn.select(aQuery).execute();
+        final BindingSet aBindingSet = aResult.next();
 
-            try {
-                assertTrue("Should have a result", aResult.hasNext());
+        assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
 
-                final String aValue = aResult.next().getValue("dist").stringValue();
-
-                assertEquals(1.0, Double.parseDouble(aValue), 0.0);
-
-                assertFalse("Should have no more results", aResult.hasNext());
-            }
-            finally {
-                aResult.close();
-            }
-        }
-        finally {
-            aConn.close();
-        }
+        assertFalse("Should have no more results", aResult.hasNext());
     }
 
     @Test
-    public void testLevenstheinTooManyArgs() throws Exception {
+    public void testLevenshteinWrongType() {
 
-        final Connection aConn = ConnectionConfiguration.to(DB)
-                .credentials("admin", "admin")
-                .connect();
+        final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
+                "select ?str where { bind(ss:levenshteinDistance(7) as ?str) }";
 
-        try {
-            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                    "select ?str where { bind(ss:levenshtein(\"one\", \"two\", \"three\") as ?str) }";
+        final TupleQueryResult aResult = connection.select(aQuery).execute();
+        // there should be a result because implicit in the query is the singleton set, so because the bind
+        // should fail due to the value error, we expect a single empty binding
+        assertTrue("Should have a result", aResult.hasNext());
 
-            final TupleQueryResult aResult = aConn.select(aQuery).execute();
-            try {
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
-                assertTrue("Should have a result", aResult.hasNext());
+        final BindingSet aBindingSet = aResult.next();
 
-                final BindingSet aBindingSet = aResult.next();
+        assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
 
-                assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
-                assertFalse("Should have no more results", aResult.hasNext());
-            }
-            finally {
-                aResult.close();
-            }
-        }
-        finally {
-            aConn.close();
-        }
-    }
-
-    @Test
-    public void testLevenshteinWrongType() throws Exception {
-        final Connection aConn = ConnectionConfiguration.to(DB)
-                .credentials("admin", "admin")
-                .connect();
-
-        try {
-
-            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                    "select ?str where { bind(ss:levenshtein(7) as ?str) }";
-
-            final TupleQueryResult aResult = aConn.select(aQuery).execute();
-            try {
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
-                assertTrue("Should have a result", aResult.hasNext());
-
-                final BindingSet aBindingSet = aResult.next();
-
-                assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
-                assertFalse("Should have no more results", aResult.hasNext());
-            }
-            finally {
-                aResult.close();
-            }
-        }
-        finally {
-            aConn.close();
-        }
+        assertFalse("Should have no more results", aResult.hasNext());
     }
 }

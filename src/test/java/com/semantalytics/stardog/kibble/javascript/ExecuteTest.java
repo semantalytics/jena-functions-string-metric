@@ -15,12 +15,12 @@ public class ExecuteTest extends AbstractStardogTest {
     @Test
     public void testExecuteString() throws Exception {
 
-            aConn.begin();
+            connection.begin();
 
             final String aQuery = "prefix js: <" + JavascriptVocabulary.NAMESPACE + ">" +
                     "select ?result where { bind(js:exec(\"values[0].stringValue() + \' \' + values[1].stringValue()\", \"Hello\", \"world!\") as ?result) }";
 
-            try (final TupleQueryResult aResult = aConn.select(aQuery).execute()) {
+            try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
@@ -35,12 +35,12 @@ public class ExecuteTest extends AbstractStardogTest {
     @Test
     public void testExecuteDouble() throws Exception {
 
-        aConn.begin();
+        connection.begin();
 
         final String aQuery = "prefix js: <" + JavascriptVocabulary.NAMESPACE + ">" +
                 "select ?result where { bind(js:exec(\"parseInt(values[0].stringValue()) + parseInt(values[1].stringValue())\", 21, 35) as ?result) }";
 
-        try (final TupleQueryResult aResult = aConn.select(aQuery).execute()) {
+        try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
             assertTrue("Should have a result", aResult.hasNext());
 

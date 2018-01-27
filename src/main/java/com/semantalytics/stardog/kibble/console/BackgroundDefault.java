@@ -16,7 +16,7 @@ import static org.fusesource.jansi.Ansi.ansi;
 public class BackgroundDefault extends AbstractFunction implements UserDefinedFunction {
 
     public BackgroundDefault() {
-        super(Range.all(), "http://semantalytics.com/2017/11/ns/stardog/kibble/console/bgDefault");
+        super(Range.all(), ConsoleVocabulary.backgroundDefault.stringValue());
     }
 
     public BackgroundDefault(final BackgroundDefault console) {
@@ -48,6 +48,6 @@ public class BackgroundDefault extends AbstractFunction implements UserDefinedFu
 
     @Override
     public String toString() {
-        return "bgDefault";
+        return ConsoleVocabulary.backgroundDefault.name();
     }
 }

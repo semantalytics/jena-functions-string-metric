@@ -35,7 +35,7 @@ public final class Save extends AbstractFunction implements UserDefinedFunction 
     }
 
     public Save() {
-        super(1, "http://semantalytics.com/2016/04/ns/stardog/udf/file/save");
+        super(1, FileVocabulary.save.stringValue());
 
 
     }
@@ -98,6 +98,6 @@ public final class Save extends AbstractFunction implements UserDefinedFunction 
 
     @Override
     public String toString() {
-        return "Save";
+        return FileVocabulary.save.name();
     }
 }

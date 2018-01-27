@@ -14,7 +14,7 @@ import static com.complexible.common.rdf.model.Values.literal;
 public class DriverPropertyInfo extends AbstractFunction implements UserDefinedFunction {
 
     public DriverPropertyInfo() {
-        super(1, JdbcVocabulary.isDriverRegistered.stringValue());
+        super(1, JdbcVocabulary.driverPropertyInfo.stringValue());
     }
 
     public DriverPropertyInfo(final DriverPropertyInfo executeDouble) {

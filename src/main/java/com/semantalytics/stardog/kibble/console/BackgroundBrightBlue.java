@@ -16,7 +16,7 @@ import static org.fusesource.jansi.Ansi.ansi;
 public class BackgroundBrightBlue extends AbstractFunction implements UserDefinedFunction {
 
     public BackgroundBrightBlue() {
-        super(1, "http://semantalytics.com/2017/11/ns/stardog/kibble/console/bgBrightBlue");
+        super(1, ConsoleVocabulary.backgroundBrightBlue.stringValue());
     }
 
     public BackgroundBrightBlue(final BackgroundBrightBlue console) {
@@ -48,6 +48,6 @@ public class BackgroundBrightBlue extends AbstractFunction implements UserDefine
 
     @Override
     public String toString() {
-        return "bgBrightBlue";
+        return ConsoleVocabulary.backgroundBrightBlue.name();
     }
 }

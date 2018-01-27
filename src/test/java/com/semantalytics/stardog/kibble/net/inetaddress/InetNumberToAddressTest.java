@@ -16,7 +16,7 @@ public class InetNumberToAddressTest extends AbstractStardogTest {
             final String aQuery = "prefix util: <" + InetAddressVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(util:inetNumberToAddress(3232235521) as ?result) }";
 
-            try (final TupleQueryResult aResult = aConn.select(aQuery).execute()) {
+            try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 

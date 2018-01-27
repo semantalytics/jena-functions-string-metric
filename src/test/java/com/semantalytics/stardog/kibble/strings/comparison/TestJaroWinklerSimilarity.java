@@ -1,10 +1,5 @@
 package com.semantalytics.stardog.kibble.strings.comparison;
 
-import com.complexible.stardog.Stardog;
-import com.complexible.stardog.api.Connection;
-import com.complexible.stardog.api.ConnectionConfiguration;
-import com.complexible.stardog.api.admin.AdminConnection;
-import com.complexible.stardog.api.admin.AdminConnectionConfiguration;
 import com.semantalytics.stardog.kibble.AbstractStardogTest;
 import org.junit.*;
 import org.openrdf.query.BindingSet;
@@ -14,234 +9,111 @@ import static org.junit.Assert.*;
 
 public class TestJaroWinklerSimilarity extends AbstractStardogTest {
 
-    protected static Stardog SERVER = null;
-    protected static final String DB = "test";
-    Connection connection;
+    final String SPARQL_PREFIX = "PREFIX ss: <" + StringComparisonVocabulary.NAMESPACE + "> ";
 
-    @BeforeClass
-    public static void beforeClass() throws Exception {
-        SERVER = Stardog.builder().create();
-
-        final AdminConnection aConn = AdminConnectionConfiguration.toEmbeddedServer()
-                .credentials("admin", "admin")
-                .connect();
-
-        try {
-            if (aConn.list().contains(DB)) {
-                aConn.drop(DB);
-            }
-
-            aConn.newDatabase(DB).create();
-        }
-        finally {
-            aConn.close();
-        }
-    }
-
-    @AfterClass
-    public static void afterClass() {
-        if (SERVER != null) {
-            SERVER.shutdown();
-        }
-    }
-
-    @Before
-    public void setUp() {
-        connection = ConnectionConfiguration.to(DB)
-                .credentials("admin", "admin")
-                .connect();
-    }
-
-    @After
-    public void tearDown() {
-        connection.close();
-    }
     @Test
-    public void testJaroWinkler() throws Exception {
-        final Connection aConn = ConnectionConfiguration.to(DB)
-                .credentials("admin", "admin")
-                .connect();
+    public void testJaroWinkler() {
 
-        try {
+        final String aQuery = SPARQL_PREFIX
+                + "select ?result where { bind(ss:jaroWinklerSimilarity(\"My string\", \"My tsring\") as ?result) }";
 
-            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                    "select ?dist where { bind(ss:jaroWinkler(\"My string\", \"My tsring\") as ?dist) }";
+        final TupleQueryResult aResult = connection.select(aQuery).execute();
 
-            final TupleQueryResult aResult = aConn.select(aQuery).execute();
+        assertTrue("Should have a result", aResult.hasNext());
 
-            try {
-                assertTrue("Should have a result", aResult.hasNext());
+        final String aValue = aResult.next().getValue("result").stringValue();
 
-                final String aValue = aResult.next().getValue("dist").stringValue();
+        assertEquals(0.9740740656852722, Double.parseDouble(aValue), 0.000001);
 
-                assertEquals(0.9740740656852722, Double.parseDouble(aValue), 0.000001);
-
-                assertFalse("Should have no more results", aResult.hasNext());
-            }
-            finally {
-                aResult.close();
-            }
-        }
-        finally {
-            aConn.close();
-        }
+        assertFalse("Should have no more results", aResult.hasNext());
     }
 
     @Test
-    public void testJaroWinklerThreeArgSimilarity() throws Exception {
-        final Connection aConn = ConnectionConfiguration.to(DB)
-                .credentials("admin", "admin")
-                .connect();
+    public void testJaroWinklerThreeArgSimilarity() {
 
-        try {
+        final String aQuery = SPARQL_PREFIX
+                + "select ?result where { bind(ss:jaroWinklerSimilarity(\"My string\", \"My tsring\", \"s\") as ?result) }";
 
-            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                    "select ?similarity where { bind(ss:jaroWinkler(\"My string\", \"My tsring\", \"s\") as ?similarity) }";
+        final TupleQueryResult aResult = connection.select(aQuery).execute();
 
-            final TupleQueryResult aResult = aConn.select(aQuery).execute();
+        assertTrue("Should have a result", aResult.hasNext());
 
-            try {
-                assertTrue("Should have a result", aResult.hasNext());
+        final String aValue = aResult.next().getValue("result").stringValue();
 
-                final String aValue = aResult.next().getValue("similarity").stringValue();
+        assertEquals(0.9740740656852722, Double.parseDouble(aValue), 0.000001);
 
-                assertEquals(0.9740740656852722, Double.parseDouble(aValue), 0.000001);
-
-                assertFalse("Should have no more results", aResult.hasNext());
-            }
-            finally {
-                aResult.close();
-            }
-        }
-        finally {
-            aConn.close();
-        }
+        assertFalse("Should have no more results", aResult.hasNext());
     }
 
     @Test
-    public void testJaroWinklerThreeArgDistance() throws Exception {
-        final Connection aConn = ConnectionConfiguration.to(DB)
-                .credentials("admin", "admin")
-                .connect();
+    public void testJaroWinklerThreeArgDistance() {
 
-        try {
+        final String aQuery = SPARQL_PREFIX
+                + "select ?result where { bind(ss:jaroWinklerSimilarity(\"My string\", \"My tsring\", \"d\") as ?result) }";
 
-            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                    "select ?distance where { bind(ss:jaroWinkler(\"My string\", \"My tsring\", \"d\") as ?distance) }";
+        final TupleQueryResult aResult = connection.select(aQuery).execute();
 
-            final TupleQueryResult aResult = aConn.select(aQuery).execute();
+        assertTrue("Should have a result", aResult.hasNext());
 
-            try {
-                assertTrue("Should have a result", aResult.hasNext());
+        final String aValue = aResult.next().getValue("result").stringValue();
 
-                final String aValue = aResult.next().getValue("distance").stringValue();
+        assertEquals(0.025925934314727783, Double.parseDouble(aValue), 0.000001);
 
-                assertEquals(0.025925934314727783, Double.parseDouble(aValue), 0.000001);
-
-                assertFalse("Should have no more results", aResult.hasNext());
-            }
-            finally {
-                aResult.close();
-            }
-        }
-        finally {
-            aConn.close();
-        }
+        assertFalse("Should have no more results", aResult.hasNext());
     }
 
     @Test
-    public void testJaroWinklerThreeArgIncorrectThirdArg() throws Exception {
-        final Connection aConn = ConnectionConfiguration.to(DB)
-                .credentials("admin", "admin")
-                .connect();
+    public void testJaroWinklerThreeArgIncorrectThirdArg() {
 
-        try {
+        final String aQuery = SPARQL_PREFIX
+                + "select ?result where { bind(ss:jaroWinklerSimilarity(\"My string\", \"My tsring\", \"x\") as ?result) }";
 
-            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                    "select ?distance where { bind(ss:jaroWinkler(\"My string\", \"My tsring\", \"x\") as ?distance) }";
+        final TupleQueryResult aResult = connection.select(aQuery).execute();
 
-            final TupleQueryResult aResult = aConn.select(aQuery).execute();
-            try {
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
-                assertTrue("Should have a result", aResult.hasNext());
+        // there should be a result because implicit in the query is the singleton set, so because the bind
+        // should fail due to the value error, we expect a single empty binding
+        assertTrue("Should have a result", aResult.hasNext());
 
-                final BindingSet aBindingSet = aResult.next();
+        final BindingSet aBindingSet = aResult.next();
 
-                assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+        assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
 
-                assertFalse("Should have no more results", aResult.hasNext());
-            }
-            finally {
-                aResult.close();
-            }
-        }
-        finally {
-            aConn.close();
-        }
+        assertFalse("Should have no more results", aResult.hasNext());
     }
 
     @Test
-    public void testJaroWinklerTooManyArgs() throws Exception {
+    public void testJaroWinklerTooManyArgs() {
 
-        final Connection aConn = ConnectionConfiguration.to(DB)
-                .credentials("admin", "admin")
-                .connect();
+        final String aQuery = SPARQL_PREFIX
+                + "select ?result where { bind(ss:jaroWinklerSimilarity(\"one\", \"two\", \"three\") as ?result) }";
 
-        try {
-            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                    "select ?str where { bind(ss:jaroWinkler(\"one\", \"two\", \"three\") as ?str) }";
+        final TupleQueryResult aResult = connection.select(aQuery).execute();
+        // there should be a result because implicit in the query is the singleton set, so because the bind
+        // should fail due to the value error, we expect a single empty binding
+        assertTrue("Should have a result", aResult.hasNext());
 
-            final TupleQueryResult aResult = aConn.select(aQuery).execute();
-            try {
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
-                assertTrue("Should have a result", aResult.hasNext());
+        final BindingSet aBindingSet = aResult.next();
 
-                final BindingSet aBindingSet = aResult.next();
+        assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
 
-                assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
-                assertFalse("Should have no more results", aResult.hasNext());
-            }
-            finally {
-                aResult.close();
-            }
-        }
-        finally {
-            aConn.close();
-        }
+        assertFalse("Should have no more results", aResult.hasNext());
     }
 
     @Test
-    public void testJaroWinklerWrongType() throws Exception {
-        final Connection aConn = ConnectionConfiguration.to(DB)
-                .credentials("admin", "admin")
-                .connect();
+    public void testJaroWinklerWrongType() {
 
-        try {
+        final String aQuery = SPARQL_PREFIX
+               + "select ?result where { bind(ss:jaroWinklerSimilarity(7) as ?result) }";
 
-            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                    "select ?str where { bind(ss:jaroWinkler(7) as ?str) }";
+        final TupleQueryResult aResult = connection.select(aQuery).execute();
+        // there should be a result because implicit in the query is the singleton set, so because the bind
+        // should fail due to the value error, we expect a single empty binding
+        assertTrue("Should have a result", aResult.hasNext());
 
-            final TupleQueryResult aResult = aConn.select(aQuery).execute();
-            try {
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
-                assertTrue("Should have a result", aResult.hasNext());
+        final BindingSet aBindingSet = aResult.next();
 
-                final BindingSet aBindingSet = aResult.next();
+        assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
 
-                assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
-                assertFalse("Should have no more results", aResult.hasNext());
-            }
-            finally {
-                aResult.close();
-            }
-        }
-        finally {
-            aConn.close();
-        }
+        assertFalse("Should have no more results", aResult.hasNext());
     }
 }

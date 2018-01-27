@@ -44,6 +44,6 @@ public class IsSymbolicLink extends AbstractFunction implements UserDefinedFunct
 
     @Override
     public String toString() {
-        return FileVocabulary.contentType.name();
+        return FileVocabulary.isSymbolicLink.name();
     }
 }

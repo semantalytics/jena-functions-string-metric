@@ -6,6 +6,14 @@ import org.openrdf.model.IRI;
 public enum FileVocabulary {
 
     key,
+    size,
+    sha512,
+    sha1,
+    save,
+    read,
+    permissions,
+    lastAccessedTime,
+    isSameFile,
     md5,
     lastModifiedTime,
     jsonPath,

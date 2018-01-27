@@ -16,7 +16,7 @@ import static org.fusesource.jansi.Ansi.ansi;
 public class BackgroundCyan extends AbstractFunction implements UserDefinedFunction {
 
     public BackgroundCyan() {
-        super(Range.all(), "http://semantalytics.com/2017/11/ns/stardog/kibble/console/bgCyan");
+        super(Range.all(), ConsoleVocabulary.backgroundCyan.stringValue());
     }
 
     public BackgroundCyan(final BackgroundCyan console) {
@@ -46,6 +46,6 @@ public class BackgroundCyan extends AbstractFunction implements UserDefinedFunct
 
     @Override
     public String toString() {
-        return "bgCyan";
+        return ConsoleVocabulary.backgroundCyan.name();
     }
 }

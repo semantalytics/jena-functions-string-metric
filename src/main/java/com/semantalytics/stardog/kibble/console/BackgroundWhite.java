@@ -16,7 +16,7 @@ import static org.fusesource.jansi.Ansi.ansi;
 public class BackgroundWhite extends AbstractFunction implements UserDefinedFunction {
 
     public BackgroundWhite() {
-        super(Range.all(), "http://semantalytics.com/2017/11/ns/stardog/kibble/console/bgWhite");
+        super(Range.all(), ConsoleVocabulary.backgroundWhite.stringValue());
     }
 
     public BackgroundWhite(final BackgroundWhite console) {
@@ -48,6 +48,6 @@ public class BackgroundWhite extends AbstractFunction implements UserDefinedFunc
 
     @Override
     public String toString() {
-        return "bgWhite";
+        return ConsoleVocabulary.backgroundWhite.name();
     }
 }
