@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.literal;
 public final class DecimalHtmlShort extends AbstractFunction implements StringFunction {
 
     protected DecimalHtmlShort() {
-        super(1, "http://semantalytics.com/2017/11/ns/stardog/strings/emoji/decimalHtmlShort");
+        super(1, EmojiVocabulary.decimalHtmlShort.stringValue());
     }
 
     private DecimalHtmlShort(final DecimalHtmlShort decimalHtmlShort) {
@@ -39,6 +39,6 @@ public final class DecimalHtmlShort extends AbstractFunction implements StringFu
 
     @Override
     public String toString() {
-        return "decimalHtmlShort";
+        return EmojiVocabulary.decimalHtmlShort.name();
     }
 }

@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.literal;
 public final class Emoticon extends AbstractFunction implements StringFunction {
 
     protected Emoticon() {
-        super(1, "http://semantalytics.com/2017/11/ns/stardog/strings/emoji/emoticon");
+        super(1, EmojiVocabulary.emoticon.stringValue());
     }
 
     private Emoticon(final Emoticon emoticon) {
@@ -39,6 +39,6 @@ public final class Emoticon extends AbstractFunction implements StringFunction {
 
     @Override
     public String toString() {
-        return "emoticon";
+        return EmojiVocabulary.emoticon.name();
     }
 }

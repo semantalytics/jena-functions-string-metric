@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.literal;
 public final class Aliases extends AbstractFunction implements StringFunction {
 
     protected Aliases() {
-        super(1, "http://semantalytics.com/2017/11/ns/stardog/strings/emoji/aliases");
+        super(1, EmojiVocabulary.aliases.stringValue());
     }
 
     private Aliases(final Aliases aliases) {
@@ -39,6 +39,6 @@ public final class Aliases extends AbstractFunction implements StringFunction {
 
     @Override
     public String toString() {
-        return "aliases";
+        return EmojiVocabulary.aliases.name();
     }
 }

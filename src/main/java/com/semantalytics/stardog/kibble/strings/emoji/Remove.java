@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.literal;
 public final class Remove extends AbstractFunction implements StringFunction {
 
     protected Remove() {
-        super(1, "http://semantalytics.com/2017/11/ns/stardog/strings/emoji/remove");
+        super(1, EmojiVocabulary.remove.stringValue());
     }
 
     private Remove(final Remove remove) {
@@ -39,6 +39,6 @@ public final class Remove extends AbstractFunction implements StringFunction {
 
     @Override
     public String toString() {
-        return "remove";
+        return EmojiVocabulary.remove.name();
     }
 }

@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.literal;
 public final class Count extends AbstractFunction implements StringFunction {
 
     protected Count() {
-        super(1, "http://semantalytics.com/2017/11/ns/stardog/strings/emoji/count");
+        super(1, EmojiVocabulary.count.stringValue());
     }
 
     private Count(final Count count) {
@@ -39,6 +39,6 @@ public final class Count extends AbstractFunction implements StringFunction {
 
     @Override
     public String toString() {
-        return "count";
+        return EmojiVocabulary.count.name();
     }
 }
