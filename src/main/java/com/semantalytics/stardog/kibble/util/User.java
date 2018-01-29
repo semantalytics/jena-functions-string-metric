@@ -22,6 +22,7 @@ public final class User extends AbstractFunction implements UserDefinedFunction 
 
     @Override
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
+        //TODO need to check if security is disabled. If it is then there is no user.
         return literal(SecurityUtils.getSubject().getPrincipal().toString());
     }
 
