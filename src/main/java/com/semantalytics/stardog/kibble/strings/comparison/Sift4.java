@@ -27,7 +27,7 @@ public final class Sift4 extends AbstractFunction implements StringFunction {
 
     @Override
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
-
+        //TODO handle two arguments
         final String string1 = assertStringLiteral(values[0]).stringValue();
         final String string2 = assertStringLiteral(values[1]).stringValue();
         final int maxOffset = assertNumericLiteral(values[2]).intValue();
