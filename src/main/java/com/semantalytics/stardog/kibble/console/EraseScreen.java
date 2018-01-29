@@ -23,10 +23,8 @@ public class EraseScreen extends AbstractFunction implements UserDefinedFunction
     }
 
     @Override
-    protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
-        final Ansi ansi = ansi();
-        
-        return literal(ansi.toString());
+    protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {        
+        return literal(ansi().eraseScreen().toString());
     }
 
     @Override
