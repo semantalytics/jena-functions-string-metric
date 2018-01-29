@@ -15,7 +15,7 @@ import static org.fusesource.jansi.Ansi.ansi;
 public class Render extends AbstractFunction implements UserDefinedFunction {
 
     public Render() {
-        super(Range.all(), ConsoleVocabulary.render.stringValue());
+        super(1, ConsoleVocabulary.render.stringValue());
     }
 
     public Render(final Render render) {
@@ -24,9 +24,8 @@ public class Render extends AbstractFunction implements UserDefinedFunction {
 
     @Override
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
-        final Ansi ansi = ansi();
-
-        return literal(ansi.toString());
+        final String text = assertStringLiteral(values[0]).stringValue();
+        return literal(ansi().render(text));
     }
 
     @Override
