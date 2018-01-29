@@ -28,6 +28,10 @@ public enum InternetDomainNameVocabulary {
         iri = StardogValueFactory.instance().createIRI(NAMESPACE, name());
     }
 
+    public static String sparqlPrefix(String prefixName) {
+        return "PREFIX " + prefixName + ": <" + NAMESPACE + "> ";
+    }
+
     public String stringValue() {
         return iri.stringValue();
     }

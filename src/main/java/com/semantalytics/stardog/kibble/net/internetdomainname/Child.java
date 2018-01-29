@@ -23,7 +23,7 @@ public class Child extends AbstractFunction implements UserDefinedFunction {
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
 
         final String name = assertStringLiteral(values[0]).stringValue();
-        final String leftParts = assertStringLiteral(values[0]).stringValue();
+        final String leftParts = assertStringLiteral(values[1]).stringValue();
 
         return literal(InternetDomainName.from(name).child(leftParts).toString());
     }
