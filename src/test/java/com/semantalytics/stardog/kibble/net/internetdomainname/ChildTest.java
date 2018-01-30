@@ -3,6 +3,7 @@ package com.semantalytics.stardog.kibble.net.internetdomainname;
 import com.semantalytics.stardog.kibble.AbstractStardogTest;
 import com.semantalytics.stardog.kibble.net.inetaddress.InetAddressVocabulary;
 import org.junit.Test;
+import org.openrdf.query.BindingSet;
 import org.openrdf.query.TupleQueryResult;
 
 import static org.junit.Assert.*;
@@ -25,5 +26,73 @@ public class ChildTest extends AbstractStardogTest {
 
                 assertFalse("Should have no more results", aResult.hasNext());
             }
+    }
+
+    @Test
+    public void testTooManyArgs() throws Exception {
+
+        final String aQuery = InternetDomainNameVocabulary.sparqlPrefix("dn") +
+                "select ?result where { bind(dn:child(\"one\", \"two\", \"three\") as ?result) }";
+
+        final TupleQueryResult aResult = connection.select(aQuery).execute();
+
+        assertTrue("Should have a result", aResult.hasNext());
+
+        final BindingSet aBindingSet = aResult.next();
+
+        assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+
+        assertFalse("Should have no more results", aResult.hasNext());
+    }
+
+    @Test
+    public void testTooFewArgs() throws Exception {
+
+        final String aQuery = InternetDomainNameVocabulary.sparqlPrefix("dn") +
+                "select ?result where { bind(dn:child(\"one\") as ?result) }";
+
+        final TupleQueryResult aResult = connection.select(aQuery).execute();
+
+        assertTrue("Should have a result", aResult.hasNext());
+
+        final BindingSet aBindingSet = aResult.next();
+
+        assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+
+        assertFalse("Should have no more results", aResult.hasNext());
+    }
+
+    @Test
+    public void testFirstArgWrongType() throws Exception {
+
+        final String aQuery = InternetDomainNameVocabulary.sparqlPrefix("dn") +
+                "select ?result where { bind(dn:child(1, \"two\") as ?result) }";
+
+        final TupleQueryResult aResult = connection.select(aQuery).execute();
+
+        assertTrue("Should have a result", aResult.hasNext());
+
+        final BindingSet aBindingSet = aResult.next();
+
+        assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+
+        assertFalse("Should have no more results", aResult.hasNext());
+    }
+
+    @Test
+    public void testSecondArgWrongType() throws Exception {
+
+        final String aQuery = InternetDomainNameVocabulary.sparqlPrefix("dn") +
+                "select ?result where { bind(dn:child(\"one\", 2) as ?result) }";
+
+        final TupleQueryResult aResult = connection.select(aQuery).execute();
+
+        assertTrue("Should have a result", aResult.hasNext());
+
+        final BindingSet aBindingSet = aResult.next();
+
+        assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+
+        assertFalse("Should have no more results", aResult.hasNext());
     }
 }

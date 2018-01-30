@@ -8,6 +8,8 @@ import com.google.common.collect.Range;
 import org.fusesource.jansi.Ansi;
 import org.openrdf.model.Value;
 
+import java.util.Arrays;
+
 import static com.complexible.common.rdf.model.Values.literal;
 import static org.fusesource.jansi.Ansi.Color.*;
 import static org.fusesource.jansi.Ansi.ansi;
@@ -26,9 +28,9 @@ public class BackgroundBlack extends AbstractFunction implements UserDefinedFunc
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
         final Ansi ansi = ansi();
         ansi.bg(BLACK);
-        for (final Value value : values) {
-            ansi.a(value.stringValue());
-        }
+
+        Arrays.stream(values).forEach(v -> ansi.a(v.stringValue()));
+
         if(values.length != 0) {
             ansi.bg(DEFAULT);
         }

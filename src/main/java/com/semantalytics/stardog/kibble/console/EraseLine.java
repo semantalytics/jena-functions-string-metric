@@ -29,7 +29,7 @@ public class EraseLine extends AbstractFunction implements UserDefinedFunction {
 
     @Override
     public EraseLine copy() {
-        return new EraseScreen(this);
+        return new EraseLine(this);
     }
 
     @Override

@@ -14,16 +14,16 @@ public class HasParentTest extends AbstractStardogTest {
     @Test
     public void testInetAddressToNumber() {
 
-            final String aQuery = "prefix util: <" + InetAddressVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(util:inetAddressToNumber(\"192.168.0.1\") as ?result) }";
+            final String aQuery = "prefix dn: <" + InternetDomainNameVocabulary.NAMESPACE + "> " +
+                    "select ?result where { bind(dn:hasParent(\"stardog.com\") as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final long aValue = Long.parseLong(aResult.next().getValue("result").stringValue());
+                final boolean aValue = Boolean.parseBoolean(aResult.next().getValue("result").stringValue());
 
-                assertEquals(3232235521L, aValue);
+                assertEquals(true, aValue);
 
                 assertFalse("Should have no more results", aResult.hasNext());
             }

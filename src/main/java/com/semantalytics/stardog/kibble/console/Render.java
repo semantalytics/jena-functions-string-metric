@@ -25,7 +25,7 @@ public class Render extends AbstractFunction implements UserDefinedFunction {
     @Override
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
         final String text = assertStringLiteral(values[0]).stringValue();
-        return literal(ansi().render(text));
+        return literal(ansi().render(text).toString());
     }
 
     @Override
