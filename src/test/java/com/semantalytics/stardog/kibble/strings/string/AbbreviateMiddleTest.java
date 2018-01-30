@@ -10,9 +10,8 @@ import static org.junit.Assert.*;
 public class AbbreviateMiddleTest  extends AbstractStardogTest {
 
     @Test
-    public void testAbbreviateMiddle() throws Exception {
+    public void testAbbreviateMiddle() {
       
-
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?result where { bind(string:abbreviateMiddle(\"Stardog graph database\", \"...\", 8) AS ?result) }";
 
@@ -31,9 +30,8 @@ public class AbbreviateMiddleTest  extends AbstractStardogTest {
     }
 
     @Test
-    public void testEmptyString() throws Exception {
+    public void testEmptyString() {
       
-
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?result where { bind(string:abbreviateMiddle(\"\", , 10) as ?result) }";
 
@@ -50,8 +48,7 @@ public class AbbreviateMiddleTest  extends AbstractStardogTest {
     }
 
     @Test
-    public void testTooFewArgs() throws Exception {
-
+    public void testTooFewArgs() {
       
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?result where { bind(string:abbreviateMiddle(\"one\") as ?result) }";
@@ -70,11 +67,9 @@ public class AbbreviateMiddleTest  extends AbstractStardogTest {
             }
     }
 
-
     @Test
-    public void testTooManyArgs() throws Exception {
+    public void testTooManyArgs() {
 
-     
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?result where { bind(string:abbreviateMiddle(\"one\", 2, \"three\") as ?result) }";
 
@@ -92,12 +87,9 @@ public class AbbreviateMiddleTest  extends AbstractStardogTest {
             }
     }
 
-
-
     @Test
-    public void testWrongTypeFirstArg() throws Exception {
+    public void testWrongTypeFirstArg() {
        
-
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?result where { bind(string:abbreviateMiddle(4, 5) as ?result) }";
 
@@ -116,7 +108,7 @@ public class AbbreviateMiddleTest  extends AbstractStardogTest {
     }
 
     @Test
-    public void testWrongTypeSecondArg() throws Exception {
+    public void testWrongTypeSecondArg() {
      
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?result where { bind(string:abbreviateMiddle(\"one\", \"two\") as ?result) }";
@@ -136,9 +128,8 @@ public class AbbreviateMiddleTest  extends AbstractStardogTest {
     }
 
     @Test
-    public void testLengthTooShort() throws Exception {
+    public void testLengthTooShort() {
      
-
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?result where { bind(string:abbreviateMiddle(\"Stardog\", 3) as ?result) }";
 
