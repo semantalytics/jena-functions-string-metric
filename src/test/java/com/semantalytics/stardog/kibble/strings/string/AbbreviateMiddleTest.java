@@ -15,7 +15,6 @@ public class AbbreviateMiddleTest  extends AbstractStardogTest {
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?result where { bind(string:abbreviateMiddle(\"Stardog graph database\", \"...\", 8) AS ?result) }";
 
-
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
@@ -26,7 +25,6 @@ public class AbbreviateMiddleTest  extends AbstractStardogTest {
 
                 assertFalse("Should have no more results", aResult.hasNext());
             }
-      
     }
 
     @Test
@@ -55,8 +53,6 @@ public class AbbreviateMiddleTest  extends AbstractStardogTest {
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
          
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final BindingSet aBindingSet = aResult.next();
@@ -74,9 +70,7 @@ public class AbbreviateMiddleTest  extends AbstractStardogTest {
                     "select ?result where { bind(string:abbreviateMiddle(\"one\", 2, \"three\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
-        
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
+
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final BindingSet aBindingSet = aResult.next();
@@ -94,9 +88,7 @@ public class AbbreviateMiddleTest  extends AbstractStardogTest {
                     "select ?result where { bind(string:abbreviateMiddle(4, 5) as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
-       
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
+
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final BindingSet aBindingSet = aResult.next();
@@ -114,9 +106,7 @@ public class AbbreviateMiddleTest  extends AbstractStardogTest {
                     "select ?result where { bind(string:abbreviateMiddle(\"one\", \"two\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
-           
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
+
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final BindingSet aBindingSet = aResult.next();
@@ -135,8 +125,6 @@ public class AbbreviateMiddleTest  extends AbstractStardogTest {
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
          
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final BindingSet aBindingSet = aResult.next();
