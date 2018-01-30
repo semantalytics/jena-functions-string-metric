@@ -28,7 +28,7 @@ public final class Abbreviate extends AbstractFunction implements StringFunction
       final int maxWidth = assertIntegerLiteral(values[1]).intValue();
 
       checkArgument(maxWidth > 3, "maxWidth must be greater than 3. Found " + maxWidth);
-
+        //TODO can't use this. Throws IllegalArgumentException and need to be throwing ExpressionEvaluationException
       switch(values.length) {
           case 2:
             return Values.literal(StringUtils.abbreviate(string, maxWidth));
