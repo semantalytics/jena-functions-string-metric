@@ -9,8 +9,6 @@ import com.google.common.collect.Range;
 import org.apache.commons.lang3.StringUtils;
 import org.openrdf.model.Value;
 
-import static com.google.common.base.Preconditions.checkArgument;
-
 public final class Abbreviate extends AbstractFunction implements StringFunction {
 
     protected Abbreviate() {
@@ -27,17 +25,18 @@ public final class Abbreviate extends AbstractFunction implements StringFunction
       final String string = assertStringLiteral(values[0]).stringValue();
       final int maxWidth = assertIntegerLiteral(values[1]).intValue();
 
-      checkArgument(maxWidth > 3, "maxWidth must be greater than 3. Found " + maxWidth);
-        //TODO can't use this. Throws IllegalArgumentException and need to be throwing ExpressionEvaluationException
-      switch(values.length) {
-          case 2:
-            return Values.literal(StringUtils.abbreviate(string, maxWidth));
-          case 3:
-            final int offset = assertIntegerLiteral(values[2]).intValue();
-            return Values.literal(StringUtils.abbreviate(string, offset, maxWidth));
-          default:
-            throw new ExpressionEvaluationException("function takes 2 or 3 arguments. Found " + values.length);
+      if(maxWidth <= 3) {
+          throw new ExpressionEvaluationException("maxWidth must be greater than 3. Found " + maxWidth);
       }
+      
+       if(values.length == 2) {
+           return Values.literal(StringUtils.abbreviate(string, maxWidth));
+       }
+        
+       if(values.length == 3) {
+           final int offset = assertIntegerLiteral(values[2]).intValue();
+           return Values.literal(StringUtils.abbreviate(string, offset, maxWidth));
+       }
     }
 
     @Override
