@@ -9,13 +9,11 @@ import static org.junit.Assert.*;
 
 public class GetDigitsTest  extends AbstractStardogTest {
 
-  
     @Test
-    public void testGetDigits() throws Exception {
+    public void testGetDigits() {
    
-            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
+            final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?result where { bind(string:getDigits(\"Stard0g\") AS ?result) }";
-
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -27,16 +25,14 @@ public class GetDigitsTest  extends AbstractStardogTest {
 
                 assertFalse("Should have no more results", aResult.hasNext());
             }
-     
     }
 
     @Test
-    public void testOnlyDigits() throws Exception {
+    public void testOnlyDigits() {
        
 
-            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
+            final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?result where { bind(string:getDigits(\"12345\") AS ?result) }";
-
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -47,18 +43,16 @@ public class GetDigitsTest  extends AbstractStardogTest {
                 assertEquals("12345", aValue);
 
                 assertFalse("Should have no more results", aResult.hasNext());
-            }
-       
+            } 
     }
+  
     @Test
-    public void testEmptyString() throws Exception {
+    public void testEmptyString() {
        
-
-            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
+            final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?result where { bind(string:getDigits(\"\") as ?result) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute();
-
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
         
                 assertTrue("Should have a result", aResult.hasNext());
 
@@ -67,20 +61,37 @@ public class GetDigitsTest  extends AbstractStardogTest {
                 assertEquals("", aValue);
 
                 assertFalse("Should have no more results", aResult.hasNext());
-            
+            }
+    }
+  
+    @Test
+    public void testNonAscii() {
+       
+            final String aQuery = StringVocabulary.sparqlPrefix("string") +
+                    "select ?result where { bind(string:getDigits(\"१२३\") as ?result) }";
+
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+
+        
+                assertTrue("Should have a result", aResult.hasNext());
+
+                final String aValue = aResult.next().getValue("result").stringValue();
+
+                assertEquals("१२३", aValue);
+
+                assertFalse("Should have no more results", aResult.hasNext());
+            }
     }
 
     @Test
-    public void testTooFewArgs() throws Exception {
+    public void testTooFewArgs() {
 
        
-            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
+            final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?result where { bind(string:getDigits() as ?result) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute();
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
           
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final BindingSet aBindingSet = aResult.next();
@@ -88,20 +99,18 @@ public class GetDigitsTest  extends AbstractStardogTest {
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
 
                 assertFalse("Should have no more results", aResult.hasNext());
-          
+            }
     }
 
     @Test
-    public void testTooManyArgs() throws Exception {
+    public void testTooManyArgs() {
 
      
-            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
+            final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?result where { bind(string:getDigits(\"Stardog\", \"one\") as ?result) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute();
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
          
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final BindingSet aBindingSet = aResult.next();
@@ -109,19 +118,17 @@ public class GetDigitsTest  extends AbstractStardogTest {
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
 
                 assertFalse("Should have no more results", aResult.hasNext());
-           
+            }
     }
 
     @Test
-    public void testWrongType() throws Exception {
+    public void testWrongType() {
        
-            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
+            final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?result where { bind(string:getDigits(4) as ?result) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute();
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
        
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final BindingSet aBindingSet = aResult.next();
@@ -129,6 +136,6 @@ public class GetDigitsTest  extends AbstractStardogTest {
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
 
                 assertFalse("Should have no more results", aResult.hasNext());
-          
+            }
     }
 }
