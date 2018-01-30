@@ -9,14 +9,11 @@ import static org.junit.Assert.*;
 
 public class StripAccentsTest  extends AbstractStardogTest {
 
-
     @Test
-    public void testOneArgumentWithoutAccents() throws Exception {
-       
+    public void testOneArgumentWithoutAccents() {
 
-            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(string:stripAccents(\"Stardog\") AS ?result) }";
-
+        final String aQuery = StringVocabulary.sparqlPrefix("string") +
+            "select ?result where { bind(string:stripAccents(\"Stardog\") AS ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -27,16 +24,14 @@ public class StripAccentsTest  extends AbstractStardogTest {
                 assertEquals("Stardog", aValue);
 
                 assertFalse("Should have no more results", aResult.hasNext());
-            }
-       
+            }    
     }
 
     @Test
-    public void testOneArgumentWithAccents() throws Exception {
+    public void testOneArgumentWithAccents() {
        
-
-            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(string:stripAccents(\"\\u00E9clair\") AS ?result) }";
+        final String aQuery = StringVocabulary.sparqlPrefix("string") +
+            "select ?result where { bind(string:stripAccents(\"\\u00E9clair\") AS ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -51,11 +46,10 @@ public class StripAccentsTest  extends AbstractStardogTest {
     }
 
     @Test
-    public void testEmptyString() throws Exception {
+    public void testEmptyString() {
        
-            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(string:stripAccents(\"\") AS ?result) }";
-
+        final String aQuery = StringVocabulary.sparqlPrefix("string") +
+            "select ?result where { bind(string:stripAccents(\"\") AS ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -70,14 +64,13 @@ public class StripAccentsTest  extends AbstractStardogTest {
     }
 
     @Test
-    public void testTooFewArgs() throws Exception {
+    public void testTooFewArgs() {
 
-            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
+         final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?result where { bind(string:stripAccents() as ?result) }";
 
             final TupleQueryResult aResult = connection.select(aQuery).execute();
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
+
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final BindingSet aBindingSet = aResult.next();
@@ -85,19 +78,16 @@ public class StripAccentsTest  extends AbstractStardogTest {
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
 
                 assertFalse("Should have no more results", aResult.hasNext());
-           
     }
 
-
     @Test
-    public void testTooManyArgs() throws Exception {
+    public void testTooManyArgs() {
 
-            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(string:stripAccents(\"one\", \"two\") as ?result) }";
+         final String aQuery = StringVocabulary.sparqlPrefix("string") +
+             "select ?result where { bind(string:stripAccents(\"one\", \"two\") as ?result) }";
 
             final TupleQueryResult aResult = connection.select(aQuery).execute();
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
+
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final BindingSet aBindingSet = aResult.next();
@@ -105,18 +95,16 @@ public class StripAccentsTest  extends AbstractStardogTest {
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
 
                 assertFalse("Should have no more results", aResult.hasNext());
-          
     }
 
     @Test
-    public void testWrongTypeFirstArg() throws Exception {
+    public void testWrongTypeFirstArg() {
       
-            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(string:stripAccents(4) as ?result) }";
+         final String aQuery = StringVocabulary.sparqlPrefix("string") +
+             "select ?result where { bind(string:stripAccents(4) as ?result) }";
 
             final TupleQueryResult aResult = connection.select(aQuery).execute();
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
+
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final BindingSet aBindingSet = aResult.next();
@@ -124,6 +112,5 @@ public class StripAccentsTest  extends AbstractStardogTest {
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
 
                 assertFalse("Should have no more results", aResult.hasNext());
-          
     }
 }
