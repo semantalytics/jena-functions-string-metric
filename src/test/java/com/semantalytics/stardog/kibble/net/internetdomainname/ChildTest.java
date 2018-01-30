@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 public class ChildTest extends AbstractStardogTest {
 
     @Test
-    public void testInetAddressToNumber() {
+    public void testChild() {
 
         final String aQuery = InternetDomainNameVocabulary.sparqlPrefix("dn") +
                     "select ?result where { bind(dn:child(\"foo.com\", \"www.bar\") as ?result) }";
@@ -29,7 +29,7 @@ public class ChildTest extends AbstractStardogTest {
     }
 
     @Test
-    public void testTooManyArgs() throws Exception {
+    public void testTooManyArgs() {
 
         final String aQuery = InternetDomainNameVocabulary.sparqlPrefix("dn") +
                 "select ?result where { bind(dn:child(\"one\", \"two\", \"three\") as ?result) }";
@@ -46,7 +46,7 @@ public class ChildTest extends AbstractStardogTest {
     }
 
     @Test
-    public void testTooFewArgs() throws Exception {
+    public void testTooFewArgs() {
 
         final String aQuery = InternetDomainNameVocabulary.sparqlPrefix("dn") +
                 "select ?result where { bind(dn:child(\"one\") as ?result) }";
@@ -63,7 +63,7 @@ public class ChildTest extends AbstractStardogTest {
     }
 
     @Test
-    public void testFirstArgWrongType() throws Exception {
+    public void testFirstArgWrongType() {
 
         final String aQuery = InternetDomainNameVocabulary.sparqlPrefix("dn") +
                 "select ?result where { bind(dn:child(1, \"two\") as ?result) }";
@@ -80,7 +80,7 @@ public class ChildTest extends AbstractStardogTest {
     }
 
     @Test
-    public void testSecondArgWrongType() throws Exception {
+    public void testSecondArgWrongType() {
 
         final String aQuery = InternetDomainNameVocabulary.sparqlPrefix("dn") +
                 "select ?result where { bind(dn:child(\"one\", 2) as ?result) }";
