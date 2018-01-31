@@ -42,7 +42,7 @@ public final class Abbreviate extends AbstractFunction implements StringFunction
               return Values.literal(StringUtils.abbreviate(string, abbrevMarker, offset, maxWidth);
           }
           default:
-              throw new ExpressionEvaluationException("Incorrect number of parameters. Valid values are 1 or 2. Found " + values.length);
+              throw new ExpressionEvaluationException("Incorrect number of parameters. Valid values are 1, 2, or 3. Found " + values.length);
        }
     }
 
