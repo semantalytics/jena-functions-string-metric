@@ -15,9 +15,75 @@ protected Connection connection;
 private static final String STARDOG_LICENCE_KEY_FILE_NAME = "stardog-license-key.bin";
 
 @RunWith(Suite.class)
-@SuiteClasses({First.class,Second.class,Third.class})
+@SuiteClasses({
+ 	AbbreviateMiddleTest.java,
+	AbbreviateTest.java,
+	AbbreviateWithMarkerTest.java,
+	AppendIfMissingIgnoreCaseTest.java,
+	AppendIfMissingTest.java,
+	CapitalizeTest.java,
+	CaseFormatTest.java,
+	CenterTest.java,
+	ChompTest.java,
+	ChopTest.java,
+	CommonPrefixTest.java,
+	CommonSuffixTest.java,
+	CompareIgnoreCaseTest.java,
+	CompareTest.java,
+	ContainsAnyTest.java,
+	ContainsNoneTest.java,
+	ContainsOnlyTest.java,
+	ContainsTest.java,
+	ContainsWhitespaceTest.java,
+	CountMatchesTest.java,
+	DefaultIfBlankTest.java,
+	DefaultIfEmptyTest.java,
+	DeleteWhitespaceTest.java,
+	DifferenceTest.java,
+	EndsWithIgnoreCase.java,
+	EndsWithTest.java,
+	EqualsAnyTest.java,
+	EqualsIgnoreCaseTest.java,
+	GetDigitsTest.java,
+	IndexOfAnyButTest.java,
+	IndexOfAnyTest.java,
+	IndexOfDifferenceTest.java,
+	IndexOfIgnoreCaseTest.java,
+	IndexOfTest.java,
+	InitialsTest.java,
+	IsAllLowerCaseTest.java,
+	IsAllUpperCaseTest.java,
+	IsAnyBlankTest.java,
+	IsAnyEmptyTest.java,
+	IsBlankTest.java,
+	IsEmptyTest.java,
+	IsMixedCaseTest.java,
+	IsWhitespaceTest.java,
+	JoinTest.java,
+	LowerCaseFullyTest.java,
+	MidTest.java,
+	OverlayTest.java,
+	PadEndTest.java,
+	PadStartTest.java,
+	PrependIfMissingIgnoreCaseTest.java,
+	PrependIfMissingTest.java,
+	RandomTest.java,
+	RepeatTest.java,
+	ReverseDelimitedTest.java,
+	ReverseTest.java,
+	RotateTest.java,
+	StringTestSuite.java,
+	StripAccentsTest.java,
+	TruncateTest.java,
+	UncapitalizeTest.java,
+	UnwrapTest.java,
+	UpperCaseFullyTest.java,
+	WrapIfMissingTest.java,
+	WrapTest.java
+})
 
 public class StringTestSuite extends TestCase {
+    
     @BeforeClass
     public static void beforeClass() throws IOException, ServerException {
 
@@ -33,7 +99,8 @@ public class StringTestSuite extends TestCase {
 
         SERVER = STARDOG.newServer()
                 //.set(ServerOptions.SECURITY_DISABLED, true)
-                .bind(new InetSocketAddress("localhost", TEST_PORT)).start();
+                .bind(new InetSocketAddress("localhost", TEST_PORT))
+                .start();
 
         final AdminConnection adminConnection = AdminConnectionConfiguration.toEmbeddedServer()
                 .credentials("admin", "admin")
@@ -52,5 +119,5 @@ public class StringTestSuite extends TestCase {
             SERVER.stop();
         }
         STARDOG.shutdown();
-}
+    }
 }
