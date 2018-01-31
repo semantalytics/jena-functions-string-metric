@@ -9,126 +9,105 @@ import static org.junit.Assert.*;
 
 public class CaseFormatTest extends AbstractStardogTest {
  
-
     @Test
     public void testLowerCamelToUpperUnderscoreByExample() {
        
-            final String aQuery = "prefix ss: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?caseFormat where { bind(ss:caseFormat(\"caseFormat\", \"CASE_FORMAT\", \"stardogUnion\") as ?caseFormat) }";
+        final String aQuery = StringVocabulary.sparqlPrefix("string") +
+                    "select ?caseFormat where { bind(string:caseFormat(\"caseFormat\", \"CASE_FORMAT\", \"stardogUnion\") as ?caseFormat) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute();
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
-       
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final String aValue = aResult.next().getValue("caseFormat").stringValue();
 
                 assertEquals("STARDOG_UNION", aValue);
-
                 assertFalse("Should have no more results", aResult.hasNext());
-            
+            }
     }
 
     @Test
     public void testLowerCamelToLowerUnderscoreByExample() {
      
-            final String aQuery = "prefix ss: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?caseFormat where { bind(ss:caseFormat(\"caseFormat\", \"case_format\", \"stardogUnion\") as ?caseFormat) }";
+        final String aQuery = StringVocabulary.sparqlPrefix("string") +
+                    "select ?caseFormat where { bind(string:caseFormat(\"caseFormat\", \"case_format\", \"stardogUnion\") as ?caseFormat) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute();
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
-   
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final String aValue = aResult.next().getValue("caseFormat").stringValue();
 
                 assertEquals("stardog_union", aValue);
-
                 assertFalse("Should have no more results", aResult.hasNext());
-            
+            }
     }
 
     @Test
     public void testLowerCamelToLowerHyphenByExample() {
        
+        final String aQuery = StringVocabulary.sparqlPrefix("string") +
+                    "select ?caseFormat where { bind(string:caseFormat(\"caseFormat\", \"case-format\", \"stardogUnion\") as ?caseFormat) }";
 
-            final String aQuery = "prefix ss: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?caseFormat where { bind(ss:caseFormat(\"caseFormat\", \"case-format\", \"stardogUnion\") as ?caseFormat) }";
-
-            final TupleQueryResult aResult = connection.select(aQuery).execute();
-
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
            
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final String aValue = aResult.next().getValue("caseFormat").stringValue();
 
                 assertEquals("stardog-union", aValue);
-
                 assertFalse("Should have no more results", aResult.hasNext());
-         
+            }
     }
 
     @Test
     public void testLowerCamelToUpperCamelByExample() {
     
+        final String aQuery = StringVocabulary.sparqlPrefix("string") +
+                    "select ?caseFormat where { bind(string:caseFormat(\"caseFormat\", \"CaseFormat\", \"stardogUnion\") as ?caseFormat) }";
 
-            final String aQuery = "prefix ss: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?caseFormat where { bind(ss:caseFormat(\"caseFormat\", \"CaseFormat\", \"stardogUnion\") as ?caseFormat) }";
-
-            final TupleQueryResult aResult = connection.select(aQuery).execute();
-
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
       
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final String aValue = aResult.next().getValue("caseFormat").stringValue();
 
                 assertEquals("StardogUnion", aValue);
-
                 assertFalse("Should have no more results", aResult.hasNext());
- 
+            }
     }
 
     @Test
     public void testTooManyArgs() {
-
       
-            final String aQuery = "prefix ss: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?caseFormat where { bind(ss:caseFormat(\"one\", \"two\", \"three\", \"four\") as ?caseFormat) }";
+        final String aQuery = StringVocabulary.sparqlPrefix("string") +
+                    "select ?caseFormat where { bind(string:caseFormat(\"one\", \"two\", \"three\", \"four\") as ?caseFormat) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute();
-        
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final BindingSet aBindingSet = aResult.next();
 
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
                 assertFalse("Should have no more results", aResult.hasNext());
-           
+            }
     }
-
-
 
     @Test
     public void testWrongType() {
     
+        final String aQuery = StringVocabulary.sparqlPrefix("string") +
+                    "select ?caseFormat where { bind(string:caseFormat(7, 8, 9) as ?caseFormat) }";
 
-            final String aQuery = "prefix ss: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?caseFormat where { bind(ss:caseFormat(7, 8, 9) as ?caseFormat) }";
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute();
-        
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final BindingSet aBindingSet = aResult.next();
 
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
                 assertFalse("Should have no more results", aResult.hasNext());
-            
+            }
     }
 }
