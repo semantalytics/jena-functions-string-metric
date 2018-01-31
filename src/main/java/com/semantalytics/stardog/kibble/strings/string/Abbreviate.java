@@ -12,7 +12,7 @@ import org.openrdf.model.Value;
 public final class Abbreviate extends AbstractFunction implements StringFunction {
 
     protected Abbreviate() {
-        super(Range.closed(2, 4), StringVocabulary.abbreviate.stringValue());
+        super(Range.closed(2, 3), StringVocabulary.abbreviate.stringValue());
     }
 
     private Abbreviate(final Abbreviate abbreviate) {
@@ -36,13 +36,8 @@ public final class Abbreviate extends AbstractFunction implements StringFunction
               final int offset = assertIntegerLiteral(values[2]).intValue();
               return Values.literal(StringUtils.abbreviate(string, offset, maxWidth));
           }
-          case 4: {
-              final int offset = assertIntegerLiteral(values[2]).intValue();
-              final String abbrevMarker = assertStringLiteral(values[3].stringValue());
-              return Values.literal(StringUtils.abbreviate(string, abbrevMarker, offset, maxWidth);
-          }
           default:
-              throw new ExpressionEvaluationException("Incorrect number of parameters. Valid values are 1, 2, or 3. Found " + values.length);
+              throw new ExpressionEvaluationException("Incorrect number of parameters. Valid values are 1 or 2. Found " + values.length);
        }
     }
 
