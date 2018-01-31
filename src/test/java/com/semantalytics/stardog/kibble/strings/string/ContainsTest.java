@@ -22,7 +22,6 @@ public class ContainsTest extends AbstractStardogTest {
                 final String aValue = aResult.next().getValue("abbreviation").stringValue();
 
                 assertEquals("Stard...", aValue);
-
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
@@ -40,7 +39,6 @@ public class ContainsTest extends AbstractStardogTest {
                 final String aValue = aResult.next().getValue("abbreviation").stringValue();
 
                 assertEquals("", aValue);
-
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
@@ -59,11 +57,9 @@ public class ContainsTest extends AbstractStardogTest {
                 final BindingSet aBindingSet = aResult.next();
 
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
-
 
     @Test
     public void testTooManyArgs() {
@@ -79,12 +75,9 @@ public class ContainsTest extends AbstractStardogTest {
                 final BindingSet aBindingSet = aResult.next();
 
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
-
-
 
     @Test
     public void testWrongTypeFirstArg() {
@@ -99,7 +92,6 @@ public class ContainsTest extends AbstractStardogTest {
                 final BindingSet aBindingSet = aResult.next();
 
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
@@ -117,7 +109,6 @@ public class ContainsTest extends AbstractStardogTest {
                 final BindingSet aBindingSet = aResult.next();
 
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
@@ -135,7 +126,6 @@ public class ContainsTest extends AbstractStardogTest {
                 final BindingSet aBindingSet = aResult.next();
 
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
