@@ -24,8 +24,6 @@ public final class CommonPrefix extends AbstractFunction implements StringFuncti
       
       final String firstString = assertStringLiteral(values[0]).stringValue();
       final String secondString = assertStringLiteral(values[1]).stringValue();
-
-      //TODO handle any number of arguments
       
       return literal(Strings.commonPrefix(firstString, secondString));
     }
