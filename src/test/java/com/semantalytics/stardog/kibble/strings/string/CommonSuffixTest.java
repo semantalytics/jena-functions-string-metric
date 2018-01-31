@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 public class CommonSuffixTest  extends AbstractStardogTest {
 
     @Test
-    public void testCommonSuffix() throws Exception {
+    public void testCommonSuffix() {
       
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:commonSuffix(\"Stardog\", \"Asterdog\") AS ?result) }";
@@ -30,7 +30,7 @@ public class CommonSuffixTest  extends AbstractStardogTest {
     }
 
     @Test
-    public void testEmptyString() throws Exception {
+    public void testEmptyString() {
        
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
@@ -50,7 +50,7 @@ public class CommonSuffixTest  extends AbstractStardogTest {
     }
 
     @Test
-    public void testTooFewArgs() throws Exception {
+    public void testTooFewArgs() {
 
        
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
@@ -72,7 +72,7 @@ public class CommonSuffixTest  extends AbstractStardogTest {
 
 
     @Test
-    public void testTooManyArgs() throws Exception {
+    public void testTooManyArgs() {
 
        
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
@@ -95,7 +95,7 @@ public class CommonSuffixTest  extends AbstractStardogTest {
 
 
     @Test
-    public void testWrongTypeFirstArg() throws Exception {
+    public void testWrongTypeFirstArg() {
        
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
@@ -116,7 +116,7 @@ public class CommonSuffixTest  extends AbstractStardogTest {
     }
 
     @Test
-    public void testWrongTypeSecondArg() throws Exception {
+    public void testWrongTypeSecondArg() {
       
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
@@ -137,7 +137,7 @@ public class CommonSuffixTest  extends AbstractStardogTest {
     }
 
     @Test
-    public void testLengthTooShort() throws Exception {
+    public void testLengthTooShort() {
        
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:commonSuffix(\"Stardog\", 3) as ?result) }";

@@ -11,7 +11,7 @@ public class CenterTest  extends AbstractStardogTest {
 
  
     @Test
-    public void testAbbreviateMiddleTwoArg() throws Exception {
+    public void testAbbreviateMiddleTwoArg() {
     
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:center(\"Stardog\", 15) AS ?result) }";
@@ -31,7 +31,7 @@ public class CenterTest  extends AbstractStardogTest {
     }
 
     @Test
-    public void testAbbreviateMiddleThreeArg() throws Exception {
+    public void testAbbreviateMiddleThreeArg() {
       
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:center(\"Stardog\", 15, \"*\") AS ?result) }";
@@ -51,7 +51,7 @@ public class CenterTest  extends AbstractStardogTest {
     }
 
     @Test
-    public void testEmptyString() throws Exception {
+    public void testEmptyString() {
       
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
@@ -71,7 +71,7 @@ public class CenterTest  extends AbstractStardogTest {
     }
 
     @Test
-    public void testTooFewArgs() throws Exception {
+    public void testTooFewArgs() {
 
     
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
@@ -93,7 +93,7 @@ public class CenterTest  extends AbstractStardogTest {
 
 
     @Test
-    public void testTooManyArgs() throws Exception {
+    public void testTooManyArgs() {
 
      
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
@@ -116,7 +116,7 @@ public class CenterTest  extends AbstractStardogTest {
 
 
     @Test
-    public void testWrongTypeFirstArg() throws Exception {
+    public void testWrongTypeFirstArg() {
      
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
@@ -137,7 +137,7 @@ public class CenterTest  extends AbstractStardogTest {
     }
 
     @Test
-    public void testWrongTypeSecondArg() throws Exception {
+    public void testWrongTypeSecondArg() {
  
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:center(\"one\", \"two\") as ?abbreviation) }";
@@ -157,7 +157,7 @@ public class CenterTest  extends AbstractStardogTest {
     }
 
     @Test
-    public void testWrongTypeThirdArg() throws Exception {
+    public void testWrongTypeThirdArg() {
        
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:center(\"one\", 2, 3) as ?result) }";

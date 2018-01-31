@@ -12,7 +12,7 @@ public class PadEndTest  extends AbstractStardogTest {
     
 
     @Test
-    public void testThreeArgument() throws Exception {
+    public void testThreeArgument() {
       
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
@@ -33,7 +33,7 @@ public class PadEndTest  extends AbstractStardogTest {
     }
 
     @Test
-    public void testEmptyString() throws Exception {
+    public void testEmptyString() {
        
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
@@ -53,7 +53,7 @@ public class PadEndTest  extends AbstractStardogTest {
     }
 
     @Test
-    public void testEmptyPad() throws Exception {
+    public void testEmptyPad() {
       
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:padEnd(\"one\", 20, \"\") as ?result) }";
@@ -73,7 +73,7 @@ public class PadEndTest  extends AbstractStardogTest {
     }
 
     @Test
-    public void testTooFewArgs() throws Exception {
+    public void testTooFewArgs() {
 
     
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
@@ -95,7 +95,7 @@ public class PadEndTest  extends AbstractStardogTest {
 
 
     @Test
-    public void testTooManyArgs() throws Exception {
+    public void testTooManyArgs() {
 
       
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
@@ -116,7 +116,7 @@ public class PadEndTest  extends AbstractStardogTest {
     }
 
     @Test
-    public void testWrongTypeFirstArg() throws Exception {
+    public void testWrongTypeFirstArg() {
      
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:padEnd(1, 20, \"*\") as ?result) }";
@@ -136,7 +136,7 @@ public class PadEndTest  extends AbstractStardogTest {
     }
 
     @Test
-    public void testWrongTypeSecondArg() throws Exception {
+    public void testWrongTypeSecondArg() {
       
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
@@ -157,7 +157,7 @@ public class PadEndTest  extends AbstractStardogTest {
     }
 
     @Test
-    public void testWrongTypeThirdArg() throws Exception {
+    public void testWrongTypeThirdArg() {
       
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +

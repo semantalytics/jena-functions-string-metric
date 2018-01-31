@@ -31,7 +31,7 @@ public class AbbreviateMiddleTest  extends AbstractStardogTest {
     public void testEmptyString() {
       
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:abbreviateMiddle(\"\", , 10) as ?result) }";
+                    "select ?result where { bind(string:abbreviateMiddle(\"\", \"\", 10) as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
            

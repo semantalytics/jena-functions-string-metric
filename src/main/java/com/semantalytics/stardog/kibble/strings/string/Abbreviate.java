@@ -28,14 +28,16 @@ public final class Abbreviate extends AbstractFunction implements StringFunction
       if(maxWidth <= 3) {
           throw new ExpressionEvaluationException("maxWidth must be greater than 3. Found " + maxWidth);
       }
-      
-       if(values.length == 2) {
+
+      switch(values.length) {
+          case 2:
            return Values.literal(StringUtils.abbreviate(string, maxWidth));
-       }
-        
-       if(values.length == 3) {
-           final int offset = assertIntegerLiteral(values[2]).intValue();
-           return Values.literal(StringUtils.abbreviate(string, offset, maxWidth));
+          case 3: {
+              final int offset = assertIntegerLiteral(values[2]).intValue();
+              return Values.literal(StringUtils.abbreviate(string, offset, maxWidth));
+          }
+          default:
+              throw new ExpressionEvaluationException("Incorrect number of parameters. Valid values are 1 or 2. Found " + values.length);
        }
     }
 

@@ -7,153 +7,122 @@ import org.openrdf.query.TupleQueryResult;
 
 import static org.junit.Assert.*;
 
-public class AppendIfMissingTest  extends AbstractStardogTest {
+public class AppendIfMissingTest extends AbstractStardogTest {
 
-  
     @Test
-    public void testAbbreviateMiddle() throws Exception {
-      
-            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?abbreviation where { bind(string:appendIfMissing(\"Stardog graph database\", \"...\", 8) AS ?abbreviation) }";
+    public void testAbbreviateMiddle() {
 
+        final String aQuery = StringVocabulary.sparqlPrefix("string") +
+                "select ?abbreviation where { bind(string:appendIfMissing(\"Stardog graph database\", \"...\", 8) AS ?abbreviation) }";
 
-            try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+        try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
-                assertTrue("Should have a result", aResult.hasNext());
+            assertTrue("Should have a result", aResult.hasNext());
 
-                final String aValue = aResult.next().getValue("abbreviation").stringValue();
+            final String aValue = aResult.next().getValue("abbreviation").stringValue();
 
-                assertEquals("Stard...", aValue);
-
-                assertFalse("Should have no more results", aResult.hasNext());
-            }
-       
+            assertEquals("Stard...", aValue);
+            assertFalse("Should have no more results", aResult.hasNext());
+        }
     }
 
     @Test
-    public void testEmptyString() throws Exception {
-       
+    public void testEmptyString() {
 
-            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?abbreviation where { bind(string:appendIfMissing(\"\", 5) as ?abbreviation) }";
+        final String aQuery = StringVocabulary.sparqlPrefix("string") +
+                "select ?abbreviation where { bind(string:appendIfMissing(\"\", 5) as ?abbreviation) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute();
+        final TupleQueryResult aResult = connection.select(aQuery).execute();
 
-         
-                assertTrue("Should have a result", aResult.hasNext());
+        assertTrue("Should have a result", aResult.hasNext());
 
-                final String aValue = aResult.next().getValue("abbreviation").stringValue();
+        final String aValue = aResult.next().getValue("abbreviation").stringValue();
 
-                assertEquals("", aValue);
-
-                assertFalse("Should have no more results", aResult.hasNext());
-           
+        assertEquals("", aValue);
+        assertFalse("Should have no more results", aResult.hasNext());
     }
 
     @Test
-    public void testTooFewArgs() throws Exception {
+    public void testTooFewArgs() {
 
-   
-            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?abbreviation where { bind(string:appendIfMissing(\"one\") as ?abbreviation) }";
+        final String aQuery = StringVocabulary.sparqlPrefix("string") +
+                "select ?abbreviation where { bind(string:appendIfMissing(\"one\") as ?abbreviation) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute();
-       
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
-                assertTrue("Should have a result", aResult.hasNext());
+        final TupleQueryResult aResult = connection.select(aQuery).execute();
 
-                final BindingSet aBindingSet = aResult.next();
+        assertTrue("Should have a result", aResult.hasNext());
 
-                assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+        final BindingSet aBindingSet = aResult.next();
 
-                assertFalse("Should have no more results", aResult.hasNext());
-          
+        assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+        assertFalse("Should have no more results", aResult.hasNext());
+
     }
 
 
     @Test
-    public void testTooManyArgs() throws Exception {
+    public void testTooManyArgs() {
 
-      
-            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?abbreviation where { bind(string:appendIfMissing(\"one\", 2, \"three\") as ?abbreviation) }";
+        final String aQuery = StringVocabulary.sparqlPrefix("string") +
+                "select ?abbreviation where { bind(string:appendIfMissing(\"one\", 2, \"three\") as ?abbreviation) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute();
-     
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
-                assertTrue("Should have a result", aResult.hasNext());
+        final TupleQueryResult aResult = connection.select(aQuery).execute();
 
-                final BindingSet aBindingSet = aResult.next();
+        assertTrue("Should have a result", aResult.hasNext());
 
-                assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+        final BindingSet aBindingSet = aResult.next();
 
-                assertFalse("Should have no more results", aResult.hasNext());
-           
-    }
+        assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+        assertFalse("Should have no more results", aResult.hasNext());
 
-
-
-    @Test
-    public void testWrongTypeFirstArg() throws Exception {
-   
-
-            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?abbreviation where { bind(string:appendIfMissing(4, 5) as ?abbreviation) }";
-
-            final TupleQueryResult aResult = connection.select(aQuery).execute();
-     
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
-                assertTrue("Should have a result", aResult.hasNext());
-
-                final BindingSet aBindingSet = aResult.next();
-
-                assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
-                assertFalse("Should have no more results", aResult.hasNext());
-        
     }
 
     @Test
-    public void testWrongTypeSecondArg() throws Exception {
-       
+    public void testWrongTypeFirstArg() {
 
-            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?abbreviation where { bind(string:appendIfMissing(\"one\", \"two\") as ?abbreviation) }";
+        final String aQuery = StringVocabulary.sparqlPrefix("string") +
+                "select ?abbreviation where { bind(string:appendIfMissing(4, 5) as ?abbreviation) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute();
-     
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
-                assertTrue("Should have a result", aResult.hasNext());
+        final TupleQueryResult aResult = connection.select(aQuery).execute();
 
-                final BindingSet aBindingSet = aResult.next();
+        assertTrue("Should have a result", aResult.hasNext());
 
-                assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+        final BindingSet aBindingSet = aResult.next();
 
-                assertFalse("Should have no more results", aResult.hasNext());
-           
+        assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+        assertFalse("Should have no more results", aResult.hasNext());
     }
 
     @Test
-    public void testLengthTooShort() throws Exception {
-      
-            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?abbreviation where { bind(string:appendIfMissing(\"Stardog\", 3) as ?abbreviation) }";
+    public void testWrongTypeSecondArg() {
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute();
-      
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
-                assertTrue("Should have a result", aResult.hasNext());
 
-                final BindingSet aBindingSet = aResult.next();
+        final String aQuery = StringVocabulary.sparqlPrefix("string") +
+                "select ?abbreviation where { bind(string:appendIfMissing(\"one\", \"two\") as ?abbreviation) }";
 
-                assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+        final TupleQueryResult aResult = connection.select(aQuery).execute();
 
-                assertFalse("Should have no more results", aResult.hasNext());
-          
+        assertTrue("Should have a result", aResult.hasNext());
+
+        final BindingSet aBindingSet = aResult.next();
+
+        assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+        assertFalse("Should have no more results", aResult.hasNext());
+    }
+
+    @Test
+    public void testLengthTooShort() {
+
+        final String aQuery = StringVocabulary.sparqlPrefix("string") +
+                "select ?abbreviation where { bind(string:appendIfMissing(\"Stardog\", 3) as ?abbreviation) }";
+
+        final TupleQueryResult aResult = connection.select(aQuery).execute();
+
+        assertTrue("Should have a result", aResult.hasNext());
+
+        final BindingSet aBindingSet = aResult.next();
+
+        assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+        assertFalse("Should have no more results", aResult.hasNext());
     }
 }

@@ -11,7 +11,7 @@ public class AbbreviateWithMarkerTest  extends AbstractStardogTest {
 
   
     @Test
-    public void testThreeArg() throws Exception {
+    public void testThreeArg() {
     
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:abbreviateWithMarker(\"Stardog graph database\", \"***\" , 10) AS ?result) }";
@@ -31,7 +31,7 @@ public class AbbreviateWithMarkerTest  extends AbstractStardogTest {
     }
 
     @Test
-    public void testFourArg() throws Exception {
+    public void testFourArg() {
      
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
@@ -52,7 +52,7 @@ public class AbbreviateWithMarkerTest  extends AbstractStardogTest {
     }
 
     @Test
-    public void testEmptyString() throws Exception {
+    public void testEmptyString() {
       
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
@@ -72,7 +72,7 @@ public class AbbreviateWithMarkerTest  extends AbstractStardogTest {
     }
 
     @Test
-    public void testTooFewArgs() throws Exception {
+    public void testTooFewArgs() {
 
        
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
@@ -94,7 +94,7 @@ public class AbbreviateWithMarkerTest  extends AbstractStardogTest {
 
 
     @Test
-    public void testTooManyArgs() throws Exception {
+    public void testTooManyArgs() {
 
      
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
@@ -117,7 +117,7 @@ public class AbbreviateWithMarkerTest  extends AbstractStardogTest {
 
 
     @Test
-    public void testWrongTypeFirstArg() throws Exception {
+    public void testWrongTypeFirstArg() {
   
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
@@ -138,7 +138,7 @@ public class AbbreviateWithMarkerTest  extends AbstractStardogTest {
     }
 
     @Test
-    public void testWrongTypeSecondArg() throws Exception {
+    public void testWrongTypeSecondArg() {
    
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:abbreviateWithMarker(\"one\", \"two\") as ?abbreviation) }";
@@ -158,7 +158,7 @@ public class AbbreviateWithMarkerTest  extends AbstractStardogTest {
     }
 
     @Test
-    public void testLengthTooShort() throws Exception {
+    public void testLengthTooShort() {
     
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:abbreviateWithMarker(\"Stardog\", 3) as ?abbreviation) }";

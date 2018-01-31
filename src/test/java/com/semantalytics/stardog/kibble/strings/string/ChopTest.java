@@ -11,7 +11,7 @@ public class ChopTest  extends AbstractStardogTest {
 
  
     @Test
-    public void testChop() throws Exception {
+    public void testChop() {
     
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:chop(\"Stardog\") AS ?result) }";
@@ -31,7 +31,7 @@ public class ChopTest  extends AbstractStardogTest {
     }
 
     @Test
-    public void testEmptyString() throws Exception {
+    public void testEmptyString() {
      
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
@@ -51,7 +51,7 @@ public class ChopTest  extends AbstractStardogTest {
     }
 
     @Test
-    public void testTooFewArgs() throws Exception {
+    public void testTooFewArgs() {
 
    
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
@@ -73,7 +73,7 @@ public class ChopTest  extends AbstractStardogTest {
 
 
     @Test
-    public void testTooManyArgs() throws Exception {
+    public void testTooManyArgs() {
 
    
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
@@ -96,7 +96,7 @@ public class ChopTest  extends AbstractStardogTest {
 
 
     @Test
-    public void testWrongTypeFirstArg() throws Exception {
+    public void testWrongTypeFirstArg() {
    
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
@@ -117,7 +117,7 @@ public class ChopTest  extends AbstractStardogTest {
     }
 
     @Test
-    public void testWrongTypeSecondArg() throws Exception {
+    public void testWrongTypeSecondArg() {
       
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
@@ -138,7 +138,7 @@ public class ChopTest  extends AbstractStardogTest {
     }
 
     @Test
-    public void testLengthTooShort() throws Exception {
+    public void testLengthTooShort() {
   
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +

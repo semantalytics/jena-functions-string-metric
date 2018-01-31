@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 public class RandomTest extends AbstractStardogTest {
 
     @Test
-    public void testAbbreviateMiddle() throws Exception {
+    public void testAbbreviateMiddle() {
  
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:random(\"Stardog graph database\", \"...\", 8) AS ?abbreviation) }";
@@ -30,7 +30,7 @@ public class RandomTest extends AbstractStardogTest {
     }
 
     @Test
-    public void testEmptyString() throws Exception {
+    public void testEmptyString() {
    
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
@@ -50,7 +50,7 @@ public class RandomTest extends AbstractStardogTest {
     }
 
     @Test
-    public void testTooFewArgs() throws Exception {
+    public void testTooFewArgs() {
 
    
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
@@ -71,7 +71,7 @@ public class RandomTest extends AbstractStardogTest {
 
 
     @Test
-    public void testTooManyArgs() throws Exception {
+    public void testTooManyArgs() {
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:random(\"one\", 2, \"three\") as ?abbreviation) }";
@@ -89,7 +89,7 @@ public class RandomTest extends AbstractStardogTest {
     }
 
     @Test
-    public void testWrongTypeFirstArg() throws Exception {
+    public void testWrongTypeFirstArg() {
 
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
@@ -108,7 +108,7 @@ public class RandomTest extends AbstractStardogTest {
     }
 
     @Test
-    public void testWrongTypeSecondArg() throws Exception {
+    public void testWrongTypeSecondArg() {
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:random(\"one\", \"two\") as ?abbreviation) }";
@@ -127,7 +127,7 @@ public class RandomTest extends AbstractStardogTest {
     }
 
     @Test
-    public void testLengthTooShort() throws Exception {
+    public void testLengthTooShort() {
 
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +

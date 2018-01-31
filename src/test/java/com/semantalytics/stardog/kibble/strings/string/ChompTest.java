@@ -11,7 +11,7 @@ public class ChompTest  extends AbstractStardogTest {
 
   
     @Test
-    public void testChomp() throws Exception {
+    public void testChomp() {
      
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:chomp(\"Stardog\\n\") AS ?result) }";
@@ -31,7 +31,7 @@ public class ChompTest  extends AbstractStardogTest {
     }
 
     @Test
-    public void testEmptyString() throws Exception {
+    public void testEmptyString() {
       
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:chomp(\"\", 5) as ?result) }";
@@ -50,7 +50,7 @@ public class ChompTest  extends AbstractStardogTest {
     }
 
     @Test
-    public void testTooFewArgs() throws Exception {
+    public void testTooFewArgs() {
 
      
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
@@ -72,7 +72,7 @@ public class ChompTest  extends AbstractStardogTest {
 
 
     @Test
-    public void testTooManyArgs() throws Exception {
+    public void testTooManyArgs() {
 
      
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
@@ -95,7 +95,7 @@ public class ChompTest  extends AbstractStardogTest {
 
 
     @Test
-    public void testWrongTypeFirstArg() throws Exception {
+    public void testWrongTypeFirstArg() {
       
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:chomp(4, 5) as ?result) }";
@@ -115,7 +115,7 @@ public class ChompTest  extends AbstractStardogTest {
     }
 
     @Test
-    public void testWrongTypeSecondArg() throws Exception {
+    public void testWrongTypeSecondArg() {
       
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
@@ -136,7 +136,7 @@ public class ChompTest  extends AbstractStardogTest {
     }
 
     @Test
-    public void testLengthTooShort() throws Exception {
+    public void testLengthTooShort() {
       
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:chomp(\"Stardog\", 3) as ?result) }";

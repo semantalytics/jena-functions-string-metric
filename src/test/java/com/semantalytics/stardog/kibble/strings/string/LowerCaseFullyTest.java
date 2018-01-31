@@ -10,7 +10,7 @@ public class LowerCaseFullyTest  extends AbstractStardogTest {
 
 
     @Test
-    public void testLowerCaseFully() throws Exception {
+    public void testLowerCaseFully() {
 
             connection.begin();
 

@@ -11,7 +11,7 @@ public class CaseFormatTest extends AbstractStardogTest {
  
 
     @Test
-    public void testLowerCamelToUpperUnderscoreByExample() throws Exception {
+    public void testLowerCamelToUpperUnderscoreByExample() {
        
             final String aQuery = "prefix ss: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?caseFormat where { bind(ss:caseFormat(\"caseFormat\", \"CASE_FORMAT\", \"stardogUnion\") as ?caseFormat) }";
@@ -30,7 +30,7 @@ public class CaseFormatTest extends AbstractStardogTest {
     }
 
     @Test
-    public void testLowerCamelToLowerUnderscoreByExample() throws Exception {
+    public void testLowerCamelToLowerUnderscoreByExample() {
      
             final String aQuery = "prefix ss: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?caseFormat where { bind(ss:caseFormat(\"caseFormat\", \"case_format\", \"stardogUnion\") as ?caseFormat) }";
@@ -49,7 +49,7 @@ public class CaseFormatTest extends AbstractStardogTest {
     }
 
     @Test
-    public void testLowerCamelToLowerHyphenByExample() throws Exception {
+    public void testLowerCamelToLowerHyphenByExample() {
        
 
             final String aQuery = "prefix ss: <" + StringVocabulary.NAMESPACE + "> " +
@@ -69,7 +69,7 @@ public class CaseFormatTest extends AbstractStardogTest {
     }
 
     @Test
-    public void testLowerCamelToUpperCamelByExample() throws Exception {
+    public void testLowerCamelToUpperCamelByExample() {
     
 
             final String aQuery = "prefix ss: <" + StringVocabulary.NAMESPACE + "> " +
@@ -89,7 +89,7 @@ public class CaseFormatTest extends AbstractStardogTest {
     }
 
     @Test
-    public void testTooManyArgs() throws Exception {
+    public void testTooManyArgs() {
 
       
             final String aQuery = "prefix ss: <" + StringVocabulary.NAMESPACE + "> " +
@@ -112,7 +112,7 @@ public class CaseFormatTest extends AbstractStardogTest {
 
 
     @Test
-    public void testWrongType() throws Exception {
+    public void testWrongType() {
     
 
             final String aQuery = "prefix ss: <" + StringVocabulary.NAMESPACE + "> " +
