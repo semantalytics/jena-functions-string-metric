@@ -34,8 +34,7 @@ public class CommonPrefixTest  extends AbstractStardogTest {
                     "select ?result where { bind(string:commonPrefix(\"\", 5) as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
-
-      
+                
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final String aValue = aResult.next().getValue("abbreviation").stringValue();
