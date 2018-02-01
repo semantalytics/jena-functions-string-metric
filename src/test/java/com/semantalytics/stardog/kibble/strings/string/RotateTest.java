@@ -12,7 +12,7 @@ public class RotateTest  extends AbstractStardogTest {
     @Test
     public void testAbbreviateMiddle() {
       
-            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
+       final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?abbreviation where { bind(string:rotate(\"Stardog graph database\", \"...\", 8) AS ?abbreviation) }";
 
 
@@ -23,7 +23,6 @@ public class RotateTest  extends AbstractStardogTest {
                 final String aValue = aResult.next().getValue("abbreviation").stringValue();
 
                 assertEquals("Stard...", aValue);
-
                 assertFalse("Should have no more results", aResult.hasNext());
             }
        
@@ -32,119 +31,102 @@ public class RotateTest  extends AbstractStardogTest {
     @Test
     public void testEmptyString() {
        
-
-            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
+       final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?abbreviation where { bind(string:rotate(\"\", 5) as ?abbreviation) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute();
+            try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final String aValue = aResult.next().getValue("abbreviation").stringValue();
 
                 assertEquals("", aValue);
-
                 assertFalse("Should have no more results", aResult.hasNext());
-            
+            }
     }
 
     @Test
     public void testTooFewArgs() {
 
-       
-            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
+       final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?abbreviation where { bind(string:rotate(\"one\") as ?abbreviation) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute();
+            try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
            
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final BindingSet aBindingSet = aResult.next();
 
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
                 assertFalse("Should have no more results", aResult.hasNext());
-           
+            }
     }
-
 
     @Test
     public void testTooManyArgs() {
 
-            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
+       final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?abbreviation where { bind(string:rotate(\"one\", 2, \"three\") as ?abbreviation) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute();
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
+            try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final BindingSet aBindingSet = aResult.next();
 
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
                 assertFalse("Should have no more results", aResult.hasNext());
-            
+            }
     }
-
-
 
     @Test
     public void testWrongTypeFirstArg() {
       
-            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
+       final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?abbreviation where { bind(string:rotate(4, 5) as ?abbreviation) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute();
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
+            try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final BindingSet aBindingSet = aResult.next();
 
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
                 assertFalse("Should have no more results", aResult.hasNext());
-           
+            }
     }
 
     @Test
     public void testWrongTypeSecondArg() {
         
-            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
+       final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?abbreviation where { bind(string:rotate(\"one\", \"two\") as ?abbreviation) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute();
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
+            try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final BindingSet aBindingSet = aResult.next();
 
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
                 assertFalse("Should have no more results", aResult.hasNext());
-           
+            }
     }
 
     @Test
     public void testLengthTooShort() {
        
-            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
+       final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?abbreviation where { bind(string:rotate(\"Stardog\", 3) as ?abbreviation) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute();
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
+            try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final BindingSet aBindingSet = aResult.next();
 
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
                 assertFalse("Should have no more results", aResult.hasNext());
-           
+            }
     }
 }
