@@ -25,6 +25,7 @@ public abstract class AbstractStardogTest {
     protected Connection connection;
     private static final String STARDOG_LICENCE_KEY_FILE_NAME = "stardog-license-key.bin";
 
+        /*
     @BeforeClass
     public static void beforeClass() throws IOException, ServerException {
 
@@ -52,7 +53,9 @@ public abstract class AbstractStardogTest {
 
         adminConnection.newDatabase(DB).create();
     }
+    */
 
+    /*
     @AfterClass
     public static void afterClass() {
         if (SERVER != null) {
@@ -60,6 +63,7 @@ public abstract class AbstractStardogTest {
         }
         STARDOG.shutdown();
     }
+    */
 
     @Before
     public void setUp() {
