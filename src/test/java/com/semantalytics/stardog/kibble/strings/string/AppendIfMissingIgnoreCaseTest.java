@@ -32,7 +32,7 @@ public class AppendIfMissingIgnoreCaseTest  extends AbstractStardogTest {
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?abbreviation where { bind(string:appendIfMissingIgnoreCase(\"\", 5) as ?abbreviation) }";
 
-            try(final TupleQueryResult aResult = connection.select(aQuery).execute() {
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
@@ -49,7 +49,7 @@ public class AppendIfMissingIgnoreCaseTest  extends AbstractStardogTest {
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?abbreviation where { bind(string:appendIfMissingIgnoreCase(\"one\") as ?abbreviation) }";
 
-            try(final TupleQueryResult aResult = connection.select(aQuery).execute() {
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
@@ -66,7 +66,7 @@ public class AppendIfMissingIgnoreCaseTest  extends AbstractStardogTest {
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?abbreviation where { bind(string:appendIfMissingIgnoreCase(\"one\", 2, \"three\") as ?abbreviation) }";
 
-            try(final TupleQueryResult aResult = connection.select(aQuery).execute() {
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
@@ -83,7 +83,7 @@ public class AppendIfMissingIgnoreCaseTest  extends AbstractStardogTest {
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?abbreviation where { bind(string:appendIfMissingIgnoreCase(4, 5) as ?abbreviation) }";
 
-            try(final TupleQueryResult aResult = connection.select(aQuery).execute() {
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
@@ -100,7 +100,7 @@ public class AppendIfMissingIgnoreCaseTest  extends AbstractStardogTest {
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?abbreviation where { bind(string:appendIfMissingIgnoreCase(\"one\", \"two\") as ?abbreviation) }";
 
-            try(final TupleQueryResult aResult = connection.select(aQuery).execute() {
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
@@ -117,7 +117,7 @@ public class AppendIfMissingIgnoreCaseTest  extends AbstractStardogTest {
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?abbreviation where { bind(string:appendIfMissingIgnoreCase(\"Stardog\", 3) as ?abbreviation) }";
 
-            try(final TupleQueryResult aResult = connection.select(aQuery).execute() {
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 

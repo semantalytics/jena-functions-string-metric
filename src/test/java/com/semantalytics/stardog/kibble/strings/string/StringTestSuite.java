@@ -1,3 +1,12 @@
+package com.semantalytics.stardog.kibble.strings.string;
+
+import com.complexible.common.protocols.server.Server;
+import com.complexible.common.protocols.server.ServerException;
+import com.complexible.stardog.Stardog;
+import com.complexible.stardog.api.Connection;
+import com.complexible.stardog.api.admin.AdminConnection;
+import com.complexible.stardog.api.admin.AdminConnectionConfiguration;
+import com.google.common.io.Files;
 import junit.framework.TestCase;
 
 import org.junit.AfterClass;
@@ -6,84 +15,87 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-private static Stardog STARDOG;
-private static Server SERVER;
-private static final String DB = "test";
-private static int TEST_PORT = 5888;
-private static final String STARDOG_HOME = System.getenv("STARDOG_HOME");
-protected Connection connection;
-private static final String STARDOG_LICENCE_KEY_FILE_NAME = "stardog-license-key.bin";
+import java.io.File;
+import java.io.IOException;
+import java.net.InetSocketAddress;
 
 @RunWith(Suite.class)
 @SuiteClasses({
- 	AbbreviateMiddleTest.java,
-	AbbreviateTest.java,
-	AbbreviateWithMarkerTest.java,
-	AppendIfMissingIgnoreCaseTest.java,
-	AppendIfMissingTest.java,
-	CapitalizeTest.java,
-	CaseFormatTest.java,
-	CenterTest.java,
-	ChompTest.java,
-	ChopTest.java,
-	CommonPrefixTest.java,
-	CommonSuffixTest.java,
-	CompareIgnoreCaseTest.java,
-	CompareTest.java,
-	ContainsAnyTest.java,
-	ContainsNoneTest.java,
-	ContainsOnlyTest.java,
-	ContainsTest.java,
-	ContainsWhitespaceTest.java,
-	CountMatchesTest.java,
-	DefaultIfBlankTest.java,
-	DefaultIfEmptyTest.java,
-	DeleteWhitespaceTest.java,
-	DifferenceTest.java,
-	EndsWithIgnoreCase.java,
-	EndsWithTest.java,
-	EqualsAnyTest.java,
-	EqualsIgnoreCaseTest.java,
-	GetDigitsTest.java,
-	IndexOfAnyButTest.java,
-	IndexOfAnyTest.java,
-	IndexOfDifferenceTest.java,
-	IndexOfIgnoreCaseTest.java,
-	IndexOfTest.java,
-	InitialsTest.java,
-	IsAllLowerCaseTest.java,
-	IsAllUpperCaseTest.java,
-	IsAnyBlankTest.java,
-	IsAnyEmptyTest.java,
-	IsBlankTest.java,
-	IsEmptyTest.java,
-	IsMixedCaseTest.java,
-	IsWhitespaceTest.java,
-	JoinTest.java,
-	LowerCaseFullyTest.java,
-	MidTest.java,
-	OverlayTest.java,
-	PadEndTest.java,
-	PadStartTest.java,
-	PrependIfMissingIgnoreCaseTest.java,
-	PrependIfMissingTest.java,
-	RandomTest.java,
-	RepeatTest.java,
-	ReverseDelimitedTest.java,
-	ReverseTest.java,
-	RotateTest.java,
-	StringTestSuite.java,
-	StripAccentsTest.java,
-	TruncateTest.java,
-	UncapitalizeTest.java,
-	UnwrapTest.java,
-	UpperCaseFullyTest.java,
-	WrapIfMissingTest.java,
-	WrapTest.java
+ 	AbbreviateMiddleTest.class,
+	AbbreviateTest.class,
+	AbbreviateWithMarkerTest.class,
+	AppendIfMissingIgnoreCaseTest.class,
+	AppendIfMissingTest.class,
+	CapitalizeTest.class,
+	CaseFormatTest.class,
+	CenterTest.class,
+	ChompTest.class,
+	ChopTest.class,
+	CommonPrefixTest.class,
+	CommonSuffixTest.class,
+	CompareIgnoreCaseTest.class,
+	CompareTest.class,
+	ContainsAnyTest.class,
+	ContainsNoneTest.class,
+	ContainsOnlyTest.class,
+	ContainsTest.class,
+	ContainsWhitespaceTest.class,
+	CountMatchesTest.class,
+	DefaultIfBlankTest.class,
+	DefaultIfEmptyTest.class,
+	DeleteWhitespaceTest.class,
+	//DifferenceTest.class,
+	EndsWithIgnoreCase.class,
+	//EndsWithTest.class,
+	//EqualsAnyTest.class,
+	//EqualsIgnoreCaseTest.class,
+	GetDigitsTest.class,
+	//IndexOfAnyButTest.class,
+	//IndexOfAnyTest.class,
+	//IndexOfDifferenceTest.class,
+	//IndexOfIgnoreCaseTest.class,
+	//IndexOfTest.class,
+	InitialsTest.class,
+	IsAllLowerCaseTest.class,
+	IsAllUpperCaseTest.class,
+	//IsAnyBlankTest.class,
+	//IsAnyEmptyTest.class,
+	IsBlankTest.class,
+	IsEmptyTest.class,
+	IsMixedCaseTest.class,
+	IsWhitespaceTest.class,
+	JoinTest.class,
+	LowerCaseFullyTest.class,
+	MidTest.class,
+	OverlayTest.class,
+	PadEndTest.class,
+	PadStartTest.class,
+	PrependIfMissingIgnoreCaseTest.class,
+	PrependIfMissingTest.class,
+	RandomTest.class,
+	RepeatTest.class,
+	ReverseDelimitedTest.class,
+	ReverseTest.class,
+	RotateTest.class,
+	StripAccentsTest.class,
+	TruncateTest.class,
+	UncapitalizeTest.class,
+	UnwrapTest.class,
+	UpperCaseFullyTest.class,
+	WrapIfMissingTest.class,
+	WrapTest.class
 })
 
 public class StringTestSuite extends TestCase {
-    
+
+	private static Stardog STARDOG;
+	private static Server SERVER;
+	public static final String DB = "test";
+	public static final int TEST_PORT = 5888;
+	private static final String STARDOG_HOME = System.getenv("STARDOG_HOME");
+	protected Connection connection;
+	private static final String STARDOG_LICENCE_KEY_FILE_NAME = "stardog-license-key.bin";
+
     @BeforeClass
     public static void beforeClass() throws IOException, ServerException {
 
