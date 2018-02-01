@@ -22,7 +22,6 @@ public class PadStartTest  extends AbstractStardogTest {
                 final String aValue = aResult.next().getValue("abbreviation").stringValue();
 
                 assertEquals("Stard...", aValue);
-
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
