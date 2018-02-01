@@ -41,7 +41,6 @@ public class GetDigitsTest  extends AbstractStardogTest {
                 final String aValue = aResult.next().getValue("result").stringValue();
 
                 assertEquals("12345", aValue);
-
                 assertFalse("Should have no more results", aResult.hasNext());
             } 
     }
@@ -59,7 +58,6 @@ public class GetDigitsTest  extends AbstractStardogTest {
                 final String aValue = aResult.next().getValue("result").stringValue();
 
                 assertEquals("", aValue);
-
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
@@ -78,7 +76,6 @@ public class GetDigitsTest  extends AbstractStardogTest {
                 final String aValue = aResult.next().getValue("result").stringValue();
 
                 assertEquals("१२३", aValue);
-
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
@@ -97,7 +94,6 @@ public class GetDigitsTest  extends AbstractStardogTest {
                 final BindingSet aBindingSet = aResult.next();
 
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
@@ -116,7 +112,6 @@ public class GetDigitsTest  extends AbstractStardogTest {
                 final BindingSet aBindingSet = aResult.next();
 
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
@@ -134,7 +129,6 @@ public class GetDigitsTest  extends AbstractStardogTest {
                 final BindingSet aBindingSet = aResult.next();
 
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
