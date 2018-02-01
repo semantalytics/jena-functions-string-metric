@@ -15,7 +15,6 @@ public class WrapIfMissingTest  extends AbstractStardogTest {
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?abbreviation where { bind(string:wrapIfMissing(\"Stardog graph database\", \"...\", 8) AS ?abbreviation) }";
 
-
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
