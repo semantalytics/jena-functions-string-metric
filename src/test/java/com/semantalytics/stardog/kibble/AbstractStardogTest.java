@@ -25,11 +25,15 @@ public abstract class AbstractStardogTest {
     protected Connection connection;
     private static final String STARDOG_LICENCE_KEY_FILE_NAME = "stardog-license-key.bin";
 
-        /*
     @BeforeClass
     public static void beforeClass() throws IOException, ServerException {
-
-        final File TEST_HOME;
+        final AdminConnection adminConnection;
+       try{
+           adminConnection = AdminConnectionConfiguration.toEmbeddedServer()
+                .credentials("admin", "admin")
+                .connect();
+       } catch(StardogException e) {
+              final File TEST_HOME;
 
         TEST_HOME = Files.createTempDir();
         TEST_HOME.deleteOnExit();
@@ -42,7 +46,8 @@ public abstract class AbstractStardogTest {
         SERVER = STARDOG.newServer()
                 //.set(ServerOptions.SECURITY_DISABLED, true)
                 .bind(new InetSocketAddress("localhost", TEST_PORT)).start();
-
+       }
+     
         final AdminConnection adminConnection = AdminConnectionConfiguration.toEmbeddedServer()
                 .credentials("admin", "admin")
                 .connect();
@@ -53,17 +58,14 @@ public abstract class AbstractStardogTest {
 
         adminConnection.newDatabase(DB).create();
     }
-    */
 
-    /*
     @AfterClass
     public static void afterClass() {
         if (SERVER != null) {
             SERVER.stop();
+            STARDOG.shutdown();
         }
-        STARDOG.shutdown();
     }
-    */
 
     @Before
     public void setUp() {
