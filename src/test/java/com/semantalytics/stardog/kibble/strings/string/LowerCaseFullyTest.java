@@ -8,13 +8,9 @@ import static org.junit.Assert.*;
 
 public class LowerCaseFullyTest  extends AbstractStardogTest {
 
-
     @Test
-    public void testLowerCaseFully() {
-
-            connection.begin();
-
-            final String aQuery = "prefix util: <" + StringVocabulary.NAMESPACE + ">" +
+    public void testLowerCaseFully() extends AbstractStardogTest {
+       final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?result where { bind(util:lowerCaseFully(\"STARDOG\") as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
@@ -24,9 +20,7 @@ public class LowerCaseFullyTest  extends AbstractStardogTest {
                 final String aValue = aResult.next().getValue("result").stringValue();
 
                 assertEquals("stardog", aValue);
-
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
-
 }
