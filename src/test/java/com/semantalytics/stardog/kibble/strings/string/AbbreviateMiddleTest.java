@@ -22,7 +22,6 @@ public class AbbreviateMiddleTest  extends AbstractStardogTest {
                 final String aValue = aResult.next().getValue("result").stringValue();
 
                 assertEquals("Sta...se", aValue);
-
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
@@ -40,7 +39,6 @@ public class AbbreviateMiddleTest  extends AbstractStardogTest {
                 final String aValue = aResult.next().getValue("result").stringValue();
 
                 assertEquals("", aValue);
-
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
@@ -58,7 +56,6 @@ public class AbbreviateMiddleTest  extends AbstractStardogTest {
                 final BindingSet aBindingSet = aResult.next();
 
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
@@ -76,7 +73,6 @@ public class AbbreviateMiddleTest  extends AbstractStardogTest {
                 final BindingSet aBindingSet = aResult.next();
 
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
@@ -94,7 +90,6 @@ public class AbbreviateMiddleTest  extends AbstractStardogTest {
                 final BindingSet aBindingSet = aResult.next();
 
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
@@ -112,7 +107,6 @@ public class AbbreviateMiddleTest  extends AbstractStardogTest {
                 final BindingSet aBindingSet = aResult.next();
 
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
@@ -130,7 +124,6 @@ public class AbbreviateMiddleTest  extends AbstractStardogTest {
                 final BindingSet aBindingSet = aResult.next();
 
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
