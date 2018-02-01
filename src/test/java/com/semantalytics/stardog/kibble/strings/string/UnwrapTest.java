@@ -15,7 +15,6 @@ public class UnwrapTest  extends AbstractStardogTest {
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?abbreviation where { bind(string:unwrap(\"Stardog graph database\", \"...\", 8) AS ?abbreviation) }";
 
-
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
@@ -36,7 +35,6 @@ public class UnwrapTest  extends AbstractStardogTest {
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
-         
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final String aValue = aResult.next().getValue("abbreviation").stringValue();
