@@ -22,7 +22,6 @@ public class IsWhitespaceTest  extends AbstractStardogTest {
                 final boolean aValue = Boolean.parseBoolean(aResult.next().getValue("result").stringValue());
 
                 assertEquals(false, aValue);
-
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
@@ -40,7 +39,6 @@ public class IsWhitespaceTest  extends AbstractStardogTest {
                 final boolean aValue = Boolean.parseBoolean(aResult.next().getValue("result").stringValue());
 
                 assertEquals(true, aValue);
-
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
@@ -59,7 +57,6 @@ public class IsWhitespaceTest  extends AbstractStardogTest {
                 final BindingSet aBindingSet = aResult.next();
 
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
@@ -78,7 +75,6 @@ public class IsWhitespaceTest  extends AbstractStardogTest {
                 final BindingSet aBindingSet = aResult.next();
 
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
@@ -96,7 +92,6 @@ public class IsWhitespaceTest  extends AbstractStardogTest {
                 final BindingSet aBindingSet = aResult.next();
 
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
