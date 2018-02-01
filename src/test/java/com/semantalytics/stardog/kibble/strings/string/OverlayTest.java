@@ -10,11 +10,10 @@ import static org.junit.Assert.*;
 public class OverlayTest  extends AbstractStardogTest {
 
     @Test
-    public void testAbbreviateMiddle() {
-        
+    public void overlayMiddle() {
 
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:overlay(\"Stardog graph database\", \"...\", 8) AS ?abbreviation) }";
+                    "select ?abbreviation where { bind(string:overlay(\"Stardog\", \"****\", 2, 4) AS ?abbreviation) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -22,16 +21,16 @@ public class OverlayTest  extends AbstractStardogTest {
 
                 final String aValue = aResult.next().getValue("abbreviation").stringValue();
 
-                assertEquals("Stard...", aValue);
+                assertEquals("Sta**og", aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
 
     @Test
-    public void testEmptyString() {
+    public void overlayEmptyString() {
   
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:overlay(\"\", 5) as ?abbreviation) }";
+                    "select ?abbreviation where { bind(string:overlay(\"\", \"****\", 0, 0) as ?abbreviation) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
         
@@ -39,7 +38,7 @@ public class OverlayTest  extends AbstractStardogTest {
 
                 final String aValue = aResult.next().getValue("abbreviation").stringValue();
 
-                assertEquals("", aValue);
+                assertEquals("****", aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
@@ -48,7 +47,7 @@ public class OverlayTest  extends AbstractStardogTest {
     public void testTooFewArgs() {
 
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:overlay(\"one\") as ?abbreviation) }";
+                    "select ?abbreviation where { bind(string:overlay(\"one\", \"two\", 3) as ?abbreviation) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -65,7 +64,7 @@ public class OverlayTest  extends AbstractStardogTest {
     public void testTooManyArgs() {
    
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:overlay(\"one\", 2, \"three\") as ?abbreviation) }";
+                    "select ?abbreviation where { bind(string:overlay(\"one\", \"two\", 3, 4, 5) as ?abbreviation) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -82,7 +81,7 @@ public class OverlayTest  extends AbstractStardogTest {
     public void testWrongTypeFirstArg() {
         
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:overlay(4, 5) as ?abbreviation) }";
+                    "select ?abbreviation where { bind(string:overlay(1, \"two\", 3, 4) as ?abbreviation) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -99,6 +98,23 @@ public class OverlayTest  extends AbstractStardogTest {
     public void testWrongTypeSecondArg() {
         
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
+                    "select ?abbreviation where { bind(string:overlay(\"one\", 2, 3, 4) as ?abbreviation) }";
+
+            try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+
+                assertTrue("Should have a result", aResult.hasNext());
+
+                final BindingSet aBindingSet = aResult.next();
+
+                assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+                assertFalse("Should have no more results", aResult.hasNext());
+            }
+    }
+
+    @Test
+    public void testWrongTypeThirdArg() {
+        
+       final String aQuery = StringVocabulary.sparqlPrefix(\"one\", \"two\", \"three\", 4) +
                     "select ?abbreviation where { bind(string:overlay(\"one\", \"two\") as ?abbreviation) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
@@ -113,10 +129,10 @@ public class OverlayTest  extends AbstractStardogTest {
     }
 
     @Test
-    public void testLengthTooShort() {
-      
-       final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:overlay(\"Stardog\", 3) as ?abbreviation) }";
+    public void testWrongTypeFourthArg() {
+        
+       final String aQuery = StringVocabulary.sparqlPrefix(\"one\", \"two\", 3, \"four\") +
+                    "select ?abbreviation where { bind(string:overlay(\"one\", \"two\") as ?abbreviation) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
