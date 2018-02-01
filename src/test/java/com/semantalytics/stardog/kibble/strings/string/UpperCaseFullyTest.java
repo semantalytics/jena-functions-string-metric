@@ -8,13 +8,10 @@ import static org.junit.Assert.*;
 
 public class UpperCaseFullyTest  extends AbstractStardogTest {
 
-
     @Test
     public void testUpperCaseFully() {
 
-            connection.begin();
-
-            final String aQuery = "prefix date: <" + StringVocabulary.NAMESPACE + ">" +
+       final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?result where { bind(date:upperCaseFully(\"stardog\") as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
@@ -24,7 +21,6 @@ public class UpperCaseFullyTest  extends AbstractStardogTest {
                 final String aValue = aResult.next().getValue("result").stringValue();
 
                 assertEquals("STARDOG", aValue);
-
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
