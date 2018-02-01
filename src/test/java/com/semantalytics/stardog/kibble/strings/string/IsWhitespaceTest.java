@@ -46,7 +46,6 @@ public class IsWhitespaceTest  extends AbstractStardogTest {
     @Test
     public void testTooFewArgs() {
 
-       
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?result where { bind(string:getDigits() as ?result) }";
 
@@ -64,7 +63,6 @@ public class IsWhitespaceTest  extends AbstractStardogTest {
     @Test
     public void testTooManyArgs() {
 
-     
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?result where { bind(string:getDigits(\"Stardog\", \"one\") as ?result) }";
 
