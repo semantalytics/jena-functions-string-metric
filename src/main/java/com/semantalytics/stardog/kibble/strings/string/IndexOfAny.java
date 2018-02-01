@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class IndexOfAny extends AbstractFunction implements StringFunction {
 
     protected IndexOfAny() {
-        super(1, StringVocabulary.indexOfAny.stringValue());
+        super(2, StringVocabulary.indexOfAny.stringValue());
     }
 
     private IndexOfAny(final IndexOfAny indexOfAny) {
@@ -23,9 +23,6 @@ public final class IndexOfAny extends AbstractFunction implements StringFunction
 
         final String string = assertStringLiteral(values[0]).stringValue();
         final String searchChars = assertStringLiteral(values[1]).stringValue();
-
-
-        //TODO handle multiple searchchars
 
         return Values.literal(StringUtils.indexOfAny(string, searchChars));
     }
