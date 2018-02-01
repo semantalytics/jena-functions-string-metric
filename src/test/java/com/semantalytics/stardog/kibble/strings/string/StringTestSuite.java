@@ -51,7 +51,7 @@ import java.net.InetSocketAddress;
 	//EqualsIgnoreCaseTest.class,
 	GetDigitsTest.class,
 	//IndexOfAnyButTest.class,
-	//IndexOfAnyTest.class,
+	IndexOfAnyTest.class,
 	//IndexOfDifferenceTest.class,
 	//IndexOfIgnoreCaseTest.class,
 	//IndexOfTest.class,
