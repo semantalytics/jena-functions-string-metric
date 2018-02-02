@@ -23,7 +23,7 @@ public class UpperCase extends AbstractFunction implements UserDefinedFunction {
 
         final String string = assertStringLiteral(values[0]).stringValue();
 
-        return literal(string.toUpperCase());
+        return literal(StringUtils.upperCase());
     }
 
     @Override
