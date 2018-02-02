@@ -90,6 +90,7 @@ public enum StringVocabulary {
     removeAll,
     removePattern,
     removeFirst,
+    removeStart,
     stripAccents,
     truncate,
     uncapitalize,
