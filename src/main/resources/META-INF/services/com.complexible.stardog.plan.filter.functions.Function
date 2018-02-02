@@ -138,6 +138,7 @@ com.semantalytics.stardog.kibble.strings.string.CommonSuffix
 com.semantalytics.stardog.kibble.strings.string.Compare
 com.semantalytics.stardog.kibble.strings.string.CompareIgnoreCase
 com.semantalytics.stardog.kibble.strings.string.Contains
+com.semantalytics.stardog.kibble.strings.string.ContainsIgnoreCase
 com.semantalytics.stardog.kibble.strings.string.ContainsAny
 com.semantalytics.stardog.kibble.strings.string.ContainsNone
 com.semantalytics.stardog.kibble.strings.string.ContainsOnly
