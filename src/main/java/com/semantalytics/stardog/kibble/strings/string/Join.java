@@ -17,12 +17,12 @@ import static java.util.stream.Collectors.toList;
 
 public final class JoinWith extends AbstractFunction implements StringFunction {
 
-    protected Join() {
-        super(Range.atLeast(1), StringVocabulary.join.stringValue());
+    protected JoinWith() {
+        super(Range.atLeast(1), StringVocabulary.joinWith.stringValue());
     }
 
-    private Join(final Join join) {
-        super(join);
+    private JoinWith(final JoinWith joinWith) {
+        super(joinWith);
     }
 
     @Override
@@ -35,8 +35,8 @@ public final class JoinWith extends AbstractFunction implements StringFunction {
     }
 
     @Override
-    public Join copy() {
-        return new Join(this);
+    public JoinWith copy() {
+        return new JoinWith(this);
     }
 
     @Override
@@ -46,6 +46,6 @@ public final class JoinWith extends AbstractFunction implements StringFunction {
 
     @Override
     public String toString() {
-        return StringVocabulary.join.name();
+        return StringVocabulary.joinWith.name();
     }
 }
