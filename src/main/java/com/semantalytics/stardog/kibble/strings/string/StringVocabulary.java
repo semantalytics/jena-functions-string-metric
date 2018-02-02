@@ -83,6 +83,7 @@ public enum StringVocabulary {
     repeat,
     random,
     remove,
+    removeIgnoreCase,
     rotate,
     reverse,
     removeEnd,
