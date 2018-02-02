@@ -21,6 +21,7 @@ public enum StringVocabulary {
     commonPrefix,
     containsAny,
     contains,
+    containsIgnoreCase,
     containsNone,
     containsWhitespace,
     containsOnly,
