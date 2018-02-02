@@ -62,6 +62,7 @@ public enum StringVocabulary {
     isNumeric,
     isWhitespace,
     join,
+    joinWith,
     left,
     length,
     leftPad,
