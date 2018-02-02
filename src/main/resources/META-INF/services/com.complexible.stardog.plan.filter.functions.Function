@@ -199,6 +199,7 @@ com.semantalytics.stardog.kibble.strings.string.PrependIfMissingIgnoreCase
 com.semantalytics.stardog.kibble.strings.string.Random
 com.semantalytics.stardog.kibble.strings.string.Remove
 com.semantalytics.stardog.kibble.strings.string.RemoveStart
+com.semantalytics.stardog.kibble.strings.string.RemoveStartIgnoreCase
 com.semantalytics.stardog.kibble.strings.string.RemovePattern
 com.semantalytics.stardog.kibble.strings.string.RemoveIgnoreCase
 com.semantalytics.stardog.kibble.strings.string.RemoveAll
