@@ -39,17 +39,16 @@ public class AbbreviateWithMarkerTest  extends AbstractStardogTest {
 
                 final String aValue = aResult.next().getValue("result").stringValue();
 
-                assertEquals("Stard...", aValue);
+                assertEquals("Stardog***", aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
-       
     }
 
     @Test
     public void testEmptyString() {
       
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:abbreviateWithMarker(\"\", 5) as ?abbreviation) }";
+                    "select ?abbreviation where { bind(string:abbreviateWithMarker(\"\", \"***\", 5) as ?abbreviation) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
     

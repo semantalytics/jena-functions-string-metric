@@ -32,7 +32,7 @@ public class PadEndTest  extends AbstractStardogTest {
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?result where { bind(string:padEnd(\"\", 20, \"*\") as ?result) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
@@ -49,7 +49,7 @@ public class PadEndTest  extends AbstractStardogTest {
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?result where { bind(string:padEnd(\"one\", 20, \"\") as ?result) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
@@ -66,7 +66,7 @@ public class PadEndTest  extends AbstractStardogTest {
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?result where { bind(string:padEnd(\"one\", 20) as ?result) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
@@ -83,7 +83,7 @@ public class PadEndTest  extends AbstractStardogTest {
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?result where { bind(string:padEnd(\"Stardog\", 20, \"*\", 3) as ?result) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
@@ -100,7 +100,7 @@ public class PadEndTest  extends AbstractStardogTest {
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?result where { bind(string:padEnd(1, 20, \"*\") as ?result) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
@@ -117,7 +117,7 @@ public class PadEndTest  extends AbstractStardogTest {
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?result where { bind(string:padEnd(\"Stardog\", \"twenty\", \"*\") as ?result) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
@@ -134,7 +134,7 @@ public class PadEndTest  extends AbstractStardogTest {
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?result where { bind(string:padEnd(\"Stardog\", 20, 1) as ?result) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 

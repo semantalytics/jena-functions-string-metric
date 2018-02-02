@@ -19,7 +19,7 @@ public class IndexOfAnyTest  extends AbstractStardogTest {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final int aValue = Integer.parse(aResult.next().getValue("result").stringValue());
+                final int aValue = Integer.parseInt(aResult.next().getValue("result").stringValue());
 
                 assertEquals(2, aValue);
 
@@ -37,7 +37,7 @@ public class IndexOfAnyTest  extends AbstractStardogTest {
         
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final int aValue = Integer.parse(aResult.next().getValue("result").stringValue());
+                final int aValue = Integer.parseInt(aResult.next().getValue("result").stringValue());
 
                 assertEquals(-1, aValue);
                 assertFalse("Should have no more results", aResult.hasNext());

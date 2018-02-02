@@ -66,7 +66,7 @@ public class StripAccentsTest  extends AbstractStardogTest {
          final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?result where { bind(string:stripAccents() as ?result) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
@@ -83,7 +83,7 @@ public class StripAccentsTest  extends AbstractStardogTest {
          final String aQuery = StringVocabulary.sparqlPrefix("string") +
              "select ?result where { bind(string:stripAccents(\"one\", \"two\") as ?result) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
@@ -100,7 +100,7 @@ public class StripAccentsTest  extends AbstractStardogTest {
          final String aQuery = StringVocabulary.sparqlPrefix("string") +
              "select ?result where { bind(string:stripAccents(4) as ?result) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 

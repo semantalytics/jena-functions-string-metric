@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 public class LowerCaseFullyTest  extends AbstractStardogTest {
 
     @Test
-    public void testLowerCaseFully() extends AbstractStardogTest {
+    public void testLowerCaseFully() {
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?result where { bind(util:lowerCaseFully(\"STARDOG\") as ?result) }";
 

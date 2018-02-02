@@ -32,9 +32,9 @@ public class JoinTest  extends AbstractStardogTest {
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?abbreviation where { bind(string:join(\"\", 5) as ?abbreviation) }";
 
-            try (final TupleQueryResult aResult = connection.select(aQuery).execute();
+            try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
        
-                assertTrue("Should have a result", aResult.hasNext())) {
+                assertTrue("Should have a result", aResult.hasNext());
 
                 final String aValue = aResult.next().getValue("abbreviation").stringValue();
 

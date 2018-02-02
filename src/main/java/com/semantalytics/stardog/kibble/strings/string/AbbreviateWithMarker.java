@@ -38,7 +38,7 @@ public final class AbbreviateWithMarker extends AbstractFunction implements Stri
             final int offset = assertIntegerLiteral(values[3]).intValue();
             return literal(StringUtils.abbreviate(string, abbrevMarker, offset, maxWidth));
         default:
-            throw new ExpressionEvaluationException("function takes 2 or 3 arguments. Found " + values.length);
+            throw new ExpressionEvaluationException("function takes 3 or 4 arguments. Found " + values.length);
         }
     }
 

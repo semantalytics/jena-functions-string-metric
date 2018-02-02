@@ -30,7 +30,7 @@ public class AppendIfMissingIgnoreCaseTest  extends AbstractStardogTest {
     public void testEmptyString() {
 
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:appendIfMissingIgnoreCase(\"\", 5) as ?abbreviation) }";
+                    "select ?abbreviation where { bind(string:appendIfMissingIgnoreCase(\"\", \".txt\") as ?abbreviation) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -38,7 +38,7 @@ public class AppendIfMissingIgnoreCaseTest  extends AbstractStardogTest {
 
                 final String aValue = aResult.next().getValue("abbreviation").stringValue();
 
-                assertEquals("", aValue);
+                assertEquals(".txt", aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
@@ -98,7 +98,7 @@ public class AppendIfMissingIgnoreCaseTest  extends AbstractStardogTest {
     public void testWrongTypeSecondArg() {
     
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:appendIfMissingIgnoreCase(\"one\", \"two\") as ?abbreviation) }";
+                    "select ?abbreviation where { bind(string:appendIfMissingIgnoreCase(\"one\", 2) as ?abbreviation) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 

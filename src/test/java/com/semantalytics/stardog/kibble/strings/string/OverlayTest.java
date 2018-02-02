@@ -114,8 +114,8 @@ public class OverlayTest  extends AbstractStardogTest {
     @Test
     public void testWrongTypeThirdArg() {
         
-       final String aQuery = StringVocabulary.sparqlPrefix(\"one\", \"two\", \"three\", 4) +
-                    "select ?abbreviation where { bind(string:overlay(\"one\", \"two\") as ?abbreviation) }";
+       final String aQuery = StringVocabulary.sparqlPrefix("string") +
+                    "select ?abbreviation where { bind(string:overlay(\"one\", \"two\", \"three\", 4) as ?abbreviation) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -131,8 +131,8 @@ public class OverlayTest  extends AbstractStardogTest {
     @Test
     public void testWrongTypeFourthArg() {
         
-       final String aQuery = StringVocabulary.sparqlPrefix(\"one\", \"two\", 3, \"four\") +
-                    "select ?abbreviation where { bind(string:overlay(\"one\", \"two\") as ?abbreviation) }";
+       final String aQuery = StringVocabulary.sparqlPrefix("string") +
+                    "select ?abbreviation where { bind(string:overlay(\"one\", \"two\", 3, \"four\") as ?abbreviation) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 

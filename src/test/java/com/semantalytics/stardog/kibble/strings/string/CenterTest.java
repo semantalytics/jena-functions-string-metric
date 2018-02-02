@@ -55,7 +55,7 @@ public class CenterTest  extends AbstractStardogTest {
 
                 final String aValue = aResult.next().getValue("abbreviation").stringValue();
 
-                assertEquals("", aValue);
+                assertEquals("     ", aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }

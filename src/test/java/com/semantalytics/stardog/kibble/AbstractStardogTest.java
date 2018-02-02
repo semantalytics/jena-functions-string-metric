@@ -3,6 +3,7 @@ package com.semantalytics.stardog.kibble;
 import com.complexible.common.protocols.server.Server;
 import com.complexible.common.protocols.server.ServerException;
 import com.complexible.stardog.Stardog;
+import com.complexible.stardog.StardogException;
 import com.complexible.stardog.api.Connection;
 import com.complexible.stardog.api.ConnectionConfiguration;
 import com.complexible.stardog.api.admin.AdminConnection;
@@ -27,7 +28,7 @@ public abstract class AbstractStardogTest {
 
     @BeforeClass
     public static void beforeClass() throws IOException, ServerException {
-        final AdminConnection adminConnection;
+       AdminConnection adminConnection;
        try{
            adminConnection = AdminConnectionConfiguration.toEmbeddedServer()
                 .credentials("admin", "admin")
@@ -48,7 +49,7 @@ public abstract class AbstractStardogTest {
                 .bind(new InetSocketAddress("localhost", TEST_PORT)).start();
        }
      
-        final AdminConnection adminConnection = AdminConnectionConfiguration.toEmbeddedServer()
+        adminConnection = AdminConnectionConfiguration.toEmbeddedServer()
                 .credentials("admin", "admin")
                 .connect();
 

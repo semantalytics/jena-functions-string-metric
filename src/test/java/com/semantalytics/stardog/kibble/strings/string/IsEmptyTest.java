@@ -33,7 +33,7 @@ public class IsEmptyTest  extends AbstractStardogTest {
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:isEmpty(\"\", 5) as ?abbreviation) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
            
                 assertTrue("Should have a result", aResult.hasNext());
@@ -51,7 +51,7 @@ public class IsEmptyTest  extends AbstractStardogTest {
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:isEmpty(\"one\") as ?abbreviation) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
@@ -69,7 +69,7 @@ public class IsEmptyTest  extends AbstractStardogTest {
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:isEmpty(\"one\", 2, \"three\") as ?abbreviation) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
@@ -86,7 +86,7 @@ public class IsEmptyTest  extends AbstractStardogTest {
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:isEmpty(4, 5) as ?abbreviation) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
@@ -103,7 +103,7 @@ public class IsEmptyTest  extends AbstractStardogTest {
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:isEmpty(\"one\", \"two\") as ?abbreviation) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
       
                 assertTrue("Should have a result", aResult.hasNext());
 
@@ -120,7 +120,7 @@ public class IsEmptyTest  extends AbstractStardogTest {
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?abbreviation where { bind(string:isEmpty(\"Stardog\", 3) as ?abbreviation) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
        
                 assertTrue("Should have a result", aResult.hasNext());
 

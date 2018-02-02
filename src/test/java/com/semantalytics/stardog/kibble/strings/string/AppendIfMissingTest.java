@@ -10,35 +10,35 @@ import static org.junit.Assert.*;
 public class AppendIfMissingTest extends AbstractStardogTest {
 
     @Test
-    public void testAbbreviateMiddle() {
+    public void testAppendIfMissing() {
 
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                "select ?abbreviation where { bind(string:appendIfMissing(\"Stardog graph database\", \"...\", 8) AS ?abbreviation) }";
+                "select ?result where { bind(string:appendIfMissing(\"Stardog\", \".txt\", 8) AS ?result) }";
 
         try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
             assertTrue("Should have a result", aResult.hasNext());
 
-            final String aValue = aResult.next().getValue("abbreviation").stringValue();
+            final String aValue = aResult.next().getValue("result").stringValue();
 
-            assertEquals("Stard...", aValue);
+            assertEquals("Stardog.txt", aValue);
             assertFalse("Should have no more results", aResult.hasNext());
         }
     }
 
     @Test
-    public void testEmptyString() {
+    public void testNotMissing() {
 
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                "select ?abbreviation where { bind(string:appendIfMissing(\"\", 5) as ?abbreviation) }";
+                "select ?result where { bind(string:appendIfMissing(\"Stardog.txt\", \".txt\") as ?result) }";
 
         final TupleQueryResult aResult = connection.select(aQuery).execute();
 
         assertTrue("Should have a result", aResult.hasNext());
 
-        final String aValue = aResult.next().getValue("abbreviation").stringValue();
+        final String aValue = aResult.next().getValue("result").stringValue();
 
-        assertEquals("", aValue);
+        assertEquals("Stardog.txt", aValue);
         assertFalse("Should have no more results", aResult.hasNext());
     }
 
@@ -46,7 +46,7 @@ public class AppendIfMissingTest extends AbstractStardogTest {
     public void testTooFewArgs() {
 
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                "select ?abbreviation where { bind(string:appendIfMissing(\"one\") as ?abbreviation) }";
+                "select ?result where { bind(string:appendIfMissing(\"one\") as ?result) }";
 
         final TupleQueryResult aResult = connection.select(aQuery).execute();
 
@@ -64,7 +64,7 @@ public class AppendIfMissingTest extends AbstractStardogTest {
     public void testTooManyArgs() {
 
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                "select ?abbreviation where { bind(string:appendIfMissing(\"one\", 2, \"three\") as ?abbreviation) }";
+                "select ?result where { bind(string:appendIfMissing(\"one\", 2, \"three\") as ?result) }";
 
         final TupleQueryResult aResult = connection.select(aQuery).execute();
 
@@ -81,7 +81,7 @@ public class AppendIfMissingTest extends AbstractStardogTest {
     public void testWrongTypeFirstArg() {
 
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                "select ?abbreviation where { bind(string:appendIfMissing(4, 5) as ?abbreviation) }";
+                "select ?result where { bind(string:appendIfMissing(4, 5) as ?result) }";
 
         final TupleQueryResult aResult = connection.select(aQuery).execute();
 
@@ -98,7 +98,7 @@ public class AppendIfMissingTest extends AbstractStardogTest {
 
 
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                "select ?abbreviation where { bind(string:appendIfMissing(\"one\", \"two\") as ?abbreviation) }";
+                "select ?result where { bind(string:appendIfMissing(\"one\", \"two\") as ?result) }";
 
         final TupleQueryResult aResult = connection.select(aQuery).execute();
 
@@ -114,7 +114,7 @@ public class AppendIfMissingTest extends AbstractStardogTest {
     public void testLengthTooShort() {
 
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                "select ?abbreviation where { bind(string:appendIfMissing(\"Stardog\", 3) as ?abbreviation) }";
+                "select ?result where { bind(string:appendIfMissing(\"Stardog\", 3) as ?result) }";
 
         final TupleQueryResult aResult = connection.select(aQuery).execute();
 
