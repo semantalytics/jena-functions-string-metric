@@ -7,13 +7,13 @@ import org.openrdf.query.TupleQueryResult;
 
 import static org.junit.Assert.*;
 
-public class GetDigitsTest  extends AbstractStardogTest {
+public class DigitsTest  extends AbstractStardogTest {
 
     @Test
     public void testGetDigits() {
    
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:getDigits(\"Stard0g\") AS ?result) }";
+                    "select ?result where { bind(string:digits(\"Stard0g\") AS ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -32,7 +32,7 @@ public class GetDigitsTest  extends AbstractStardogTest {
        
 
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:getDigits(\"12345\") AS ?result) }";
+                    "select ?result where { bind(string:digits(\"12345\") AS ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -49,7 +49,7 @@ public class GetDigitsTest  extends AbstractStardogTest {
     public void testEmptyString() {
        
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:getDigits(\"\") as ?result) }";
+                    "select ?result where { bind(string:digits(\"\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
         
@@ -66,7 +66,7 @@ public class GetDigitsTest  extends AbstractStardogTest {
     public void testNonAscii() {
        
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:getDigits(\"१२३\") as ?result) }";
+                    "select ?result where { bind(string:digits(\"१२३\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -85,7 +85,7 @@ public class GetDigitsTest  extends AbstractStardogTest {
 
        
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:getDigits() as ?result) }";
+                    "select ?result where { bind(string:digits() as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
           
@@ -103,7 +103,7 @@ public class GetDigitsTest  extends AbstractStardogTest {
 
      
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:getDigits(\"Stardog\", \"one\") as ?result) }";
+                    "select ?result where { bind(string:digits(\"Stardog\", \"one\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
          
@@ -120,7 +120,7 @@ public class GetDigitsTest  extends AbstractStardogTest {
     public void testWrongType() {
        
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:getDigits(4) as ?result) }";
+                    "select ?result where { bind(string:digits(4) as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
        
