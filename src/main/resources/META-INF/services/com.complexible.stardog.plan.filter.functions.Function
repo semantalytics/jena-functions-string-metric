@@ -207,6 +207,7 @@ com.semantalytics.stardog.kibble.strings.string.RemoveEnd
 com.semantalytics.stardog.kibble.strings.string.RemoveEndIgnoreCase
 com.semantalytics.stardog.kibble.strings.string.RemoveFirst
 com.semantalytics.stardog.kibble.strings.string.Repeat
+com.semantalytics.stardog.kibble.strings.string.Replace
 com.semantalytics.stardog.kibble.strings.string.Reverse
 com.semantalytics.stardog.kibble.strings.string.StripAccents
 com.semantalytics.stardog.kibble.strings.string.Truncate
