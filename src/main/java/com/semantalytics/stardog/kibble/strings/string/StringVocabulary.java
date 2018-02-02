@@ -100,7 +100,8 @@ public enum StringVocabulary {
     wrapIfMissing,
     mid,
     normalizeSpace,
-    upperCaseFully;
+    upperCaseFully,
+    upperCase;
 
     public static final String NAMESPACE = "http://semantalytics.com/2017/09/ns/stardog/kibble/strings/string/";
     public final IRI iri;
