@@ -88,6 +88,7 @@ public enum StringVocabulary {
     reverse,
     removeEnd,
     removeAll,
+    removePattern,
     removeFirst,
     stripAccents,
     truncate,
