@@ -34,7 +34,7 @@ public enum StringVocabulary {
     endsWithIgnoreCase,
     equalsAny,
     equalsIgnoreCase,
-    getDigits,
+    digits,
     initials,
     indexOf,
     indexOfAny,
