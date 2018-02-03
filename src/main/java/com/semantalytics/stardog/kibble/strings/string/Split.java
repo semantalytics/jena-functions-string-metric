@@ -5,10 +5,12 @@ import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.string.StringFunction;
+import com.google.common.base.Joiner;
+import com.google.common.collect.Range;
 import org.apache.commons.lang3.StringUtils;
 import org.openrdf.model.Value;
 
-public final class Rotate extends AbstractFunction implements StringFunction {
+public final class Split extends AbstractFunction implements StringFunction {
 
     protected Split() {
         super(Range.closed(1, 3), StringVocabulary.split.stringValue());
@@ -20,25 +22,26 @@ public final class Rotate extends AbstractFunction implements StringFunction {
 
     @Override
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
-      
-      final String string = assertStringLiteral(values[0]).stringValue();
-      
-      switch(values.length) {
-        case 1: {
-              return Values.literal(StringUtils.split(string, shift));
-        }
-        case 2: {
-                final String separator = assertIntegerLiteral(values[1]).intValue();
-                return Values.literal(StringUtils.split(string, shift));
-        }
-        case 3: {
+
+        final String string = assertStringLiteral(values[0]).stringValue();
+
+        switch (values.length) {
+            case 1: {
+                return Values.literal(Joiner.on("\u001f").join(StringUtils.split(string)));
+            }
+            case 2: {
+                final String separator = assertStringLiteral(values[1]).stringValue();
+                return Values.literal(Joiner.on("\u001f").join(StringUtils.split(string, separator)));
+            }
+            case 3: {
+                final String separator = assertStringLiteral(values[1]).stringValue();
                 final int max = assertIntegerLiteral(values[2]).intValue();
-                return Values.literal(StringUtils.split(string, shift));
+                return Values.literal(Joiner.on("\u0014").join(StringUtils.split(string, separator, max)));
+            }
+            default: {
+                throw new ExpressionEvaluationException("Takes 1 to 3 arguments. Fount " + values.length);
+            }
         }
-        default: {
-            throw new ExpressionEvaluationException();
-        }
-      }
     }
 
     @Override

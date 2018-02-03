@@ -8,14 +8,14 @@ import com.complexible.stardog.plan.filter.functions.string.StringFunction;
 import org.apache.commons.lang3.StringUtils;
 import org.openrdf.model.Value;
 
-public final class GetDigits extends AbstractFunction implements StringFunction {
+public final class Digits extends AbstractFunction implements StringFunction {
 
     protected Digits() {
         super(1, StringVocabulary.digits.stringValue());
     }
 
     private Digits(final Digits digits) {
-        super(Digits);
+        super(digits);
     }
 
     @Override

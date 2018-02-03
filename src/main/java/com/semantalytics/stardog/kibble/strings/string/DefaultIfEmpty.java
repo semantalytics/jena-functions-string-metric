@@ -8,14 +8,14 @@ import com.complexible.stardog.plan.filter.functions.string.StringFunction;
 import org.apache.commons.lang3.StringUtils;
 import org.openrdf.model.Value;
 
-public final class DefaultIfBlank extends AbstractFunction implements StringFunction {
+public final class DefaultIfEmpty extends AbstractFunction implements StringFunction {
 
-    protected DefaultIfBlank() {
-        super(2, StringVocabulary.defaultIfBlank.stringValue());
+    protected DefaultIfEmpty() {
+        super(2, StringVocabulary.defaultIfEmpty.stringValue());
     }
 
-    private DefaultIfBlank(final DefaultIfBlank abbreviate) {
-        super(abbreviate);
+    private DefaultIfEmpty(final DefaultIfEmpty defaultIfEmpty) {
+        super(defaultIfEmpty);
     }
 
     @Override
@@ -24,12 +24,12 @@ public final class DefaultIfBlank extends AbstractFunction implements StringFunc
       final String string = assertStringLiteral(values[0]).stringValue();
       final String defaultString = assertIntegerLiteral(values[1]).stringValue();
       
-      return Values.literal(StringUtils.defaultIfBlank(string, defaultString));
+      return Values.literal(StringUtils.defaultIfEmpty(string, defaultString));
     }
 
     @Override
-    public DefaultIfBlank copy() {
-        return new DefaultIfBlank(this);
+    public DefaultIfEmpty copy() {
+        return new DefaultIfEmpty(this);
     }
 
     @Override
@@ -39,6 +39,6 @@ public final class DefaultIfBlank extends AbstractFunction implements StringFunc
 
     @Override
     public String toString() {
-        return StringVocabulary.defaultIfBlank.name();
+        return StringVocabulary.defaultIfEmpty.name();
     }
 }

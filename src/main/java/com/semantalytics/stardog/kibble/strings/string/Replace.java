@@ -5,16 +5,16 @@ import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.string.StringFunction;
-import com.google.common.base.Strings;
+import org.apache.commons.lang3.StringUtils;
 import org.openrdf.model.Value;
 
 public final class Replace extends AbstractFunction implements StringFunction {
 
     protected Replace() {
-        super(2, StringVocabulary.replace.stringValue());
+        super(3, StringVocabulary.replace.stringValue());
     }
 
-    private ReReplacepeat(final Replace replace) {
+    private Replace(final Replace replace) {
         super(replace);
     }
 
@@ -22,8 +22,10 @@ public final class Replace extends AbstractFunction implements StringFunction {
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
       
       final String string = assertStringLiteral(values[0]).stringValue();
-      final int count = assertIntegerLiteral(values[1]).integerValue().intValue();
-      return Values.literal(Strings.replace(string, count));
+      final String searchString = assertStringLiteral(values[1]).stringValue();
+      final String replacement = assertStringLiteral(values[2]).stringValue();
+
+      return Values.literal(StringUtils.replace(string, searchString, replacement));
     }
 
     @Override

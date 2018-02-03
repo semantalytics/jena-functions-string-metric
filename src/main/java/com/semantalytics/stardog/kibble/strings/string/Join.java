@@ -15,14 +15,14 @@ import com.google.common.collect.Range;
 
 import static java.util.stream.Collectors.toList;
 
-public final class JoinWith extends AbstractFunction implements StringFunction {
+public final class Join extends AbstractFunction implements StringFunction {
 
-    protected JoinWith() {
-        super(Range.atLeast(1), StringVocabulary.joinWith.stringValue());
+    protected Join() {
+        super(Range.atLeast(1), StringVocabulary.join.stringValue());
     }
 
-    private JoinWith(final JoinWith joinWith) {
-        super(joinWith);
+    private Join(final Join join) {
+        super(join);
     }
 
     @Override
@@ -35,8 +35,8 @@ public final class JoinWith extends AbstractFunction implements StringFunction {
     }
 
     @Override
-    public JoinWith copy() {
-        return new JoinWith(this);
+    public Join copy() {
+        return new Join(this);
     }
 
     @Override
@@ -46,6 +46,6 @@ public final class JoinWith extends AbstractFunction implements StringFunction {
 
     @Override
     public String toString() {
-        return StringVocabulary.joinWith.name();
+        return StringVocabulary.join.name();
     }
 }

@@ -7,13 +7,13 @@ import org.openrdf.query.TupleQueryResult;
 
 import static org.junit.Assert.*;
 
-public class DefaultIfEmptyTest  extends AbstractStardogTest {
-  
+public class DefaultIfEmptyIfBlankTest extends AbstractStardogTest {
+
     @Test
     public void testAbbreviateMiddle() {
-        
+   
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:defaultIfEmpty(\"Stardog graph database\", \"...\", 8) AS ?abbreviation) }";
+                    "select ?abbreviation where { bind(string:defaultIfBlank(\"Stardog graph database\", \"...\", 8) AS ?abbreviation) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -22,17 +22,15 @@ public class DefaultIfEmptyTest  extends AbstractStardogTest {
                 final String aValue = aResult.next().getValue("abbreviation").stringValue();
 
                 assertEquals("Stard...", aValue);
-
                 assertFalse("Should have no more results", aResult.hasNext());
             }
-       
     }
 
     @Test
     public void testEmptyString() {
-      
+    
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:defaultIfEmpty(\"\", 5) as ?abbreviation) }";
+                    "select ?abbreviation where { bind(string:defaultIfBlank(\"\", 5) as ?abbreviation) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -49,7 +47,7 @@ public class DefaultIfEmptyTest  extends AbstractStardogTest {
     public void testTooFewArgs() {
 
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:defaultIfEmpty(\"one\") as ?abbreviation) }";
+                    "select ?abbreviation where { bind(string:defaultIfBlank(\"one\") as ?abbreviation) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -61,13 +59,12 @@ public class DefaultIfEmptyTest  extends AbstractStardogTest {
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
-
 
     @Test
     public void testTooManyArgs() {
 
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:defaultIfEmpty(\"one\", 2, \"three\") as ?abbreviation) }";
+                    "select ?abbreviation where { bind(string:defaultIfBlank(\"one\", 2, \"three\") as ?abbreviation) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -79,12 +76,12 @@ public class DefaultIfEmptyTest  extends AbstractStardogTest {
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
-
+    
     @Test
     public void testWrongTypeFirstArg() {
-      
+       
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:defaultIfEmpty(4, 5) as ?abbreviation) }";
+                    "select ?abbreviation where { bind(string:defaultIfBlank(4, 5) as ?abbreviation) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -99,9 +96,9 @@ public class DefaultIfEmptyTest  extends AbstractStardogTest {
 
     @Test
     public void testWrongTypeSecondArg() {
-       
+     
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:defaultIfEmpty(\"one\", \"two\") as ?abbreviation) }";
+                    "select ?abbreviation where { bind(string:defaultIfBlank(\"one\", \"two\") as ?abbreviation) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -116,9 +113,9 @@ public class DefaultIfEmptyTest  extends AbstractStardogTest {
 
     @Test
     public void testLengthTooShort() {
-       
+  
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:defaultIfEmpty(\"Stardog\", 3) as ?abbreviation) }";
+                    "select ?abbreviation where { bind(string:defaultIfBlank(\"Stardog\", 3) as ?abbreviation) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 

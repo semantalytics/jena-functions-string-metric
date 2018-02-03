@@ -4,6 +4,8 @@ import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.UserDefinedFunction;
+import com.google.common.collect.Range;
+import org.apache.commons.lang3.StringUtils;
 import org.openrdf.model.Value;
 
 import static com.complexible.common.rdf.model.Values.literal;
@@ -11,7 +13,7 @@ import static com.complexible.common.rdf.model.Values.literal;
 public class UpperCase extends AbstractFunction implements UserDefinedFunction {
 
     public UpperCase() {
-        super(1, StringVocabulary.upperCase.stringValue());
+        super(Range.closed(1, 2), StringVocabulary.upperCase.stringValue());
     }
 
     public UpperCase(final UpperCase upperCase) {
@@ -23,12 +25,12 @@ public class UpperCase extends AbstractFunction implements UserDefinedFunction {
 
         final String string = assertStringLiteral(values[0]).stringValue();
 
-        return literal(StringUtils.upperCase());
+        return literal(StringUtils.upperCase(string));
     }
 
     @Override
-    public UpperCasee copy() {
-        return new UpperCaseFully(this);
+    public UpperCase copy() {
+        return new UpperCase(this);
     }
 
     @Override
