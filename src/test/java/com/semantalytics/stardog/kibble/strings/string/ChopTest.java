@@ -13,7 +13,7 @@ public class ChopTest  extends AbstractStardogTest {
     public void testChop() {
     
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:chop(\"Stardog\") AS ?result) }";
+                    "select ?result where { bind(string:chop(\"Stardog\\n\") AS ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -21,7 +21,7 @@ public class ChopTest  extends AbstractStardogTest {
 
                 final String aValue = aResult.next().getValue("result").stringValue();
 
-                assertEquals("Stardo", aValue);
+                assertEquals("Stardog", aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
@@ -30,13 +30,13 @@ public class ChopTest  extends AbstractStardogTest {
     public void testEmptyString() {
      
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:chop(\"\", 5) as ?result) }";
+                    "select ?result where { bind(string:chop(\"\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final String aValue = aResult.next().getValue("abbreviation").stringValue();
+                final String aValue = aResult.next().getValue("result").stringValue();
 
                 assertEquals("", aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
@@ -47,7 +47,7 @@ public class ChopTest  extends AbstractStardogTest {
     public void testTooFewArgs() {
 
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:chop(\"one\") as ?result) }";
+                    "select ?result where { bind(string:chop() as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -64,7 +64,7 @@ public class ChopTest  extends AbstractStardogTest {
     public void testTooManyArgs() {
 
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:chop(\"one\", 2, \"three\") as ?result) }";
+                    "select ?result where { bind(string:chop(\"one\", \"two\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -81,41 +81,7 @@ public class ChopTest  extends AbstractStardogTest {
     public void testWrongTypeFirstArg() {
    
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:chop(4, 5) as ?result) }";
-
-            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
-
-                assertTrue("Should have a result", aResult.hasNext());
-
-                final BindingSet aBindingSet = aResult.next();
-
-                assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-                assertFalse("Should have no more results", aResult.hasNext());
-            }
-    }
-
-    @Test
-    public void testWrongTypeSecondArg() {
-      
-        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:chop(\"one\", \"two\") as ?result) }";
-
-            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
-
-                assertTrue("Should have a result", aResult.hasNext());
-
-                final BindingSet aBindingSet = aResult.next();
-
-                assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-                assertFalse("Should have no more results", aResult.hasNext());
-            }
-    }
-
-    @Test
-    public void testLengthTooShort() {
-  
-        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:chop(\"Stardog\", 3) as ?result) }";
+                    "select ?result where { bind(string:chop(4) as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 

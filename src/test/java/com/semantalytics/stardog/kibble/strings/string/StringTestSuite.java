@@ -41,7 +41,6 @@ import java.net.InetSocketAddress;
 	ContainsTest.class,
 	ContainsWhitespaceTest.class,
 	CountMatchesTest.class,
-	DefaultIf.class,
 	DeleteWhitespaceTest.class,
 	//DifferenceTest.class,
 	EndsWithIgnoreCase.class,

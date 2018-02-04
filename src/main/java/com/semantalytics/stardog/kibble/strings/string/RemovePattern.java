@@ -15,7 +15,7 @@ public final class RemovePattern extends AbstractFunction implements StringFunct
         super(2, StringVocabulary.removePattern.stringValue());
     }
 
-    private Remove(final RemovePattern removePattern) {
+    private RemovePattern(final RemovePattern removePattern) {
         super(removePattern);
     }
 

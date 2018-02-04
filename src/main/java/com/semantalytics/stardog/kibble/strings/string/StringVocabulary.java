@@ -75,6 +75,7 @@ public enum StringVocabulary {
     ordinalIndexOf,
     overlay,
     padEnd,
+    pipe,
     padStart,
     prependIfMissing,
     prependIfMissingIgnoreCase,

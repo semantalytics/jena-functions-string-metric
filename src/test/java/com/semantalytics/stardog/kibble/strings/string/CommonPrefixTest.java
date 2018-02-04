@@ -31,7 +31,7 @@ public class CommonPrefixTest  extends AbstractStardogTest {
     public void testEmptyString() {
        
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:commonPrefix(\"\", 5) as ?result) }";
+                    "select ?result where { bind(string:commonPrefix(\"\", \"\") as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
                 
@@ -65,7 +65,7 @@ public class CommonPrefixTest  extends AbstractStardogTest {
     public void testTooManyArgs() {
 
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:commonPrefix(\"one\", 2, \"three\") as ?result) }";
+                    "select ?result where { bind(string:commonPrefix(\"one\", \"two\", \"three\") as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -82,7 +82,7 @@ public class CommonPrefixTest  extends AbstractStardogTest {
     public void testWrongTypeFirstArg() {
        
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:commonPrefix(4, 5) as ?result) }";
+                    "select ?result where { bind(string:commonPrefix(1, \"two\") as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -99,24 +99,7 @@ public class CommonPrefixTest  extends AbstractStardogTest {
     public void testWrongTypeSecondArg() {
         
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:commonPrefix(\"one\", \"two\") as ?result) }";
-
-            try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
-
-                assertTrue("Should have a result", aResult.hasNext());
-
-                final BindingSet aBindingSet = aResult.next();
-
-                assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-                assertFalse("Should have no more results", aResult.hasNext());
-            }
-    }
-
-    @Test
-    public void testLengthTooShort() {
-       
-        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:commonPrefix(\"Stardog\", 3) as ?result) }";
+                    "select ?result where { bind(string:commonPrefix(\"one\", 2) as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 

@@ -14,7 +14,7 @@ public final class ContainsIgnoreCase extends AbstractFunction implements String
         super(1, StringVocabulary.containsIgnoreCase.stringValue());
     }
 
-    private Contains(final ContainsIgnoreCase containsIgnoreCase) {
+    private ContainsIgnoreCase(final ContainsIgnoreCase containsIgnoreCase) {
         super(containsIgnoreCase);
     }
 

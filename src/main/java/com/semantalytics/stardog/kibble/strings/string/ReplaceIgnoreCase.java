@@ -1,12 +1,13 @@
 package com.semantalytics.stardog.kibble.strings.string;
 
-import com.complexible.common.rdf.model.Values;
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.string.StringFunction;
 import org.apache.commons.lang3.StringUtils;
 import org.openrdf.model.Value;
+
+import static com.complexible.common.rdf.model.Values.literal;
 
 public final class ReplaceIgnoreCase extends AbstractFunction implements StringFunction {
 
@@ -25,7 +26,7 @@ public final class ReplaceIgnoreCase extends AbstractFunction implements StringF
         final String searchString = assertStringLiteral(values[1]).stringValue();
         final String replacement = assertStringLiteral(values[2]).stringValue();
 
-        return Values.literal(StringUtils.replaceIgnoreCase(string, searchString, replacement));
+        return literal(StringUtils.replaceIgnoreCase(string, searchString, replacement));
     }
 
     @Override

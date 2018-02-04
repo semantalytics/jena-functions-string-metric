@@ -32,14 +32,15 @@ public class AppendIfMissingTest extends AbstractStardogTest {
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
                 "select ?result where { bind(string:appendIfMissing(\"Stardog.txt\", \".txt\") as ?result) }";
 
-        final TupleQueryResult aResult = connection.select(aQuery).execute();
+        try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
-        assertTrue("Should have a result", aResult.hasNext());
+            assertTrue("Should have a result", aResult.hasNext());
 
-        final String aValue = aResult.next().getValue("result").stringValue();
+            final String aValue = aResult.next().getValue("result").stringValue();
 
-        assertEquals("Stardog.txt", aValue);
-        assertFalse("Should have no more results", aResult.hasNext());
+            assertEquals("Stardog.txt", aValue);
+            assertFalse("Should have no more results", aResult.hasNext());
+        }
     }
 
     @Test
@@ -48,7 +49,7 @@ public class AppendIfMissingTest extends AbstractStardogTest {
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
                 "select ?result where { bind(string:appendIfMissing(\"one\") as ?result) }";
 
-        final TupleQueryResult aResult = connection.select(aQuery).execute();
+        try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
         assertTrue("Should have a result", aResult.hasNext());
 
@@ -56,7 +57,7 @@ public class AppendIfMissingTest extends AbstractStardogTest {
 
         assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
         assertFalse("Should have no more results", aResult.hasNext());
-
+        }
     }
 
 
@@ -66,15 +67,15 @@ public class AppendIfMissingTest extends AbstractStardogTest {
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
                 "select ?result where { bind(string:appendIfMissing(\"one\", 2, \"three\") as ?result) }";
 
-        final TupleQueryResult aResult = connection.select(aQuery).execute();
+        try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
-        assertTrue("Should have a result", aResult.hasNext());
+            assertTrue("Should have a result", aResult.hasNext());
 
-        final BindingSet aBindingSet = aResult.next();
+            final BindingSet aBindingSet = aResult.next();
 
-        assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-        assertFalse("Should have no more results", aResult.hasNext());
-
+            assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+            assertFalse("Should have no more results", aResult.hasNext());
+        }
     }
 
     @Test
@@ -83,14 +84,15 @@ public class AppendIfMissingTest extends AbstractStardogTest {
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
                 "select ?result where { bind(string:appendIfMissing(4, 5) as ?result) }";
 
-        final TupleQueryResult aResult = connection.select(aQuery).execute();
+        try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
-        assertTrue("Should have a result", aResult.hasNext());
+            assertTrue("Should have a result", aResult.hasNext());
 
-        final BindingSet aBindingSet = aResult.next();
+            final BindingSet aBindingSet = aResult.next();
 
-        assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-        assertFalse("Should have no more results", aResult.hasNext());
+            assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+            assertFalse("Should have no more results", aResult.hasNext());
+        }
     }
 
     @Test
@@ -100,14 +102,15 @@ public class AppendIfMissingTest extends AbstractStardogTest {
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
                 "select ?result where { bind(string:appendIfMissing(\"one\", \"two\") as ?result) }";
 
-        final TupleQueryResult aResult = connection.select(aQuery).execute();
+        try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
-        assertTrue("Should have a result", aResult.hasNext());
+            assertTrue("Should have a result", aResult.hasNext());
 
-        final BindingSet aBindingSet = aResult.next();
+            final BindingSet aBindingSet = aResult.next();
 
-        assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-        assertFalse("Should have no more results", aResult.hasNext());
+            assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+            assertFalse("Should have no more results", aResult.hasNext());
+        }
     }
 
     @Test
@@ -116,13 +119,14 @@ public class AppendIfMissingTest extends AbstractStardogTest {
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
                 "select ?result where { bind(string:appendIfMissing(\"Stardog\", 3) as ?result) }";
 
-        final TupleQueryResult aResult = connection.select(aQuery).execute();
+        try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
-        assertTrue("Should have a result", aResult.hasNext());
+            assertTrue("Should have a result", aResult.hasNext());
 
-        final BindingSet aBindingSet = aResult.next();
+            final BindingSet aBindingSet = aResult.next();
 
-        assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-        assertFalse("Should have no more results", aResult.hasNext());
+            assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+            assertFalse("Should have no more results", aResult.hasNext());
+        }
     }
 }

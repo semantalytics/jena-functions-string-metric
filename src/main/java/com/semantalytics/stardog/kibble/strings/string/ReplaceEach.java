@@ -1,5 +1,3 @@
-
-
 package com.semantalytics.stardog.kibble.strings.string;
 
 import com.complexible.common.rdf.model.Values;
