@@ -11,11 +11,11 @@ public class InitialsTest  extends AbstractStardogTest {
 
   
     @Test
-    public void testAbbreviateMiddle() {
+    public void testInitialsOneArg() {
      
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?abbreviation where { bind(string:initials(\"Stardog graph database\", \"...\", 8) AS ?abbreviation) }";
+                    "select ?abbreviation where { bind(string:initials(\"Stardog graph database\") AS ?abbreviation) }";
 
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
@@ -24,11 +24,30 @@ public class InitialsTest  extends AbstractStardogTest {
 
                 final String aValue = aResult.next().getValue("abbreviation").stringValue();
 
-                assertEquals("Stard...", aValue);
+                assertEquals("sgd", aValue);
 
                 assertFalse("Should have no more results", aResult.hasNext());
             }
-       
+    }
+
+    @Test
+    public void testInitialsTwoArg() {
+
+
+        final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
+                "select ?abbreviation where { bind(string:initials(\"Stardog,graph,database\", \",\") AS ?abbreviation) }";
+
+
+        try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+
+            assertTrue("Should have a result", aResult.hasNext());
+
+            final String aValue = aResult.next().getValue("abbreviation").stringValue();
+
+            assertEquals("sgd", aValue);
+
+            assertFalse("Should have no more results", aResult.hasNext());
+        }
     }
 
     @Test

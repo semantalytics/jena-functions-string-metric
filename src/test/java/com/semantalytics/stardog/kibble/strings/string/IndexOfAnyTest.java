@@ -10,10 +10,10 @@ import static org.junit.Assert.*;
 public class IndexOfAnyTest  extends AbstractStardogTest {
 
     @Test
-    public void testGetDigits() {
+    public void testIndexOfAny() {
    
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:indexOfAny(\"stardog\"m \"adg\") AS ?result) }";
+                    "select ?result where { bind(string:indexOfAny(\"stardog\" \"dog\") AS ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -21,7 +21,7 @@ public class IndexOfAnyTest  extends AbstractStardogTest {
 
                 final int aValue = Integer.parseInt(aResult.next().getValue("result").stringValue());
 
-                assertEquals(2, aValue);
+                assertEquals(5, aValue);
 
                 assertFalse("Should have no more results", aResult.hasNext());
             }

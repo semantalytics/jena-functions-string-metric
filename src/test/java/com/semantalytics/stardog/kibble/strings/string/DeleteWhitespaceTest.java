@@ -30,7 +30,7 @@ public class DeleteWhitespaceTest extends AbstractStardogTest {
     public void testEmptyString() {
       
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:deleteWhitespace(\"\", , 10) as ?result) }";
+                    "select ?result where { bind(string:deleteWhitespace(\"\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
            
