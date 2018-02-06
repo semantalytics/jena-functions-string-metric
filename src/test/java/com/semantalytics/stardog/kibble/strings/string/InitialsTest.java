@@ -21,7 +21,7 @@ public class InitialsTest  extends AbstractStardogTest {
 
                 final String aValue = aResult.next().getValue("result").stringValue();
 
-                assertEquals("sgd", aValue);
+                assertEquals("Sgd", aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
@@ -38,7 +38,7 @@ public class InitialsTest  extends AbstractStardogTest {
 
             final String aValue = aResult.next().getValue("result").stringValue();
 
-            assertEquals("sgd", aValue);
+            assertEquals("Sgd", aValue);
             assertFalse("Should have no more results", aResult.hasNext());
         }
     }
