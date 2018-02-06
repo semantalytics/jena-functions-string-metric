@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.*;
 public class IndexOf extends AbstractFunction implements StringFunction {
 
     protected IndexOf() {
-        super(1, StringVocabulary.indexOf.stringValue());
+        super(Range.closed(2, 3), StringVocabulary.indexOf.stringValue());
     }
 
     private IndexOf(final IndexOf indexOf) {
@@ -22,12 +22,22 @@ public class IndexOf extends AbstractFunction implements StringFunction {
     @Override
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
 
-        final String string = assertStringLiteral(values[0]).stringValue();
-        final String searchChars = assertStringLiteral(values[1]).stringValue();
+        final String sequence = assertStringLiteral(values[0]).stringValue();
+        final String searchSequence = assertStringLiteral(values[1]).stringValue();
 
-        //TODO handle multiple searchchars
+        switch(values.length) {
+            case 2: {
+                return literal(StringUtils.indexOf(sequence, searchSequence));
+            }
+            case 3: {
+                final int startPosition = assertNumericLiteral(values[2]).intValue();
 
-        return literal(StringUtils.indexOf(string, searchChars));
+                return literal(StringUtils.indexOf(sequence, searchSequence, startPosition));
+            }
+            default: {
+                throw new ExpressionEvaluationException("Expected 2 or 3 args. Found " + values.length);
+            }
+        }
     }
 
     @Override
