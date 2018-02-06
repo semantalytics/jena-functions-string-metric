@@ -10,12 +10,12 @@ import org.openrdf.model.Value;
 
 public final class IndexOfAnyBut extends AbstractFunction implements StringFunction {
 
-    protected IndexOfAnyBut() {
-        super(1, StringVocabulary.indexOfAnyBut.stringValue());
+    protected IndexOfAnyCharBut() {
+        super(1, StringVocabulary.indexOfAnyCharBut.stringValue());
     }
 
-    private IndexOfAnyBut(final IndexOfAnyBut indexOfAnyBut) {
-        super(indexOfAnyBut);
+    private IndexOfAnyCharBut(final IndexOfAnyCharBut indexOfAnyCharBut) {
+        super(indexOfAnyCharBut);
     }
 
     @Override
@@ -28,12 +28,12 @@ public final class IndexOfAnyBut extends AbstractFunction implements StringFunct
 
         //TODO handle multiple searchchars
 
-        return Values.literal(StringUtils.indexOfAnyBut(string, searchChars));
+        return Values.literal(StringUtils.indexOfAnyCharBut(string, searchChars));
     }
 
     @Override
-    public IndexOfAnyBut copy() {
-        return new IndexOfAnyBut(this);
+    public IndexOfAnyCharBut copy() {
+        return new IndexOfAnyCharBut(this);
     }
 
     @Override
@@ -43,6 +43,6 @@ public final class IndexOfAnyBut extends AbstractFunction implements StringFunct
 
     @Override
     public String toString() {
-        return StringVocabulary.indexOfAnyBut.name();
+        return StringVocabulary.indexOfAnyCharBut.name();
     }
 }
