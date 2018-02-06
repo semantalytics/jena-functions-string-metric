@@ -112,6 +112,7 @@ public enum StringVocabulary {
     startsWithAny,
     startsWithIgnoreCase,
     strip,
+    stripAll,
     stripAccents,
     stripAll,
     stripEnd,
