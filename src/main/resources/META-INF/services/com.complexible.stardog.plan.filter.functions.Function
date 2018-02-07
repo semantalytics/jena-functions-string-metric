@@ -153,8 +153,10 @@ com.semantalytics.stardog.kibble.strings.string.EqualsAny
 com.semantalytics.stardog.kibble.strings.string.EqualsIgnoreCase
 com.semantalytics.stardog.kibble.strings.string.Digits
 com.semantalytics.stardog.kibble.strings.string.IndexOf
-com.semantalytics.stardog.kibble.strings.string.IndexOfAny
-com.semantalytics.stardog.kibble.strings.string.IndexOfAnyBut
+com.semantalytics.stardog.kibble.strings.string.IndexOfAnyString
+com.semantalytics.stardog.kibble.strings.string.IndexOfAnyChar
+com.semantalytics.stardog.kibble.strings.string.IndexOfAnyCharBut
+com.semantalytics.stardog.kibble.strings.string.IndexOfAnyStringBut
 com.semantalytics.stardog.kibble.strings.string.IndexOfDifference
 com.semantalytics.stardog.kibble.strings.string.IndexOfIgnoreCase
 com.semantalytics.stardog.kibble.strings.string.Initials

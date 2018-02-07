@@ -1,13 +1,13 @@
 package com.semantalytics.stardog.kibble.strings.string;
 
 import com.semantalytics.stardog.kibble.AbstractStardogTest;
-import org.junit.*;
+import org.junit.Test;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.TupleQueryResult;
 
 import static org.junit.Assert.*;
 
-public class IndexOfAnyTest  extends AbstractStardogTest {
+public class IndexOfAnyCharTest extends AbstractStardogTest {
 
     @Test
     public void testIndexOfAny() {

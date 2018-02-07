@@ -13,13 +13,13 @@ public class PadStartTest  extends AbstractStardogTest {
     public void testAbbreviateMiddle() {
    
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:padStart(\"Stardog graph database\", \"...\", 8) AS ?abbreviation) }";
+                    "select ?result where { bind(string:padStart(\"Stardog graph database\", \"...\", 8) AS ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final String aValue = aResult.next().getValue("abbreviation").stringValue();
+                final String aValue = aResult.next().getValue("result").stringValue();
 
                 assertEquals("Stard...", aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
@@ -30,13 +30,13 @@ public class PadStartTest  extends AbstractStardogTest {
     public void testEmptyString() {
      
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:padStart(\"\", 5) as ?abbreviation) }";
+                    "select ?result where { bind(string:padStart(\"\", 5) as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final String aValue = aResult.next().getValue("abbreviation").stringValue();
+                final String aValue = aResult.next().getValue("result").stringValue();
 
                 assertEquals("", aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
@@ -47,7 +47,7 @@ public class PadStartTest  extends AbstractStardogTest {
     public void testTooFewArgs() {
 
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:padStart(\"one\") as ?abbreviation) }";
+                    "select ?result where { bind(string:padStart(\"one\") as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -64,7 +64,7 @@ public class PadStartTest  extends AbstractStardogTest {
     public void testTooManyArgs() {
 
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:padStart(\"one\", 2, \"three\") as ?abbreviation) }";
+                    "select ?result where { bind(string:padStart(\"one\", 2, \"three\") as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -81,7 +81,7 @@ public class PadStartTest  extends AbstractStardogTest {
     public void testWrongTypeFirstArg() {
       
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:padStart(4, 5) as ?abbreviation) }";
+                    "select ?result where { bind(string:padStart(4, 5) as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -98,7 +98,7 @@ public class PadStartTest  extends AbstractStardogTest {
     public void testWrongTypeSecondArg() {
       
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:padStart(\"one\", \"two\") as ?abbreviation) }";
+                    "select ?result where { bind(string:padStart(\"one\", \"two\") as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -115,7 +115,7 @@ public class PadStartTest  extends AbstractStardogTest {
     public void testLengthTooShort() {
       
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:padStart(\"Stardog\", 3) as ?abbreviation) }";
+                    "select ?result where { bind(string:padStart(\"Stardog\", 3) as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 

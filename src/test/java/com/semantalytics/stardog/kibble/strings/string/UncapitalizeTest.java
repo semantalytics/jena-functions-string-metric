@@ -13,14 +13,14 @@ public class UncapitalizeTest  extends AbstractStardogTest {
     public void testAbbreviateMiddle() {
        
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:uncapitalize(\"Stardog graph database\", \"...\", 8) AS ?abbreviation) }";
+                    "select ?result where { bind(string:uncapitalize(\"Stardog graph database\", \"...\", 8) AS ?result) }";
 
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final String aValue = aResult.next().getValue("abbreviation").stringValue();
+                final String aValue = aResult.next().getValue("result").stringValue();
 
                 assertEquals("Stard...", aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
@@ -32,14 +32,14 @@ public class UncapitalizeTest  extends AbstractStardogTest {
     public void testEmptyString() {
       
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:uncapitalize(\"\", 5) as ?abbreviation) }";
+                    "select ?result where { bind(string:uncapitalize(\"\", 5) as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
         
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final String aValue = aResult.next().getValue("abbreviation").stringValue();
+                final String aValue = aResult.next().getValue("result").stringValue();
 
                 assertEquals("", aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
@@ -50,7 +50,7 @@ public class UncapitalizeTest  extends AbstractStardogTest {
     public void testTooFewArgs() {
 
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:uncapitalize(\"one\") as ?abbreviation) }";
+                    "select ?result where { bind(string:uncapitalize(\"one\") as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -67,7 +67,7 @@ public class UncapitalizeTest  extends AbstractStardogTest {
     public void testTooManyArgs() {
 
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:uncapitalize(\"one\", 2, \"three\") as ?abbreviation) }";
+                    "select ?result where { bind(string:uncapitalize(\"one\", 2, \"three\") as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -84,7 +84,7 @@ public class UncapitalizeTest  extends AbstractStardogTest {
     public void testWrongTypeFirstArg() {
       
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:uncapitalize(4, 5) as ?abbreviation) }";
+                    "select ?result where { bind(string:uncapitalize(4, 5) as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -101,7 +101,7 @@ public class UncapitalizeTest  extends AbstractStardogTest {
     public void testWrongTypeSecondArg() {
         
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:uncapitalize(\"one\", \"two\") as ?abbreviation) }";
+                    "select ?result where { bind(string:uncapitalize(\"one\", \"two\") as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -118,7 +118,7 @@ public class UncapitalizeTest  extends AbstractStardogTest {
     public void testLengthTooShort() {
        
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:uncapitalize(\"Stardog\", 3) as ?abbreviation) }";
+                    "select ?result where { bind(string:uncapitalize(\"Stardog\", 3) as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 

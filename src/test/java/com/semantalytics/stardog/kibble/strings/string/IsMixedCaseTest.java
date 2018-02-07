@@ -14,14 +14,14 @@ public class IsMixedCaseTest  extends AbstractStardogTest {
         
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?abbreviation where { bind(string:isMixedCase(\"Stardog graph database\", \"...\", 8) AS ?abbreviation) }";
+                    "select ?result where { bind(string:isMixedCase(\"Stardog graph database\", \"...\", 8) AS ?result) }";
 
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final String aValue = aResult.next().getValue("abbreviation").stringValue();
+                final String aValue = aResult.next().getValue("result").stringValue();
 
                 assertEquals("Stard...", aValue);
 
@@ -35,14 +35,14 @@ public class IsMixedCaseTest  extends AbstractStardogTest {
        
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?abbreviation where { bind(string:isMixedCase(\"\", 5) as ?abbreviation) }";
+                    "select ?result where { bind(string:isMixedCase(\"\", 5) as ?result) }";
 
             final TupleQueryResult aResult = connection.select(aQuery).execute();
 
        
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final String aValue = aResult.next().getValue("abbreviation").stringValue();
+                final String aValue = aResult.next().getValue("result").stringValue();
 
                 assertEquals("", aValue);
 
@@ -55,7 +55,7 @@ public class IsMixedCaseTest  extends AbstractStardogTest {
 
    
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?abbreviation where { bind(string:isMixedCase(\"one\") as ?abbreviation) }";
+                    "select ?result where { bind(string:isMixedCase(\"one\") as ?result) }";
 
             final TupleQueryResult aResult = connection.select(aQuery).execute();
          
@@ -77,7 +77,7 @@ public class IsMixedCaseTest  extends AbstractStardogTest {
 
        
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?abbreviation where { bind(string:isMixedCase(\"one\", 2, \"three\") as ?abbreviation) }";
+                    "select ?result where { bind(string:isMixedCase(\"one\", 2, \"three\") as ?result) }";
 
             final TupleQueryResult aResult = connection.select(aQuery).execute();
          
@@ -99,7 +99,7 @@ public class IsMixedCaseTest  extends AbstractStardogTest {
     public void testWrongTypeFirstArg() {
     
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?abbreviation where { bind(string:isMixedCase(4, 5) as ?abbreviation) }";
+                    "select ?result where { bind(string:isMixedCase(4, 5) as ?result) }";
 
             final TupleQueryResult aResult = connection.select(aQuery).execute();
         
@@ -120,7 +120,7 @@ public class IsMixedCaseTest  extends AbstractStardogTest {
      
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?abbreviation where { bind(string:isMixedCase(\"one\", \"two\") as ?abbreviation) }";
+                    "select ?result where { bind(string:isMixedCase(\"one\", \"two\") as ?result) }";
 
             final TupleQueryResult aResult = connection.select(aQuery).execute();
          
@@ -140,7 +140,7 @@ public class IsMixedCaseTest  extends AbstractStardogTest {
     public void testLengthTooShort() {
     
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?abbreviation where { bind(string:isMixedCase(\"Stardog\", 3) as ?abbreviation) }";
+                    "select ?result where { bind(string:isMixedCase(\"Stardog\", 3) as ?result) }";
 
             final TupleQueryResult aResult = connection.select(aQuery).execute();
         

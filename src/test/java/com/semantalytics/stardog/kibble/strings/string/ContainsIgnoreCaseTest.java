@@ -13,13 +13,13 @@ public class ContainsIgnoreCaseTest extends AbstractStardogTest {
     public void testAbbreviateMiddle() {
     
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:containsIgnoreCase(\"Stardog graph database\", \"...\", 8) AS ?abbreviation) }";
+                    "select ?result where { bind(string:containsIgnoreCase(\"Stardog graph database\", \"...\", 8) AS ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final String aValue = aResult.next().getValue("abbreviation").stringValue();
+                final String aValue = aResult.next().getValue("result").stringValue();
 
                 assertEquals("Stard...", aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
@@ -30,13 +30,13 @@ public class ContainsIgnoreCaseTest extends AbstractStardogTest {
     public void testEmptyString() {
      
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-            "select ?abbreviation where { bind(string:containsIgnoreCase(\"\", 5) as ?abbreviation) }";
+            "select ?result where { bind(string:containsIgnoreCase(\"\", 5) as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final String aValue = aResult.next().getValue("abbreviation").stringValue();
+                final String aValue = aResult.next().getValue("result").stringValue();
 
                 assertEquals("", aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
@@ -48,7 +48,7 @@ public class ContainsIgnoreCaseTest extends AbstractStardogTest {
 
      
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-            "select ?abbreviation where { bind(string:containsIgnoreCase(\"one\") as ?abbreviation) }";
+            "select ?result where { bind(string:containsIgnoreCase(\"one\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -66,7 +66,7 @@ public class ContainsIgnoreCaseTest extends AbstractStardogTest {
 
       
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-            "select ?abbreviation where { bind(string:containsIgnoreCase(\"one\", 2, \"three\") as ?abbreviation) }";
+            "select ?result where { bind(string:containsIgnoreCase(\"one\", 2, \"three\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -83,7 +83,7 @@ public class ContainsIgnoreCaseTest extends AbstractStardogTest {
     public void testWrongTypeFirstArg() {
     
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-            "select ?abbreviation where { bind(string:containsIgnoreCase(4, 5) as ?abbreviation) }";
+            "select ?result where { bind(string:containsIgnoreCase(4, 5) as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -100,7 +100,7 @@ public class ContainsIgnoreCaseTest extends AbstractStardogTest {
     public void testWrongTypeSecondArg() {
      
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-            "select ?abbreviation where { bind(string:containsIgnoreCase(\"one\", \"two\") as ?abbreviation) }";
+            "select ?result where { bind(string:containsIgnoreCase(\"one\", \"two\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -117,7 +117,7 @@ public class ContainsIgnoreCaseTest extends AbstractStardogTest {
     public void testLengthTooShort() {
        
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-            "select ?abbreviation where { bind(string:containsIgnoreCase(\"Stardog\", 3) as ?abbreviation) }";
+            "select ?result where { bind(string:containsIgnoreCase(\"Stardog\", 3) as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 

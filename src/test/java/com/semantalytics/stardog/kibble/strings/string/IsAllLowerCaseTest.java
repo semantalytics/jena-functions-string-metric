@@ -14,14 +14,14 @@ public class IsAllLowerCaseTest  extends AbstractStardogTest {
     public void testAbbreviateMiddle() {
       
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?abbreviation where { bind(string:isAllLowerCase(\"Stardog graph database\", \"...\", 8) AS ?abbreviation) }";
+                    "select ?result where { bind(string:isAllLowerCase(\"Stardog graph database\", \"...\", 8) AS ?result) }";
 
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final String aValue = aResult.next().getValue("abbreviation").stringValue();
+                final String aValue = aResult.next().getValue("result").stringValue();
 
                 assertEquals("Stard...", aValue);
 
@@ -34,14 +34,14 @@ public class IsAllLowerCaseTest  extends AbstractStardogTest {
     public void testEmptyString() {
     
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?abbreviation where { bind(string:isAllLowerCase(\"\", 5) as ?abbreviation) }";
+                    "select ?result where { bind(string:isAllLowerCase(\"\", 5) as ?result) }";
 
             final TupleQueryResult aResult = connection.select(aQuery).execute();
 
    
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final String aValue = aResult.next().getValue("abbreviation").stringValue();
+                final String aValue = aResult.next().getValue("result").stringValue();
 
                 assertEquals("", aValue);
 
@@ -53,7 +53,7 @@ public class IsAllLowerCaseTest  extends AbstractStardogTest {
     public void testTooFewArgs() {
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?abbreviation where { bind(string:isAllLowerCase(\"one\") as ?abbreviation) }";
+                    "select ?result where { bind(string:isAllLowerCase(\"one\") as ?result) }";
 
             final TupleQueryResult aResult = connection.select(aQuery).execute();
             
@@ -75,7 +75,7 @@ public class IsAllLowerCaseTest  extends AbstractStardogTest {
 
        
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?abbreviation where { bind(string:isAllLowerCase(\"one\", 2, \"three\") as ?abbreviation) }";
+                    "select ?result where { bind(string:isAllLowerCase(\"one\", 2, \"three\") as ?result) }";
 
             final TupleQueryResult aResult = connection.select(aQuery).execute();
      
@@ -98,7 +98,7 @@ public class IsAllLowerCaseTest  extends AbstractStardogTest {
        
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?abbreviation where { bind(string:isAllLowerCase(4, 5) as ?abbreviation) }";
+                    "select ?result where { bind(string:isAllLowerCase(4, 5) as ?result) }";
 
             final TupleQueryResult aResult = connection.select(aQuery).execute();
          
@@ -118,7 +118,7 @@ public class IsAllLowerCaseTest  extends AbstractStardogTest {
     public void testWrongTypeSecondArg() {
        
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?abbreviation where { bind(string:isAllLowerCase(\"one\", \"two\") as ?abbreviation) }";
+                    "select ?result where { bind(string:isAllLowerCase(\"one\", \"two\") as ?result) }";
 
             final TupleQueryResult aResult = connection.select(aQuery).execute();
           
@@ -139,7 +139,7 @@ public class IsAllLowerCaseTest  extends AbstractStardogTest {
        
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?abbreviation where { bind(string:isAllLowerCase(\"Stardog\", 3) as ?abbreviation) }";
+                    "select ?result where { bind(string:isAllLowerCase(\"Stardog\", 3) as ?result) }";
 
             final TupleQueryResult aResult = connection.select(aQuery).execute();
            

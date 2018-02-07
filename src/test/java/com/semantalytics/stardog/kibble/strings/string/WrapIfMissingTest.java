@@ -10,35 +10,35 @@ import static org.junit.Assert.*;
 public class WrapIfMissingTest  extends AbstractStardogTest {
 
     @Test
-    public void testAbbreviateMiddle() {
+    public void testIfNoWrapping() {
         
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:wrapIfMissing(\"Stardog graph database\", \"...\", 8) AS ?abbreviation) }";
+                    "select ?result where { bind(string:wrapIfMissing(\"Stardog\", \"*\") AS ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final String aValue = aResult.next().getValue("abbreviation").stringValue();
+                final String aValue = aResult.next().getValue("result").stringValue();
 
-                assertEquals("Stard...", aValue);
+                assertEquals("*Stardog*", aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
 
     @Test
-    public void testEmptyString() {
+    public void testIfWrapped() {
 
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:wrapIfMissing(\"\", 5) as ?abbreviation) }";
+                    "select ?result where { bind(string:wrapIfMissing(\"*Stardog*\", \"*\") as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final String aValue = aResult.next().getValue("abbreviation").stringValue();
+                final String aValue = aResult.next().getValue("result").stringValue();
 
-                assertEquals("", aValue);
+                assertEquals("*Stardog*", aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
@@ -47,7 +47,7 @@ public class WrapIfMissingTest  extends AbstractStardogTest {
     public void testTooFewArgs() {
 
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:wrapIfMissing(\"one\") as ?abbreviation) }";
+                    "select ?result where { bind(string:wrapIfMissing(\"one\") as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -64,7 +64,7 @@ public class WrapIfMissingTest  extends AbstractStardogTest {
     public void testTooManyArgs() {
 
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:wrapIfMissing(\"one\", 2, \"three\") as ?abbreviation) }";
+                    "select ?result where { bind(string:wrapIfMissing(\"one\", \"two\", \"three\") as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -81,7 +81,7 @@ public class WrapIfMissingTest  extends AbstractStardogTest {
     public void testWrongTypeFirstArg() {
         
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:wrapIfMissing(4, 5) as ?abbreviation) }";
+                    "select ?result where { bind(string:wrapIfMissing(1, \"two\") as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -98,7 +98,7 @@ public class WrapIfMissingTest  extends AbstractStardogTest {
     public void testWrongTypeSecondArg() {
 
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:wrapIfMissing(\"one\", \"two\") as ?abbreviation) }";
+                    "select ?result where { bind(string:wrapIfMissing(\"one\", 2) as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -112,10 +112,10 @@ public class WrapIfMissingTest  extends AbstractStardogTest {
     }
 
     @Test
-    public void testLengthTooShort() {
+    public void testMoreThanOneWrapChar() {
       
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:wrapIfMissing(\"Stardog\", 3) as ?abbreviation) }";
+                    "select ?result where { bind(string:wrapIfMissing(\"Stardog\", \"**\") as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
