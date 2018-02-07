@@ -24,9 +24,11 @@ public final class WrapIfMissing extends AbstractFunction implements StringFunct
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
       
       final String string = assertStringLiteral(values[0]).stringValue();
-      final String wrapWith = assertIntegerLiteral(values[1]).stringValue();
+      final String wrapWith = assertStringLiteral(values[1]).stringValue();
       
-      checkElementIndex(0, wrapWith.length());
+      if (wrapWith.length() != 1) {
+          throw new ExpressionEvaluationException("Expecting a single character for second argument. Found '" + wrapWith + "'");
+      }
 
       return Values.literal(StringUtils.wrapIfMissing(string, wrapWith.charAt(0)));
     }

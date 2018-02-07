@@ -28,7 +28,7 @@ public final class IndexOfAnyStringBut extends AbstractFunction implements Strin
 
         //TODO handle multiple searchchars
 
-        return Values.literal(StringUtils.indexOfAnyStringBut(string, searchChars));
+        return Values.literal(StringUtils.indexOfAnyBut(string, searchChars));
     }
 
     @Override
