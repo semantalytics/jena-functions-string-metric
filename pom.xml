@@ -49,7 +49,7 @@
     </organization>
 
     <properties>
-        <stardog.version>5.2.0</stardog.version>
+        <stardog.version>5.2.1</stardog.version>
         <icu4j.version>2.6.1</icu4j.version>
         <slugify.version>2.1.9</slugify.version>
         <moneta.version>1.1</moneta.version>
