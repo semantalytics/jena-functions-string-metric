@@ -4,6 +4,7 @@ import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.string.StringFunction;
+import com.google.common.collect.Range;
 import org.apache.commons.lang3.StringUtils;
 import org.openrdf.model.Value;
 

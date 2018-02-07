@@ -24,7 +24,7 @@ public final class IndexOfAnyString extends AbstractFunction implements StringFu
         final String string = assertStringLiteral(values[0]).stringValue();
         final String searchChars = assertStringLiteral(values[1]).stringValue();
 
-        return Values.literal(StringUtils.indexOfAnyString(string, searchChars));
+        return Values.literal(StringUtils.indexOfAny(string, searchChars));
     }
 
     @Override

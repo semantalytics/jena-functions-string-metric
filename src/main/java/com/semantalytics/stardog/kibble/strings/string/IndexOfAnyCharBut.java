@@ -8,7 +8,7 @@ import com.complexible.stardog.plan.filter.functions.string.StringFunction;
 import org.apache.commons.lang3.StringUtils;
 import org.openrdf.model.Value;
 
-public final class IndexOfAnyBut extends AbstractFunction implements StringFunction {
+public final class IndexOfAnyCharBut extends AbstractFunction implements StringFunction {
 
     protected IndexOfAnyCharBut() {
         super(1, StringVocabulary.indexOfAnyCharBut.stringValue());
@@ -28,7 +28,7 @@ public final class IndexOfAnyBut extends AbstractFunction implements StringFunct
 
         //TODO handle multiple searchchars
 
-        return Values.literal(StringUtils.indexOfAnyCharBut(string, searchChars));
+        return Values.literal(StringUtils.indexOfAnyBut(string, searchChars));
     }
 
     @Override
