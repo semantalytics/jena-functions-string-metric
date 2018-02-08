@@ -10,10 +10,10 @@ import static org.junit.Assert.*;
 public class AppendIfMissingTest extends AbstractStardogTest {
 
     @Test
-    public void testAppendIfMissing() {
+    public void testMissing() {
 
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                "select ?result where { bind(string:appendIfMissing(\"Stardog\", \".txt\", 8) AS ?result) }";
+                "select ?result where { bind(string:appendIfMissing(\"Stardog\", \".txt\") AS ?result) }";
 
         try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -100,7 +100,7 @@ public class AppendIfMissingTest extends AbstractStardogTest {
 
 
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                "select ?result where { bind(string:appendIfMissing(\"one\", \"two\") as ?result) }";
+                "select ?result where { bind(string:appendIfMissing(\"one\", 2) as ?result) }";
 
         try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 

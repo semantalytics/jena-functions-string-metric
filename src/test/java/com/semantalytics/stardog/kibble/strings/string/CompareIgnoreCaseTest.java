@@ -38,7 +38,7 @@ public class CompareIgnoreCaseTest  extends AbstractStardogTest {
 
             final int aValue = Integer.parseInt(aResult.next().getValue("result").stringValue());
 
-            assertEquals(-1, aValue);
+            assertEquals(1, aValue);
             assertFalse("Should have no more results", aResult.hasNext());
         }
     }
@@ -55,7 +55,7 @@ public class CompareIgnoreCaseTest  extends AbstractStardogTest {
 
             final int aValue = Integer.parseInt(aResult.next().getValue("result").stringValue());
 
-            assertEquals(1, aValue);
+            assertEquals(-1, aValue);
             assertFalse("Should have no more results", aResult.hasNext());
         }
     }
