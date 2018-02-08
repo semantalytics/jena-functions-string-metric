@@ -1,1 +1,0 @@
-package com.semantalytics.stardog.kibble.strings.string;
