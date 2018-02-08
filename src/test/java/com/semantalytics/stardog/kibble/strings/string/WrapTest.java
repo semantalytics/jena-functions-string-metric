@@ -10,10 +10,10 @@ import static org.junit.Assert.*;
 public class WrapTest extends AbstractStardogTest {
 
     @Test
-    public void testAbbreviateMiddle() {
+    public void testNotWrapped() {
 
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:wrap(\"Stardog graph database\", \"...\", 8) AS ?result) }";
+                    "select ?result where { bind(string:wrap(\"Stardog\", \"*\") AS ?result) }";
 
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
@@ -22,16 +22,16 @@ public class WrapTest extends AbstractStardogTest {
 
                 final String aValue = aResult.next().getValue("result").stringValue();
 
-                assertEquals("Stard...", aValue);
+                assertEquals("*Stardog*", aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
 
     @Test
-    public void testEmptyString() {
+    public void testWrapped() {
 
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:wrap(\"\", 5) as ?result) }";
+                    "select ?result where { bind(string:wrap(\"*Stardog*\", \"*\") as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -39,7 +39,7 @@ public class WrapTest extends AbstractStardogTest {
 
                 final String aValue = aResult.next().getValue("result").stringValue();
 
-                assertEquals("", aValue);
+                assertEquals("**Stardog**", aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
@@ -65,7 +65,7 @@ public class WrapTest extends AbstractStardogTest {
     public void testTooManyArgs() {
 
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:wrap(\"one\", 2, \"three\") as ?result) }";
+                    "select ?result where { bind(string:wrap(\"one\", \"2\", \"3\") as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -82,7 +82,7 @@ public class WrapTest extends AbstractStardogTest {
     public void testWrongTypeFirstArg() {
 
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:wrap(4, 5) as ?result) }";
+                    "select ?result where { bind(string:wrap(1,\"2\") as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -99,7 +99,7 @@ public class WrapTest extends AbstractStardogTest {
     public void testWrongTypeSecondArg() {
 
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:wrap(\"one\", \"two\") as ?result) }";
+                    "select ?result where { bind(string:wrap(\"one\", 2) as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -113,19 +113,19 @@ public class WrapTest extends AbstractStardogTest {
     }
 
     @Test
-    public void testLengthTooShort() {
+    public void testMultiCharacterWrap() {
 
-       final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:wrap(\"Stardog\", 3) as ?result) }";
+        final String aQuery = StringVocabulary.sparqlPrefix("string") +
+                "select ?result where { bind(string:wrap(\"one\", \"**\") as ?result) }";
 
-            try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+        try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
-                assertTrue("Should have a result", aResult.hasNext());
+            assertTrue("Should have a result", aResult.hasNext());
 
-                final BindingSet aBindingSet = aResult.next();
+            final BindingSet aBindingSet = aResult.next();
 
-                assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-                assertFalse("Should have no more results", aResult.hasNext());
-            }
+            assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+            assertFalse("Should have no more results", aResult.hasNext());
+        }
     }
 }

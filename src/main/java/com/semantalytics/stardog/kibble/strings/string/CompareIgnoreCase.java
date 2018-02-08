@@ -21,10 +21,10 @@ public final class CompareIgnoreCase extends AbstractFunction implements StringF
     @Override
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
 
-        final String string1 = assertStringLiteral(values[0]).stringValue();
-        final String string2= assertIntegerLiteral(values[1]).stringValue();
+        final String firstString = assertStringLiteral(values[0]).stringValue();
+        final String secondString = assertIntegerLiteral(values[1]).stringValue();
 
-        return Values.literal(StringUtils.compareIgnoreCase(string1, string2));
+        return Values.literal(StringUtils.compareIgnoreCase(firstString, secondString));
     }
 
     @Override

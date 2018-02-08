@@ -144,7 +144,6 @@ com.semantalytics.stardog.kibble.strings.string.ContainsNone
 com.semantalytics.stardog.kibble.strings.string.ContainsOnly
 com.semantalytics.stardog.kibble.strings.string.ContainsWhitespace
 com.semantalytics.stardog.kibble.strings.string.CountMatches
-com.semantalytics.stardog.kibble.strings.string.DefaultIfEmpty
 com.semantalytics.stardog.kibble.strings.string.DeleteWhitespace
 com.semantalytics.stardog.kibble.strings.string.Difference
 com.semantalytics.stardog.kibble.strings.string.EndsWith
