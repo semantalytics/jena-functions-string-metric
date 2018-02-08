@@ -6,18 +6,17 @@ import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.string.StringFunction;
 import com.google.common.base.Joiner;
-import com.google.common.collect.Range;
 import org.apache.commons.lang3.StringUtils;
 import org.openrdf.model.Value;
 
-public final class SplitByCharacterType extends AbstractFunction implements StringFunction {
+public final class SplitByCharacterTypeCamelCase extends AbstractFunction implements StringFunction {
 
-    protected SplitByCharacterType() {
-        super(1, StringVocabulary.splitByCharacterType.stringValue());
+    protected SplitByCharacterTypeCamelCase() {
+        super(1, StringVocabulary.splitByCharacterTypeCamelCase.stringValue());
     }
 
-    private SplitByCharacterType(final SplitByCharacterType splitByCharacterType) {
-        super(splitByCharacterType);
+    private SplitByCharacterTypeCamelCase(final SplitByCharacterTypeCamelCase splitByCharacterTypeCamelCase) {
+        super(splitByCharacterTypeCamelCase);
     }
 
     @Override
@@ -25,12 +24,12 @@ public final class SplitByCharacterType extends AbstractFunction implements Stri
 
         final String string = assertStringLiteral(values[0]).stringValue();
 
-        return Values.literal(Joiner.on("\u001f").join(StringUtils.splitByCharacterType(string)));
+        return Values.literal(Joiner.on("\u001f").join(StringUtils.splitByCharacterTypeCamelCase(string)));
     }
 
     @Override
-    public SplitByCharacterType copy() {
-        return new SplitByCharacterType(this);
+    public SplitByCharacterTypeCamelCase copy() {
+        return new SplitByCharacterTypeCamelCase(this);
     }
 
     @Override
@@ -40,6 +39,6 @@ public final class SplitByCharacterType extends AbstractFunction implements Stri
 
     @Override
     public String toString() {
-        return StringVocabulary.splitByCharacterType.name();
+        return StringVocabulary.splitByCharacterTypeCamelCase.name();
     }
 }
