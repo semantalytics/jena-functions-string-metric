@@ -7,7 +7,7 @@ import org.openrdf.query.TupleQueryResult;
 
 import static org.junit.Assert.*;
 
-public class IsWhitespaceTest  extends AbstractStardogTest {
+public class TestIsWhitespace extends AbstractStardogTest {
 
     @Test
     public void testIsWhitespaceFalse() {
