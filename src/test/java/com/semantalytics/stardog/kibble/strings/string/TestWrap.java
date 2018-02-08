@@ -7,7 +7,7 @@ import org.openrdf.query.TupleQueryResult;
 
 import static org.junit.Assert.*;
 
-public class WrapTest extends AbstractStardogTest {
+public class TestWrap extends AbstractStardogTest {
 
     @Test
     public void testNotWrapped() {
