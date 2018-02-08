@@ -6,7 +6,7 @@ import org.openrdf.query.TupleQueryResult;
 
 import static org.junit.Assert.*;
 
-public class UpperCaseFullyTest  extends AbstractStardogTest {
+public class TestUpperCaseFully extends AbstractStardogTest {
 
     @Test
     public void testUpperCaseFully() {
