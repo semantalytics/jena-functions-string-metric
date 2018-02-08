@@ -7,7 +7,7 @@ import org.openrdf.query.TupleQueryResult;
 
 import static org.junit.Assert.*;
 
-public class StripAccentsTest  extends AbstractStardogTest {
+public class TestStripAccents extends AbstractStardogTest {
 
     @Test
     public void testOneArgumentWithoutAccents() {
