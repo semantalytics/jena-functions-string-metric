@@ -7,7 +7,7 @@ import org.openrdf.query.TupleQueryResult;
 
 import static org.junit.Assert.*;
 
-public class PrependIfMissingTest  extends AbstractStardogTest {
+public class TestPrependIfMissing extends AbstractStardogTest {
 
     @Test
     public void testAbbreviateMiddle() {
