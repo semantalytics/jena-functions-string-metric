@@ -7,7 +7,7 @@ import org.openrdf.query.TupleQueryResult;
 
 import static org.junit.Assert.*;
 
-public class IsMixedCaseTest  extends AbstractStardogTest {
+public class TestIsMixedCase extends AbstractStardogTest {
 
     @Test
     public void testAbbreviateMiddle() {
