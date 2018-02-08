@@ -7,7 +7,7 @@ import org.openrdf.query.TupleQueryResult;
 
 import static org.junit.Assert.*;
 
-public class OverlayTest  extends AbstractStardogTest {
+public class TestOverlay extends AbstractStardogTest {
 
     @Test
     public void overlayMiddle() {
