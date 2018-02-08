@@ -7,7 +7,7 @@ import org.openrdf.query.TupleQueryResult;
 
 import static org.junit.Assert.*;
 
-public class CompareIgnoreCaseTest  extends AbstractStardogTest {
+public class TestCompareIgnoreCase extends AbstractStardogTest {
 
     @Test
     public void testEqual() {
