@@ -7,7 +7,7 @@ import org.openrdf.query.TupleQueryResult;
 
 import static org.junit.Assert.*;
 
-public class TruncateTest  extends AbstractStardogTest {
+public class TestTruncate extends AbstractStardogTest {
 
     @Test
     public void testAbbreviateMiddle() {
