@@ -7,7 +7,7 @@ import org.openrdf.query.TupleQueryResult;
 
 import static org.junit.Assert.*;
 
-public class DeleteWhitespaceTest extends AbstractStardogTest {
+public class TestDeleteWhitespace extends AbstractStardogTest {
 
     @Test
     public void testAbbreviateMiddle() {
