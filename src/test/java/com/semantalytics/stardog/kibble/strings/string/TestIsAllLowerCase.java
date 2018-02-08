@@ -7,7 +7,7 @@ import org.openrdf.query.TupleQueryResult;
 
 import static org.junit.Assert.*;
 
-public class IsAllLowerCaseTest  extends AbstractStardogTest {
+public class TestIsAllLowerCase extends AbstractStardogTest {
 
     @Test
     public void testTrue() {
