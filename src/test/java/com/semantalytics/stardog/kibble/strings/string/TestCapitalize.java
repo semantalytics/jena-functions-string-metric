@@ -7,7 +7,7 @@ import org.openrdf.query.TupleQueryResult;
 
 import static org.junit.Assert.*;
 
-public class CapitalizeTest  extends AbstractStardogTest {
+public class TestCapitalize extends AbstractStardogTest {
    
     @Test
     public void testCapitalize() {
