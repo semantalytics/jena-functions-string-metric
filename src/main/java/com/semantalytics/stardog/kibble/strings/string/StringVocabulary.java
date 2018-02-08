@@ -108,6 +108,7 @@ public enum StringVocabulary {
     right,
     rightPad,
     split,
+    splitByCharacterType,
     startsWith,
     startsWithAny,
     startsWithIgnoreCase,
