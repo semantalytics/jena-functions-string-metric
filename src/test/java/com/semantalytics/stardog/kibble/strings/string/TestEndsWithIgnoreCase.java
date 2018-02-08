@@ -9,7 +9,7 @@ import org.openrdf.query.TupleQueryResult;
 
 import static org.junit.Assert.*;
 
-public class EndsWithIgnoreCaseTest extends AbstractStardogTest {
+public class TestEndsWithIgnoreCase extends AbstractStardogTest {
 
     @Test
     public void testEndsWithIgnoreCase() {
