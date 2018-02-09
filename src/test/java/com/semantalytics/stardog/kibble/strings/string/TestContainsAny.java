@@ -110,21 +110,4 @@ public class TestContainsAny extends AbstractStardogTest {
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
-
-    @Test
-    public void testLengthTooShort() {
-       
-        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:containsAny(\"Stardog\", 3) as ?result) }";
-
-            try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
-
-                assertTrue("Should have a result", aResult.hasNext());
-
-                final BindingSet aBindingSet = aResult.next();
-
-                assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-                assertFalse("Should have no more results", aResult.hasNext());
-            }
-    }
 }

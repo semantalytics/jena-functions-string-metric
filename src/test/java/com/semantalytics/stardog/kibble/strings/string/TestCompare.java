@@ -19,9 +19,9 @@ public class TestCompare extends AbstractStardogTest {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final boolean aValue = Boolean.parseBoolean(aResult.next().getValue("result").stringValue());
+                final int aValue = Integer.parseInt(aResult.next().getValue("result").stringValue());
 
-                assertEquals(true, aValue);
+                assertEquals(0, aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
@@ -36,9 +36,9 @@ public class TestCompare extends AbstractStardogTest {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final boolean aValue = Boolean.parseBoolean(aResult.next().getValue("result").stringValue());
+                final int aValue = Integer.parseInt(aResult.next().getValue("result").stringValue());
 
-                assertEquals(1, aValue);
+                assertEquals(true, aValue < 0);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
@@ -47,15 +47,15 @@ public class TestCompare extends AbstractStardogTest {
     public void testLessThan() {
 
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                "select ?result where { bind(string:compare(\"dog\", \"star\") as ?result) }";
+                "select ?result where { bind(string:compare(\"dog\", \"Star\") as ?result) }";
 
         try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
             assertTrue("Should have a result", aResult.hasNext());
 
-            final boolean aValue = Boolean.parseBoolean(aResult.next().getValue("result").stringValue());
+            final int aValue = Integer.parseInt(aResult.next().getValue("result").stringValue());
 
-            assertEquals(-1, aValue);
+            assertEquals(true, aValue > 0);
             assertFalse("Should have no more results", aResult.hasNext());
         }
     }

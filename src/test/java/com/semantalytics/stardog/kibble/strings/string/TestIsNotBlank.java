@@ -7,7 +7,7 @@ import org.openrdf.query.TupleQueryResult;
 
 import static org.junit.Assert.*;
 
-public class TEstIsNotBlank extends AbstractStardogTest {
+public class TestIsNotBlank extends AbstractStardogTest {
 
     @Test
     public void testAbbreviateMiddle() {

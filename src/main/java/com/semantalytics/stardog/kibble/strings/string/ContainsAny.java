@@ -22,9 +22,12 @@ public final class ContainsAny extends AbstractFunction implements StringFunctio
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
       
       final String string = assertStringLiteral(values[0]).stringValue();
-      final int maxWidth = assertIntegerLiteral(values[1]).intValue();
-      
-      return Values.literal(StringUtils.contains(string, maxWidth));
+      final String search = assertStringLiteral(values[1]).stringValue();
+
+      if(search.length() != 1) {
+          throw new ExpressionEvaluationException("second argument must be a single character. Found " + search.length());
+      }
+      return Values.literal(StringUtils.contains(string, search.charAt(0)));
     }
 
     @Override

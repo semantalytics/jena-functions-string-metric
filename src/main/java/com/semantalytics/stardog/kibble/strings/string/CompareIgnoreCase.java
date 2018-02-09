@@ -22,7 +22,7 @@ public final class CompareIgnoreCase extends AbstractFunction implements StringF
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
 
         final String firstString = assertStringLiteral(values[0]).stringValue();
-        final String secondString = assertIntegerLiteral(values[1]).stringValue();
+        final String secondString = assertStringLiteral(values[1]).stringValue();
 
         return Values.literal(StringUtils.compareIgnoreCase(firstString, secondString));
     }

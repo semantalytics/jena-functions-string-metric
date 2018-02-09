@@ -8,13 +8,13 @@ import org.openrdf.query.TupleQueryResult;
 
 import static org.junit.Assert.*;
 
-public class TestIndexOfAnyCharBut extends AbstractStardogTest {
+public class TestEqualsIgnoreCase extends AbstractStardogTest {
 
     @Test
     public void testIndexOfAny() {
    
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:indexOfAnyCharBut(\"stardog\" \"dog\") AS ?result) }";
+                    "select ?result where { bind(string:equalsIgnoreCase(\"stardog\" \"dog\") AS ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -32,7 +32,7 @@ public class TestIndexOfAnyCharBut extends AbstractStardogTest {
     public void testEmptyString() {
        
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:indexOfAnyCharBut(\"\", \"\") as ?result) }";
+                    "select ?result where { bind(string:equalsIgnoreCase(\"\", \"\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
         
@@ -49,7 +49,7 @@ public class TestIndexOfAnyCharBut extends AbstractStardogTest {
     public void testTooFewArgs() {
 
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:indexOfAnyCharBut(\"one\") as ?result) }";
+                    "select ?result where { bind(string:equalsIgnoreCase(\"one\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
           
@@ -67,7 +67,7 @@ public class TestIndexOfAnyCharBut extends AbstractStardogTest {
 
      
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:indexOfAnyCharBut(\"one\", \"two\", \"three\") as ?result) }";
+                    "select ?result where { bind(string:equalsIgnoreCase(\"one\", \"two\", \"three\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
          
@@ -84,7 +84,7 @@ public class TestIndexOfAnyCharBut extends AbstractStardogTest {
     public void testWrongTypeFirstArg() {
        
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:indexOfAnyCharBut(1, \"two\") as ?result) }";
+                    "select ?result where { bind(string:equalsIgnoreCase(1, \"two\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
        
@@ -102,7 +102,7 @@ public class TestIndexOfAnyCharBut extends AbstractStardogTest {
     public void testWrongTypeSecondArg() {
        
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:indexOfAnyCharBut(\"one\", 2) as ?result) }";
+                    "select ?result where { bind(string:equalsIgnoreCase(\"one\", 2) as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
        

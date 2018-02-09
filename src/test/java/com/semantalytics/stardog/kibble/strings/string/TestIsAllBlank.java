@@ -7,13 +7,13 @@ import org.openrdf.query.TupleQueryResult;
 
 import static org.junit.Assert.*;
 
-public class TesetIsAllBlank extends AbstractStardogTest {
+public class TestIsAllBlank extends AbstractStardogTest {
 
     @Test
     public void testAbbreviateMiddle() {
        
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(string:isBlank(\"Stardog graph database\", \"...\", 8) AS ?result) }";
+                    "select ?result where { bind(string:isAllBlank(\"Stardog graph database\", \"...\", 8) AS ?result) }";
 
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
@@ -32,7 +32,7 @@ public class TesetIsAllBlank extends AbstractStardogTest {
        
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(string:isBlank(\"\", 5) as ?result) }";
+                    "select ?result where { bind(string:isAllBlank(\"\", 5) as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -50,7 +50,7 @@ public class TesetIsAllBlank extends AbstractStardogTest {
 
        
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(string:isBlank(\"one\") as ?result) }";
+                    "select ?result where { bind(string:isAllBlank(\"one\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -69,7 +69,7 @@ public class TesetIsAllBlank extends AbstractStardogTest {
 
        
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(string:isBlank(\"one\", 2, \"three\") as ?result) }";
+                    "select ?result where { bind(string:isAllBlank(\"one\", 2, \"three\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -89,7 +89,7 @@ public class TesetIsAllBlank extends AbstractStardogTest {
        
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(string:isBlank(4, 5) as ?result) }";
+                    "select ?result where { bind(string:isAllBlank(4, 5) as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -107,7 +107,7 @@ public class TesetIsAllBlank extends AbstractStardogTest {
        
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(string:isBlank(\"one\", \"two\") as ?result) }";
+                    "select ?result where { bind(string:isAllBlank(\"one\", \"two\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -125,7 +125,7 @@ public class TesetIsAllBlank extends AbstractStardogTest {
        
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(string:isBlank(\"Stardog\", 3) as ?result) }";
+                    "select ?result where { bind(string:isAllBlank(\"Stardog\", 3) as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 

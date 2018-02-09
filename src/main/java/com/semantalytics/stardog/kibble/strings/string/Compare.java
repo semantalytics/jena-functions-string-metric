@@ -22,7 +22,7 @@ public final class Compare extends AbstractFunction implements StringFunction {
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
 
         final String string1 = assertStringLiteral(values[0]).stringValue();
-        final String string2 = assertIntegerLiteral(values[1]).stringValue();
+        final String string2 = assertStringLiteral(values[1]).stringValue();
 
         return Values.literal(StringUtils.compare(string1, string2));
     }
