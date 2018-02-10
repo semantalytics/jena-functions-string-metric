@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 public class TestCenter extends AbstractStardogTest {
 
     @Test
-    public void testAbbreviateMiddleTwoArg() {
+    public void testCenterTwoArg() {
     
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?result where { bind(string:center(\"Stardog\", 15) AS ?result) }";
@@ -27,7 +27,7 @@ public class TestCenter extends AbstractStardogTest {
     }
 
     @Test
-    public void testAbbreviateMiddleThreeArg() {
+    public void testCenterThreeArg() {
       
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?result where { bind(string:center(\"Stardog\", 15, \"*\") AS ?result) }";

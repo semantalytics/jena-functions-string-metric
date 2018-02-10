@@ -10,152 +10,108 @@ import static org.junit.Assert.*;
 public class TestIsAnyEmpty extends AbstractStardogTest {
 
     @Test
-    public void testAbbreviateMiddle() {
+    public void testTrue() {
        
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(string:isAnyEmpty(\"Stardog graph database\", \"...\", 8) AS ?result) }";
-
+                "select ?result where { bind(string:isAnyBlank(\"Stardog\", \"graph\", \"database\", \"\") AS ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final String aValue = aResult.next().getValue("result").stringValue();
+                final boolean aValue = Boolean.parseBoolean(aResult.next().getValue("result").stringValue());
 
-                assertEquals("Stard...", aValue);
-
+                assertEquals(true, aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
-       
     }
 
     @Test
-    public void testEmptyString() {
+    public void testFalse() {
+
+        final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
+                "select ?result where { bind(string:isAnyBlank(\"Stardog\", \"graph\", \"database\") AS ?result) }";
+
+        try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+
+            assertTrue("Should have a result", aResult.hasNext());
+
+            final boolean aValue = Boolean.parseBoolean(aResult.next().getValue("result").stringValue());
+
+            assertEquals(false, aValue);
+            assertFalse("Should have no more results", aResult.hasNext());
+        }
+
+    }
+
+    @Test
+    public void testBlank() {
        
-
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(string:isAnyEmpty(\"\", 5) as ?result) }";
+                    "select ?result where { bind(string:isAnyEmpty(\" \") as ?result) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute();
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
-           
+
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final String aValue = aResult.next().getValue("result").stringValue();
+                final boolean aValue = Boolean.parseBoolean(aResult.next().getValue("result").stringValue());
 
-                assertEquals("", aValue);
-
+                assertEquals(false, aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
-            
+            }
     }
 
     @Test
     public void testTooFewArgs() {
 
-       
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(string:isAnyEmpty(\"one\") as ?result) }";
+                    "select ?result where { bind(string:isAnyEmpty() as ?result) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute();
-         
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final BindingSet aBindingSet = aResult.next();
 
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
                 assertFalse("Should have no more results", aResult.hasNext());
-          
-    }
-
-
-    @Test
-    public void testTooManyArgs() {
-
-       
-            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(string:isAnyEmpty(\"one\", 2, \"three\") as ?result) }";
-
-            final TupleQueryResult aResult = connection.select(aQuery).execute();
-         
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
-                assertTrue("Should have a result", aResult.hasNext());
-
-                final BindingSet aBindingSet = aResult.next();
-
-                assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
-                assertFalse("Should have no more results", aResult.hasNext());
-        
-    }
-
-
-
-    @Test
-    public void testWrongTypeFirstArg() {
-       
-
-            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(string:isAnyEmpty(4, 5) as ?result) }";
-
-            final TupleQueryResult aResult = connection.select(aQuery).execute();
-         
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
-                assertTrue("Should have a result", aResult.hasNext());
-
-                final BindingSet aBindingSet = aResult.next();
-
-                assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
-                assertFalse("Should have no more results", aResult.hasNext());
-           
+            }
     }
 
     @Test
-    public void testWrongTypeSecondArg() {
+    public void testWrongTypeOneArg() {
        
-
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(string:isAnyEmpty(\"one\", \"two\") as ?result) }";
+                    "select ?result where { bind(string:isAnyEmpty(1) as ?result) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute();
-       
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final BindingSet aBindingSet = aResult.next();
 
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
                 assertFalse("Should have no more results", aResult.hasNext());
-         
+            }
     }
 
     @Test
-    public void testLengthTooShort() {
+    public void testWrongTypeTwoArg() {
        
-
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(string:isAnyEmpty(\"Stardog\", 3) as ?result) }";
+                    "select ?result where { bind(string:isAnyEmpty(1, 2) as ?result) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute();
-           
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final BindingSet aBindingSet = aResult.next();
 
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
                 assertFalse("Should have no more results", aResult.hasNext());
-          
+            }
     }
 }
 

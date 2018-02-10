@@ -10,23 +10,39 @@ import static org.junit.Assert.*;
 public class TestIsAlpha extends AbstractStardogTest {
 
     @Test
-    public void testIndexOfAny() {
+    public void testTrue() {
    
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:isAlpha(\"stardog\" \"dog\") AS ?result) }";
+                    "select ?result where { bind(string:isAlpha(\"Stardog\") AS ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final int aValue = Integer.parseInt(aResult.next().getValue("result").stringValue());
+                final boolean aValue = Boolean.parseBoolean(aResult.next().getValue("result").stringValue());
 
-                assertEquals(5, aValue);
-
+                assertEquals(true, aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
-  
+
+    @Test
+    public void testFalse() {
+
+        final String aQuery = StringVocabulary.sparqlPrefix("string") +
+                "select ?result where { bind(string:isAlpha(\"Stardog1\") AS ?result) }";
+
+        try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+
+            assertTrue("Should have a result", aResult.hasNext());
+
+            final boolean aValue = Boolean.parseBoolean(aResult.next().getValue("result").stringValue());
+
+            assertEquals(false, aValue);
+            assertFalse("Should have no more results", aResult.hasNext());
+        }
+    }
+
     @Test
     public void testEmptyString() {
        
@@ -37,9 +53,9 @@ public class TestIsAlpha extends AbstractStardogTest {
         
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final int aValue = Integer.parseInt(aResult.next().getValue("result").stringValue());
+                final boolean aValue = Boolean.parseBoolean(aResult.next().getValue("result").stringValue());
 
-                assertEquals(-1, aValue);
+                assertEquals(true, aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
@@ -48,7 +64,7 @@ public class TestIsAlpha extends AbstractStardogTest {
     public void testTooFewArgs() {
 
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:isAlpha(\"one\") as ?result) }";
+                    "select ?result where { bind(string:isAlpha() as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
           
@@ -64,9 +80,8 @@ public class TestIsAlpha extends AbstractStardogTest {
     @Test
     public void testTooManyArgs() {
 
-     
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:isAlpha(\"one\", \"two\", \"three\") as ?result) }";
+                    "select ?result where { bind(string:isAlpha(\"one\", \"two\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
          
@@ -83,25 +98,7 @@ public class TestIsAlpha extends AbstractStardogTest {
     public void testWrongTypeFirstArg() {
        
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:isAlpha(1, \"two\") as ?result) }";
-
-            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
-       
-                assertTrue("Should have a result", aResult.hasNext());
-
-                final BindingSet aBindingSet = aResult.next();
-
-                assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-                assertFalse("Should have no more results", aResult.hasNext());
-            }
-    }
-  
-  
-    @Test
-    public void testWrongTypeSecondArg() {
-       
-            final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:isAlpha(\"one\", 2) as ?result) }";
+                    "select ?result where { bind(string:isAlpha(1) as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
        

@@ -12,7 +12,7 @@ import org.openrdf.model.Value;
 public final class EndsWith extends AbstractFunction implements StringFunction {
 
     protected EndsWith() {
-        super(Range.closed(2, 3), StringVocabulary.endsWith.stringValue());
+        super(2, StringVocabulary.endsWith.stringValue());
     }
 
     private EndsWith(final EndsWith endsWith) {
@@ -25,11 +25,7 @@ public final class EndsWith extends AbstractFunction implements StringFunction {
         final String string = assertStringLiteral(values[0]).stringValue();
         final String suffix = assertStringLiteral(values[1]).stringValue();
 
-       //TODO include endsWithAny
-
-
         return Values.literal(StringUtils.endsWith(string, suffix));
-
     }
 
     @Override

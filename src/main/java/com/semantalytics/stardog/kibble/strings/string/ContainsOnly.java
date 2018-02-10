@@ -22,7 +22,7 @@ public final class ContainsOnly extends AbstractFunction implements StringFuncti
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
       
       final String string = assertStringLiteral(values[0]).stringValue();
-      final String validChars = assertIntegerLiteral(values[1]).stringValue();
+      final String validChars = assertStringLiteral(values[1]).stringValue();
       
       return Values.literal(StringUtils.containsOnly(string, validChars));
     }

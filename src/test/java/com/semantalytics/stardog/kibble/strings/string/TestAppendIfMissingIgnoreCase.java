@@ -10,10 +10,10 @@ import static org.junit.Assert.*;
 public class TestAppendIfMissingIgnoreCase extends AbstractStardogTest {
   
     @Test
-    public void testAppendIfMissingIgnoreCaseTest() {
+    public void testNotMissing() {
    
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:appendIfMissingIgnoreCase(\"stardog\", \".txt\") AS ?result) }";
+                    "select ?result where { bind(string:appendIfMissingIgnoreCase(\"stardog.txt\", \".txt\") AS ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -24,6 +24,23 @@ public class TestAppendIfMissingIgnoreCase extends AbstractStardogTest {
                 assertEquals("stardog.txt", aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
+    }
+
+    @Test
+    public void testMissing() {
+
+        final String aQuery = StringVocabulary.sparqlPrefix("string") +
+                "select ?result where { bind(string:appendIfMissingIgnoreCase(\"stardog\", \".txt\") AS ?result) }";
+
+        try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+
+            assertTrue("Should have a result", aResult.hasNext());
+
+            final String aValue = aResult.next().getValue("result").stringValue();
+
+            assertEquals("stardog.txt", aValue);
+            assertFalse("Should have no more results", aResult.hasNext());
+        }
     }
 
     @Test

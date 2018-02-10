@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class ContainsIgnoreCase extends AbstractFunction implements StringFunction {
 
     protected ContainsIgnoreCase() {
-        super(1, StringVocabulary.containsIgnoreCase.stringValue());
+        super(2, StringVocabulary.containsIgnoreCase.stringValue());
     }
 
     private ContainsIgnoreCase(final ContainsIgnoreCase containsIgnoreCase) {

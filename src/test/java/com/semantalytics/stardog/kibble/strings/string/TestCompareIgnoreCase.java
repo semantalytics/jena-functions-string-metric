@@ -13,7 +13,7 @@ public class TestCompareIgnoreCase extends AbstractStardogTest {
     public void testEqual() {
      
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:compareIgnoreCase(\"Stardog\", \"Stardog\" 8) AS ?result) }";
+                    "select ?result where { bind(string:compareIgnoreCase(\"Stardog\", \"stardog\") AS ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -70,7 +70,7 @@ public class TestCompareIgnoreCase extends AbstractStardogTest {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final String aValue = aResult.next().getValue("result").stringValue();
+                final int aValue = Integer.parseInt(aResult.next().getValue("result").stringValue());
 
                 assertEquals(0, aValue);
                 assertFalse("Should have no more results", aResult.hasNext());

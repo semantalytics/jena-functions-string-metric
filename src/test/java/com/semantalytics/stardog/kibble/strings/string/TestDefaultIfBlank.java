@@ -10,18 +10,18 @@ import static org.junit.Assert.*;
 public class TestDefaultIfBlank extends AbstractStardogTest {
   
     @Test
-    public void testAbbreviateMiddle() {
+    public void testBlank() {
         
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:defaultIfEmpty(\"Stardog graph database\", \"...\", 8) AS ?abbreviation) }";
+                    "select ?result where { bind(string:defaultIfBlank(\" \", \"Stardog\") AS ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final String aValue = aResult.next().getValue("abbreviation").stringValue();
+                final String aValue = aResult.next().getValue("result").stringValue();
 
-                assertEquals("Stard...", aValue);
+                assertEquals("Stardog", aValue);
 
                 assertFalse("Should have no more results", aResult.hasNext());
             }
@@ -29,18 +29,37 @@ public class TestDefaultIfBlank extends AbstractStardogTest {
     }
 
     @Test
-    public void testEmptyString() {
+    public void testNotBlank() {
+
+        final String aQuery = StringVocabulary.sparqlPrefix("string") +
+                "select ?result where { bind(string:defaultIfBlank(\"z\", \"Stardog\") AS ?result) }";
+
+        try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+
+            assertTrue("Should have a result", aResult.hasNext());
+
+            final String aValue = aResult.next().getValue("result").stringValue();
+
+            assertEquals("z", aValue);
+
+            assertFalse("Should have no more results", aResult.hasNext());
+        }
+
+    }
+
+    @Test
+    public void testEmpty() {
       
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:defaultIfEmpty(\"\", 5) as ?abbreviation) }";
+                    "select ?result where { bind(string:defaultIfBlank(\"\", \"Stardog\") as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final String aValue = aResult.next().getValue("abbreviation").stringValue();
+                final String aValue = aResult.next().getValue("result").stringValue();
 
-                assertEquals("", aValue);
+                assertEquals("Stardog", aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
@@ -49,7 +68,7 @@ public class TestDefaultIfBlank extends AbstractStardogTest {
     public void testTooFewArgs() {
 
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:defaultIfEmpty(\"one\") as ?abbreviation) }";
+                    "select ?result where { bind(string:defaultIfBlank(\"one\") as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -67,7 +86,7 @@ public class TestDefaultIfBlank extends AbstractStardogTest {
     public void testTooManyArgs() {
 
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:defaultIfEmpty(\"one\", 2, \"three\") as ?abbreviation) }";
+                    "select ?result where { bind(string:defaultIfBlank(\"one\", \"two\", \"three\") as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -84,7 +103,7 @@ public class TestDefaultIfBlank extends AbstractStardogTest {
     public void testWrongTypeFirstArg() {
       
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:defaultIfEmpty(4, 5) as ?abbreviation) }";
+                    "select ?result where { bind(string:defaultIfBlank(1, \"two\") as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -101,24 +120,7 @@ public class TestDefaultIfBlank extends AbstractStardogTest {
     public void testWrongTypeSecondArg() {
        
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:defaultIfEmpty(\"one\", \"two\") as ?abbreviation) }";
-
-            try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
-
-                assertTrue("Should have a result", aResult.hasNext());
-
-                final BindingSet aBindingSet = aResult.next();
-
-                assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-                assertFalse("Should have no more results", aResult.hasNext());
-            }
-    }
-
-    @Test
-    public void testLengthTooShort() {
-       
-       final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?abbreviation where { bind(string:defaultIfEmpty(\"Stardog\", 3) as ?abbreviation) }";
+                    "select ?result where { bind(string:defaultIfBlank(\"one\", 2) as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 

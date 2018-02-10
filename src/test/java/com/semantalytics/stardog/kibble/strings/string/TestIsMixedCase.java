@@ -24,7 +24,6 @@ public class TestIsMixedCase extends AbstractStardogTest {
                 final String aValue = aResult.next().getValue("result").stringValue();
 
                 assertEquals("Stard...", aValue);
-
                 assertFalse("Should have no more results", aResult.hasNext());
             }
       
@@ -45,9 +44,7 @@ public class TestIsMixedCase extends AbstractStardogTest {
                 final String aValue = aResult.next().getValue("result").stringValue();
 
                 assertEquals("", aValue);
-
                 assertFalse("Should have no more results", aResult.hasNext());
-           
     }
 
     @Test
@@ -66,9 +63,7 @@ public class TestIsMixedCase extends AbstractStardogTest {
                 final BindingSet aBindingSet = aResult.next();
 
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
                 assertFalse("Should have no more results", aResult.hasNext());
-            
     }
 
 
@@ -81,14 +76,11 @@ public class TestIsMixedCase extends AbstractStardogTest {
 
             final TupleQueryResult aResult = connection.select(aQuery).execute();
          
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final BindingSet aBindingSet = aResult.next();
 
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
                 assertFalse("Should have no more results", aResult.hasNext());
         
     }
@@ -103,14 +95,11 @@ public class TestIsMixedCase extends AbstractStardogTest {
 
             final TupleQueryResult aResult = connection.select(aQuery).execute();
         
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final BindingSet aBindingSet = aResult.next();
 
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
                 assertFalse("Should have no more results", aResult.hasNext());
            
     }
@@ -124,14 +113,11 @@ public class TestIsMixedCase extends AbstractStardogTest {
 
             final TupleQueryResult aResult = connection.select(aQuery).execute();
          
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final BindingSet aBindingSet = aResult.next();
 
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
                 assertFalse("Should have no more results", aResult.hasNext());
            
     }

@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 public class TestCapitalize extends AbstractStardogTest {
    
     @Test
-    public void testCapitalize() {
+    public void testNotCapitalized() {
      
          final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?result where { bind(string:capitalize(\"stardog\") AS ?result) }";
@@ -28,7 +28,7 @@ public class TestCapitalize extends AbstractStardogTest {
     }
 
     @Test
-    public void testAlreadyCapitalized() {
+    public void testCapitalized() {
    
          final String aQuery = StringVocabulary.sparqlPrefix("string") +
                "select ?result where { bind(string:capitalize(\"Stardog\") AS ?result) }";

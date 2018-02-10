@@ -10,10 +10,10 @@ import static org.junit.Assert.*;
 public class TestDifference extends AbstractStardogTest {
 
     @Test
-    public void testGetDigits() {
+    public void testDifferent() {
    
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:(\"Stard0g\") AS ?result) }";
+                    "select ?result where { bind(string:difference(\"Stardog\", \"Starman\") AS ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -21,35 +21,35 @@ public class TestDifference extends AbstractStardogTest {
 
                 final String aValue = aResult.next().getValue("result").stringValue();
 
-                assertEquals("0", aValue);
+                assertEquals("man", aValue);
 
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
 
     @Test
-    public void testOnlyDigits() {
-       
+    public void testNotDifferent() {
 
-            final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:(\"12345\") AS ?result) }";
+        final String aQuery = StringVocabulary.sparqlPrefix("string") +
+                "select ?result where { bind(string:difference(\"Stardog\", \"Stardog\") AS ?result) }";
 
-            try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+        try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
-                assertTrue("Should have a result", aResult.hasNext());
+            assertTrue("Should have a result", aResult.hasNext());
 
-                final String aValue = aResult.next().getValue("result").stringValue();
+            final String aValue = aResult.next().getValue("result").stringValue();
 
-                assertEquals("12345", aValue);
-                assertFalse("Should have no more results", aResult.hasNext());
-            } 
+            assertEquals("", aValue);
+
+            assertFalse("Should have no more results", aResult.hasNext());
+        }
     }
-  
+
     @Test
     public void testEmptyString() {
        
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:(\"\") as ?result) }";
+                    "select ?result where { bind(string:difference(\"\", \"\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
         
@@ -63,29 +63,11 @@ public class TestDifference extends AbstractStardogTest {
     }
   
     @Test
-    public void testNonAscii() {
-       
-            final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:(\"१२३\") as ?result) }";
-
-            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
-
-        
-                assertTrue("Should have a result", aResult.hasNext());
-
-                final String aValue = aResult.next().getValue("result").stringValue();
-
-                assertEquals("१२३", aValue);
-                assertFalse("Should have no more results", aResult.hasNext());
-            }
-    }
-
-    @Test
     public void testTooFewArgs() {
 
        
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:() as ?result) }";
+                    "select ?result where { bind(string:difference(\"one\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
           
@@ -101,9 +83,8 @@ public class TestDifference extends AbstractStardogTest {
     @Test
     public void testTooManyArgs() {
 
-     
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:(\"Stardog\", \"one\") as ?result) }";
+                    "select ?result where { bind(string:difference(\"one\", \"two\", \"three\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
          
@@ -117,10 +98,10 @@ public class TestDifference extends AbstractStardogTest {
     }
 
     @Test
-    public void testWrongType() {
+    public void testWrongTypeFirstArg() {
        
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:(4) as ?result) }";
+                    "select ?result where { bind(string:difference(1, \"two\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
        
@@ -131,6 +112,23 @@ public class TestDifference extends AbstractStardogTest {
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
                 assertFalse("Should have no more results", aResult.hasNext());
             }
+    }
+
+    @Test
+    public void testWrongTypeSecondArg() {
+
+        final String aQuery = StringVocabulary.sparqlPrefix("string") +
+                "select ?result where { bind(string:difference(\"one\", 2) as ?result) }";
+
+        try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+
+            assertTrue("Should have a result", aResult.hasNext());
+
+            final BindingSet aBindingSet = aResult.next();
+
+            assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+            assertFalse("Should have no more results", aResult.hasNext());
+        }
     }
 }
 
