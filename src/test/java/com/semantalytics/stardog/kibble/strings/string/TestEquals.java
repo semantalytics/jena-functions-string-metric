@@ -2,6 +2,7 @@ package com.semantalytics.stardog.kibble.strings.string;
 
 import com.semantalytics.stardog.kibble.AbstractStardogTest;
 import org.junit.Test;
+import org.openrdf.model.impl.BooleanLiteral;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.TupleQueryResult;
 
@@ -10,23 +11,39 @@ import static org.junit.Assert.*;
 public class TestEquals extends AbstractStardogTest {
 
     @Test
-    public void testIndexOfAny() {
+    public void testTrue() {
    
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:equals(\"stardog\" \"dog\") AS ?result) }";
+                    "select ?result where { bind(string:equals(\"stardog\", \"stardog\") AS ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final int aValue = Integer.parseInt(aResult.next().getValue("result").stringValue());
+                final boolean aValue = Boolean.parseBoolean(aResult.next().getValue("result").stringValue());
 
-                assertEquals(5, aValue);
-
+                assertEquals(true, aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
-  
+
+    @Test
+    public void testFalse() {
+
+        final String aQuery = StringVocabulary.sparqlPrefix("string") +
+                "select ?result where { bind(string:equals(\"stardog\", \"starman\") AS ?result) }";
+
+        try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+
+            assertTrue("Should have a result", aResult.hasNext());
+
+            final boolean aValue = Boolean.parseBoolean(aResult.next().getValue("result").stringValue());
+
+            assertEquals(false, aValue);
+            assertFalse("Should have no more results", aResult.hasNext());
+        }
+    }
+
     @Test
     public void testEmptyString() {
        
@@ -37,9 +54,9 @@ public class TestEquals extends AbstractStardogTest {
         
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final int aValue = Integer.parseInt(aResult.next().getValue("result").stringValue());
+                final boolean aValue = Boolean.parseBoolean(aResult.next().getValue("result").stringValue());
 
-                assertEquals(-1, aValue);
+                assertEquals(true, aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
@@ -64,7 +81,6 @@ public class TestEquals extends AbstractStardogTest {
     @Test
     public void testTooManyArgs() {
 
-     
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?result where { bind(string:equals(\"one\", \"two\", \"three\") as ?result) }";
 

@@ -8,14 +8,14 @@ import com.complexible.stardog.plan.filter.functions.string.StringFunction;
 import org.apache.commons.lang3.StringUtils;
 import org.openrdf.model.Value;
 
-public final class IndexOfAnyCharBut extends AbstractFunction implements StringFunction {
+public final class IndexOfAny extends AbstractFunction implements StringFunction {
 
-    protected IndexOfAnyCharBut() {
-        super(1, StringVocabulary.indexOfAnyCharBut.stringValue());
+    protected IndexOfAny() {
+        super(2, StringVocabulary.indexOfAny.stringValue());
     }
 
-    private IndexOfAnyCharBut(final IndexOfAnyCharBut indexOfAnyCharBut) {
-        super(indexOfAnyCharBut);
+    private IndexOfAny(final IndexOfAny indexOfAny) {
+        super(indexOfAny);
     }
 
     @Override
@@ -24,16 +24,12 @@ public final class IndexOfAnyCharBut extends AbstractFunction implements StringF
         final String string = assertStringLiteral(values[0]).stringValue();
         final String searchChars = assertStringLiteral(values[1]).stringValue();
 
-
-
-        //TODO handle multiple searchchars
-
-        return Values.literal(StringUtils.indexOfAnyBut(string, searchChars));
+        return Values.literal(StringUtils.indexOfAny(string, searchChars));
     }
 
     @Override
-    public IndexOfAnyCharBut copy() {
-        return new IndexOfAnyCharBut(this);
+    public IndexOfAny copy() {
+        return new IndexOfAny(this);
     }
 
     @Override
@@ -43,6 +39,6 @@ public final class IndexOfAnyCharBut extends AbstractFunction implements StringF
 
     @Override
     public String toString() {
-        return StringVocabulary.indexOfAnyCharBut.name();
+        return StringVocabulary.indexOfAny.name();
     }
 }

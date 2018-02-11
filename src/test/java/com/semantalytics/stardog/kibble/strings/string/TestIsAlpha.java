@@ -47,7 +47,7 @@ public class TestIsAlpha extends AbstractStardogTest {
     public void testEmptyString() {
        
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:isAlpha(\"\", \"\") as ?result) }";
+                    "select ?result where { bind(string:isAlpha(\"\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
         
@@ -55,7 +55,7 @@ public class TestIsAlpha extends AbstractStardogTest {
 
                 final boolean aValue = Boolean.parseBoolean(aResult.next().getValue("result").stringValue());
 
-                assertEquals(true, aValue);
+                assertEquals(false, aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }

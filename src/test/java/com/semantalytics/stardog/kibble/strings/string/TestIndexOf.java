@@ -10,62 +10,44 @@ import static org.junit.Assert.*;
 public class TestIndexOf extends AbstractStardogTest {
 
     @Test
-    public void testInitialsOneArg() {
+    public void testTwoArg() {
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(string:indexOf(\"Stardog graph database\") AS ?result) }";
+                    "select ?result where { bind(string:indexOf(\"Stardog\", \"dog\") AS ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final String aValue = aResult.next().getValue("result").stringValue();
+                final int aValue = Integer.parseInt(aResult.next().getValue("result").stringValue());
 
-                assertEquals("Sgd", aValue);
+                assertEquals(4, aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
 
     @Test
-    public void testInitialsTwoArg() {
+    public void testThreeArg() {
 
         final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                "select ?result where { bind(string:indexOf(\"Stardog,graph,database\", \",\") AS ?result) }";
+                "select ?result where { bind(string:indexOf(\"Stardogdog\", \"dog\", 5) AS ?result) }";
 
         try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
             assertTrue("Should have a result", aResult.hasNext());
 
-            final String aValue = aResult.next().getValue("result").stringValue();
+            final int aValue = Integer.parseInt(aResult.next().getValue("result").stringValue());
 
-            assertEquals("Sgd", aValue);
+            assertEquals(7, aValue);
             assertFalse("Should have no more results", aResult.hasNext());
         }
-    }
-
-    @Test
-    public void testEmptyString() {
-       
-
-            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(string:indexOf(\"\") as ?result) }";
-
-            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
-
-                assertTrue("Should have a result", aResult.hasNext());
-
-                final String aValue = aResult.next().getValue("result").stringValue();
-
-                assertEquals("", aValue);
-                assertFalse("Should have no more results", aResult.hasNext());
-            }
     }
 
     @Test
     public void testTooFewArgs() {
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(string:indexOf() as ?result) }";
+                    "select ?result where { bind(string:indexOf(\"one\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -81,9 +63,8 @@ public class TestIndexOf extends AbstractStardogTest {
     @Test
     public void testTooManyArgs() {
 
-       
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(string:indexOf(\"one\", 2, \"three\") as ?result) }";
+                    "select ?result where { bind(string:indexOf(\"one\", \"two\", \"three\", \"four\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -131,20 +112,20 @@ public class TestIndexOf extends AbstractStardogTest {
     }
 
     @Test
-    public void testLengthTooShort() {
-      
-            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(string:indexOf(\"Stardog\", 3) as ?result) }";
+    public void testWrongTypeThirdArg() {
 
-            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+        final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
+                "select ?result where { bind(string:indexOf(\"one\", \"two\", \"three\") as ?result) }";
 
-                assertTrue("Should have a result", aResult.hasNext());
+        try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
-                final BindingSet aBindingSet = aResult.next();
+            assertTrue("Should have a result", aResult.hasNext());
 
-                assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-                assertFalse("Should have no more results", aResult.hasNext());
-            }
+            final BindingSet aBindingSet = aResult.next();
+
+            assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+            assertFalse("Should have no more results", aResult.hasNext());
+        }
     }
 }
 

@@ -13,7 +13,7 @@ import static com.complexible.common.rdf.model.Values.literal;
 public final class EndsWithIgnoreCase extends AbstractFunction implements StringFunction {
 
     protected EndsWithIgnoreCase() {
-        super(Range.closed(2, 3), StringVocabulary.endsWithIgnoreCase.stringValue());
+        super(2, StringVocabulary.endsWithIgnoreCase.stringValue());
     }
 
     private EndsWithIgnoreCase(final EndsWithIgnoreCase endsWithIgnoreCase) {

@@ -1,6 +1,5 @@
 package com.semantalytics.stardog.kibble.strings.string;
 
-import com.complexible.stardog.plan.filter.EvalUtil;
 import com.semantalytics.stardog.kibble.AbstractStardogTest;
 import org.junit.*;
 import org.openrdf.model.impl.BooleanLiteral;
@@ -12,37 +11,35 @@ import static org.junit.Assert.*;
 public class TestEndsWithIgnoreCase extends AbstractStardogTest {
 
     @Test
-    public void testEndsWithIgnoreCase() {
+    public void testTrue() {
 
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                "select ?result where { bind(string:endsWithIgnoreCase(\"Stardog\", \"dog\") AS ?result) }";
+                "select ?result where { bind(string:endsWithIgnoreCase(\"Stardog\", \"Dog\") AS ?result) }";
 
         try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
             assertTrue("Should have a result", aResult.hasNext());
 
-            final boolean aValue = ((BooleanLiteral)aResult.next().getValue("result")).booleanValue();
+            final boolean aValue = Boolean.parseBoolean(aResult.next().getValue("result").stringValue());
 
             assertEquals(true, aValue);
-
             assertFalse("Should have no more results", aResult.hasNext());
         }
     }
 
     @Test
-    public void testOnlyDigits() {
-
+    public void testFalse() {
 
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                "select ?result where { bind(string:endsWithIgnoreCase(\"12345\") AS ?result) }";
+                "select ?result where { bind(string:endsWithIgnoreCase(\"Stardog\", \"man\") AS ?result) }";
 
         try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
             assertTrue("Should have a result", aResult.hasNext());
 
-            final String aValue = aResult.next().getValue("result").stringValue();
+            final boolean aValue = Boolean.parseBoolean(aResult.next().getValue("result").stringValue());
 
-            assertEquals("12345", aValue);
+            assertEquals(false, aValue);
             assertFalse("Should have no more results", aResult.hasNext());
         }
     }
@@ -51,33 +48,15 @@ public class TestEndsWithIgnoreCase extends AbstractStardogTest {
     public void testEmptyString() {
 
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                "select ?result where { bind(string:endsWithIgnoreCase(\"\") as ?result) }";
+                "select ?result where { bind(string:endsWithIgnoreCase(\"\", \"\") as ?result) }";
 
         try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
             assertTrue("Should have a result", aResult.hasNext());
 
-            final String aValue = aResult.next().getValue("result").stringValue();
+            final boolean aValue = Boolean.parseBoolean(aResult.next().getValue("result").stringValue());
 
-            assertEquals("", aValue);
-            assertFalse("Should have no more results", aResult.hasNext());
-        }
-    }
-
-    @Test
-    public void testNonAscii() {
-
-        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                "select ?result where { bind(string:endsWithIgnoreCase(\"१२३\") as ?result) }";
-
-        try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
-
-
-            assertTrue("Should have a result", aResult.hasNext());
-
-            final String aValue = aResult.next().getValue("result").stringValue();
-
-            assertEquals("१२३", aValue);
+            assertEquals(true, aValue);
             assertFalse("Should have no more results", aResult.hasNext());
         }
     }
@@ -87,7 +66,7 @@ public class TestEndsWithIgnoreCase extends AbstractStardogTest {
 
 
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                "select ?result where { bind(string:endsWithIgnoreCase() as ?result) }";
+                "select ?result where { bind(string:endsWithIgnoreCase(\"one\") as ?result) }";
 
         try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -103,9 +82,8 @@ public class TestEndsWithIgnoreCase extends AbstractStardogTest {
     @Test
     public void testTooManyArgs() {
 
-
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                "select ?result where { bind(string:endsWithIgnoreCase(\"Stardog\", \"one\") as ?result) }";
+                "select ?result where { bind(string:endsWithIgnoreCase(\"one\", \"two\", \"three\") as ?result) }";
 
         try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -119,10 +97,27 @@ public class TestEndsWithIgnoreCase extends AbstractStardogTest {
     }
 
     @Test
-    public void testWrongType() {
+    public void testWrongTypeFirstArg() {
 
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                "select ?result where { bind(string:endsWithIgnoreCase(4) as ?result) }";
+                "select ?result where { bind(string:endsWithIgnoreCase(1, \"two\") as ?result) }";
+
+        try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+
+            assertTrue("Should have a result", aResult.hasNext());
+
+            final BindingSet aBindingSet = aResult.next();
+
+            assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+            assertFalse("Should have no more results", aResult.hasNext());
+        }
+    }
+
+    @Test
+    public void testWrongTypeSecondArg() {
+
+        final String aQuery = StringVocabulary.sparqlPrefix("string") +
+                "select ?result where { bind(string:endsWithIgnoreCase(\"one\", 2) as ?result) }";
 
         try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 

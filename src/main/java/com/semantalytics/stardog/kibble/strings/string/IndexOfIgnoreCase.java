@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.*;
 public class IndexOfIgnoreCase extends AbstractFunction implements StringFunction {
 
     protected IndexOfIgnoreCase() {
-        super(1, StringVocabulary.indexOfIgnoreCase.stringValue());
+        super(2, StringVocabulary.indexOfIgnoreCase.stringValue());
     }
 
     private IndexOfIgnoreCase(final IndexOfIgnoreCase indexOfIgnoreCase) {
@@ -24,8 +24,6 @@ public class IndexOfIgnoreCase extends AbstractFunction implements StringFunctio
 
         final String string = assertStringLiteral(values[0]).stringValue();
         final String searchChars = assertStringLiteral(values[1]).stringValue();
-
-        //TODO handle multiple searchchars
 
         return literal(StringUtils.indexOfIgnoreCase(string, searchChars));
     }

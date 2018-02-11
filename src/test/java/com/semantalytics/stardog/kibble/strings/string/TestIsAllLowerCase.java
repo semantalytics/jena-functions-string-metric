@@ -77,7 +77,6 @@ public class TestIsAllLowerCase extends AbstractStardogTest {
             }
     }
 
-
     @Test
     public void testTooManyArgs() {
 
@@ -95,12 +94,9 @@ public class TestIsAllLowerCase extends AbstractStardogTest {
             }
     }
 
-
-
     @Test
     public void testWrongTypeFirstArg() {
        
-
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
                     "select ?result where { bind(string:isAllLowerCase(1) as ?result) }";
 

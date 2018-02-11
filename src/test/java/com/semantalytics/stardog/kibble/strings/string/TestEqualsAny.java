@@ -11,36 +11,35 @@ import static org.junit.Assert.*;
 public class TestEqualsAny extends AbstractStardogTest {
 
     @Test
-    public void testIndexOfAny() {
+    public void testTrue() {
    
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:equalsAny(\"stardog\" \"dog\") AS ?result) }";
+                    "select ?result where { bind(string:equalsAny(\"Stardog\", \"Stardog\", \"graph\", \"database\") AS ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final int aValue = Integer.parseInt(aResult.next().getValue("result").stringValue());
+                final boolean aValue = Boolean.parseBoolean(aResult.next().getValue("result").stringValue());
 
-                assertEquals(5, aValue);
-
+                assertEquals(true, aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
   
     @Test
-    public void testEmptyString() {
+    public void testFalse() {
        
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:equalsAny(\"\", \"\") as ?result) }";
+                    "select ?result where { bind(string:equalsAny(\"Stardog\", \"graph\", \"database\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
         
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final int aValue = Integer.parseInt(aResult.next().getValue("result").stringValue());
+                final boolean aValue = Boolean.parseBoolean(aResult.next().getValue("result").stringValue());
 
-                assertEquals(-1, aValue);
+                assertEquals(false, aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
@@ -53,24 +52,6 @@ public class TestEqualsAny extends AbstractStardogTest {
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
           
-                assertTrue("Should have a result", aResult.hasNext());
-
-                final BindingSet aBindingSet = aResult.next();
-
-                assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-                assertFalse("Should have no more results", aResult.hasNext());
-            }
-    }
-
-    @Test
-    public void testTooManyArgs() {
-
-     
-            final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:equalsAny(\"one\", \"two\", \"three\") as ?result) }";
-
-            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
-         
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final BindingSet aBindingSet = aResult.next();

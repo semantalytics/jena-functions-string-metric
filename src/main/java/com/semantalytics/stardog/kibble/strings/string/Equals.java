@@ -12,7 +12,7 @@ import org.openrdf.model.Value;
 public final class Equals extends AbstractFunction implements StringFunction {
 
     protected Equals() {
-        super(Range.closed(2, 3), StringVocabulary.equals.stringValue());
+        super(2, StringVocabulary.equals.stringValue());
     }
 
     private Equals(final Equals equals) {
@@ -25,11 +25,7 @@ public final class Equals extends AbstractFunction implements StringFunction {
         final String string = assertStringLiteral(values[0]).stringValue();
         final String suffix = assertStringLiteral(values[1]).stringValue();
 
-        //TODO include equals
-
-
         return Values.literal(StringUtils.equals(string, suffix));
-
     }
 
     @Override

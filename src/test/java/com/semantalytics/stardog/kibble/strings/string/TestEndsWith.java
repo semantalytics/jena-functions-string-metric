@@ -13,7 +13,7 @@ public class TestEndsWith extends AbstractStardogTest {
     public void testTrue() {
    
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:endsWith(\"stardog\" \"dog\") AS ?result) }";
+                    "select ?result where { bind(string:endsWith(\"stardog\", \"dog\") AS ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -31,7 +31,7 @@ public class TestEndsWith extends AbstractStardogTest {
     public void testFalse() {
 
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                "select ?result where { bind(string:endsWith(\"stardog\" \"man\") AS ?result) }";
+                "select ?result where { bind(string:endsWith(\"stardog\", \"man\") AS ?result) }";
 
         try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 

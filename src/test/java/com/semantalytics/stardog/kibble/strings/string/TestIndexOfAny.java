@@ -7,13 +7,13 @@ import org.openrdf.query.TupleQueryResult;
 
 import static org.junit.Assert.*;
 
-public class TestIndexOfAnyCharBut extends AbstractStardogTest {
+public class TestIndexOfAny extends AbstractStardogTest {
 
     @Test
-    public void testIndexOfAny() {
+    public void test() {
    
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:indexOfAnyCharBut(\"stardog\" \"dog\") AS ?result) }";
+                    "select ?result where { bind(string:indexOfAny(\"stardog\", \"srg\") AS ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -21,8 +21,7 @@ public class TestIndexOfAnyCharBut extends AbstractStardogTest {
 
                 final int aValue = Integer.parseInt(aResult.next().getValue("result").stringValue());
 
-                assertEquals(5, aValue);
-
+                assertEquals(0, aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
@@ -31,7 +30,7 @@ public class TestIndexOfAnyCharBut extends AbstractStardogTest {
     public void testEmptyString() {
        
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:indexOfAnyCharBut(\"\", \"\") as ?result) }";
+                    "select ?result where { bind(string:indexOfAny(\"\", \"\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
         
@@ -48,7 +47,7 @@ public class TestIndexOfAnyCharBut extends AbstractStardogTest {
     public void testTooFewArgs() {
 
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:indexOfAnyCharBut(\"one\") as ?result) }";
+                    "select ?result where { bind(string:indexOfAny(\"one\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
           
@@ -64,9 +63,8 @@ public class TestIndexOfAnyCharBut extends AbstractStardogTest {
     @Test
     public void testTooManyArgs() {
 
-     
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:indexOfAnyCharBut(\"one\", \"two\", \"three\") as ?result) }";
+                    "select ?result where { bind(string:indexOfAny(\"one\", \"two\", \"three\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
          
@@ -83,7 +81,7 @@ public class TestIndexOfAnyCharBut extends AbstractStardogTest {
     public void testWrongTypeFirstArg() {
        
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:indexOfAnyCharBut(1, \"two\") as ?result) }";
+                    "select ?result where { bind(string:indexOfAny(1, \"two\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
        
@@ -101,7 +99,7 @@ public class TestIndexOfAnyCharBut extends AbstractStardogTest {
     public void testWrongTypeSecondArg() {
        
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:indexOfAnyCharBut(\"one\", 2) as ?result) }";
+                    "select ?result where { bind(string:indexOfAny(\"one\", 2) as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
        

@@ -11,23 +11,39 @@ import static org.junit.Assert.*;
 public class TestEqualsIgnoreCase extends AbstractStardogTest {
 
     @Test
-    public void testIndexOfAny() {
+    public void testTrue() {
    
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:equalsIgnoreCase(\"stardog\" \"dog\") AS ?result) }";
+                    "select ?result where { bind(string:equalsIgnoreCase(\"stardog\", \"Stardog\") AS ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final int aValue = Integer.parseInt(aResult.next().getValue("result").stringValue());
+                final boolean aValue = Boolean.parseBoolean(aResult.next().getValue("result").stringValue());
 
-                assertEquals(5, aValue);
-
+                assertEquals(true, aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
-  
+
+    @Test
+    public void testFalse() {
+
+        final String aQuery = StringVocabulary.sparqlPrefix("string") +
+                "select ?result where { bind(string:equalsIgnoreCase(\"stardog\", \"Starman\") AS ?result) }";
+
+        try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+
+            assertTrue("Should have a result", aResult.hasNext());
+
+            final boolean aValue = Boolean.parseBoolean(aResult.next().getValue("result").stringValue());
+
+            assertEquals(false, aValue);
+            assertFalse("Should have no more results", aResult.hasNext());
+        }
+    }
+
     @Test
     public void testEmptyString() {
        
@@ -38,9 +54,9 @@ public class TestEqualsIgnoreCase extends AbstractStardogTest {
         
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final int aValue = Integer.parseInt(aResult.next().getValue("result").stringValue());
+                final boolean aValue = Boolean.parseBoolean(aResult.next().getValue("result").stringValue());
 
-                assertEquals(-1, aValue);
+                assertEquals(true, aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }

@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.*;
 public class IndexOfDifference extends AbstractFunction implements StringFunction {
 
     protected IndexOfDifference() {
-        super(1, StringVocabulary.indexOfDifference.stringValue());
+        super(2, StringVocabulary.indexOfDifference.stringValue());
     }
 
     private IndexOfDifference(final IndexOfDifference indexOfDifference) {
@@ -24,10 +24,6 @@ public class IndexOfDifference extends AbstractFunction implements StringFunctio
 
         final String string = assertStringLiteral(values[0]).stringValue();
         final String searchChars = assertStringLiteral(values[1]).stringValue();
-
-
-
-        //TODO handle multiple searchchars
 
         return literal(StringUtils.indexOfDifference(string, searchChars));
     }
