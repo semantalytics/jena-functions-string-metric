@@ -8,12 +8,14 @@ import com.google.common.collect.Range;
 import org.apache.commons.lang3.StringUtils;
 import org.openrdf.model.Value;
 
+import java.util.Arrays;
+
 import static com.complexible.common.rdf.model.Values.*;
 
 public final class IsNoneEmpty extends AbstractFunction implements StringFunction {
 
     protected IsNoneEmpty() {
-        super(Range.all(), StringVocabulary.isNoneBlank.stringValue());
+        super(Range.atLeast(1), StringVocabulary.isNoneEmpty.stringValue());
     }
 
     private IsNoneEmpty(final IsNoneEmpty isNoneBlank) {
@@ -23,9 +25,13 @@ public final class IsNoneEmpty extends AbstractFunction implements StringFunctio
     @Override
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
 
-        final String string = assertStringLiteral(values[0]).stringValue();
+        for(final Value value : values) {
+            assertStringLiteral(value);
+        }
 
-        return literal(StringUtils.isNoneBlank(string));
+        final String[] strings = Arrays.stream(values).map(Value::stringValue).toArray(String[]::new);
+
+        return literal(StringUtils.isNoneEmpty(strings));
     }
 
     @Override

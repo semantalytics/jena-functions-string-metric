@@ -10,35 +10,52 @@ import static org.junit.Assert.*;
 public class TestIsNumericSpace extends AbstractStardogTest {
 
     @Test
-    public void testAbbreviateMiddle() {
+    public void testTrue() {
       
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:isNumericSpace(\"Stardog graph database\", \"...\", 8) AS ?result) }";
+                    "select ?result where { bind(string:isNumericSpace(\"1 \") AS ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final String aValue = aResult.next().getValue("result").stringValue();
+                final boolean aValue = Boolean.parseBoolean(aResult.next().getValue("result").stringValue());
 
-                assertEquals("Sta...se", aValue);
+                assertEquals(true, aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
+    }
+
+    @Test
+    public void testFalse() {
+
+        final String aQuery = StringVocabulary.sparqlPrefix("string") +
+                "select ?result where { bind(string:isNumericSpace(\"1\") AS ?result) }";
+
+        try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+
+            assertTrue("Should have a result", aResult.hasNext());
+
+            final boolean aValue = Boolean.parseBoolean(aResult.next().getValue("result").stringValue());
+
+            assertEquals(true, aValue);
+            assertFalse("Should have no more results", aResult.hasNext());
+        }
     }
 
     @Test
     public void testEmptyString() {
       
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:isNumericSpace(\"\", \"\", 10) as ?result) }";
+                    "select ?result where { bind(string:isNumericSpace(\"\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
            
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final String aValue = aResult.next().getValue("result").stringValue();
+                final boolean aValue = Boolean.parseBoolean(aResult.next().getValue("result").stringValue());
 
-                assertEquals("", aValue);
+                assertEquals(true, aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
@@ -47,7 +64,7 @@ public class TestIsNumericSpace extends AbstractStardogTest {
     public void testTooFewArgs() {
       
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:isNumericSpace(\"one\") as ?result) }";
+                    "select ?result where { bind(string:isNumericSpace() as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
          
@@ -64,7 +81,7 @@ public class TestIsNumericSpace extends AbstractStardogTest {
     public void testTooManyArgs() {
 
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:isNumericSpace(\"one\", 2, \"three\") as ?result) }";
+                    "select ?result where { bind(string:isNumericSpace(\"one\", \"two\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -81,44 +98,10 @@ public class TestIsNumericSpace extends AbstractStardogTest {
     public void testWrongTypeFirstArg() {
        
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:isNumericSpace(4, 5) as ?result) }";
+                    "select ?result where { bind(string:isNumericSpace(1) as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
-                assertTrue("Should have a result", aResult.hasNext());
-
-                final BindingSet aBindingSet = aResult.next();
-
-                assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-                assertFalse("Should have no more results", aResult.hasNext());
-            }
-    }
-
-    @Test
-    public void testWrongTypeSecondArg() {
-     
-        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:isNumericSpace(\"one\", \"two\") as ?result) }";
-
-            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
-
-                assertTrue("Should have a result", aResult.hasNext());
-
-                final BindingSet aBindingSet = aResult.next();
-
-                assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-                assertFalse("Should have no more results", aResult.hasNext());
-            }
-    }
-
-    @Test
-    public void testLengthTooShort() {
-     
-        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:isNumericSpace(\"Stardog\", 3) as ?result) }";
-
-            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
-         
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final BindingSet aBindingSet = aResult.next();

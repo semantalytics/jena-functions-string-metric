@@ -10,24 +10,7 @@ import static org.junit.Assert.*;
 public class TestIsWhitespace extends AbstractStardogTest {
 
     @Test
-    public void testIsWhitespaceFalse() {
-   
-            final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:isWhitespace(\"Stardog\") AS ?result) }";
-
-            try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
-
-                assertTrue("Should have a result", aResult.hasNext());
-
-                final boolean aValue = Boolean.parseBoolean(aResult.next().getValue("result").stringValue());
-
-                assertEquals(false, aValue);
-                assertFalse("Should have no more results", aResult.hasNext());
-            }
-    }
-
-    @Test
-    public void testIsWhitespaceTrue() {
+    public void testTrue() {
    
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?result where { bind(string:isWhitespace(\"    \") AS ?result) }";
@@ -44,10 +27,27 @@ public class TestIsWhitespace extends AbstractStardogTest {
     }
 
     @Test
+    public void testFalse() {
+   
+            final String aQuery = StringVocabulary.sparqlPrefix("string") +
+                    "select ?result where { bind(string:isWhitespace(\"Stardog\") AS ?result) }";
+
+            try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+
+                assertTrue("Should have a result", aResult.hasNext());
+
+                final boolean aValue = Boolean.parseBoolean(aResult.next().getValue("result").stringValue());
+
+                assertEquals(false, aValue);
+                assertFalse("Should have no more results", aResult.hasNext());
+            }
+    }
+
+    @Test
     public void testTooFewArgs() {
 
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:getDigits() as ?result) }";
+                    "select ?result where { bind(string:isWhitespace() as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
           
@@ -64,7 +64,7 @@ public class TestIsWhitespace extends AbstractStardogTest {
     public void testTooManyArgs() {
 
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:getDigits(\"Stardog\", \"one\") as ?result) }";
+                    "select ?result where { bind(string:isWhitespace(\"one\", \"two\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
          
@@ -81,7 +81,7 @@ public class TestIsWhitespace extends AbstractStardogTest {
     public void testWrongType() {
        
             final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:getDigits(4) as ?result) }";
+                    "select ?result where { bind(string:isWhitespace(4) as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
        

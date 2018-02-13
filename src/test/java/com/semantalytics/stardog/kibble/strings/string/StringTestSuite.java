@@ -26,6 +26,7 @@ import java.net.InetSocketAddress;
 	TestAbbreviateWithMarker.class,
 	TestAppendIfMissing.class,
 	TestAppendIfMissingIgnoreCase.class,
+    TestArraySeparator.class,
 	TestCapitalize.class,
 	TestCaseFormat.class,
 	TestCenter.class,

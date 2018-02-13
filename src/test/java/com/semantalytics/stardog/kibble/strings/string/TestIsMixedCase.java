@@ -10,41 +10,54 @@ import static org.junit.Assert.*;
 public class TestIsMixedCase extends AbstractStardogTest {
 
     @Test
-    public void testAbbreviateMiddle() {
+    public void testTrue() {
         
-
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(string:isMixedCase(\"Stardog graph database\", \"...\", 8) AS ?result) }";
-
+                    "select ?result where { bind(string:isMixedCase(\"Stardog\") AS ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final String aValue = aResult.next().getValue("result").stringValue();
+                final boolean aValue = Boolean.parseBoolean(aResult.next().getValue("result").stringValue());
 
-                assertEquals("Stard...", aValue);
+                assertEquals(true, aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
-      
+    }
+
+    @Test
+    public void testFalse() {
+
+        final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
+                "select ?result where { bind(string:isMixedCase(\"stardog\") AS ?result) }";
+
+        try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+
+            assertTrue("Should have a result", aResult.hasNext());
+
+            final boolean aValue = Boolean.parseBoolean(aResult.next().getValue("result").stringValue());
+
+            assertEquals(false, aValue);
+            assertFalse("Should have no more results", aResult.hasNext());
+        }
     }
 
     @Test
     public void testEmptyString() {
-       
 
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(string:isMixedCase(\"\", 5) as ?result) }";
+                    "select ?result where { bind(string:isMixedCase(\"\") as ?result) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute();
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
-       
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final String aValue = aResult.next().getValue("result").stringValue();
+                final boolean aValue = Boolean.parseBoolean(aResult.next().getValue("result").stringValue());
 
-                assertEquals("", aValue);
+                assertEquals(false, aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
+            }
     }
 
     @Test
@@ -52,93 +65,50 @@ public class TestIsMixedCase extends AbstractStardogTest {
 
    
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(string:isMixedCase(\"one\") as ?result) }";
+                    "select ?result where { bind(string:isMixedCase() as ?result) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute();
-         
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final BindingSet aBindingSet = aResult.next();
 
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
                 assertFalse("Should have no more results", aResult.hasNext());
+            }
     }
-
 
     @Test
     public void testTooManyArgs() {
 
-       
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(string:isMixedCase(\"one\", 2, \"three\") as ?result) }";
+                    "select ?result where { bind(string:isMixedCase(\"one\", \"two\") as ?result) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute();
-         
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final BindingSet aBindingSet = aResult.next();
 
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
                 assertFalse("Should have no more results", aResult.hasNext());
-        
+            }
     }
-
-
 
     @Test
     public void testWrongTypeFirstArg() {
     
             final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(string:isMixedCase(4, 5) as ?result) }";
+                    "select ?result where { bind(string:isMixedCase(1) as ?result) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute();
-        
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final BindingSet aBindingSet = aResult.next();
 
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
                 assertFalse("Should have no more results", aResult.hasNext());
-           
-    }
-
-    @Test
-    public void testWrongTypeSecondArg() {
-     
-
-            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(string:isMixedCase(\"one\", \"two\") as ?result) }";
-
-            final TupleQueryResult aResult = connection.select(aQuery).execute();
-         
-                assertTrue("Should have a result", aResult.hasNext());
-
-                final BindingSet aBindingSet = aResult.next();
-
-                assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-                assertFalse("Should have no more results", aResult.hasNext());
-           
-    }
-
-    @Test
-    public void testLengthTooShort() {
-    
-            final String aQuery = "prefix string: <" + StringVocabulary.NAMESPACE + "> " +
-                    "select ?result where { bind(string:isMixedCase(\"Stardog\", 3) as ?result) }";
-
-            final TupleQueryResult aResult = connection.select(aQuery).execute();
-        
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
-                assertTrue("Should have a result", aResult.hasNext());
-
-                final BindingSet aBindingSet = aResult.next();
-
-                assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
-                assertFalse("Should have no more results", aResult.hasNext());
-         
+            }
     }
 }

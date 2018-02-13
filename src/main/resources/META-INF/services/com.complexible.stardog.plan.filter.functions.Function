@@ -128,6 +128,7 @@ com.semantalytics.stardog.kibble.strings.string.AbbreviateMiddle
 com.semantalytics.stardog.kibble.strings.string.AbbreviateWithMarker
 com.semantalytics.stardog.kibble.strings.string.AppendIfMissing
 com.semantalytics.stardog.kibble.strings.string.AppendIfMissingIgnoreCase
+com.semantalytics.stardog.kibble.strings.string.ArraySeparator
 com.semantalytics.stardog.kibble.strings.string.Capitalize
 com.semantalytics.stardog.kibble.strings.string.CaseFormat
 com.semantalytics.stardog.kibble.strings.string.Center
@@ -177,6 +178,7 @@ com.semantalytics.stardog.kibble.strings.string.IsMixedCase
 com.semantalytics.stardog.kibble.strings.string.IsNoneBlank
 com.semantalytics.stardog.kibble.strings.string.IsNoneEmpty
 com.semantalytics.stardog.kibble.strings.string.IsNotBlank
+com.semantalytics.stardog.kibble.strings.string.IsNotEmpty
 com.semantalytics.stardog.kibble.strings.string.IsNumeric
 com.semantalytics.stardog.kibble.strings.string.IsNumericSpace
 com.semantalytics.stardog.kibble.strings.string.IsWhitespace
