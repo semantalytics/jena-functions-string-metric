@@ -14,7 +14,7 @@ public class TestArraySeparator extends AbstractStardogTest {
     public void test() {
     
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:arraySeparator AS ?result) }";
+                    "select ?result where { bind(string:arraySeparator() AS ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
