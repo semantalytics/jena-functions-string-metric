@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 public class TestLastIndexOfAny extends AbstractStardogTest {
 
     @Test
-    public void testAbbreviateMiddle() {
+    public void testTwoArg() {
       
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
                     "select ?result where { bind(string:lastIndexOfAny(\"Stardog graph database\", \"...\", 8) AS ?result) }";

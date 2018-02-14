@@ -26,7 +26,9 @@ public final class ReverseDelimited extends AbstractFunction implements StringFu
       final String string = assertStringLiteral(values[0]).stringValue();
       final String separatorChar = assertStringLiteral(values[1]).stringValue();
 
-      checkElementIndex(0, separatorChar.length());
+      if(separatorChar.length() != 1) {
+          throw new ExpressionEvaluationException("Second argument must be a single character. Found " + separatorChar.length());
+      }
       
       return Values.literal(StringUtils.reverseDelimited(string, separatorChar.charAt(0)));
     }

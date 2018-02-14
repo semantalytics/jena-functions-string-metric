@@ -10,10 +10,10 @@ import static org.junit.Assert.*;
 public class TestRightPad extends AbstractStardogTest {
 
     @Test
-    public void testAbbreviateMiddle() {
+    public void test() {
       
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:rightPad(\"Stardog graph database\", \"...\", 8) AS ?result) }";
+                    "select ?result where { bind(string:rightPad(\"Stardog\", 10) AS ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -21,7 +21,7 @@ public class TestRightPad extends AbstractStardogTest {
 
                 final String aValue = aResult.next().getValue("result").stringValue();
 
-                assertEquals("Sta...se", aValue);
+                assertEquals("Stardog   ", aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
@@ -30,7 +30,7 @@ public class TestRightPad extends AbstractStardogTest {
     public void testEmptyString() {
       
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:rightPad(\"\", \"\", 10) as ?result) }";
+                    "select ?result where { bind(string:rightPad(\"\", 10) as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
            
@@ -38,7 +38,7 @@ public class TestRightPad extends AbstractStardogTest {
 
                 final String aValue = aResult.next().getValue("result").stringValue();
 
-                assertEquals("", aValue);
+                assertEquals("          ", aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
@@ -81,7 +81,7 @@ public class TestRightPad extends AbstractStardogTest {
     public void testWrongTypeFirstArg() {
        
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:rightPad(4, 5) as ?result) }";
+                    "select ?result where { bind(string:rightPad(1, 2) as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -102,23 +102,6 @@ public class TestRightPad extends AbstractStardogTest {
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
-                assertTrue("Should have a result", aResult.hasNext());
-
-                final BindingSet aBindingSet = aResult.next();
-
-                assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-                assertFalse("Should have no more results", aResult.hasNext());
-            }
-    }
-
-    @Test
-    public void testLengthTooShort() {
-     
-        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:rightPad(\"Stardog\", 3) as ?result) }";
-
-            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
-         
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final BindingSet aBindingSet = aResult.next();

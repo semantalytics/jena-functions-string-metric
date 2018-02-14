@@ -10,6 +10,8 @@ import com.google.common.collect.Range;
 import org.apache.commons.lang3.StringUtils;
 import org.openrdf.model.Value;
 
+import static com.complexible.common.rdf.model.Values.literal;
+
 public final class Split extends AbstractFunction implements StringFunction {
 
     protected Split() {
@@ -27,16 +29,16 @@ public final class Split extends AbstractFunction implements StringFunction {
 
         switch (values.length) {
             case 1: {
-                return Values.literal(Joiner.on("\u001f").join(StringUtils.split(string)));
+                return literal(Joiner.on("\u001f").join(StringUtils.split(string)));
             }
             case 2: {
                 final String separator = assertStringLiteral(values[1]).stringValue();
-                return Values.literal(Joiner.on("\u001f").join(StringUtils.split(string, separator)));
+                return literal(Joiner.on("\u001f").join(StringUtils.split(string, separator)));
             }
             case 3: {
                 final String separator = assertStringLiteral(values[1]).stringValue();
                 final int max = assertIntegerLiteral(values[2]).intValue();
-                return Values.literal(Joiner.on("\u0014").join(StringUtils.split(string, separator, max)));
+                return literal(Joiner.on("\u001f").join(StringUtils.split(string, separator, max)));
             }
             default: {
                 throw new ExpressionEvaluationException("Takes 1 to 3 arguments. Fount " + values.length);

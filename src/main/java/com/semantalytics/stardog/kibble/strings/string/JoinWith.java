@@ -34,7 +34,7 @@ public final class JoinWith extends AbstractFunction implements StringFunction {
         }
 
         final String separator = assertStringLiteral(values[0]).stringValue();
-        final List<String> pieces = Arrays.stream(values).skip(1).map(Value::stringValue).collect(toList());
+        final String[] pieces = Arrays.stream(values).skip(1).map(Value::stringValue).toArray(String[]::new);
 
         return literal(StringUtils.joinWith(separator, pieces));
     }

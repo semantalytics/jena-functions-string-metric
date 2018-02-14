@@ -31,7 +31,7 @@ public final class LastIndexOf extends AbstractFunction implements StringFunctio
                 return literal(StringUtils.lastIndexOf(sequence, searchSequence));
             }
             case 3: {
-                final int startPos = assertNumericLiteral(values[1]).intValue();
+                final int startPos = assertNumericLiteral(values[2]).intValue();
                 return literal(StringUtils.lastIndexOf(sequence, searchSequence, startPos));
             }
             default: {

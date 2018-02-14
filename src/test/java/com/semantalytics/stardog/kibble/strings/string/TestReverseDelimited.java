@@ -10,10 +10,10 @@ import static org.junit.Assert.*;
 public class TestReverseDelimited extends AbstractStardogTest {
 
     @Test
-    public void testAbbreviateMiddle() {
+    public void test() {
     
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:reverseDelimited(\"Stardog graph database\", \"...\", 8) AS ?result) }";
+                    "select ?result where { bind(string:reverseDelimited(\"Stardog.graph.database\", \".\") AS ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -21,7 +21,7 @@ public class TestReverseDelimited extends AbstractStardogTest {
 
                 final String aValue = aResult.next().getValue("result").stringValue();
 
-                assertEquals("Stard...", aValue);
+                assertEquals("database.graph.Stardog", aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
@@ -30,7 +30,7 @@ public class TestReverseDelimited extends AbstractStardogTest {
     public void testEmptyString() {
         
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:reverseDelimited(\"\", 5) as ?result) }";
+                    "select ?result where { bind(string:reverseDelimited(\"\", \"x\") as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -64,7 +64,7 @@ public class TestReverseDelimited extends AbstractStardogTest {
     public void testTooManyArgs() {
        
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:reverseDelimited(\"one\", 2, \"three\") as ?result) }";
+                    "select ?result where { bind(string:reverseDelimited(\"one\", \"two\", \"three\") as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -81,7 +81,7 @@ public class TestReverseDelimited extends AbstractStardogTest {
     public void testWrongTypeFirstArg() {
        
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:reverseDelimited(4, 5) as ?result) }";
+                    "select ?result where { bind(string:reverseDelimited(1, \"two\") as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -98,7 +98,7 @@ public class TestReverseDelimited extends AbstractStardogTest {
     public void testWrongTypeSecondArg() {
        
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:reverseDelimited(\"one\", \"two\") as ?result) }";
+                    "select ?result where { bind(string:reverseDelimited(\"one\", 2) as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -112,10 +112,10 @@ public class TestReverseDelimited extends AbstractStardogTest {
     }
 
     @Test
-    public void testLengthTooShort() {
+    public void testSecondArgNotSingleChar() {
        
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:reverseDelimited(\"Stardog\", 3) as ?result) }";
+                    "select ?result where { bind(string:reverseDelimited(\"Stardog\", \"xx\") as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 

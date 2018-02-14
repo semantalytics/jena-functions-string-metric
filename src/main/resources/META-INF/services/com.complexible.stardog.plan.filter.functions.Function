@@ -233,6 +233,7 @@ com.semantalytics.stardog.kibble.strings.string.RightPad
 com.semantalytics.stardog.kibble.strings.string.Rotate
 com.semantalytics.stardog.kibble.strings.string.Split
 com.semantalytics.stardog.kibble.strings.string.SplitByCharacterType
+com.semantalytics.stardog.kibble.strings.string.SplitByCharacterTypeCamelCase
 com.semantalytics.stardog.kibble.strings.string.StartsWith
 com.semantalytics.stardog.kibble.strings.string.StartsWithIgnoreCase
 com.semantalytics.stardog.kibble.strings.string.Strip

@@ -34,7 +34,7 @@ public final class Join extends AbstractFunction implements StringFunction {
             assertStringLiteral(value);
         }
 
-        final List<String> pieces = Arrays.stream(values).map(Value::stringValue).collect(toList());
+        final String[] pieces = Arrays.stream(values).map(Value::stringValue).toArray(String[]::new);
 
         return literal(StringUtils.join(pieces));
     }

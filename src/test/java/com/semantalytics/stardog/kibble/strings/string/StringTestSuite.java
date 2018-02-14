@@ -126,6 +126,7 @@ import java.net.InetSocketAddress;
 	TestRotate.class,
 	TestSplit.class,
 	TestSplitByCharacterType.class,
+    TestSplitByCharacterTypeCamelCase.class,
 	TestStartsWith.class,
 	TestStartsWithAny.class,
 	TestStartsWithIgnoreCase.class,
