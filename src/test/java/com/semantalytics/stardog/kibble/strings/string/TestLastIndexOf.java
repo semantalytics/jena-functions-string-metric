@@ -38,7 +38,7 @@ public class TestLastIndexOf extends AbstractStardogTest {
 
                 final int aValue = Integer.parseInt(aResult.next().getValue("result").stringValue());
 
-                assertEquals(2, aValue);
+                assertEquals(1, aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }

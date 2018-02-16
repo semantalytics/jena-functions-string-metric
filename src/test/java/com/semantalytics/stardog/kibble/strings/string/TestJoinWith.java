@@ -47,7 +47,7 @@ public class TestJoinWith extends AbstractStardogTest {
     public void testTooFewArgs() {
       
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:joinWith(\",\") as ?result) }";
+                    "select ?result where { bind(string:joinWith(\",\", \"two\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
          

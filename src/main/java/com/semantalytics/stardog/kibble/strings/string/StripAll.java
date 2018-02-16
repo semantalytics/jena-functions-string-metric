@@ -15,7 +15,7 @@ import java.util.Arrays;
 public final class StripAll extends AbstractFunction implements StringFunction {
 
     protected StripAll() {
-        super(Range.all(), StringVocabulary.stripAll.stringValue());
+        super(Range.atLeast(1), StringVocabulary.stripAll.stringValue());
     }
 
     private StripAll(final StripAll stripAll) {
@@ -26,7 +26,7 @@ public final class StripAll extends AbstractFunction implements StringFunction {
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
 
         for(final Value value : values) {
-            assertStringLiteral(values[0]).stringValue();
+            assertStringLiteral(value).stringValue();
         }
 
         final String[] strings = Arrays.stream(values).map(Value::stringValue).toArray(String[]::new);

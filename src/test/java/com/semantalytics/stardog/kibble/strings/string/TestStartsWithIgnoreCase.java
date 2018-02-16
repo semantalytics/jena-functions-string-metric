@@ -48,7 +48,7 @@ public class TestStartsWithIgnoreCase extends AbstractStardogTest {
     public void testEmptyString() {
       
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:startsWithIgnoreCase(\"\", \"\", 10) as ?result) }";
+                    "select ?result where { bind(string:startsWithIgnoreCase(\"\", \"\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
            

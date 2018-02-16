@@ -10,18 +10,18 @@ import static org.junit.Assert.*;
 public class TestLastOrdinalIndexOf extends AbstractStardogTest {
 
     @Test
-    public void testAbbreviateMiddle() {
+    public void testThreeArg() {
       
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:lastOrdinalIindexOf(\"Stardog graph database\", \"...\", 8) AS ?result) }";
+                    "select ?result where { bind(string:lastOrdinalIndexOf(\"Stardog\", \"ar\", 2) AS ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final String aValue = aResult.next().getValue("result").stringValue();
+                final int aValue = Integer.parseInt(aResult.next().getValue("result").stringValue());
 
-                assertEquals("Sta...se", aValue);
+                assertEquals(2, aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
@@ -30,7 +30,7 @@ public class TestLastOrdinalIndexOf extends AbstractStardogTest {
     public void testEmptyString() {
       
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:lastOrdinalIindexOf(\"\", \"\", 10) as ?result) }";
+                    "select ?result where { bind(string:lastOrdinalIndexOf(\"\", \"\", 10) as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
            
@@ -47,7 +47,7 @@ public class TestLastOrdinalIndexOf extends AbstractStardogTest {
     public void testTooFewArgs() {
       
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:lastOrdinalIindexOf(\"one\") as ?result) }";
+                    "select ?result where { bind(string:lastOrdinalIndexOf(\"one\", \"two\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
          
@@ -64,7 +64,7 @@ public class TestLastOrdinalIndexOf extends AbstractStardogTest {
     public void testTooManyArgs() {
 
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:lastOrdinalIindexOf(\"one\", 2, \"three\") as ?result) }";
+                    "select ?result where { bind(string:lastOrdinalIndexOf(\"one\", \"two\", 3, 4) as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -81,7 +81,7 @@ public class TestLastOrdinalIndexOf extends AbstractStardogTest {
     public void testWrongTypeFirstArg() {
        
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:lastOrdinalIindexOf(4, 5) as ?result) }";
+                    "select ?result where { bind(string:lastOrdinalIndexOf(1, \"two\", 3) as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -98,7 +98,7 @@ public class TestLastOrdinalIndexOf extends AbstractStardogTest {
     public void testWrongTypeSecondArg() {
      
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:lastOrdinalIindexOf(\"one\", \"two\") as ?result) }";
+                    "select ?result where { bind(string:lastOrdinalIndexOf(\"one\", 2, 3) as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -112,10 +112,27 @@ public class TestLastOrdinalIndexOf extends AbstractStardogTest {
     }
 
     @Test
+    public void testWrongTypeThirdArg() {
+
+        final String aQuery = StringVocabulary.sparqlPrefix("string") +
+                "select ?result where { bind(string:lastOrdinalIndexOf(\"one\", \"two\", \"three\") as ?result) }";
+
+        try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+
+            assertTrue("Should have a result", aResult.hasNext());
+
+            final BindingSet aBindingSet = aResult.next();
+
+            assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+            assertFalse("Should have no more results", aResult.hasNext());
+        }
+    }
+
+    @Test
     public void testLengthTooShort() {
      
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:lastOrdinalIindexOf(\"Stardog\", 3) as ?result) }";
+                    "select ?result where { bind(string:lastOrdinalIndexOf(\"Stardog\", 3) as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
          

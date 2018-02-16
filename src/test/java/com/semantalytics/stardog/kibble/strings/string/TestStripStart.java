@@ -10,10 +10,10 @@ import static org.junit.Assert.*;
 public class TestStripStart extends AbstractStardogTest {
 
     @Test
-    public void testAbbreviateMiddle() {
+    public void test() {
       
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:stripStart(\"Stardog graph database\", \"...\", 8) AS ?result) }";
+                    "select ?result where { bind(string:stripStart(\"        Stardog\") AS ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 

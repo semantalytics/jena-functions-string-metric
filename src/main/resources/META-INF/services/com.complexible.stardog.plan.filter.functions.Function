@@ -192,7 +192,6 @@ com.semantalytics.stardog.kibble.strings.string.Left
 com.semantalytics.stardog.kibble.strings.string.LeftPad
 com.semantalytics.stardog.kibble.strings.string.Length
 com.semantalytics.stardog.kibble.strings.string.LowerCase
-com.semantalytics.stardog.kibble.strings.string.LowerCaseFully
 com.semantalytics.stardog.kibble.strings.string.Mid
 com.semantalytics.stardog.kibble.strings.string.NormalizeSpace
 com.semantalytics.stardog.kibble.strings.string.OrdinalIndexOf

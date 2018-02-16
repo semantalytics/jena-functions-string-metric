@@ -89,7 +89,6 @@ import java.net.InetSocketAddress;
 	TestLeftPad.class,
 	TestLength.class,
 	TestLowerCase.class,
-	TestLowerCaseFully.class,
 	TestMid.class,
 	TestNormalizeSpace.class,
 	TestOrdinalIndexOf.class,
