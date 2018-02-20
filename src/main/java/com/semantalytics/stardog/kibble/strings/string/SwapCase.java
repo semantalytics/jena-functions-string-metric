@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.*;
 public final class SwapCase extends AbstractFunction implements StringFunction {
 
     protected SwapCase() {
-        super(2, StringVocabulary.swapCase.stringValue());
+        super(1, StringVocabulary.swapCase.stringValue());
     }
 
     private SwapCase(final SwapCase swapCase) {

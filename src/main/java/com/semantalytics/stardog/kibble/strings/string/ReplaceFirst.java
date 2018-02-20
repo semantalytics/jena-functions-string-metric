@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.literal;
 public final class ReplaceFirst extends AbstractFunction implements StringFunction {
 
     protected ReplaceFirst() {
-        super(3, StringVocabulary.replace.stringValue());
+        super(3, StringVocabulary.replaceFirst.stringValue());
     }
 
     private ReplaceFirst(final ReplaceFirst replaceFirst) {

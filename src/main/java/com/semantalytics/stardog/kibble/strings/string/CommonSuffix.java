@@ -8,6 +8,8 @@ import com.complexible.stardog.plan.filter.functions.string.StringFunction;
 import com.google.common.base.Strings;
 import org.openrdf.model.Value;
 
+import static com.complexible.common.rdf.model.Values.literal;
+
 public final class CommonSuffix extends AbstractFunction implements StringFunction {
 
     protected CommonSuffix() {
@@ -24,7 +26,7 @@ public final class CommonSuffix extends AbstractFunction implements StringFuncti
       final String firstString = assertStringLiteral(values[0]).stringValue();
       final String secondString = assertStringLiteral(values[1]).stringValue();
       
-      return Values.literal(Strings.commonSuffix(firstString, secondString));
+      return literal(Strings.commonSuffix(firstString, secondString));
     }
 
     @Override

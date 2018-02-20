@@ -10,10 +10,10 @@ import static org.junit.Assert.*;
 public class TestPadStart extends AbstractStardogTest {
 
     @Test
-    public void testAbbreviateMiddle() {
+    public void test() {
    
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:padStart(\"Stardog graph database\", \"...\", 8) AS ?result) }";
+                    "select ?result where { bind(string:padStart(\"Stardog\", 10, \"*\") AS ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -21,7 +21,7 @@ public class TestPadStart extends AbstractStardogTest {
 
                 final String aValue = aResult.next().getValue("result").stringValue();
 
-                assertEquals("Stard...", aValue);
+                assertEquals("***Stardog", aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
@@ -30,7 +30,7 @@ public class TestPadStart extends AbstractStardogTest {
     public void testEmptyString() {
      
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:padStart(\"\", 5) as ?result) }";
+                    "select ?result where { bind(string:padStart(\"\", 5, \"*\") as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -38,7 +38,7 @@ public class TestPadStart extends AbstractStardogTest {
 
                 final String aValue = aResult.next().getValue("result").stringValue();
 
-                assertEquals("", aValue);
+                assertEquals("*****", aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
@@ -47,7 +47,7 @@ public class TestPadStart extends AbstractStardogTest {
     public void testTooFewArgs() {
 
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:padStart(\"one\") as ?result) }";
+                    "select ?result where { bind(string:padStart(\"one\", 2) as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -64,7 +64,7 @@ public class TestPadStart extends AbstractStardogTest {
     public void testTooManyArgs() {
 
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:padStart(\"one\", 2, \"three\") as ?result) }";
+                    "select ?result where { bind(string:padStart(\"one\", 2, \"t\", \"four\") as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -81,7 +81,7 @@ public class TestPadStart extends AbstractStardogTest {
     public void testWrongTypeFirstArg() {
       
        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:padStart(4, 5) as ?result) }";
+                    "select ?result where { bind(string:padStart(1, 2) as ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -112,19 +112,36 @@ public class TestPadStart extends AbstractStardogTest {
     }
 
     @Test
-    public void testLengthTooShort() {
-      
-       final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:padStart(\"Stardog\", 3) as ?result) }";
+    public void testWrongTypeThirdArg() {
 
-            try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+        final String aQuery = StringVocabulary.sparqlPrefix("string") +
+                "select ?result where { bind(string:padStart(\"one\", 2, 3) as ?result) }";
 
-                assertTrue("Should have a result", aResult.hasNext());
+        try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
-                final BindingSet aBindingSet = aResult.next();
+            assertTrue("Should have a result", aResult.hasNext());
 
-                assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-                assertFalse("Should have no more results", aResult.hasNext());
-            }
+            final BindingSet aBindingSet = aResult.next();
+
+            assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+            assertFalse("Should have no more results", aResult.hasNext());
+        }
+    }
+
+    @Test
+    public void testMultiCharThirdArg() {
+
+        final String aQuery = StringVocabulary.sparqlPrefix("string") +
+                "select ?result where { bind(string:padStart(\"one\", 2, \"three\") as ?result) }";
+
+        try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+
+            assertTrue("Should have a result", aResult.hasNext());
+
+            final BindingSet aBindingSet = aResult.next();
+
+            assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+            assertFalse("Should have no more results", aResult.hasNext());
+        }
     }
 }

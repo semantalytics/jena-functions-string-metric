@@ -8,6 +8,8 @@ import com.complexible.stardog.plan.filter.functions.string.StringFunction;
 import org.apache.commons.lang3.StringUtils;
 import org.openrdf.model.Value;
 
+import static com.complexible.common.rdf.model.Values.literal;
+
 public final class DefaultIfEmpty extends AbstractFunction implements StringFunction {
 
     protected DefaultIfEmpty() {
@@ -24,7 +26,7 @@ public final class DefaultIfEmpty extends AbstractFunction implements StringFunc
       final String string = assertStringLiteral(values[0]).stringValue();
       final String defaultString = assertStringLiteral(values[1]).stringValue();
       
-      return Values.literal(StringUtils.defaultIfEmpty(string, defaultString));
+      return literal(StringUtils.defaultIfEmpty(string, defaultString));
     }
 
     @Override

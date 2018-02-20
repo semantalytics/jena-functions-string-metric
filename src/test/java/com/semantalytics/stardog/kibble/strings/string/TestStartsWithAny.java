@@ -56,7 +56,7 @@ public class TestStartsWithAny extends AbstractStardogTest {
 
                 final boolean aValue = Boolean.parseBoolean(aResult.next().getValue("result").stringValue());
 
-                assertEquals(true, aValue);
+                assertEquals(false, aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }

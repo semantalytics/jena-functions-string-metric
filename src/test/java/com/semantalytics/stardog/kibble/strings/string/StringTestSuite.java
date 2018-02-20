@@ -26,7 +26,7 @@ import java.net.InetSocketAddress;
 	TestAbbreviateWithMarker.class,
 	TestAppendIfMissing.class,
 	TestAppendIfMissingIgnoreCase.class,
-    TestArraySeparator.class,
+    TestArrayFunctionSeparator.class,
 	TestCapitalize.class,
 	TestCaseFormat.class,
 	TestCenter.class,
@@ -97,7 +97,6 @@ import java.net.InetSocketAddress;
 	TestPadStart.class,
 	TestPrependIfMissing.class,
 	TestPrependIfMissingIgnoreCase.class,
-	TestRandom.class,
 	TestRemove.class,
 	TestRemoveAll.class,
 	TestRemoveEnd.class,
@@ -146,7 +145,6 @@ import java.net.InetSocketAddress;
 	TestUncapitalize.class,
 	TestUnwrap.class,
 	TestUpperCase.class,
-	TestUpperCaseFully.class,
 	TestWrap.class,
 	TestWrapIfMissing.class
 })

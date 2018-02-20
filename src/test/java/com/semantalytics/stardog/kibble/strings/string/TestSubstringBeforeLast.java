@@ -10,10 +10,10 @@ import static org.junit.Assert.*;
 public class TestSubstringBeforeLast extends AbstractStardogTest {
 
     @Test
-    public void testAbbreviateMiddle() {
+    public void test() {
       
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:substringBeforeLast(\"Stardog graph database\", \"...\", 8) AS ?result) }";
+                    "select ?result where { bind(string:substringBeforeLast(\"StardogStardog\", \"dog\") AS ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -21,7 +21,7 @@ public class TestSubstringBeforeLast extends AbstractStardogTest {
 
                 final String aValue = aResult.next().getValue("result").stringValue();
 
-                assertEquals("Sta...se", aValue);
+                assertEquals("StardogStar", aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }
@@ -30,7 +30,7 @@ public class TestSubstringBeforeLast extends AbstractStardogTest {
     public void testEmptyString() {
       
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:substringBeforeLast(\"\", \"\", 10) as ?result) }";
+                    "select ?result where { bind(string:substringBeforeLast(\"\", \"\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
            
@@ -64,7 +64,7 @@ public class TestSubstringBeforeLast extends AbstractStardogTest {
     public void testTooManyArgs() {
 
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:substringBeforeLast(\"one\", 2, \"three\") as ?result) }";
+                    "select ?result where { bind(string:substringBeforeLast(\"one\", \"two\", \"three\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -81,7 +81,7 @@ public class TestSubstringBeforeLast extends AbstractStardogTest {
     public void testWrongTypeFirstArg() {
        
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:substringBeforeLast(4, 5) as ?result) }";
+                    "select ?result where { bind(string:substringBeforeLast(1, \"two\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -98,27 +98,10 @@ public class TestSubstringBeforeLast extends AbstractStardogTest {
     public void testWrongTypeSecondArg() {
      
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:substringBeforeLast(\"one\", \"two\") as ?result) }";
+                    "select ?result where { bind(string:substringBeforeLast(\"one\", 2) as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
-                assertTrue("Should have a result", aResult.hasNext());
-
-                final BindingSet aBindingSet = aResult.next();
-
-                assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-                assertFalse("Should have no more results", aResult.hasNext());
-            }
-    }
-
-    @Test
-    public void testLengthTooShort() {
-     
-        final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:substringBeforeLast(\"Stardog\", 3) as ?result) }";
-
-            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
-         
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final BindingSet aBindingSet = aResult.next();

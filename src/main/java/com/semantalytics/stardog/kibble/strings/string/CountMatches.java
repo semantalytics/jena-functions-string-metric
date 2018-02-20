@@ -8,6 +8,8 @@ import com.complexible.stardog.plan.filter.functions.string.StringFunction;
 import org.apache.commons.lang3.StringUtils;
 import org.openrdf.model.Value;
 
+import static com.complexible.common.rdf.model.Values.literal;
+
 public final class CountMatches extends AbstractFunction implements StringFunction {
 
     protected CountMatches() {
@@ -24,7 +26,7 @@ public final class CountMatches extends AbstractFunction implements StringFuncti
       final String string = assertStringLiteral(values[0]).stringValue();
       final String sequence = assertStringLiteral(values[1]).stringValue();
       
-      return Values.literal(StringUtils.countMatches(string, sequence));
+      return literal(StringUtils.countMatches(string, sequence));
     }
 
     @Override

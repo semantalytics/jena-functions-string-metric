@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class ReplaceEach extends AbstractFunction implements StringFunction {
 
     protected ReplaceEach() {
-        super(3, StringVocabulary.replace.stringValue());
+        super(3, StringVocabulary.replaceEach.stringValue());
     }
 
     private ReplaceEach(final ReplaceEach replaceEach) {
@@ -24,6 +24,10 @@ public final class ReplaceEach extends AbstractFunction implements StringFunctio
         final String string = assertStringLiteral(values[0]).stringValue();
         final String[] searchList = assertStringLiteral(values[1]).stringValue().split("\u001f");
         final String[] replacementList = assertStringLiteral(values[2]).stringValue().split("\u001f");
+
+        if(searchList.length != searchList.length) {
+            throw new ExpressionEvaluationException("Invalid argument to " + this.getName() + " argument 2 and 3 must an equal number of ArrayFunction elements, was: " + searchList.length + " and " + replacementList.length);
+        }
 
         return Values.literal(StringUtils.replaceEach(string, searchList, replacementList));
     }

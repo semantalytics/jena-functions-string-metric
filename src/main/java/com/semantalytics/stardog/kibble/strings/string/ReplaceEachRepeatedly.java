@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class ReplaceEachRepeatedly extends AbstractFunction implements StringFunction {
 
     protected ReplaceEachRepeatedly() {
-        super(3, StringVocabulary.replace.stringValue());
+        super(3, StringVocabulary.replaceEachRepeatedly.stringValue());
     }
 
     private ReplaceEachRepeatedly(final ReplaceEachRepeatedly replaceEachRepeatedly) {
@@ -20,6 +20,10 @@ public final class ReplaceEachRepeatedly extends AbstractFunction implements Str
 
     @Override
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
+
+        for(final Value value : values) {
+            assertStringLiteral(value);
+        }
 
         final String string = assertStringLiteral(values[0]).stringValue();
         final String[] searchList = assertStringLiteral(values[1]).stringValue().split("\u001f");

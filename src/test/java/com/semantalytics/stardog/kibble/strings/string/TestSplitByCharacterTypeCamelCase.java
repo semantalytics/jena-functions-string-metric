@@ -10,10 +10,10 @@ import static org.junit.Assert.*;
 public class TestSplitByCharacterTypeCamelCase extends AbstractStardogTest {
 
     @Test
-    public void testAbbreviateMiddle() {
+    public void test() {
       
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:splitByCharacterTypeCamelCase(\"Stardog8graph8database\") AS ?result) }";
+                    "select ?result where { bind(string:splitByCharacterTypeCamelCase(\"Stardog8graph8Database\") AS ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -21,7 +21,7 @@ public class TestSplitByCharacterTypeCamelCase extends AbstractStardogTest {
 
                 final String aValue = aResult.next().getValue("result").stringValue();
 
-                assertEquals("Star\u001fdog", aValue);
+                assertEquals("Stardog\u001f8\u001fgraph\u001f8\u001fDatabase", aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }

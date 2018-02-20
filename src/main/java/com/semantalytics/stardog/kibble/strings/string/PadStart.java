@@ -23,6 +23,9 @@ public final class PadStart extends AbstractFunction implements StringFunction {
       
       final String string = assertStringLiteral(values[0]).stringValue();
       final int minLength = assertIntegerLiteral(values[1]).integerValue().intValue();
+      if(values[2].stringValue().length() != 1) {
+          throw new ExpressionEvaluationException("Third argument must be a single char");
+      }
       final char padChar = assertStringLiteral(values[2]).stringValue().charAt(0);
       
       return Values.literal(Strings.padStart(string, minLength, padChar));

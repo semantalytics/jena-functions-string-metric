@@ -1,6 +1,5 @@
 package com.semantalytics.stardog.kibble.strings.string;
 
-import com.complexible.common.rdf.model.Values;
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
@@ -8,6 +7,8 @@ import com.complexible.stardog.plan.filter.functions.string.StringFunction;
 import com.google.common.collect.Range;
 import org.apache.commons.lang3.StringUtils;
 import org.openrdf.model.Value;
+
+import static com.complexible.common.rdf.model.Values.literal;
 
 public final class AppendIfMissingIgnoreCase extends AbstractFunction implements StringFunction {
 
@@ -31,7 +32,7 @@ public final class AppendIfMissingIgnoreCase extends AbstractFunction implements
           suffixes[i - 2] = assertStringLiteral(values[i]).stringValue();
       }
 
-      return Values.literal(StringUtils.appendIfMissingIgnoreCase(string, suffix, suffixes));
+      return literal(StringUtils.appendIfMissingIgnoreCase(string, suffix, suffixes));
     }
 
     @Override

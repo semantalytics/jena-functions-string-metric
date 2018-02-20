@@ -8,6 +8,8 @@ import com.complexible.stardog.plan.filter.functions.string.StringFunction;
 import org.apache.commons.lang3.StringUtils;
 import org.openrdf.model.Value;
 
+import static com.complexible.common.rdf.model.Values.literal;
+
 public final class ContainsWhitespace extends AbstractFunction implements StringFunction {
 
     protected ContainsWhitespace() {
@@ -23,7 +25,7 @@ public final class ContainsWhitespace extends AbstractFunction implements String
       
       final String string = assertStringLiteral(values[0]).stringValue();
 
-      return Values.literal(StringUtils.containsWhitespace(string));
+      return literal(StringUtils.containsWhitespace(string));
     }
 
     @Override

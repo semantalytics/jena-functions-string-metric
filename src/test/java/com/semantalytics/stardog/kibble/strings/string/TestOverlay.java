@@ -21,7 +21,7 @@ public class TestOverlay extends AbstractStardogTest {
 
                 final String aValue = aResult.next().getValue("result").stringValue();
 
-                assertEquals("Sta**og", aValue);
+                assertEquals("St****dog", aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }

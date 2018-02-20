@@ -104,12 +104,12 @@
             <artifactId>heideltime</artifactId>
             <version>${heideltime.version}</version>
         </dependency>
-         <dependency>
-           <groupId>org.threeten</groupId>
-           <artifactId>threeten-extra</artifactId>
-           <version>${threeten-extra.version}</version>
-         </dependency>
-         <dependency>
+        <dependency>
+            <groupId>org.threeten</groupId>
+            <artifactId>threeten-extra</artifactId>
+            <version>${threeten-extra.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.javamoney</groupId>
             <artifactId>moneta</artifactId>
             <version>${moneta.version}</version>
@@ -161,11 +161,11 @@
             <artifactId>prettytime</artifactId>
             <version>${prettytime.version}</version>
         </dependency>
-         <dependency>
-           <groupId>org.ocpsoft.prettytime</groupId>
-           <artifactId>prettytime-nlp</artifactId>
-           <version>${prettytime-nlp.version}</version>
-         </dependency>
+        <dependency>
+            <groupId>org.ocpsoft.prettytime</groupId>
+            <artifactId>prettytime-nlp</artifactId>
+            <version>${prettytime-nlp.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.complexible.stardog.core</groupId>
             <artifactId>stardog</artifactId>
@@ -236,7 +236,7 @@
         </repository>
     </repositories>
 
-  <build>
+    <build>
         <finalName>${project.artifactId}-${project.version}-sd${stardog.version}</finalName>
         <plugins>
             <plugin>
@@ -282,8 +282,10 @@
                         </goals>
                         <configuration>
                             <transformers>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"/>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"/>
                             </transformers>
                         </configuration>
                     </execution>
@@ -292,17 +294,16 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.20.1</version>
+                <version>2.12.4</version>
                 <configuration>
+                    <excludes>
+                        <exclude>**/*</exclude>
+                    </excludes>
                     <includes>
                         <include>**/StringTestSuite.java</include>
                     </includes>
-                    <excludes>
-                             <exclude>regex[**/Test*]</exclude>
-                    </excludes
                 </configuration>
-            </plugin> 
+            </plugin>
         </plugins>
-    </build> 
-
+    </build>
 </project>

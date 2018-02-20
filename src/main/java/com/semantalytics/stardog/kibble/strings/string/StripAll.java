@@ -12,6 +12,8 @@ import org.openrdf.model.Value;
 
 import java.util.Arrays;
 
+import static com.complexible.common.rdf.model.Values.literal;
+
 public final class StripAll extends AbstractFunction implements StringFunction {
 
     protected StripAll() {
@@ -31,7 +33,7 @@ public final class StripAll extends AbstractFunction implements StringFunction {
 
         final String[] strings = Arrays.stream(values).map(Value::stringValue).toArray(String[]::new);
 
-        return Values.literal(Joiner.on("\u001f").join(StringUtils.stripAll(strings)));
+        return literal(Joiner.on("\u001f").join(StringUtils.stripAll(strings)));
     }
 
     @Override

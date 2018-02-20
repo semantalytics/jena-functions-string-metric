@@ -9,6 +9,8 @@ import com.google.common.collect.Range;
 import org.apache.commons.lang3.StringUtils;
 import org.openrdf.model.Value;
 
+import static com.complexible.common.rdf.model.Values.literal;
+
 public final class Center extends AbstractFunction implements StringFunction {
 
     protected Center() {
@@ -27,10 +29,10 @@ public final class Center extends AbstractFunction implements StringFunction {
 
         switch(values.length) {
             case 2:
-                return Values.literal(StringUtils.center(string, size));
+                return literal(StringUtils.center(string, size));
             case 3:
                 char padChar = assertStringLiteral(values[2]).stringValue().charAt(0);
-                return Values.literal(StringUtils.center(string, size, padChar));
+                return literal(StringUtils.center(string, size, padChar));
             default:
                 throw new ExpressionEvaluationException("Function requires 2 or 3 arguments. Found " + values.length);
         }

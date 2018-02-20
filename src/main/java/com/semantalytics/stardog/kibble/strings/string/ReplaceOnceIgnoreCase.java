@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class ReplaceOnceIgnoreCase extends AbstractFunction implements StringFunction {
 
     protected ReplaceOnceIgnoreCase() {
-        super(3, StringVocabulary.replace.stringValue());
+        super(3, StringVocabulary.replaceOnceIgnoreCase.stringValue());
     }
 
     private ReplaceOnceIgnoreCase(final ReplaceOnceIgnoreCase replaceOnceIgnoreCase) {

@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class ReplaceChars extends AbstractFunction implements StringFunction {
 
     protected ReplaceChars() {
-        super(3, StringVocabulary.replace.stringValue());
+        super(3, StringVocabulary.replaceChars.stringValue());
     }
 
     private ReplaceChars(final ReplaceChars replaceChars) {

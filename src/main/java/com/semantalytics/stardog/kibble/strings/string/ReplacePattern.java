@@ -11,7 +11,7 @@ import org.openrdf.model.Value;
 public final class ReplacePattern extends AbstractFunction implements StringFunction {
 
     protected ReplacePattern() {
-        super(3, StringVocabulary.replace.stringValue());
+        super(3, StringVocabulary.replacePattern.stringValue());
     }
 
     private ReplacePattern(final ReplacePattern replacePattern) {
@@ -22,10 +22,10 @@ public final class ReplacePattern extends AbstractFunction implements StringFunc
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
 
         final String string = assertStringLiteral(values[0]).stringValue();
-        final String searchString = assertStringLiteral(values[1]).stringValue();
+        final String regex = assertStringLiteral(values[1]).stringValue();
         final String replacement = assertStringLiteral(values[2]).stringValue();
 
-        return Values.literal(StringUtils.replacePattern(string, searchString, replacement));
+        return Values.literal(StringUtils.replacePattern(string, regex, replacement));
     }
 
     @Override

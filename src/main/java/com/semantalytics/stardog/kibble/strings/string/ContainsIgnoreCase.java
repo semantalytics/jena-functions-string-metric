@@ -8,6 +8,8 @@ import com.complexible.stardog.plan.filter.functions.string.StringFunction;
 import org.apache.commons.lang3.StringUtils;
 import org.openrdf.model.Value;
 
+import static com.complexible.common.rdf.model.Values.literal;
+
 public final class ContainsIgnoreCase extends AbstractFunction implements StringFunction {
 
     protected ContainsIgnoreCase() {
@@ -24,7 +26,7 @@ public final class ContainsIgnoreCase extends AbstractFunction implements String
         final String sequence = assertStringLiteral(values[0]).stringValue();
         final String searchSequence = assertStringLiteral(values[1]).stringValue();
 
-        return Values.literal(StringUtils.containsIgnoreCase(sequence, searchSequence));
+        return literal(StringUtils.containsIgnoreCase(sequence, searchSequence));
     }
 
     @Override

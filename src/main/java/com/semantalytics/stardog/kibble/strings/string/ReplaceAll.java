@@ -12,7 +12,7 @@ import org.openrdf.model.Value;
 public final class ReplaceAll extends AbstractFunction implements StringFunction {
 
     protected ReplaceAll() {
-        super(3, StringVocabulary.replace.stringValue());
+        super(3, StringVocabulary.replaceAll.stringValue());
     }
 
     private ReplaceAll(final ReplaceAll replaceAll) {

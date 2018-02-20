@@ -22,9 +22,9 @@ public final class Overlay extends AbstractFunction implements StringFunction {
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
       
       final String string = assertStringLiteral(values[0]).stringValue();
-      final String overlay = assertIntegerLiteral(values[1]).stringValue();
-      final int start = assertIntegerLiteral(values[1]).intValue();
-      final int end = assertIntegerLiteral(values[1]).intValue();
+      final String overlay = assertStringLiteral(values[1]).stringValue();
+      final int start = assertIntegerLiteral(values[2]).intValue();
+      final int end = assertIntegerLiteral(values[3]).intValue();
 
       return Values.literal(StringUtils.overlay(string, overlay, start, end));
     }

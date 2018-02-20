@@ -24,7 +24,7 @@ public final class Wrap extends AbstractFunction implements StringFunction {
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
 
         final String string = assertStringLiteral(values[0]).stringValue();
-        final String wrapWith = assertIntegerLiteral(values[1]).stringValue();
+        final String wrapWith = assertStringLiteral(values[1]).stringValue();
 
         if (wrapWith.length() != 1) {
             throw new ExpressionEvaluationException("Expecting a single character for second argument. Found '" + wrapWith + "'");

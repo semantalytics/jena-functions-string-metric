@@ -5,6 +5,8 @@ import org.junit.*;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.TupleQueryResult;
 
+import java.util.Collections;
+
 import static org.junit.Assert.*;
 
 public class TestStripAll extends AbstractStardogTest {
@@ -30,7 +32,7 @@ public class TestStripAll extends AbstractStardogTest {
     public void testEmptyString() {
       
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:stripAll(\"\", \"\", 10) as ?result) }";
+                    "select ?result where { bind(string:stripAll(\"\", \"\") as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
            
@@ -38,7 +40,7 @@ public class TestStripAll extends AbstractStardogTest {
 
                 final String aValue = aResult.next().getValue("result").stringValue();
 
-                assertEquals("", aValue);
+                assertEquals("\u001f", aValue);
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }

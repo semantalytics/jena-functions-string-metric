@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.literal;
 public final class RemoveEndIgnoreCase extends AbstractFunction implements StringFunction {
 
     protected RemoveEndIgnoreCase() {
-        super(2, StringVocabulary.removeEndIgnoreSpace.stringValue());
+        super(2, StringVocabulary.removeEndIgnoreCase.stringValue());
     }
 
     private RemoveEndIgnoreCase(final RemoveEndIgnoreCase removeEndIgnoreCase) {
@@ -40,6 +40,6 @@ public final class RemoveEndIgnoreCase extends AbstractFunction implements Strin
 
     @Override
     public String toString() {
-        return StringVocabulary.removeEndIgnoreSpace.name();
+        return StringVocabulary.removeEndIgnoreCase.name();
     }
 }

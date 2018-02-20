@@ -8,6 +8,8 @@ import com.complexible.stardog.plan.filter.functions.string.StringFunction;
 import org.apache.commons.lang3.StringUtils;
 import org.openrdf.model.Value;
 
+import static com.complexible.common.rdf.model.Values.literal;
+
 public final class ContainsNone extends AbstractFunction implements StringFunction {
 
     protected ContainsNone() {
@@ -24,7 +26,7 @@ public final class ContainsNone extends AbstractFunction implements StringFuncti
       final String string = assertStringLiteral(values[0]).stringValue();
       final String invalidChars = assertStringLiteral(values[1]).stringValue();
       
-      return Values.literal(StringUtils.containsNone(string, invalidChars));
+      return literal(StringUtils.containsNone(string, invalidChars));
     }
 
     @Override

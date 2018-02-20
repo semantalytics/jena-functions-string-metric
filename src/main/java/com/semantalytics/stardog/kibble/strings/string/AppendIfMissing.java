@@ -1,22 +1,16 @@
 package com.semantalytics.stardog.kibble.strings.string;
 
-import com.complexible.common.rdf.model.Values;
-import com.complexible.stardog.plan.filter.EvalUtil;
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.string.StringFunction;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Range;
-import com.mchange.v1.lang.BooleanUtils;
-import edu.stanford.nlp.util.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.openrdf.model.Value;
 
-import java.util.Arrays;
 import java.util.stream.IntStream;
 
-import static java.util.stream.Collectors.toList;
+import static com.complexible.common.rdf.model.Values.literal;
 
 public final class AppendIfMissing extends AbstractFunction implements StringFunction {
 
@@ -36,7 +30,7 @@ public final class AppendIfMissing extends AbstractFunction implements StringFun
                 final String string = assertStringLiteral(values[0]).stringValue();
                 final String suffix = assertStringLiteral(values[1]).stringValue();
 
-                return Values.literal(StringUtils.appendIfMissing(string, suffix));
+                return literal(StringUtils.appendIfMissing(string, suffix));
 
             }
             case 3: {
@@ -47,7 +41,7 @@ public final class AppendIfMissing extends AbstractFunction implements StringFun
                 final String suffix = values[1].stringValue();
                 final String[] suffixes = IntStream.range(2, values.length).mapToObj(i -> values[i].stringValue()).toArray(String[]::new);
 
-                return Values.literal(StringUtils.appendIfMissing(string, suffix, suffixes));
+                return literal(StringUtils.appendIfMissing(string, suffix, suffixes));
 
             }
             default: {

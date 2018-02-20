@@ -13,7 +13,7 @@ import org.openrdf.model.Value;
 public final class ReplaceOnce extends AbstractFunction implements StringFunction {
 
     protected ReplaceOnce() {
-        super(3, StringVocabulary.replace.stringValue());
+        super(3, StringVocabulary.replaceOnce.stringValue());
     }
 
     private ReplaceOnce(final ReplaceOnce replaceOnce) {

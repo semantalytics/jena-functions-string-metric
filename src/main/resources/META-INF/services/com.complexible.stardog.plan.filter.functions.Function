@@ -128,6 +128,8 @@ com.semantalytics.stardog.kibble.strings.string.AbbreviateMiddle
 com.semantalytics.stardog.kibble.strings.string.AbbreviateWithMarker
 com.semantalytics.stardog.kibble.strings.string.AppendIfMissing
 com.semantalytics.stardog.kibble.strings.string.AppendIfMissingIgnoreCase
+com.semantalytics.stardog.kibble.strings.string.ArrayFunction
+com.semantalytics.stardog.kibble.strings.string.ArrayIndex
 com.semantalytics.stardog.kibble.strings.string.ArraySeparator
 com.semantalytics.stardog.kibble.strings.string.Capitalize
 com.semantalytics.stardog.kibble.strings.string.CaseFormat
@@ -200,7 +202,6 @@ com.semantalytics.stardog.kibble.strings.string.PadEnd
 com.semantalytics.stardog.kibble.strings.string.PadStart
 com.semantalytics.stardog.kibble.strings.string.PrependIfMissing
 com.semantalytics.stardog.kibble.strings.string.PrependIfMissingIgnoreCase
-com.semantalytics.stardog.kibble.strings.string.Random
 com.semantalytics.stardog.kibble.strings.string.Remove
 com.semantalytics.stardog.kibble.strings.string.RemoveAll
 com.semantalytics.stardog.kibble.strings.string.RemoveEnd
@@ -234,6 +235,7 @@ com.semantalytics.stardog.kibble.strings.string.Split
 com.semantalytics.stardog.kibble.strings.string.SplitByCharacterType
 com.semantalytics.stardog.kibble.strings.string.SplitByCharacterTypeCamelCase
 com.semantalytics.stardog.kibble.strings.string.StartsWith
+com.semantalytics.stardog.kibble.strings.string.StartsWithAny
 com.semantalytics.stardog.kibble.strings.string.StartsWithIgnoreCase
 com.semantalytics.stardog.kibble.strings.string.Strip
 com.semantalytics.stardog.kibble.strings.string.StripAccents
@@ -251,7 +253,7 @@ com.semantalytics.stardog.kibble.strings.string.Trim
 com.semantalytics.stardog.kibble.strings.string.Truncate
 com.semantalytics.stardog.kibble.strings.string.Uncapitalize
 com.semantalytics.stardog.kibble.strings.string.Unwrap
-com.semantalytics.stardog.kibble.strings.string.UpperCaseFully
+com.semantalytics.stardog.kibble.strings.string.UpperCase
 com.semantalytics.stardog.kibble.strings.string.Wrap
 com.semantalytics.stardog.kibble.strings.string.WrapIfMissing
 

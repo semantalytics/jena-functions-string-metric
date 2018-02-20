@@ -1,37 +1,42 @@
 package com.semantalytics.stardog.kibble.strings.string;
 
-import com.complexible.common.rdf.model.Values;
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.string.StringFunction;
-import org.apache.commons.lang3.StringUtils;
+import com.google.common.base.Joiner;
+import com.google.common.collect.Range;
 import org.openrdf.model.Value;
+
+import java.util.Arrays;
 
 import static com.complexible.common.rdf.model.Values.literal;
 
-public final class Difference extends AbstractFunction implements StringFunction {
+public final class ArrayFunction extends AbstractFunction implements StringFunction {
 
-    protected Difference() {
-        super(2, StringVocabulary.difference.stringValue());
+    protected ArrayFunction() {
+        super(Range.atLeast(1), StringVocabulary.array.stringValue());
     }
 
-    private Difference(final Difference difference) {
-        super(difference);
+    private ArrayFunction(final ArrayFunction arrayFunction) {
+        super(arrayFunction);
     }
 
     @Override
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
 
-        final String string1 = assertStringLiteral(values[0]).stringValue();
-        final String string2 = assertStringLiteral(values[1]).stringValue();
+        for(final Value value : values) {
+            assertStringLiteral(value);
+        }
 
-        return literal(StringUtils.difference(string1, string2));
+        final String[] stringArray = Arrays.stream(values).map(Value::stringValue).toArray(String[]::new);
+
+        return literal(Joiner.on("\u001f").join(stringArray));
     }
 
     @Override
-    public Difference copy() {
-        return new Difference(this);
+    public ArrayFunction copy() {
+        return new ArrayFunction(this);
     }
 
     @Override
@@ -41,6 +46,6 @@ public final class Difference extends AbstractFunction implements StringFunction
 
     @Override
     public String toString() {
-        return StringVocabulary.difference.name();
+        return StringVocabulary.array.name();
     }
 }

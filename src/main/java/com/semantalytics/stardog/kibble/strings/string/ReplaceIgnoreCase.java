@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.literal;
 public final class ReplaceIgnoreCase extends AbstractFunction implements StringFunction {
 
     protected ReplaceIgnoreCase() {
-        super(3, StringVocabulary.replace.stringValue());
+        super(3, StringVocabulary.replaceIgnoreCase.stringValue());
     }
 
     private ReplaceIgnoreCase(final ReplaceIgnoreCase replaceIgnoreCase) {

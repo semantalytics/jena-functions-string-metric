@@ -9,6 +9,8 @@ import com.google.common.collect.Range;
 import org.apache.commons.lang3.StringUtils;
 import org.openrdf.model.Value;
 
+import static com.complexible.common.rdf.model.Values.literal;
+
 public final class Chomp extends AbstractFunction implements StringFunction {
 
     protected Chomp() {
@@ -24,7 +26,7 @@ public final class Chomp extends AbstractFunction implements StringFunction {
 
         final String string = assertStringLiteral(values[0]).stringValue();
 
-        return Values.literal(StringUtils.chomp(string));
+        return literal(StringUtils.chomp(string));
     }
 
     @Override

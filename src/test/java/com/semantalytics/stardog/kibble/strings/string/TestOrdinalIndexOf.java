@@ -10,10 +10,10 @@ import static org.junit.Assert.*;
 public class TestOrdinalIndexOf extends AbstractStardogTest {
 
     @Test
-    public void test() {
+    public void testThreeArg() {
       
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:ordinalIndexOf(\"Stardog\", \"ar\") AS ?result) }";
+                    "select ?result where { bind(string:ordinalIndexOf(\"Stardog\", \"ar\", 1) AS ?result) }";
 
             try (final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -30,7 +30,7 @@ public class TestOrdinalIndexOf extends AbstractStardogTest {
     public void testEmptyString() {
       
         final String aQuery = StringVocabulary.sparqlPrefix("string") +
-                    "select ?result where { bind(string:ordinalIndexOf(\"\", \"\") as ?result) }";
+                    "select ?result where { bind(string:ordinalIndexOf(\"\", \"\", 1) as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
            

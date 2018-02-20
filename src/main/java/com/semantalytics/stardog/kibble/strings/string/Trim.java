@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.*;
 public final class Trim extends AbstractFunction implements StringFunction {
 
     protected Trim() {
-        super(2, StringVocabulary.trim.stringValue());
+        super(1, StringVocabulary.trim.stringValue());
     }
 
     private Trim(final Trim trim) {

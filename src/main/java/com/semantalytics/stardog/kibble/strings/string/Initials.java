@@ -9,6 +9,8 @@ import com.google.common.collect.Range;
 import org.apache.commons.text.WordUtils;
 import org.openrdf.model.Value;
 
+import static com.complexible.common.rdf.model.Values.literal;
+
 public final class Initials extends AbstractFunction implements StringFunction {
 
     protected Initials() {
@@ -26,10 +28,10 @@ public final class Initials extends AbstractFunction implements StringFunction {
 
       switch(values.length) {
           case 1:
-              return Values.literal(WordUtils.initials(string));
+              return literal(WordUtils.initials(string));
           case 2: {
               final String delimiters = assertStringLiteral(values[1]).stringValue();
-              return Values.literal(WordUtils.initials(string, delimiters.toCharArray()));
+              return literal(WordUtils.initials(string, delimiters.toCharArray()));
           }
           default:
               throw new ExpressionEvaluationException("Incorrect number of parameters. Valid values are 1 or 2. Found " + values.length);

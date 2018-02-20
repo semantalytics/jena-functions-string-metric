@@ -8,6 +8,8 @@ import com.complexible.stardog.plan.filter.functions.string.StringFunction;
 import org.apache.commons.lang3.StringUtils;
 import org.openrdf.model.Value;
 
+import static com.complexible.common.rdf.model.Values.literal;
+
 public final class Compare extends AbstractFunction implements StringFunction {
 
     protected Compare() {
@@ -24,7 +26,7 @@ public final class Compare extends AbstractFunction implements StringFunction {
         final String string1 = assertStringLiteral(values[0]).stringValue();
         final String string2 = assertStringLiteral(values[1]).stringValue();
 
-        return Values.literal(StringUtils.compare(string1, string2));
+        return literal(StringUtils.compare(string1, string2));
     }
 
     @Override

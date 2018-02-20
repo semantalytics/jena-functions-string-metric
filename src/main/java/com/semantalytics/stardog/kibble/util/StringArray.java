@@ -10,7 +10,7 @@ import org.openrdf.model.Value;
 public class StringArray extends AbstractFunction implements UserDefinedFunction {
 
     protected StringArray() {
-        super(1, "http://semantalytics.com/2016/03/ns/stardog/udf/util/stringArray");
+        super(1, "http://semantalytics.com/2016/03/ns/stardog/udf/util/array");
     }
 
     public StringArray(final StringArray stringArray) {
@@ -35,6 +35,6 @@ public class StringArray extends AbstractFunction implements UserDefinedFunction
 
     @Override
     public String toString() {
-        return "stringArray";
+        return "array";
     }
 }

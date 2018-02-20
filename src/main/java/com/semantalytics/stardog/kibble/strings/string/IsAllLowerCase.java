@@ -1,12 +1,13 @@
 package com.semantalytics.stardog.kibble.strings.string;
 
-import com.complexible.common.rdf.model.Values;
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.string.StringFunction;
 import org.apache.commons.lang3.StringUtils;
 import org.openrdf.model.Value;
+
+import static com.complexible.common.rdf.model.Values.literal;
 
 public final class IsAllLowerCase extends AbstractFunction implements StringFunction {
 
@@ -23,7 +24,7 @@ public final class IsAllLowerCase extends AbstractFunction implements StringFunc
       
       final String string = assertStringLiteral(values[0]).stringValue();
 
-      return Values.literal(StringUtils.isAllLowerCase(string));
+      return literal(StringUtils.isAllLowerCase(string));
     }
 
     @Override

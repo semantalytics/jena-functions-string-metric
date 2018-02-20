@@ -23,8 +23,8 @@ public final class OrdinalIndexOf extends AbstractFunction implements StringFunc
     protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
 
         final String string = assertStringLiteral(values[0]).stringValue();
-        final String searchStr = assertStringLiteral(values[0]).stringValue();
-        final int ordinal = assertNumericLiteral(values[0]).intValue();
+        final String searchStr = assertStringLiteral(values[1]).stringValue();
+        final int ordinal = assertNumericLiteral(values[2]).intValue();
 
         return literal(StringUtils.ordinalIndexOf(string, searchStr, ordinal));
     }
