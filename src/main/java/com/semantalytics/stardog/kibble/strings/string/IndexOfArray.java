@@ -12,13 +12,13 @@ import java.util.Arrays;
 
 import static com.complexible.common.rdf.model.Values.literal;
 
-public final class ArrayIndex extends AbstractFunction implements StringFunction {
+public final class IndexOfArray extends AbstractFunction implements StringFunction {
 
-    protected ArrayIndex() {
+    protected IndexOfArray() {
         super(Range.closed(2, 3), StringVocabulary.arrayIndex.stringValue());
     }
 
-    private ArrayIndex(final ArrayIndex array) {
+    private IndexOfArray(final IndexOfArray array) {
         super(array);
     }
 
@@ -64,8 +64,8 @@ public final class ArrayIndex extends AbstractFunction implements StringFunction
     }
 
     @Override
-    public ArrayIndex copy() {
-        return new ArrayIndex(this);
+    public IndexOfArray copy() {
+        return new IndexOfArray(this);
     }
 
     @Override

@@ -9,11 +9,14 @@ import com.complexible.stardog.api.ConnectionConfiguration;
 import com.complexible.stardog.api.admin.AdminConnection;
 import com.complexible.stardog.api.admin.AdminConnectionConfiguration;
 import com.google.common.io.Files;
+import com.google.common.io.Resources;
+import com.stardog.http.server.ServerOptions;
 import org.junit.*;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.net.URISyntaxException;
 
 
 public abstract class AbstractStardogTest {
@@ -34,13 +37,19 @@ public abstract class AbstractStardogTest {
                 .credentials("admin", "admin")
                 .connect();
        } catch(StardogException e) {
-              final File TEST_HOME;
 
-        TEST_HOME = Files.createTempDir();
+
+        final File TEST_HOME = Files.createTempDir();
         TEST_HOME.deleteOnExit();
 
         Files.copy(new File(STARDOG_HOME + "/" + STARDOG_LICENCE_KEY_FILE_NAME),
                 new File(TEST_HOME, STARDOG_LICENCE_KEY_FILE_NAME));
+
+        try {
+            Files.copy(new File(Resources.getResource("log4j2-test.xml").toURI()), new File(TEST_HOME, "log4j2.xml"));
+        } catch(URISyntaxException e1) {
+
+        }
 
         STARDOG = Stardog.builder().home(TEST_HOME).create();
 

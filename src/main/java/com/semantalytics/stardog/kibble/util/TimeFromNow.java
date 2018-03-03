@@ -1,4 +1,4 @@
-package com.semantalytics.stardog.function.util;
+package com.semantalytics.stardog.kibble.util;
 
 import com.complexible.common.rdf.model.StardogValueFactory;
 import com.complexible.common.rdf.model.Values;

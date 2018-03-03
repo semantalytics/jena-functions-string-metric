@@ -18,6 +18,7 @@ import com.complexible.stardog.plan.eval.operator.PropertyFunctionOperator;
 import com.complexible.stardog.plan.eval.operator.Solution;
 import com.complexible.stardog.plan.eval.operator.impl.AbstractOperator;
 import com.complexible.stardog.plan.eval.operator.impl.Solutions;
+import com.complexible.stardog.plan.filter.EvalUtil;
 import com.complexible.stardog.plan.util.QueryTermRenderer;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
@@ -28,8 +29,9 @@ import com.google.common.collect.Sets;
 import org.openrdf.model.IRI;
 import org.openrdf.model.Literal;
 import org.openrdf.model.Value;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import static com.complexible.common.rdf.model.Values.iri;
 import static com.complexible.common.rdf.model.Values.literal;
 import static com.complexible.stardog.plan.Costs.*;
 
@@ -86,18 +88,23 @@ public final class ArrayPropertyFunction implements PropertyFunction {
     public void estimate(final PropertyFunctionPlanNode theNode, CostingContext theContext) throws PlanException {
         Preconditions.checkArgument(theNode instanceof ArrayPlanNode);
 
-        final long aLimit = ((ArrayPlanNode) theNode).getInput().getValue().stringValue().split("\u001f").length;
+        if (((ArrayPlanNode) theNode).getInput().isConstant()) {
+            final long aLimit = ((ArrayPlanNode) theNode).getInput().getValue().stringValue().split("\u001f").length;
 
-        // we know this is an exact cardinality for the repeat node, but also get the value of the child
-        final double aCount = aLimit * Math.max(1, theNode.getArg().getCardinality().value());
+            // we know this is an exact cardinality for the repeat node, but also get the value of the child
+            final double aCount = aLimit * Math.max(1, theNode.getArg().getCardinality().value());
 
-        // the accuracy of the estimation is whatever is the lesser
-        theNode.setCardinality(Cardinality.of(aCount,
-                Accuracy.takeLessAccurate(Accuracy.ACCURATE,
-                        theNode.getArg().getCardinality().accuracy())));
+            // the accuracy of the estimation is whatever is the lesser
+            theNode.setCardinality(Cardinality.of(aCount, Accuracy.takeLessAccurate(Accuracy.ACCURATE, theNode.getArg().getCardinality().accuracy())));
 
-        // assume a flat cost of 1 per iteration + the cost of our child
-        theNode.setCost(theNode.getCardinality().value() + theNode.getArg().getCost());
+            // assume a flat cost of 1 per iteration + the cost of our child
+            theNode.setCost(theNode.getCardinality().value() + theNode.getArg().getCost());
+        } else {
+            theNode.setCardinality(Cardinality.UNKNOWN);
+
+            // assume a flat cost of 1 per iteration + the cost of our child
+            theNode.setCost(theNode.getCardinality().value() + theNode.getArg().getCost());
+        }
     }
 
     /**
@@ -111,7 +118,7 @@ public final class ArrayPropertyFunction implements PropertyFunction {
 
         final ArrayPlanNode aNode = (ArrayPlanNode) theNode;
 
-        return String.format("StringArray", theTermRenderer.render(aNode.getInput()));
+        return String.format("StringArray(%s)", theTermRenderer.render(aNode.getInput()));
     }
 
     /**
@@ -122,11 +129,18 @@ public final class ArrayPropertyFunction implements PropertyFunction {
     public static final class ArrayPlanNode extends AbstractPropertyFunctionPlanNode {
 
         private ArrayPlanNode(final PlanNode theArg,
-                              final List<QueryTerm> theSubjects, final List<QueryTerm> theObjects, final QueryTerm theContext,
-                              final QueryDataset.Scope theScope, final double theCost, final Cardinality theCardinality,
-                              final ImmutableSet<Integer> theSubjVars, final ImmutableSet<Integer> thePredVars,
-                              final ImmutableSet<Integer> theObjVars, final ImmutableSet<Integer> theContextVars,
-                              final ImmutableSet<Integer> theAssuredVars, final ImmutableSet<Integer> theAllVars) {
+                              final List<QueryTerm> theSubjects,
+                              final List<QueryTerm> theObjects,
+                              final QueryTerm theContext,
+                              final QueryDataset.Scope theScope,
+                              final double theCost,
+                              final Cardinality theCardinality,
+                              final ImmutableSet<Integer> theSubjVars,
+                              final ImmutableSet<Integer> thePredVars,
+                              final ImmutableSet<Integer> theObjVars,
+                              final ImmutableSet<Integer> theContextVars,
+                              final ImmutableSet<Integer> theAssuredVars,
+                              final ImmutableSet<Integer> theAllVars) {
             super(theArg, theSubjects, theObjects, theContext, theScope, theCost, theCardinality, theSubjVars,
                     thePredVars, theObjVars, theContextVars, theAssuredVars, theAllVars);
         }
@@ -134,10 +148,6 @@ public final class ArrayPropertyFunction implements PropertyFunction {
         public QueryTerm getInput() {
             return getObjects().get(0);
         }
-
-//        public long getLimit() {
-//            return ((Literal)getObjects().get(1).getValue()).longValue();
-//        }
 
         public QueryTerm getResultVar() {
             return getSubjects().get(0);
@@ -222,12 +232,13 @@ public final class ArrayPropertyFunction implements PropertyFunction {
             super.validate();
 
             Preconditions.checkState(mSubjects.size() <= 2);
-            Preconditions.checkState(mObjects.size() == 1);
-
             Preconditions.checkState(mSubjects.get(0).isVariable());
             Preconditions.checkState(mSubjects.size() == 1 || mSubjects.get(1).isVariable());
 
-            Preconditions.checkState(mObjects.get(0).getValue() instanceof Literal);
+            Preconditions.checkState(mObjects.size() == 1);
+            if(mObjects.get(0).isConstant()) {
+                Preconditions.checkState(mObjects.get(0).getValue() instanceof Literal && EvalUtil.isStringLiteral((Literal)mObjects.get(0).getValue()));
+            }
         }
 
         /**
@@ -283,7 +294,7 @@ public final class ArrayPropertyFunction implements PropertyFunction {
         /**
          * The number of times we should repeat the value
          */
-        private final long mLimit;
+        private long mLimit;
 
         /**
          * The current iteration
@@ -316,7 +327,6 @@ public final class ArrayPropertyFunction implements PropertyFunction {
             mNode = Preconditions.checkNotNull(theNode);
             mArg = Optional.of(theOperator);
 
-            mLimit = theNode.getInput().getValue().stringValue().split("\u001f").length;
         }
 
         /**
@@ -365,21 +375,23 @@ public final class ArrayPropertyFunction implements PropertyFunction {
                 }
             }
 
+
             while (mInputs.hasNext() || mCount < mLimit) {
                 if (mValue == null) {
                     // get the current solution, set the value, and begin iteration
                     mValue = mInputs.next();
-                    mValue.set(mNode.getResultVar().getName(), getValue());
+                    //mValue.set(mNode.getResultVar().getName(), getValue());
                     mCount = 0;
+                    mLimit = getMappings().getValue(getValue()).stringValue().split("\u001f").length;
                 }
 
                 if (mCount < mLimit) {
+                    Value string = literal(getMappings().getValue(getValue()).stringValue().split("\u001f")[mCount]);
+                    long value = getMappings().add(string);
+                    mValue.set(mNode.getResultVar().getName(), value);
                     if (mNode.getArrayIndexVar().isPresent()) {
                         // update the counter when the var is present
-                        Value string = literal(mNode.getInput().getValue().stringValue().split("\u001f")[mCount]);
-                        long value = getMappings().add(string);
                         mValue.set(mNode.getArrayIndexVar().get().getName(), getMappings().getID(literal(mCount)));
-                        mValue.set(mNode.getResultVar().getName(), value);
                     }
 
                     mCount++;
@@ -395,9 +407,11 @@ public final class ArrayPropertyFunction implements PropertyFunction {
         }
 
         private long getValue() {
-            return mNode.getInput().isConstant()
-                    ? mNode.getInput().getIndex()
-                    : mValue.get(mNode.getInput().getName());
+            if(mNode.getInput().isConstant()) {
+               return mNode.getInput().getIndex();
+            } else  {
+               return mValue.get(mNode.getInput().getName());
+            }
         }
 
         /**

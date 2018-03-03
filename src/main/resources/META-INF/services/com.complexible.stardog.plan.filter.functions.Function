@@ -129,7 +129,7 @@ com.semantalytics.stardog.kibble.strings.string.AbbreviateWithMarker
 com.semantalytics.stardog.kibble.strings.string.AppendIfMissing
 com.semantalytics.stardog.kibble.strings.string.AppendIfMissingIgnoreCase
 com.semantalytics.stardog.kibble.strings.string.ArrayFunction
-com.semantalytics.stardog.kibble.strings.string.ArrayIndex
+com.semantalytics.stardog.kibble.strings.string.IndexOfArray
 com.semantalytics.stardog.kibble.strings.string.ArraySeparator
 com.semantalytics.stardog.kibble.strings.string.Capitalize
 com.semantalytics.stardog.kibble.strings.string.CaseFormat
@@ -185,7 +185,9 @@ com.semantalytics.stardog.kibble.strings.string.IsNumeric
 com.semantalytics.stardog.kibble.strings.string.IsNumericSpace
 com.semantalytics.stardog.kibble.strings.string.IsWhitespace
 com.semantalytics.stardog.kibble.strings.string.Join
+com.semantalytics.stardog.kibble.strings.string.JoinArray
 com.semantalytics.stardog.kibble.strings.string.JoinWith
+com.semantalytics.stardog.kibble.strings.string.JoinArrayWith
 com.semantalytics.stardog.kibble.strings.string.LastIndexOf
 com.semantalytics.stardog.kibble.strings.string.LastIndexOfAny
 com.semantalytics.stardog.kibble.strings.string.LastIndexOfIgnoreCase

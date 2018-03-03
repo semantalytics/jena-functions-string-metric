@@ -45,12 +45,11 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class TestArrayPropertyFunction extends AbstractStardogTest {
-
     @Test(expected = ExecutionException.class)
     public void tooManyResultsThrowsError() {
 
         final String aQueryStr = StringVocabulary.sparqlPrefix("string") +
-                " select * where { (?too ?many ?args) string:array (\"foo\") }";
+                " select * where { (?too ?many ?args) string:array (\"stardog\") }";
 
         final TupleQueryResult aResult = connection.select(aQueryStr).execute();
         try {
@@ -64,7 +63,7 @@ public class TestArrayPropertyFunction extends AbstractStardogTest {
     @Test(expected = ExecutionException.class)
     public void resultTermsWhichAreNotVariablesShouldBeAnError() {
         final String aQueryStr = StringVocabulary.sparqlPrefix("string") +
-                " select * where { (\"no literals allowed\") string:array (\"foo\") }";
+                " select * where { (\"no literals allowed\") string:array (\"stardog\") }";
 
         final TupleQueryResult aResult = connection.select(aQueryStr).execute();
         try {
@@ -77,7 +76,7 @@ public class TestArrayPropertyFunction extends AbstractStardogTest {
     @Test(expected = ExecutionException.class)
     public void tooManyInputsThrowsError() {
         final String aQueryStr = StringVocabulary.sparqlPrefix("string") +
-                " select * where { ?result string:array (\"foo\" 5) }";
+                " select * where { ?result string:array (\"stardog\" 5) }";
 
 
         final TupleQueryResult aResult = connection.select(aQueryStr).execute();
@@ -90,7 +89,7 @@ public class TestArrayPropertyFunction extends AbstractStardogTest {
     }
 
     @Test(expected = ExecutionException.class)
-    public void countArgCannotBeANonnumericLiteral() {
+    public void argCannotBeANonnumericLiteral() {
         final String aQueryStr = StringVocabulary.sparqlPrefix("string") +
                 " select * where { ?result string:array (5) }";
 
@@ -104,7 +103,7 @@ public class TestArrayPropertyFunction extends AbstractStardogTest {
     }
 
     @Test(expected = ExecutionException.class)
-    public void countArgCannotBeAIRI() {
+    public void argCannotBeAnIRI() {
         final String aQueryStr = StringVocabulary.sparqlPrefix("string") +
                 " select * where { ?result string:array (<http://example.com>) }";
 
@@ -117,30 +116,13 @@ public class TestArrayPropertyFunction extends AbstractStardogTest {
         }
     }
 
-    @Test(expected = ExecutionException.class)
-    public void countArgCannotBeABNode() {
+    @Test
+    public void argCannotBeABNode() {
         final String aQueryStr = StringVocabulary.sparqlPrefix("string") +
                 " select * where { ?result string:array (_:bnode) }";
 
-        final TupleQueryResult aResult = connection.select(aQueryStr).execute();
-        try {
-            fail("Should not have successfully executed");
-        } finally {
-            aResult.close();
-        }
-    }
-
-    @Test(expected = ExecutionException.class)
-    public void missingCountArgIsAnError() {
-        final String aQueryStr = StringVocabulary.sparqlPrefix("string") +
-                " select * where { ?result string:array (\"foo\") }";
-
-
-        final TupleQueryResult aResult = connection.select(aQueryStr).execute();
-        try {
-            fail("Should not have successfully executed");
-        } finally {
-            aResult.close();
+        try(final TupleQueryResult aResult = connection.select(aQueryStr).execute()) {
+            assertFalse("Should have no more results", aResult.hasNext());
         }
     }
 
@@ -159,73 +141,67 @@ public class TestArrayPropertyFunction extends AbstractStardogTest {
     }
 
     @Test
-    public void simpleRepeat() {
+    public void simpleStringArray() {
         final String aQueryStr = StringVocabulary.sparqlPrefix("string") +
-                " select * where { ?result string:array (\"foo\u001fbar\") }";
+                " select * where { ?result string:array (\"star\u001fdog\") }";
 
-        final TupleQueryResult aResult = connection.select(aQueryStr).execute();
-        try {
-            final List<Value> aExpected = Lists.newArrayList(literal("foo"), literal("foo"), literal("foo"), literal("foo"), literal("foo"));
+        try(final TupleQueryResult aResult = connection.select(aQueryStr).execute()) {
+
+            final List<Value> aExpected = Lists.newArrayList(literal("star"), literal("dog"));
             final List<Value> aResults = Iterations.stream(aResult).map(BindingSets.select("result")).collect(Collectors.toList());
 
             assertEquals(aExpected, aResults);
-        } finally {
-            aResult.close();
         }
     }
 
     @Test
-    public void repeatWithCounter() {
+    public void stringArrayWithIndex() {
         final String aQueryStr = StringVocabulary.sparqlPrefix("string") +
-                " select * where { (?result ?idx) string:array (\"foo\u001fbar\") }";
+                " select * where { (?result ?idx) string:array (\"star\u001fdog\") }";
 
-        final TupleQueryResult aResult = connection.select(aQueryStr).execute();
-        try {
-            int aNum = 0;
+        BindingSet aBindingSet;
 
-            while (aResult.hasNext()) {
-                BindingSet aBindingSet = aResult.next();
+        try(final TupleQueryResult aResult = connection.select(aQueryStr).execute()) {
 
-                assertEquals(literal("foo"), aBindingSet.getValue("result"));
-                assertEquals(literal(aNum++, StardogValueFactory.Datatype.INTEGER), aBindingSet.getValue("idx"));
-            }
+            aBindingSet = aResult.next();
 
-            assertEquals(5, aNum);
-        } finally {
-            aResult.close();
+            assertEquals(literal("star"), aBindingSet.getValue("result"));
+            assertEquals(literal(0, StardogValueFactory.Datatype.INTEGER), aBindingSet.getValue("idx"));
+
+            aBindingSet = aResult.next();
+
+            assertEquals(literal("dog"), aBindingSet.getValue("result"));
+            assertEquals(literal(1, StardogValueFactory.Datatype.INTEGER), aBindingSet.getValue("idx"));
+
+            assertFalse("Should have no more results", aResult.hasNext());
         }
     }
 
     @Test
     public void repeatWithVarInput() {
         final String aQueryStr = StringVocabulary.sparqlPrefix("string") +
-                " select * where { (?result ?idx) string:array (?in 5) . values ?in { \"foo\u001fbar\u001fbaz\"} }";
+                " select * where { (?result ?idx) string:array (?in) . values ?in { \"star\u001fdog\u001fdatabase\"} }";
 
+        BindingSet aBindingSet;
 
-        final TupleQueryResult aResult = connection.select(aQueryStr).execute();
-        try {
-            int aCount = 0;
-            int aNum = 0;
+        try(final TupleQueryResult aResult = connection.select(aQueryStr).execute()) {
 
-            String aValue = "foo";
+            aBindingSet = aResult.next();
 
-            while (aResult.hasNext()) {
-                BindingSet aBindingSet = aResult.next();
+            assertEquals(literal("star"), aBindingSet.getValue("result"));
+            assertEquals(literal(0, StardogValueFactory.Datatype.INTEGER), aBindingSet.getValue("idx"));
 
-                assertEquals(literal(aValue), aBindingSet.getValue("result"));
-                assertEquals(literal(aCount++, StardogValueFactory.Datatype.INTEGER), aBindingSet.getValue("idx"));
+            aBindingSet = aResult.next();
 
-                if (aCount == 5) {
-                    aValue = aValue.equals("foo") ? "bar" : "baz";
-                    aCount = 0;
-                }
+            assertEquals(literal("dog"), aBindingSet.getValue("result"));
+            assertEquals(literal(1, StardogValueFactory.Datatype.INTEGER), aBindingSet.getValue("idx"));
 
-                aNum++;
-            }
+            aBindingSet = aResult.next();
 
-            assertEquals(15, aNum);
-        } finally {
-            aResult.close();
+            assertEquals(literal("database"), aBindingSet.getValue("result"));
+            assertEquals(literal(2, StardogValueFactory.Datatype.INTEGER), aBindingSet.getValue("idx"));
+
+            assertFalse("Should have no more results", aResult.hasNext());
         }
     }
 
@@ -274,8 +250,11 @@ public class TestArrayPropertyFunction extends AbstractStardogTest {
 */
     @Test
     public void shouldRenderACustomExplanation() {
-        final String aQueryStr = "select * where { (?result ?idx) <tag:stardog:api:repeat> (\"foo\" 5) }";
 
-        assertTrue(connection.select(aQueryStr).explain().contains("Repeat("));
+        final String aQueryStr = StringVocabulary.sparqlPrefix("string") +
+                "select * where { (?result ?idx) string:array (\"star\u001fdog\") }";
+
+        System.out.println(connection.select(aQueryStr).explain());
+        assertTrue(connection.select(aQueryStr).explain().contains("StringArray("));
     }
 }
