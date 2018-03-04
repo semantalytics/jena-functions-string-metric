@@ -18,7 +18,7 @@ public final class NormalizedLevenshteinDistance extends AbstractFunction implem
     }
 
     protected NormalizedLevenshteinDistance() {
-        super(2, StringComparisonVocabulary.normalizedLevenshteinDistance.stringValue());
+        super(2, StringMetricVocabulary.normalizedLevenshteinDistance.stringValue());
     }
 
     private NormalizedLevenshteinDistance(final NormalizedLevenshteinDistance normalizedLevenshteinDistance) {
@@ -44,6 +44,6 @@ public final class NormalizedLevenshteinDistance extends AbstractFunction implem
 
     @Override
     public String toString() {
-        return StringComparisonVocabulary.normalizedLevenshteinDistance.name();
+        return StringMetricVocabulary.normalizedLevenshteinDistance.name();
     }
 }

@@ -10,10 +10,10 @@ import static org.junit.Assert.*;
 public class TestNGram extends AbstractStardogTest {
 
     @Test
-    public void testNGram() throws Exception {
+    public void testNGram() {
 
-        final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                "select ?dist where { bind(ss:ngram(\"ABCD\", \"ABUTIO\", 2) as ?dist) }";
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                "select ?dist where { bind(stringmetric:ngram(\"ABCD\", \"ABUTIO\", 2) as ?dist) }";
 
         final TupleQueryResult aResult = connection.select(aQuery).execute();
 
@@ -21,20 +21,18 @@ public class TestNGram extends AbstractStardogTest {
 
         final String aValue = aResult.next().getValue("dist").stringValue();
 
-        assertEquals(0.41666, Double.parseDouble(aValue), 0.0001);
+        assertEquals(0.58333, Double.parseDouble(aValue), 0.0001);
 
         assertFalse("Should have no more results", aResult.hasNext());
     }
 
     @Test
-    public void testNGramTooManyArgs() throws Exception {
+    public void testNGramTooManyArgs() {
 
-        final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                "select ?str where { bind(ss:ngram(\"one\", \"two\", \"three\", \"four\") as ?str) }";
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                "select ?str where { bind(stringmetric:ngram(\"one\", \"two\", \"three\", \"four\") as ?str) }";
 
         final TupleQueryResult aResult = connection.select(aQuery).execute();
-        // there should be a result because implicit in the query is the singleton set, so because the bind
-        // should fail due to the value error, we expect a single empty binding
         assertTrue("Should have a result", aResult.hasNext());
 
         final BindingSet aBindingSet = aResult.next();
@@ -45,13 +43,11 @@ public class TestNGram extends AbstractStardogTest {
     }
 
     @Test
-    public void testNGramWrongType() throws Exception {
-        final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                "select ?str where { bind(ss:ngram(7) as ?str) }";
+    public void testNGramWrongType() {
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                "select ?str where { bind(stringmetric:ngram(7) as ?str) }";
 
         final TupleQueryResult aResult = connection.select(aQuery).execute();
-        // there should be a result because implicit in the query is the singleton set, so because the bind
-        // should fail due to the value error, we expect a single empty binding
         assertTrue("Should have a result", aResult.hasNext());
 
         final BindingSet aBindingSet = aResult.next();

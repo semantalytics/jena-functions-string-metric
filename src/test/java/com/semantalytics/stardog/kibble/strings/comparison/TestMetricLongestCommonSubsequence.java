@@ -10,10 +10,10 @@ import static org.junit.Assert.*;
 public class TestMetricLongestCommonSubsequence extends AbstractStardogTest {
 
     @Test
-    public void testMetricLongestCommonSubsequence() throws Exception {
+    public void testMetricLongestCommonSubsequence() {
 
-        final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                "select ?dist where { bind(ss:metricLongestCommonSubsequence(\"ABCDEFG\", \"ABCDEFHJKL\") as ?dist) }";
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                "select ?dist where { bind(stringmetric:metricLongestCommonSubsequence(\"ABCDEFG\", \"ABCDEFHJKL\") as ?dist) }";
 
         final TupleQueryResult aResult = connection.select(aQuery).execute();
 
@@ -27,14 +27,12 @@ public class TestMetricLongestCommonSubsequence extends AbstractStardogTest {
     }
 
     @Test
-    public void testMetricLongestCommonSubsequenceTooManyArgs() throws Exception {
+    public void testMetricLongestCommonSubsequenceTooManyArgs() {
 
-        final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                "select ?str where { bind(ss:metricLongestCommonSubsequence(\"one\", \"two\", \"three\") as ?str) }";
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                "select ?str where { bind(stringmetric:metricLongestCommonSubsequence(\"one\", \"two\", \"three\") as ?str) }";
 
         final TupleQueryResult aResult = connection.select(aQuery).execute();
-        // there should be a result because implicit in the query is the singleton set, so because the bind
-        // should fail due to the value error, we expect a single empty binding
         assertTrue("Should have a result", aResult.hasNext());
 
         final BindingSet aBindingSet = aResult.next();
@@ -45,14 +43,12 @@ public class TestMetricLongestCommonSubsequence extends AbstractStardogTest {
     }
 
     @Test
-    public void testMetricLongestCommonSubsequenceWrongType() throws Exception {
+    public void testMetricLongestCommonSubsequenceWrongType() {
 
-        final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                "select ?str where { bind(ss:metricLongestCommonSubsequence(7) as ?str) }";
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                "select ?str where { bind(stringmetric:metricLongestCommonSubsequence(7) as ?str) }";
 
         final TupleQueryResult aResult = connection.select(aQuery).execute();
-        // there should be a result because implicit in the query is the singleton set, so because the bind
-        // should fail due to the value error, we expect a single empty binding
         assertTrue("Should have a result", aResult.hasNext());
 
         final BindingSet aBindingSet = aResult.next();

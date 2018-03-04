@@ -3,7 +3,7 @@ package com.semantalytics.stardog.kibble.strings.comparison;
 import com.complexible.common.rdf.model.StardogValueFactory;
 import org.openrdf.model.IRI;
 
-public enum StringComparisonVocabulary {
+public enum StringMetricVocabulary {
 
     cosineDistance,
     cosineSimilarity,
@@ -27,12 +27,12 @@ public enum StringComparisonVocabulary {
     smithWatermanGotoh,
     sorensenDiceSimilarity,
     sorensenDiceDistance,
-    weithtedLevenshteinDistance;
+    weightedLevenshteinDistance;
 
-    public static final String NAMESPACE = "http://semantalytics.com/2017/09/ns/stardog/kibble/strings/comparison/";
+    public static final String NAMESPACE = "http://semantalytics.com/2017/09/ns/stardog/kibble/string/metric/";
     public final IRI iri;
 
-    StringComparisonVocabulary() {
+    StringMetricVocabulary() {
         iri = StardogValueFactory.instance().createIRI(NAMESPACE, name());
     }
 

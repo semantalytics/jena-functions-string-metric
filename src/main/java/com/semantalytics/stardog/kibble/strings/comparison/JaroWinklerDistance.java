@@ -14,7 +14,7 @@ public final class JaroWinklerDistance extends AbstractFunction implements Strin
 
 
     protected JaroWinklerDistance() {
-        super(Range.closed(2, 5), StringComparisonVocabulary.jaroWinklerDistance.stringValue());
+        super(Range.closed(2, 5), StringMetricVocabulary.jaroWinklerDistance.stringValue());
     }
 
     private JaroWinklerDistance(final JaroWinklerDistance jaroWinklerDistance) {
@@ -57,6 +57,6 @@ public final class JaroWinklerDistance extends AbstractFunction implements Strin
 
     @Override
     public String toString() {
-        return StringComparisonVocabulary.jaroWinklerDistance.name();
+        return StringMetricVocabulary.jaroWinklerDistance.name();
     }
 }

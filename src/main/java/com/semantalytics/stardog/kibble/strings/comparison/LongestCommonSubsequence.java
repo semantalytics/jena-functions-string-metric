@@ -18,7 +18,7 @@ public final class LongestCommonSubsequence extends AbstractFunction implements 
     private static final org.simmetrics.metrics.LongestCommonSubsequence longestCommonSubsequence;
 
     protected LongestCommonSubsequence() {
-        super(2, StringComparisonVocabulary.longestCommonSubsequence.stringValue());
+        super(2, StringMetricVocabulary.longestCommonSubsequence.stringValue());
     }
 
     private LongestCommonSubsequence(final LongestCommonSubsequence longestCommonSubsequence) {
@@ -44,7 +44,7 @@ public final class LongestCommonSubsequence extends AbstractFunction implements 
 
     @Override
     public String toString() {
-        return StringComparisonVocabulary.longestCommonSubsequence.name();
+        return StringMetricVocabulary.longestCommonSubsequence.name();
     }
 }
 

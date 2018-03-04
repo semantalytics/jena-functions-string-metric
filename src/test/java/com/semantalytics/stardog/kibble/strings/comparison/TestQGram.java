@@ -10,10 +10,10 @@ import static org.junit.Assert.*;
 public class TestQGram extends AbstractStardogTest {
 
     @Test
-    public void testQGram() throws Exception {
+    public void testQGram() {
 
-        final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                "select ?dist where { bind(ss:qgram(\"ABCD\", \"ABCE\", 2) as ?dist) }";
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                "select ?dist where { bind(stringmetric:qgram(\"ABCD\", \"ABCE\", 2) as ?dist) }";
 
         final TupleQueryResult aResult = connection.select(aQuery).execute();
 
@@ -27,14 +27,12 @@ public class TestQGram extends AbstractStardogTest {
     }
 
     @Test
-    public void testQGramTooManyArgs() throws Exception {
+    public void testQGramTooManyArgs() {
 
-        final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                "select ?str where { bind(ss:qgram(\"one\", \"two\", \"three\", \"four\") as ?str) }";
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                "select ?str where { bind(stringmetric:qgram(\"one\", \"two\", \"three\", \"four\") as ?str) }";
 
         final TupleQueryResult aResult = connection.select(aQuery).execute();
-        // there should be a result because implicit in the query is the singleton set, so because the bind
-        // should fail due to the value error, we expect a single empty binding
         assertTrue("Should have a result", aResult.hasNext());
 
         final BindingSet aBindingSet = aResult.next();
@@ -45,14 +43,13 @@ public class TestQGram extends AbstractStardogTest {
     }
 
     @Test
-    public void testQGramWrongType() throws Exception {
+    public void testQGramWrongType() {
 
-        final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                "select ?str where { bind(ss:qgram(7) as ?str) }";
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                "select ?str where { bind(stringmetric:qgram(7) as ?str) }";
 
         final TupleQueryResult aResult = connection.select(aQuery).execute();
-        // there should be a result because implicit in the query is the singleton set, so because the bind
-        // should fail due to the value error, we expect a single empty binding
+
         assertTrue("Should have a result", aResult.hasNext());
 
         final BindingSet aBindingSet = aResult.next();

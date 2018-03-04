@@ -2,72 +2,67 @@ package com.semantalytics.stardog.kibble.strings.comparison;
 
 import com.semantalytics.stardog.kibble.AbstractStardogTest;
 import org.junit.*;
+import org.openrdf.model.Literal;
+import org.openrdf.model.Value;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.TupleQueryResult;
 
 import static org.junit.Assert.*;
 
-public class TestSorensenDiceSimilarity  extends AbstractStardogTest {
-
- 
+public class TestSorensenDiceSimilarity extends AbstractStardogTest {
 
     @Test
-    public void testSorensenDice() throws Exception {
-    
-            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                    "select ?dist where { bind(ss:sorensenDice(\"ABCDE\", \"ABCDFG\", 2) as ?dist) }";
+    public void testThreeArg() {
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute();
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                    "select ?result where { bind(stringmetric:sorensenDiceSimilarity(\"ABCDE\", \"ABCDFG\", 2) as ?result) }";
 
-     
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+
                 assertTrue("Should have a result", aResult.hasNext());
 
-                final String aValue = aResult.next().getValue("dist").stringValue();
+                final Value aValue = aResult.next().getValue("result");
 
-                assertEquals(0.3333, Double.parseDouble(aValue), 0.0001);
+                assertTrue(aValue instanceof Literal);
 
+                final double aLiteralValue = ((Literal) aValue).doubleValue();
+
+                assertEquals(0.6666, aLiteralValue, 0.0001);
                 assertFalse("Should have no more results", aResult.hasNext());
-         
+            }
     }
 
     @Test
-    public void testSorensenDiceTooManyArgs() throws Exception {
+    public void testTooManyArgs() {
 
-     
-            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                    "select ?str where { bind(ss:sorensenDice(\"one\", \"two\", \"three\", \"four\") as ?str) }";
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                    "select ?result where { bind(stringmetric:sorensenDiceSimilarity(\"one\", \"two\", \"three\", \"four\") as ?str) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute();
-        
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final BindingSet aBindingSet = aResult.next();
 
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
                 assertFalse("Should have no more results", aResult.hasNext());
+            }
     }
 
     @Test
-    public void testSorensenDiceWrongType() throws Exception {
-       
+    public void testTooFewArgs() {
 
-            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                    "select ?str where { bind(ss:sorensenDice(7) as ?str) }";
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                    "select ?result where { bind(stringmetric:sorensenDiceSimilarity(\"one\") as ?result) }";
 
-            final TupleQueryResult aResult = connection.select(aQuery).execute();
-         
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
+            try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
+
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final BindingSet aBindingSet = aResult.next();
 
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
                 assertFalse("Should have no more results", aResult.hasNext());
-           
+            }
     }
 }

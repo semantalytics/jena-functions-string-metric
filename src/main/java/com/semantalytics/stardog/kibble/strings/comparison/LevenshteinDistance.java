@@ -5,7 +5,6 @@ import com.complexible.stardog.plan.filter.ExpressionVisitor;
 import com.complexible.stardog.plan.filter.functions.AbstractFunction;
 import com.complexible.stardog.plan.filter.functions.Function;
 import com.complexible.stardog.plan.filter.functions.string.StringFunction;
-import com.semantalytics.stardog.kibble.strings.comparison.StringComparisonVocabulary;
 import org.openrdf.model.Value;
 
 import static com.complexible.common.rdf.model.Values.literal;
@@ -19,7 +18,7 @@ public final class LevenshteinDistance extends AbstractFunction implements Strin
     }
 
     protected LevenshteinDistance() {
-        super(2, StringComparisonVocabulary.levenshteinDistance.stringValue());
+        super(2, StringMetricVocabulary.levenshteinDistance.stringValue());
     }
 
     private LevenshteinDistance(final LevenshteinDistance levenshteinDistance) {
@@ -45,6 +44,6 @@ public final class LevenshteinDistance extends AbstractFunction implements Strin
 
     @Override
     public String toString() {
-        return StringComparisonVocabulary.levenshteinDistance.name();
+        return StringMetricVocabulary.levenshteinDistance.name();
     }
 }

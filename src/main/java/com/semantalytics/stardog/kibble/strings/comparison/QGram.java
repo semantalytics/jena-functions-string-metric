@@ -25,7 +25,7 @@ public final class QGram extends AbstractFunction implements StringFunction {
     }
 
     protected QGram() {
-        super(Range.closed(2, 3), StringComparisonVocabulary.qgram.stringValue());
+        super(Range.closed(2, 3), StringMetricVocabulary.qgram.stringValue());
     }
 
     private QGram(final QGram qGram) {
@@ -57,7 +57,7 @@ public final class QGram extends AbstractFunction implements StringFunction {
 
     @Override
     public String toString() {
-        return StringComparisonVocabulary.qgram.name();
+        return StringMetricVocabulary.qgram.name();
     }
 }
 

@@ -1,6 +1,5 @@
 package com.semantalytics.stardog.kibble.strings.comparison;
 
-import com.complexible.common.rdf.model.Values;
 import com.complexible.stardog.plan.filter.Expression;
 import com.complexible.stardog.plan.filter.ExpressionEvaluationException;
 import com.complexible.stardog.plan.filter.ExpressionVisitor;
@@ -13,12 +12,14 @@ import org.openrdf.model.Value;
 import org.simmetrics.metrics.functions.AffineGap;
 import org.simmetrics.metrics.functions.MatchMismatch;
 
+import static com.complexible.common.rdf.model.Values.literal;
+
 public final class SmithWaterman extends AbstractFunction implements StringFunction {
 
     private org.simmetrics.metrics.SmithWaterman smithWaterman;
 
     protected SmithWaterman() {
-        super(Range.closed(2, 7), StringComparisonVocabulary.smithWaterman.stringValue());
+        super(Range.closed(2, 7), StringMetricVocabulary.smithWaterman.stringValue());
     }
 
     private SmithWaterman(final SmithWaterman smithWaterman) {
@@ -36,31 +37,34 @@ public final class SmithWaterman extends AbstractFunction implements StringFunct
         final String firstString = assertStringLiteral(values[0]).stringValue();
         final String secondString = assertStringLiteral(values[1]).stringValue();
 
-        return Values.literal(getSmithWatermanFunction(values).compare(firstString, secondString));
+        return literal(getSmithWatermanFunction(values).compare(firstString, secondString));
     }
 
     private org.simmetrics.metrics.SmithWaterman getSmithWatermanFunction(final Value... values) throws ExpressionEvaluationException {
-        if (smithWaterman == null) {
-            if (values.length == 7) {
-                for(final Expression expression : getArgs()) {
-                    if(!(expression instanceof Constant)) {
-                        throw new ExpressionEvaluationException("Parameters 2 through 7 must be constant expressions");
+            switch(values.length) {
+                case 7: {
+                    for (final Expression expression : getArgs()) {
+                        if (!(expression instanceof Constant)) {
+                            throw new ExpressionEvaluationException("Parameters 2 through 7 must be constant expressions");
+                        }
                     }
+                    final float gapA = assertNumericLiteral(values[2]).floatValue();
+                    final float gapB = assertNumericLiteral(values[3]).floatValue();
+
+                    final float subPenaltyA = assertNumericLiteral(values[4]).floatValue();
+                    final float subPenaltyB = assertNumericLiteral(values[5]).floatValue();
+
+                    final int windowSize = assertNumericLiteral(values[6]).intValue();
+
+                    return new org.simmetrics.metrics.SmithWaterman(new AffineGap(gapA, gapB), new MatchMismatch(subPenaltyA, subPenaltyB), windowSize);
                 }
-                final float gapA = assertNumericLiteral(values[2]).floatValue();
-                final float gapB = assertNumericLiteral(values[3]).floatValue();
-                
-                final float subPenaltyA = assertNumericLiteral(values[4]).floatValue();
-                final float subPenaltyB = assertNumericLiteral(values[5]).floatValue();
-                
-                final int windowSize = assertNumericLiteral(values[6]).intValue();
-                
-                smithWaterman = new org.simmetrics.metrics.SmithWaterman(new AffineGap(gapA, gapB), new MatchMismatch(subPenaltyA, subPenaltyB), windowSize);
-            } else {
-                smithWaterman = new org.simmetrics.metrics.SmithWaterman();
+                case 2: {
+                    return new org.simmetrics.metrics.SmithWaterman();
+                }
+                default: {
+                    throw new ExpressionEvaluationException("Function takes either 2 or 7 arguments. Fount " + values.length);
+                }
             }
-        }
-        return smithWaterman;
     }
 
     @Override
@@ -75,6 +79,6 @@ public final class SmithWaterman extends AbstractFunction implements StringFunct
 
     @Override
     public String toString() {
-        return StringComparisonVocabulary.smithWaterman.name();
+        return StringMetricVocabulary.smithWaterman.name();
     }
 }

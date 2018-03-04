@@ -21,7 +21,7 @@ public final class ISub extends AbstractFunction implements StringFunction {
     }
 
     protected ISub() {
-        super(Range.closed(2, 3), StringComparisonVocabulary.isub.stringValue());
+        super(Range.closed(2, 3), StringMetricVocabulary.isub.stringValue());
     }
 
     @Override
@@ -53,6 +53,6 @@ public final class ISub extends AbstractFunction implements StringFunction {
 
     @Override
     public String toString() {
-        return StringComparisonVocabulary.isub.name();
+        return StringMetricVocabulary.isub.name();
     }
 }

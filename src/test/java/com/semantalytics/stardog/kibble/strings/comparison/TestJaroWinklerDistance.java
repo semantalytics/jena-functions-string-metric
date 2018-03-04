@@ -10,27 +10,27 @@ import static org.junit.Assert.*;
 public class TestJaroWinklerDistance extends AbstractStardogTest {
 
     @Test
-    public void testTwoArg() throws Exception {
+    public void testTwoArg() {
 
-        final String aQuery = "prefix stringcomparision: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                "select ?dist where { bind(stringcomparision:jaroWinklerDistance(\"My string\", \"My tsring\") as ?dist) }";
+        final String aQuery = "prefix stringmetric: <" + StringMetricVocabulary.NAMESPACE + "> " +
+                "select ?dist where { bind(stringmetric:jaroWinklerDistance(\"My string\", \"My tsring\") as ?dist) }";
 
-        final TupleQueryResult aResult = connection.select(aQuery).execute();
+        try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
-        assertTrue("Should have a result", aResult.hasNext());
+            assertTrue("Should have a result", aResult.hasNext());
 
-        final String aValue = aResult.next().getValue("dist").stringValue();
+            final String aValue = aResult.next().getValue("dist").stringValue();
 
-        assertEquals(0.025925, Double.parseDouble(aValue), 0.000001);
-
-        assertFalse("Should have no more results", aResult.hasNext());
+            assertEquals(0.025925, Double.parseDouble(aValue), 0.000001);
+            assertFalse("Should have no more results", aResult.hasNext());
+        }
     }
 
     @Test
-    public void testThreeArg() throws Exception {
+    public void testThreeArg() {
 
-        final String aQuery = "prefix stringcomparision: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                "select ?distance where { bind(stringcomparision:jaroWinklerDistance(\"My string\", \"My tsring\", 0.1) as ?distance) }";
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                "select ?distance where { bind(stringmetric:jaroWinklerDistance(\"My string\", \"My tsring\", 0.1) as ?distance) }";
 
         final TupleQueryResult aResult = connection.select(aQuery).execute();
 
@@ -44,14 +44,13 @@ public class TestJaroWinklerDistance extends AbstractStardogTest {
     }
 
     @Test
-    public void testThreeArgIncorrectTypeThirdArg() throws Exception {
+    public void testThreeArgIncorrectTypeThirdArg() {
 
-        final String aQuery = "prefix stringcomparision: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                "select ?distance where { bind(stringcomparision:jaroWinklerDistance(\"My string\", \"My tsring\", \"x\") as ?distance) }";
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                "select ?distance where { bind(stringmetric:jaroWinklerDistance(\"My string\", \"My tsring\", \"x\") as ?distance) }";
 
         final TupleQueryResult aResult = connection.select(aQuery).execute();
-        // there should be a result because implicit in the query is the singleton set, so because the bind
-        // should fail due to the value error, we expect a single empty binding
+
         assertTrue("Should have a result", aResult.hasNext());
 
         final BindingSet aBindingSet = aResult.next();
@@ -62,14 +61,13 @@ public class TestJaroWinklerDistance extends AbstractStardogTest {
     }
 
     @Test
-    public void testTooManyArgs() throws Exception {
+    public void testTooManyArgs() {
 
-        final String aQuery = "prefix stringcomparision: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                "select ?str where { bind(stringcomparision:jaroWinklerDistance(\"one\", \"two\", 0.7, \"four\") as ?str) }";
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                "select ?str where { bind(stringmetric:jaroWinklerDistance(\"one\", \"two\", 0.7, \"four\") as ?str) }";
 
         final TupleQueryResult aResult = connection.select(aQuery).execute();
-        // there should be a result because implicit in the query is the singleton set, so because the bind
-        // should fail due to the value error, we expect a single empty binding
+
         assertTrue("Should have a result", aResult.hasNext());
 
         final BindingSet aBindingSet = aResult.next();
@@ -80,13 +78,12 @@ public class TestJaroWinklerDistance extends AbstractStardogTest {
     }
 
     @Test
-    public void testTooFewArgs() throws Exception {
-        final String aQuery = "prefix stringcomparision: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                "select ?str where { bind(stringcomparision:jaroWinklerDistance(7) as ?str) }";
+    public void testTooFewArgs() {
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                "select ?str where { bind(stringmetric:jaroWinklerDistance(7) as ?str) }";
 
         final TupleQueryResult aResult = connection.select(aQuery).execute();
-        // there should be a result because implicit in the query is the singleton set, so because the bind
-        // should fail due to the value error, we expect a single empty binding
+
         assertTrue("Should have a result", aResult.hasNext());
 
         final BindingSet aBindingSet = aResult.next();

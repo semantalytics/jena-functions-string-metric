@@ -10,54 +10,53 @@ import static org.junit.Assert.*;
 public class TestHammingDistance extends AbstractStardogTest {
 
     @Test
-    public void testHammingDistance() throws Exception {
+    public void testTwoArg() {
 
-        final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                "select ?hammingDistance where { bind(ss:hammingDistance(\"Stardog\", \"Starman\") as ?hammingDistance) }";
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                "select ?hammingDistance where { bind(stringmetric:hammingDistance(\"Stardog\", \"Starman\") as ?hammingDistance) }";
 
-        final TupleQueryResult aResult = connection.select(aQuery).execute();
+        try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
-        assertTrue("Should have a result", aResult.hasNext());
+            assertTrue("Should have a result", aResult.hasNext());
 
-        final String aValue = aResult.next().getValue("hammingDistance").stringValue();
+            final String aValue = aResult.next().getValue("hammingDistance").stringValue();
 
-        assertEquals(3.0, Double.parseDouble(aValue), 0.0001);
-
-        assertFalse("Should have no more results", aResult.hasNext());
+            assertEquals(3.0, Double.parseDouble(aValue), 0.0001);
+            assertFalse("Should have no more results", aResult.hasNext());
+        }
     }
 
     @Test
-    public void testCosineTooManyArgs() throws Exception {
+    public void testTooManyArgs() {
 
-        final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                "select ?hammingDistance where { bind(ss:hammingDistance(\"one\", \"two\", \"three\", \"four\") as ?hammingDistance) }";
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                "select ?hammingDistance where { bind(stringmetric:hammingDistance(\"one\", \"two\", \"three\", \"four\") as ?hammingDistance) }";
 
-        final TupleQueryResult aResult = connection.select(aQuery).execute();
-        // there should be a result because implicit in the query is the singleton set, so because the bind
-        // should fail due to the value error, we expect a single empty binding
-        assertTrue("Should have a result", aResult.hasNext());
+        try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
-        final BindingSet aBindingSet = aResult.next();
+            assertTrue("Should have a result", aResult.hasNext());
 
-        assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+            final BindingSet aBindingSet = aResult.next();
 
-        assertFalse("Should have no more results", aResult.hasNext());
+            assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+            assertFalse("Should have no more results", aResult.hasNext());
+        }
     }
 
     @Test
-    public void testCosineWrongType() {
-        final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                "select ?hammingDistance where { bind(ss:hammingDistance(7) as ?hammingDistance) }";
+    public void testWrongType() {
 
-        final TupleQueryResult aResult = connection.select(aQuery).execute();
-        // there should be a result because implicit in the query is the singleton set, so because the bind
-        // should fail due to the value error, we expect a single empty binding
-        assertTrue("Should have a result", aResult.hasNext());
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                "select ?hammingDistance where { bind(stringmetric:hammingDistance(7) as ?hammingDistance) }";
 
-        final BindingSet aBindingSet = aResult.next();
+        try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
-        assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+            assertTrue("Should have a result", aResult.hasNext());
 
-        assertFalse("Should have no more results", aResult.hasNext());
+            final BindingSet aBindingSet = aResult.next();
+
+            assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+            assertFalse("Should have no more results", aResult.hasNext());
+        }
     }
 }

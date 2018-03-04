@@ -11,8 +11,8 @@ public class TestLongestCommonSubstring extends AbstractStardogTest {
 
     @Test
     public void testLongestCommonSubstring() {
-        final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                "select ?result where { bind(ss:longestCommonSubstring(\"Stardog\", \"Starman\") as ?result) }";
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                "select ?result where { bind(stringmetric:longestCommonSubstring(\"Stardog\", \"Starman\") as ?result) }";
 
         final TupleQueryResult aResult = connection.select(aQuery).execute();
 
@@ -26,14 +26,12 @@ public class TestLongestCommonSubstring extends AbstractStardogTest {
     }
 
     @Test
-    public void testLongestCommonSubstringTooManyArgs() throws Exception {
+    public void testLongestCommonSubstringTooManyArgs() {
 
-        final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                "select ?result where { bind(ss:longestCommonSubstring(\"one\", \"two\", \"three\") as ?result) }";
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                "select ?result where { bind(stringmetric:longestCommonSubstring(\"one\", \"two\", \"three\") as ?result) }";
 
         final TupleQueryResult aResult = connection.select(aQuery).execute();
-        // there should be a result because implicit in the query is the singleton set, so because the bind
-        // should fail due to the value error, we expect a single empty binding
         assertTrue("Should have a result", aResult.hasNext());
 
         final BindingSet aBindingSet = aResult.next();
@@ -44,14 +42,12 @@ public class TestLongestCommonSubstring extends AbstractStardogTest {
     }
 
     @Test
-    public void testLongestCommonSubstringWrongType() throws Exception {
+    public void testLongestCommonSubstringWrongType() {
 
-        final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                "select ?result where { bind(ss:longestCommonSubstring(7) as ?result) }";
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                "select ?result where { bind(stringmetric:longestCommonSubstring(7) as ?result) }";
 
         final TupleQueryResult aResult = connection.select(aQuery).execute();
-        // there should be a result because implicit in the query is the singleton set, so because the bind
-        // should fail due to the value error, we expect a single empty binding
         assertTrue("Should have a result", aResult.hasNext());
 
         final BindingSet aBindingSet = aResult.next();

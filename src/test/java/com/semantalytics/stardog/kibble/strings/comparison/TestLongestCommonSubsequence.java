@@ -10,15 +10,13 @@ import static org.junit.Assert.*;
 
 public class TestLongestCommonSubsequence extends AbstractStardogTest {
 
-    private Connection aConn;
-
     @Test
-    public void testLongestCommonSubsequence() throws Exception {
+    public void testLongestCommonSubsequence() {
 
-        final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                "select ?result where { bind(ss:longestCommonSubsequence(\"AGCAT\", \"GAC\") as ?result) }";
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                "select ?result where { bind(stringmetric:longestCommonSubsequence(\"AGCAT\", \"GAC\") as ?result) }";
 
-        final TupleQueryResult aResult = aConn.select(aQuery).execute();
+        final TupleQueryResult aResult = connection.select(aQuery).execute();
 
         assertTrue("Should have a result", aResult.hasNext());
 
@@ -30,14 +28,12 @@ public class TestLongestCommonSubsequence extends AbstractStardogTest {
     }
 
     @Test
-    public void testLongestCommonSubsequenceTooManyArgs() throws Exception {
+    public void testLongestCommonSubsequenceTooManyArgs() {
 
-        final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                "select ?result where { bind(ss:longestCommonSubsequence(\"one\", \"two\", \"three\") as ?result) }";
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                "select ?result where { bind(stringmetric:longestCommonSubsequence(\"one\", \"two\", \"three\") as ?result) }";
 
-        final TupleQueryResult aResult = aConn.select(aQuery).execute();
-        // there should be a result because implicit in the query is the singleton set, so because the bind
-        // should fail due to the value error, we expect a single empty binding
+        final TupleQueryResult aResult = connection.select(aQuery).execute();
         assertTrue("Should have a result", aResult.hasNext());
 
         final BindingSet aBindingSet = aResult.next();
@@ -48,14 +44,12 @@ public class TestLongestCommonSubsequence extends AbstractStardogTest {
     }
 
     @Test
-    public void testLongestCommonSubsequenceWrongType() throws Exception {
+    public void testLongestCommonSubsequenceWrongType() {
 
-        final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                "select ?result where { bind(ss:longestCommonSubsequence(7) as ?result) }";
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                "select ?result where { bind(stringmetric:longestCommonSubsequence(7) as ?result) }";
 
-        final TupleQueryResult aResult = aConn.select(aQuery).execute();
-        // there should be a result because implicit in the query is the singleton set, so because the bind
-        // should fail due to the value error, we expect a single empty binding
+        final TupleQueryResult aResult = connection.select(aQuery).execute();
         assertTrue("Should have a result", aResult.hasNext());
 
         final BindingSet aBindingSet = aResult.next();

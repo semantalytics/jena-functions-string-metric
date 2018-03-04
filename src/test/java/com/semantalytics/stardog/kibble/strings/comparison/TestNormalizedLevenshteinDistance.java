@@ -10,10 +10,10 @@ import static org.junit.Assert.*;
 public class TestNormalizedLevenshteinDistance extends AbstractStardogTest {
 
     @Test
-    public void testNormalizedLevenshtein() {
+    public void testNormalizedLevenshteinDistance() {
 
-        final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                "select ?dist where { bind(ss:normalizedLevenshtein(\"My string\", \"My $tring\") as ?dist) }";
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                "select ?dist where { bind(stringmetric:normalizedLevenshteinDistance(\"My string\", \"My $tring\") as ?dist) }";
 
         final TupleQueryResult aResult = connection.select(aQuery).execute();
 
@@ -27,14 +27,12 @@ public class TestNormalizedLevenshteinDistance extends AbstractStardogTest {
     }
 
     @Test
-    public void testNormalizedLevenstheinTooManyArgs() throws Exception {
+    public void testNormalizedLevenstheinTooManyArgs() {
 
-        final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                "select ?str where { bind(ss:normalizedLevenshtein(\"one\", \"two\", \"three\") as ?str) }";
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                "select ?str where { bind(stringmetric:normalizedLevenshteinDistance(\"one\", \"two\", \"three\") as ?str) }";
 
         final TupleQueryResult aResult = connection.select(aQuery).execute();
-        // there should be a result because implicit in the query is the singleton set, so because the bind
-        // should fail due to the value error, we expect a single empty binding
         assertTrue("Should have a result", aResult.hasNext());
 
         final BindingSet aBindingSet = aResult.next();
@@ -45,13 +43,11 @@ public class TestNormalizedLevenshteinDistance extends AbstractStardogTest {
     }
 
     @Test
-    public void testNormalizedLevenshteinWrongType() throws Exception {
-        final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                "select ?str where { bind(ss:normalizedLevenshtein(7) as ?str) }";
+    public void testNormalizedLevenshteinDistanceWrongType() {
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                "select ?str where { bind(stringmetric:normalizedLevenshteinDistance(7) as ?str) }";
 
         final TupleQueryResult aResult = connection.select(aQuery).execute();
-        // there should be a result because implicit in the query is the singleton set, so because the bind
-        // should fail due to the value error, we expect a single empty binding
         assertTrue("Should have a result", aResult.hasNext());
 
         final BindingSet aBindingSet = aResult.next();

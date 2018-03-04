@@ -25,7 +25,7 @@ public final class NGram extends AbstractFunction implements StringFunction {
     }
 
     protected NGram() {
-        super(Range.closed(2, 3), StringComparisonVocabulary.ngram.stringValue());
+        super(Range.closed(2, 3), StringMetricVocabulary.ngram.stringValue());
     }
 
     private NGram(final NGram nGram) {
@@ -56,6 +56,6 @@ public final class NGram extends AbstractFunction implements StringFunction {
 
     @Override
     public String toString() {
-        return StringComparisonVocabulary.needlemanWunch.name();
+        return StringMetricVocabulary.needlemanWunch.name();
     }
 }

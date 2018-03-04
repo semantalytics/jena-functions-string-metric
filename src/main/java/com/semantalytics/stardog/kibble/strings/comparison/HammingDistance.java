@@ -13,7 +13,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 public final class HammingDistance extends AbstractFunction implements StringFunction {
 
     protected HammingDistance() {
-        super(2, StringComparisonVocabulary.hammingDistance.stringValue());
+        super(2, StringMetricVocabulary.hammingDistance.stringValue());
     }
 
     private HammingDistance(final HammingDistance hammingDistance) {
@@ -61,6 +61,6 @@ public final class HammingDistance extends AbstractFunction implements StringFun
 
     @Override
     public String toString() {
-        return StringComparisonVocabulary.hammingDistance.name();
+        return StringMetricVocabulary.hammingDistance.name();
     }
 }

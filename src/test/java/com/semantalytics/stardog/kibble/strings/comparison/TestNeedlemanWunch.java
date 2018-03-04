@@ -10,9 +10,9 @@ import static org.junit.Assert.*;
 public class TestNeedlemanWunch extends AbstractStardogTest {
 
     @Test
-    public void testNeedlemanWunch() throws Exception {
-        final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                "select ?dist where { bind(ss:needlemanWunch(\"Stardog\", \"Starman\") as ?dist) }";
+    public void testNeedlemanWunch() {
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                "select ?dist where { bind(stringmetric:needlemanWunch(\"Stardog\", \"Starman\") as ?dist) }";
 
         final TupleQueryResult aResult = connection.select(aQuery).execute();
 
@@ -26,14 +26,12 @@ public class TestNeedlemanWunch extends AbstractStardogTest {
     }
 
     @Test
-    public void testNeedlemanWunchTooManyArgs() throws Exception {
+    public void testNeedlemanWunchTooManyArgs() {
 
-        final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                "select ?dist where { bind(ss:needlemanWunch(\"one\", \"two\", \"three\", \"four\") as ?dist) }";
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                "select ?dist where { bind(stringmetric:needlemanWunch(\"one\", \"two\", \"three\", \"four\", \"five\", \"six\") as ?dist) }";
 
         final TupleQueryResult aResult = connection.select(aQuery).execute();
-        // there should be a result because implicit in the query is the singleton set, so because the bind
-        // should fail due to the value error, we expect a single empty binding
         assertTrue("Should have a result", aResult.hasNext());
 
         final BindingSet aBindingSet = aResult.next();
@@ -44,15 +42,13 @@ public class TestNeedlemanWunch extends AbstractStardogTest {
     }
 
     @Test
-    public void testNeedlemanWunchWrongType() throws Exception {
+    public void testNeedlemanWunchWrongType() {
 
-        final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                "select ?dist where { bind(ss:needlemanWunch(7) as ?dist) }";
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                "select ?dist where { bind(stringmetric:needlemanWunch(7) as ?dist) }";
 
         final TupleQueryResult aResult = connection.select(aQuery).execute();
 
-        // there should be a result because implicit in the query is the singleton set, so because the bind
-        // should fail due to the value error, we expect a single empty binding
         assertTrue("Should have a result", aResult.hasNext());
 
         final BindingSet aBindingSet = aResult.next();

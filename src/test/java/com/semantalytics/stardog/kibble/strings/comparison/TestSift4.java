@@ -2,6 +2,8 @@ package com.semantalytics.stardog.kibble.strings.comparison;
 
 import com.semantalytics.stardog.kibble.AbstractStardogTest;
 import org.junit.*;
+import org.openrdf.model.Literal;
+import org.openrdf.model.Value;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.TupleQueryResult;
 
@@ -9,128 +11,129 @@ import static org.junit.Assert.*;
 
 public class TestSift4 extends AbstractStardogTest {
 
-
     @Test
-    public void testCosineTwoArg() throws Exception {
+    public void testTwoArg() {
 
-        final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                "select ?result where { bind(ss:cosine(\"ABC\", \"ABCE\") as ?result) }";
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                "select ?result where { bind(stringmetric:sift4(\"This is the first string\", \"And this is another string\") as ?result) }";
 
-        final TupleQueryResult aResult = connection.select(aQuery).execute();
+        try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
-        assertTrue("Should have a result", aResult.hasNext());
+            assertTrue("Should have a result", aResult.hasNext());
 
-        final String aValue = aResult.next().getValue("result").stringValue();
+            final Value aValue = aResult.next().getValue("result");
 
-        assertEquals(0.29289, Double.parseDouble(aValue), 0.0001);
+            assertTrue(aValue instanceof Literal);
 
-        assertFalse("Should have no more results", aResult.hasNext());
+            final double aLiteralValue = ((Literal)aValue).doubleValue();
+
+            assertEquals(11.0, aLiteralValue, 0.0);
+            assertFalse("Should have no more results", aResult.hasNext());
+        }
     }
 
     @Test
-    public void testCosineThreeArg() throws Exception {
+    public void testThreeArg() {
 
-        final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                "select ?result where { bind(ss:cosine(\"ABC\", \"ABCE\", 3) as ?result) }";
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                "select ?result where { bind(stringmetric:sift4(\"This is the first string\", \"And this is another string\", 5) as ?result) }";
 
-        final TupleQueryResult aResult = connection.select(aQuery).execute();
+        try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
-        assertTrue("Should have a result", aResult.hasNext());
+            assertTrue("Should have a result", aResult.hasNext());
 
-        final String aValue = aResult.next().getValue("result").stringValue();
+            final Value aValue = aResult.next().getValue("result");
 
-        assertEquals(0.29289, Double.parseDouble(aValue), 0.0001);
+            assertTrue(aValue instanceof Literal);
 
-        assertFalse("Should have no more results", aResult.hasNext());
+            final double aLiteralValue = ((Literal)aValue).doubleValue();
+
+            assertEquals(11.0, aLiteralValue, 0.0);
+            assertFalse("Should have no more results", aResult.hasNext());
+        }
     }
 
     @Test
-    public void testCosineTooManyArgs() throws Exception {
+    public void testTooManyArgs() {
 
-        final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                "select ?result where { bind(ss:cosine(\"one\", \"two\", \"three\", \"four\") as ?result) }";
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                "select ?result where { bind(stringmetric:sift4(\"one\", \"two\", \"three\", \"four\") as ?result) }";
 
-        final TupleQueryResult aResult = connection.select(aQuery).execute();
-        // there should be a result because implicit in the query is the singleton set, so because the bind
-        // should fail due to the value error, we expect a single empty binding
-        assertTrue("Should have a result", aResult.hasNext());
+        try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
-        final BindingSet aBindingSet = aResult.next();
+            assertTrue("Should have a result", aResult.hasNext());
 
-        assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+            final BindingSet aBindingSet = aResult.next();
 
-        assertFalse("Should have no more results", aResult.hasNext());
+            assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+            assertFalse("Should have no more results", aResult.hasNext());
+        }
     }
 
     @Test
-    public void testCosineWrongTypeFirstArg() throws Exception {
+    public void testWrongTypeFirstArg() {
 
-        final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + ">" +
-                "select ?result where { bind(ss:cosine(7) as ?result) }";
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                "select ?result where { bind(stringmetric:sift4(7) as ?result) }";
 
-        final TupleQueryResult aResult = connection.select(aQuery).execute();
-        // there should be a result because implicit in the query is the singleton set, so because the bind
-        // should fail due to the value error, we expect a single empty binding
-        assertTrue("Should have a result", aResult.hasNext());
+        try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
-        final BindingSet aBindingSet = aResult.next();
+            assertTrue("Should have a result", aResult.hasNext());
 
-        assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+            final BindingSet aBindingSet = aResult.next();
 
-        assertFalse("Should have no more results", aResult.hasNext());
+            assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+            assertFalse("Should have no more results", aResult.hasNext());
+        }
     }
 
     @Test
-    public void testCosineWrongTypeSecondArg() throws Exception {
+    public void testWrongTypeSecondArg() {
 
-        final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + ">" +
-                "select ?result where { bind(ss:cosine(\"Stardog\", 2) as ?result) }";
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                "select ?result where { bind(stringmetric:sift4(\"Stardog\", 2) as ?result) }";
 
-        final TupleQueryResult aResult = connection.select(aQuery).execute();
-        // there should be a result because implicit in the query is the singleton set, so because the bind
-        // should fail due to the value error, we expect a single empty binding
-        assertTrue("Should have a result", aResult.hasNext());
+        try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
-        final BindingSet aBindingSet = aResult.next();
+            assertTrue("Should have a result", aResult.hasNext());
 
-        assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+            final BindingSet aBindingSet = aResult.next();
 
-        assertFalse("Should have no more results", aResult.hasNext());
+            assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+            assertFalse("Should have no more results", aResult.hasNext());
+        }
     }
 
     @Test
-    public void testCosineWrongTypeThirdArg() throws Exception {
+    public void testWrongTypeThirdArg() {
 
-        final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + ">" +
-                "select ?result where { bind(ss:cosine(\"Stardog\", \"Starlight\", \"Starship\") as ?result) }";
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                "select ?result where { bind(stringmetric:sift4(\"Stardog\", \"Starlight\", \"Starship\") as ?result) }";
 
-        final TupleQueryResult aResult = connection.select(aQuery).execute();
-        // there should be a result because implicit in the query is the singleton set, so because the bind
-        // should fail due to the value error, we expect a single empty binding
-        assertTrue("Should have a result", aResult.hasNext());
+        try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
-        final BindingSet aBindingSet = aResult.next();
+            assertTrue("Should have a result", aResult.hasNext());
 
-        assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+            final BindingSet aBindingSet = aResult.next();
 
-        assertFalse("Should have no more results", aResult.hasNext());
+            assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
+            assertFalse("Should have no more results", aResult.hasNext());
+        }
     }
 
     @Test
-    public void testCosineThirdArgNotConstant() throws Exception {
+    public void testThirdArgNotConstant() {
 
-            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + ">" +
-                    "select ?result where { bind(ss:cosine(\"Stardog\", \"Starlight\", ?thirdArg) as ?result) }";
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                    "select ?result where { bind(stringmetric:sift4(\"Stardog\", \"Starlight\", ?thirdArg) as ?result) }";
 
             try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
-                // there should be a result because implicit in the query is the singleton set, so because the bind
-                // should fail due to the value error, we expect a single empty binding
+
                 assertTrue("Should have a result", aResult.hasNext());
 
                 final BindingSet aBindingSet = aResult.next();
 
                 assertTrue("Should have no bindings", aBindingSet.getBindingNames().isEmpty());
-
                 assertFalse("Should have no more results", aResult.hasNext());
             }
     }

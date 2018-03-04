@@ -12,7 +12,7 @@ import static com.complexible.common.rdf.model.Values.literal;
 public final class OverlapCoefficient extends AbstractFunction implements StringFunction {
 
     protected OverlapCoefficient() {
-        super(2, StringComparisonVocabulary.overlapCoefficient.stringValue());
+        super(2, StringMetricVocabulary.overlapCoefficient.stringValue());
     }
 
     private OverlapCoefficient(final OverlapCoefficient overlapCoefficient) {
@@ -40,6 +40,6 @@ public final class OverlapCoefficient extends AbstractFunction implements String
 
     @Override
     public String toString() {
-        return StringComparisonVocabulary.overlapCoefficient.name();
+        return StringMetricVocabulary.overlapCoefficient.name();
     }
 }

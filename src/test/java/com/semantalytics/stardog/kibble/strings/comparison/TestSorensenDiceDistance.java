@@ -7,13 +7,13 @@ import org.openrdf.query.TupleQueryResult;
 
 import static org.junit.Assert.*;
 
-public class TestSorensenDiceDistance  extends AbstractStardogTest {
+public class TestSorensenDiceDistance extends AbstractStardogTest {
 
     @Test
-    public void testSorensenDice() {
-     
-        final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                "select ?dist where { bind(ss:sorensenDice(\"ABCDE\", \"ABCDFG\", 2) as ?dist) }";
+    public void testSorensenDiceDistance() {
+
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                "select ?dist where { bind(stringmetric:sorensenDiceDistance(\"ABCDE\", \"ABCDFG\", 2) as ?dist) }";
 
         final TupleQueryResult aResult = connection.select(aQuery).execute();
 
@@ -27,11 +27,11 @@ public class TestSorensenDiceDistance  extends AbstractStardogTest {
     }
 
     @Test
-    public void testSorensenDiceTooManyArgs() {
+    public void testSorensenDiceDistanceTooManyArgs() {
 
-    
-            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                    "select ?str where { bind(ss:sorensenDice(\"one\", \"two\", \"three\", \"four\") as ?str) }";
+
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                    "select ?str where { bind(stringmetric:sorensenDiceDistance(\"one\", \"two\", \"three\", \"four\") as ?str) }";
 
             final TupleQueryResult aResult = connection.select(aQuery).execute();
          
@@ -47,11 +47,11 @@ public class TestSorensenDiceDistance  extends AbstractStardogTest {
     }
 
     @Test
-    public void testSorensenDiceWrongType() {
-       
+    public void testSorensenDiceDistanceWrongType() {
 
-            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                    "select ?str where { bind(ss:sorensenDice(7) as ?str) }";
+
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                    "select ?str where { bind(stringmetric:sorensenDiceDistance(7) as ?str) }";
 
             final TupleQueryResult aResult = connection.select(aQuery).execute();
         

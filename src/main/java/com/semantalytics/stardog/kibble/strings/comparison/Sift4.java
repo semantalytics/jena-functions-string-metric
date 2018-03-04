@@ -18,7 +18,7 @@ public final class Sift4 extends AbstractFunction implements StringFunction {
     }
 
     protected Sift4() {
-        super(Range.closed(2, 3), StringComparisonVocabulary.sift4.stringValue());
+        super(Range.closed(2, 3), StringMetricVocabulary.sift4.stringValue());
     }
 
     private Sift4(final Sift4 sift4) {
@@ -30,9 +30,10 @@ public final class Sift4 extends AbstractFunction implements StringFunction {
         //TODO handle two arguments
         final String string1 = assertStringLiteral(values[0]).stringValue();
         final String string2 = assertStringLiteral(values[1]).stringValue();
-        final int maxOffset = assertNumericLiteral(values[2]).intValue();
 
-        sift4.setMaxOffset(maxOffset);
+        if(values.length == 3) {
+            sift4.setMaxOffset(assertNumericLiteral(values[2]).intValue());
+        }
 
         return literal(sift4.distance(string1, string2));
     }
@@ -49,6 +50,6 @@ public final class Sift4 extends AbstractFunction implements StringFunction {
 
     @Override
     public String toString() {
-        return StringComparisonVocabulary.sift4.name();
+        return StringMetricVocabulary.sift4.name();
     }
 }

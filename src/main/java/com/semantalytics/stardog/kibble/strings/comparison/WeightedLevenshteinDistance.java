@@ -19,7 +19,7 @@ public final class WeightedLevenshteinDistance extends AbstractFunction implemen
     private info.debatty.java.stringsimilarity.WeightedLevenshtein weightedLevenshtein;
 
     protected WeightedLevenshteinDistance() {
-        super(Range.atLeast(2), StringComparisonVocabulary.weithtedLevenshteinDistance.stringValue());
+        super(Range.atLeast(2), StringMetricVocabulary.weightedLevenshteinDistance.stringValue());
     }
 
     private WeightedLevenshteinDistance(final WeightedLevenshteinDistance weightedLevenshteinDistance) {
@@ -89,7 +89,7 @@ public final class WeightedLevenshteinDistance extends AbstractFunction implemen
 
     @Override
     public String toString() {
-        return StringComparisonVocabulary.weithtedLevenshteinDistance.name();
+        return StringMetricVocabulary.weightedLevenshteinDistance.name();
     }
 
     private class SubstitutionPair {

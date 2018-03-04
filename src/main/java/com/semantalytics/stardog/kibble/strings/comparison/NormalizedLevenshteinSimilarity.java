@@ -17,7 +17,7 @@ public final class NormalizedLevenshteinSimilarity extends AbstractFunction impl
     }
 
     protected NormalizedLevenshteinSimilarity() {
-        super(2, StringComparisonVocabulary.normalizedLevenshteinSimarity.stringValue());
+        super(2, StringMetricVocabulary.normalizedLevenshteinSimarity.stringValue());
     }
 
     private NormalizedLevenshteinSimilarity(final NormalizedLevenshteinSimilarity normalizedLevenshteinSimilarity) {
@@ -43,6 +43,6 @@ public final class NormalizedLevenshteinSimilarity extends AbstractFunction impl
 
     @Override
     public String toString() {
-        return StringComparisonVocabulary.normalizedLevenshteinSimarity.name();
+        return StringMetricVocabulary.normalizedLevenshteinSimarity.name();
     }
 }

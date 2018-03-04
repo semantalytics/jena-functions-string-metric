@@ -16,7 +16,7 @@ public class SorensenDiceDistance extends AbstractFunction implements StringFunc
     private info.debatty.java.stringsimilarity.SorensenDice sorensenDice;
 
     protected SorensenDiceDistance() {
-        super(Range.closed(2, 3), StringComparisonVocabulary.sorensenDiceDistance.stringValue());
+        super(Range.closed(2, 3), StringMetricVocabulary.sorensenDiceDistance.stringValue());
     }
 
     private SorensenDiceDistance(final SorensenDiceDistance sorensenDiceDistance) {
@@ -65,6 +65,6 @@ public class SorensenDiceDistance extends AbstractFunction implements StringFunc
 
     @Override
     public String toString() {
-        return StringComparisonVocabulary.sorensenDiceDistance.name();
+        return StringMetricVocabulary.sorensenDiceDistance.name();
     }
 }

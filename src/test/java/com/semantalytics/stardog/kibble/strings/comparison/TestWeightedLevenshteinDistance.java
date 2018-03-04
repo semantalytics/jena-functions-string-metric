@@ -7,15 +7,15 @@ import org.openrdf.query.TupleQueryResult;
 
 import static org.junit.Assert.*;
 
-public class TestWeightedLevenshteinDistance  extends AbstractStardogTest {
+public class TestWeightedLevenshteinDistance extends AbstractStardogTest {
 
    
     @Test
-    public void testLevenshtein() throws Exception {
+    public void testLevenshteinDistance() throws Exception {
 
 
-            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                    "select ?dist where { bind(ss:weightedLevenshtein(\"String1\", \"Srring2\", \"t\", \"r\", 0.5) as ?dist) }";
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                    "select ?dist where { bind(stringmetric:weightedLevenshteinDistance(\"String1\", \"Srring2\", \"t\", \"r\", 0.5) as ?dist) }";
 
         try(final TupleQueryResult aResult = connection.select(aQuery).execute()) {
 
@@ -33,9 +33,9 @@ public class TestWeightedLevenshteinDistance  extends AbstractStardogTest {
     public void testLevenstheinTooManyArgs() throws Exception {
 
 
-    
-            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                    "select ?str where { bind(ss:weightedLevenshtein(\"one\", \"two\", \"three\") as ?str) }";
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+
+                    "select ?str where { bind(stringmetric:weightedLevenshteinDistance(\"one\", \"two\", \"three\") as ?str) }";
 
             final TupleQueryResult aResult = connection.select(aQuery).execute();
        
@@ -51,12 +51,11 @@ public class TestWeightedLevenshteinDistance  extends AbstractStardogTest {
     }
 
     @Test
-    public void testLevenshteinWrongType() throws Exception {
+    public void testLevenshteinDistanceWrongType() throws Exception {
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
 
      
-
-            final String aQuery = "prefix ss: <" + StringComparisonVocabulary.NAMESPACE + "> " +
-                    "select ?str where { bind(ss:weightedLevenshtein(7) as ?str) }";
+                    "select ?str where { bind(stringmetric:weightedLevenshteinDistance(7) as ?str) }";
 
             final TupleQueryResult aResult = connection.select(aQuery).execute();
        

@@ -9,13 +9,11 @@ import static org.junit.Assert.*;
 
 public class TestSmithWatermanGotoh extends AbstractStardogTest {
 
-    private static final String SPARQL_PREFIX = "PREFIX ss: <" + StringComparisonVocabulary.NAMESPACE + "> ";
-
     @Test
     public void testSmithWatermanGotohTwoArg() {
 
-        final String aQuery = SPARQL_PREFIX +
-                "select ?result where { bind(ss:smithWatermanGotoh(\"Stardog\", \"Starman\") as ?result) }";
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                "select ?result where { bind(stringmetric:smithWatermanGotoh(\"Stardog\", \"Starman\") as ?result) }";
 
         final TupleQueryResult aResult = connection.select(aQuery).execute();
 
@@ -31,8 +29,8 @@ public class TestSmithWatermanGotoh extends AbstractStardogTest {
     @Test
     public void testSmithWatermanGotohFiveArg() {
 
-        final String aQuery = SPARQL_PREFIX +
-                "select ?result where { bind(ss:smithWatermanGotoh(\"Stardog\", \"Starman\", -0.5, 1.0, -2.0) as ?result) }";
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                "select ?result where { bind(stringmetric:smithWatermanGotoh(\"Stardog\", \"Starman\", -0.5, 1.0, -2.0) as ?result) }";
 
         final TupleQueryResult aResult = connection.select(aQuery).execute();
 
@@ -48,12 +46,10 @@ public class TestSmithWatermanGotoh extends AbstractStardogTest {
     @Test
     public void testSmithWatermanGotohTooManyArgs() {
 
-        final String aQuery = SPARQL_PREFIX +
-                "select ?result where { bind(ss:smithWatermanGotoh(\"one\", \"two\", \"three\", \"four\") as ?result) }";
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                "select ?result where { bind(stringmetric:smithWatermanGotoh(\"one\", \"two\", \"three\", \"four\", \"five\", \"six\") as ?result) }";
 
         final TupleQueryResult aResult = connection.select(aQuery).execute();
-        // there should be a result because implicit in the query is the singleton set, so because the bind
-        // should fail due to the value error, we expect a single empty binding
         assertTrue("Should have a result", aResult.hasNext());
 
         final BindingSet aBindingSet = aResult.next();
@@ -65,12 +61,10 @@ public class TestSmithWatermanGotoh extends AbstractStardogTest {
     @Test
     public void testSmithWatermanGotohWrongType() {
 
-        final String aQuery = SPARQL_PREFIX +
-                "select ?result where { bind(ss:smithWatermanGotoh(7) as ?result) }";
+        final String aQuery = StringMetricVocabulary.sparqlPrefix("stringmetric") +
+                "select ?result where { bind(stringmetric:smithWatermanGotoh(7) as ?result) }";
 
         final TupleQueryResult aResult = connection.select(aQuery).execute();
-        // there should be a result because implicit in the query is the singleton set, so because the bind
-        // should fail due to the value error, we expect a single empty binding
         assertTrue("Should have a result", aResult.hasNext());
 
         final BindingSet aBindingSet = aResult.next();
