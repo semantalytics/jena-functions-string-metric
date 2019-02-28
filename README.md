@@ -1,10 +1,10 @@
-[![Build Status](https://travis-ci.org/semantalytics/stardog-kibbles.svg?branch=master)](https://travis-ci.org/semantalytics/stardog-kibbles)
+[![Build Status](https://travis-ci.org/semantalytics/jena-functions-string-metric.svg?branch=master)](https://travis-ci.org/semantalytics/jena-functions-string-metric)
 
-# Stardog Kibbles String Metric
+# jena functions - string metric
 
-A collection of [Stardog](http://stardog.com) functions for computing string metrics
+A collection of [Jena](http://jena.apache.org) functions for computing string metrics
 
-Namespace: http://semantalytics.com/2017/09/ns/stardog/kibble/string/metric/
+Namespace: http://semantalytics.com/2017/09/ns/jena/function/string/metric/
 
 Suggested prefixes: sm: , strm:, stringmetric: 
 
