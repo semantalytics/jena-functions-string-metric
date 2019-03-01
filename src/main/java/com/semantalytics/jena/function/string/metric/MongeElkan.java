@@ -6,6 +6,8 @@ import org.apache.jena.sparql.function.FunctionBase;
 
 import java.util.List;
 
+import static org.apache.jena.sparql.expr.NodeValue.*;
+
 public final class MongeElkan extends FunctionBase {
 
     private info.debatty.java.stringsimilarity.Cosine cosine;
@@ -36,16 +38,27 @@ public final class MongeElkan extends FunctionBase {
     }
 
     @Override
-    public void initialize() {
-        cosine = null;
+    public NodeValue exec(final List<NodeValue> args) {
+
+        final String string1 = args.get(0).getString();
+        final String string2 = args.get(1).getString();
+
+        return makeDouble(getCosineFunction(args).distance(string1, string2));
     }
 
     @Override
-    public NodeValue exec(final List<NodeValue> args) {
-
-        final String string1 = assertStringLiteral(values[0]).stringValue();
-        final String string2 = assertStringLiteral(values[1]).stringValue();
-
-        return literal(getCosineFunction(values).distance(string1, string2));
+    public void checkBuild(final String uri, final ExprList args) {
+        if(!Range.closed(2, 3).contains(args.size())) {
+            throw new QueryBuildException("Function '" + Lib.className(this) + "' takes two or three arguments") ;
+        }
+        if(args.get(0).isConstant() && !args.get(0).getConstant().isString()) {
+            throw new QueryBuildException("Function '" + Lib.className(this) + "' first argument must be a string literal") ;
+        }
+        if(args.get(1).isConstant() && !args.get(1).getConstant().isString()) {
+            throw new QueryBuildException("Function '" + Lib.className(this) + "' second argument must be a string literal") ;
+        }
+        if(args.size() == 3 && args.get(2).isConstant() && !args.get(2).getConstant().isInteger()) {
+            throw new QueryBuildException("Function '" + Lib.className(this) + "' third argument must be a integer literal") ;
+        }
     }
 }

@@ -15,7 +15,7 @@ import static org.apache.jena.sparql.expr.NodeValue.*;
 
 public final class JaroWinklerDistance extends FunctionBase {
 
-    public static final String name = StringMetricVocabulary.jaroWinklerDistance.stringValue());
+    public static final String name = StringMetricVocabulary.jaroWinklerDistance.stringValue();
 
     @Override
     public NodeValue exec(final List<NodeValue> args) {

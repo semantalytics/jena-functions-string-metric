@@ -7,6 +7,8 @@ import org.simmetrics.metrics.functions.MatchMismatch;
 
 import java.util.List;
 
+import static org.apache.jena.sparql.expr.NodeValue.*;
+
 public final class NeedlemanWunch extends FunctionBase {
 
     private static org.simmetrics.metrics.NeedlemanWunch needlemanWunch;
@@ -15,17 +17,13 @@ public final class NeedlemanWunch extends FunctionBase {
         super(Range.closed(2, 5), StringMetricVocabulary.needlemanWunch.stringValue());
     }
 
-    private NeedlemanWunch(final NeedlemanWunch needlemanWunch) {
-        super(needlemanWunch);
-    }
-
     @Override
-    public NodeValue exec(final List<NodeValue> values) {
+    public NodeValue exec(final List<NodeValue> args) {
 
-        final String firstString = assertStringLiteral(values[0]).stringValue();
-        final String secondString = assertStringLiteral(values[1]).stringValue();
+        final String firstString = args.get(0).getString();
+        final String secondString = args.get(1).getString();
 
-        if(values.length == 5) {
+        if(args.size() == 5) {
             for(final Expression expression : getArgs()) {
                 // FIXME this should only check args 2-4 not all args
                 if(!(expression instanceof Constant)) {
@@ -34,13 +32,13 @@ public final class NeedlemanWunch extends FunctionBase {
             }
         }
 
-        return Values.literal(getNeedlemanWunchFunction(values).compare(firstString, secondString));
+        return makeDouble(getNeedlemanWunchFunction(args).compare(firstString, secondString));
     }
 
 
-    private org.simmetrics.metrics.NeedlemanWunch getNeedlemanWunchFunction(final Value... values) throws ExpressionEvaluationException {
+    private org.simmetrics.metrics.NeedlemanWunch getNeedlemanWunchFunction(final List<NodeValue> args) {
         if (needlemanWunch == null) {
-            if (values.length == 5) {
+            if (args.size() == 5) {
                 
                 final float gapValue = assertNumericLiteral(values[2]).floatValue();
                 final float subPenaltyA = assertNumericLiteral(values[3]).floatValue();
@@ -52,5 +50,21 @@ public final class NeedlemanWunch extends FunctionBase {
             }
         }
         return needlemanWunch;
+    }
+
+    @Override
+    public void checkBuild(final String uri, final ExprList args) {
+        if(!Range.closed(2, 3).contains(args.size())) {
+            throw new QueryBuildException("Function '" + Lib.className(this) + "' takes two or three arguments") ;
+        }
+        if(args.get(0).isConstant() && !args.get(0).getConstant().isString()) {
+            throw new QueryBuildException("Function '" + Lib.className(this) + "' first argument must be a string literal") ;
+        }
+        if(args.get(1).isConstant() && !args.get(1).getConstant().isString()) {
+            throw new QueryBuildException("Function '" + Lib.className(this) + "' second argument must be a string literal") ;
+        }
+        if(args.size() == 3 && args.get(2).isConstant() && !args.get(2).getConstant().isInteger()) {
+            throw new QueryBuildException("Function '" + Lib.className(this) + "' third argument must be a integer literal") ;
+        }
     }
 }

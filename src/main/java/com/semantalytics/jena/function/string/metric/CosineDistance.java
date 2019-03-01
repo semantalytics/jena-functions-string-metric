@@ -1,7 +1,11 @@
 package com.semantalytics.jena.function.string.metric;
 
 import com.google.common.collect.Range;
+import info.debatty.java.stringsimilarity.Cosine;
 import org.apache.jena.atlas.lib.Lib;
+import org.apache.jena.ext.com.google.common.cache.CacheBuilder;
+import org.apache.jena.ext.com.google.common.cache.CacheLoader;
+import org.apache.jena.ext.com.google.common.cache.LoadingCache;
 import org.apache.jena.query.QueryBuildException;
 import org.apache.jena.sparql.ARQInternalErrorException;
 import org.apache.jena.sparql.expr.ExprEvalException;
@@ -10,26 +14,28 @@ import org.apache.jena.sparql.expr.NodeValue;
 import org.apache.jena.sparql.function.FunctionBase;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+
+import static org.apache.jena.sparql.expr.NodeValue.*;
 
 public final class CosineDistance extends FunctionBase {
 
-    private info.debatty.java.stringsimilarity.Cosine cosine;
+    private Cosine cosine = new info.debatty.java.stringsimilarity.Cosine();
+    private LoadingCache<Integer, Cosine> cache = CacheBuilder.newBuilder().maximumSize(100).build(new CacheLoader<Integer, Cosine>() {
+        @Override
+        public Cosine load(Integer k) {
+            return new info.debatty.java.stringsimilarity.Cosine(k);
+        }
+    });
     private static final String name = StringMetricVocabulary.cosineDistance.stringValue();
 
-    public info.debatty.java.stringsimilarity.Cosine getCosineFunction(final List<NodeValue> args) {
-        if(cosine == null) {
-            if (args.size() == 3) {
-                 args.get(2).isInteger();
-                 if(!(args.get(3).isConstant())) {
-                    throw new ExprEvalException("Parameter must be constant expression");
-                }
-                final int n = args.get(2).getInteger().intValue();
-                cosine = new info.debatty.java.stringsimilarity.Cosine(n);
-            } else {
-                cosine = new info.debatty.java.stringsimilarity.Cosine();
-            }
+    public info.debatty.java.stringsimilarity.Cosine getCosineFunction(final List<NodeValue> args) throws ExecutionException {
+        if (args.size() == 3) {
+            final int k = args.get(2).getInteger().intValue();
+            return cache.get(k);
+        } else {
+            return this.cosine;
         }
-        return cosine;
     }
 
     @Override
@@ -54,11 +60,19 @@ public final class CosineDistance extends FunctionBase {
         final String string1 = args.get(0).getString();
         final String string2 = args.get(1).getString();
 
-        return NodeValue.makeDouble(getCosineFunction(args).distance(string1, string2));
+        final Cosine cosine;
+
+        try {
+           cosine = getCosineFunction(args);
+        } catch(ExecutionException e) {
+            throw new ExprEvalException(e);
+        }
+
+        return makeDouble(cosine.distance(string1, string2));
     }
 
     @Override
-    public void checkBuild(String uri, ExprList args) {
+    public void checkBuild(final String uri, final ExprList args) {
         if(!Range.closed(2, 3).contains(args.size())) {
             throw new QueryBuildException("Function '" + Lib.className(this) + "' takes two or three arguments") ;
         }

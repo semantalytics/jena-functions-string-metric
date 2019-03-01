@@ -1,9 +1,11 @@
 package com.semantalytics.jena.function.string.metric;
 
+import org.apache.jena.sparql.expr.NodeValue;
+import org.apache.jena.sparql.function.FunctionBase2;
 
-import org.apache.jena.sparql.function.FunctionBase;
+import static org.apache.jena.sparql.expr.NodeValue.*;
 
-public final class NormalizedLevenshteinSimilarity extends FunctionBase {
+public final class NormalizedLevenshteinSimilarity extends FunctionBase2 {
 
     private static final info.debatty.java.stringsimilarity.NormalizedLevenshtein normalizedLevenshtein;
 
@@ -11,33 +13,12 @@ public final class NormalizedLevenshteinSimilarity extends FunctionBase {
         normalizedLevenshtein = new info.debatty.java.stringsimilarity.NormalizedLevenshtein();
     }
 
-    protected NormalizedLevenshteinSimilarity() {
-        super(2, StringMetricVocabulary.normalizedLevenshteinSimarity.stringValue());
-    }
-
-    private NormalizedLevenshteinSimilarity(final NormalizedLevenshteinSimilarity normalizedLevenshteinSimilarity) {
-        super(normalizedLevenshteinSimilarity);
-    }
-
     @Override
-    protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
+    public NodeValue exec(final NodeValue arg0, final NodeValue arg1) {
 
-        final String firstString = assertStringLiteral(values[0]).stringValue();
-        final String secondString = assertStringLiteral(values[1]).stringValue();
+        final String firstString = arg0.getString();
+        final String secondString = arg1.getString();
 
-        return literal(normalizedLevenshtein.similarity(firstString, secondString));
-    }
-
-    public NormalizedLevenshteinSimilarity copy() {
-        return new NormalizedLevenshteinSimilarity(this);
-    }
-
-    public void accept(final ExpressionVisitor expressionVisitor) {
-        expressionVisitor.visit(this);
-    }
-
-    @Override
-    public String toString() {
-        return StringMetricVocabulary.normalizedLevenshteinSimarity.name();
+        return makeDouble(normalizedLevenshtein.similarity(firstString, secondString));
     }
 }

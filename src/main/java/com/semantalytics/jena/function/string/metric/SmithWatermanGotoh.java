@@ -1,8 +1,14 @@
 package com.semantalytics.jena.function.string.metric;
 
 import com.google.common.collect.Range;
+import org.apache.jena.sparql.expr.ExprEvalException;
+import org.apache.jena.sparql.expr.NodeValue;
 import org.apache.jena.sparql.function.FunctionBase;
 import org.simmetrics.metrics.functions.MatchMismatch;
+
+import java.util.List;
+
+import static org.apache.jena.sparql.expr.NodeValue.*;
 
 public final class SmithWatermanGotoh extends FunctionBase {
 
@@ -12,32 +18,28 @@ public final class SmithWatermanGotoh extends FunctionBase {
         super(Range.closed(2, 5), StringMetricVocabulary.smithWatermanGotoh.stringValue());
     }
 
-    private SmithWatermanGotoh(final SmithWatermanGotoh smithWatermanGotoh) {
-        super(smithWatermanGotoh);
-    }
-
     @Override
-    protected Value internalEvaluate(final Value... values) throws ExpressionEvaluationException {
+    public NodeValue exec(final List<NodeValue> args) {
 
-        final String firstString = assertStringLiteral(values[0]).stringValue();
-        final String secondString = assertStringLiteral(values[1]).stringValue();
+        final String firstString = args.get(0).getString();
+        final String secondString = args.get(1).getString();
 
-        return Values.literal(getSmithWatermanGotohFunction().compare(firstString, secondString));
+        return makeDouble(getSmithWatermanGotohFunction().compare(firstString, secondString));
     }
 
-    private org.simmetrics.metrics.SmithWatermanGotoh getSmithWatermanGotohFunction(final Value... values) throws ExpressionEvaluationException {
+    private org.simmetrics.metrics.SmithWatermanGotoh getSmithWatermanGotohFunction(final List<NodeValue> args) {
         if (smithWatermanGotoh == null) {
             if (values.length == 5) {
                 for (final Expression expression : getArgs()) {
                     //FIXME check only 2 through 7 not all params
                     if (!(expression instanceof Constant)) {
-                        throw new ExpressionEvaluationException("Parameters 2 through 7 must be constant expressions");
+                        throw new ExprEvalException("Parameters 2 through 7 must be constant expressions");
                     }
                 }
                 
-                final float gapValue = assertNumericLiteral(values[2]).floatValue();
-                final float matchPenalty = assertNumericLiteral(values[3]).floatValue();
-                final float mismatchPenalty = assertNumericLiteral(values[4]).floatValue();
+                final float gapValue = args.get(2).getFloat();
+                final float matchPenalty = args.get(3).getFloat();
+                final float mismatchPenalty = args.get(4).getFloat();
                 
                 smithWatermanGotoh = new org.simmetrics.metrics.SmithWatermanGotoh(gapValue, new MatchMismatch(matchPenalty, mismatchPenalty));
             } else {
@@ -48,22 +50,18 @@ public final class SmithWatermanGotoh extends FunctionBase {
     }
 
     @Override
-    public void initialize() {
-        smithWatermanGotoh = null;
-    }
-
-    @Override
-    public Function copy() {
-        return new SmithWatermanGotoh(this);
-    }
-
-    @Override
-    public void accept(final ExpressionVisitor expressionVisitor) {
-        expressionVisitor.visit(this);
-    }
-
-    @Override
-    public String toString() {
-        return StringMetricVocabulary.smithWatermanGotoh.name();
+    public void checkBuild(final String uri, final ExprList args) {
+        if(!Range.closed(2, 3).contains(args.size())) {
+            throw new QueryBuildException("Function '" + Lib.className(this) + "' takes two or three arguments") ;
+        }
+        if(args.get(0).isConstant() && !args.get(0).getConstant().isString()) {
+            throw new QueryBuildException("Function '" + Lib.className(this) + "' first argument must be a string literal") ;
+        }
+        if(args.get(1).isConstant() && !args.get(1).getConstant().isString()) {
+            throw new QueryBuildException("Function '" + Lib.className(this) + "' second argument must be a string literal") ;
+        }
+        if(args.size() == 3 && args.get(2).isConstant() && !args.get(2).getConstant().isInteger()) {
+            throw new QueryBuildException("Function '" + Lib.className(this) + "' third argument must be a integer literal") ;
+        }
     }
 }

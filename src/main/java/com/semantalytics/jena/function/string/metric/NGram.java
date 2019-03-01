@@ -23,19 +23,25 @@ public final class NGram extends FunctionBase {
         super(Range.closed(2, 3), StringMetricVocabulary.ngram.stringValue());
     }
 
-    private NGram(final NGram nGram) {
-        super(nGram);
-    }
-
     @Override
     public NodeValue exec(final List<NodeValue> args) {
 
-        assertStringLiteral(values[0]);
-        assertStringLiteral(values[1]);
-        if(values.length == 3) {
-            assertNumericLiteral(values[2]);
-        }
+        return NodeValue.makeDouble(nGram.distance(args.get(0).getString(), args.get(1).getString()));
+    }
 
-        return literal(nGram.distance(values[0].stringValue(), values[1].stringValue()));
+    @Override
+    public void checkBuild(final String uri, final ExprList args) {
+        if(!Range.closed(2, 3).contains(args.size())) {
+            throw new QueryBuildException("Function '" + Lib.className(this) + "' takes two or three arguments") ;
+        }
+        if(args.get(0).isConstant() && !args.get(0).getConstant().isString()) {
+            throw new QueryBuildException("Function '" + Lib.className(this) + "' first argument must be a string literal") ;
+        }
+        if(args.get(1).isConstant() && !args.get(1).getConstant().isString()) {
+            throw new QueryBuildException("Function '" + Lib.className(this) + "' second argument must be a string literal") ;
+        }
+        if(args.size() == 3 && args.get(2).isConstant() && !args.get(2).getConstant().isInteger()) {
+            throw new QueryBuildException("Function '" + Lib.className(this) + "' third argument must be a integer literal") ;
+        }
     }
 }
